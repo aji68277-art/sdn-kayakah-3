@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Materi & 600 Soal Agama Islam Kelas 1-6 - SDN Kayakah</title>
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+html,body{margin:0;padding:0;height:100%;height:100dvh;overflow:hidden;background:#FFF8E1}
+body{display:flex;flex-direction:column}
+.container{max-width:1000px;width:100%;margin:0 auto;padding:6px;display:flex;flex-direction:column;height:100%;height:100dvh;overflow:hidden}
+.topPelangi{flex-shrink:0}
+.judulPelangi{background:linear-gradient(90deg,#0E9F8A,#2E9E5B,#F2A900,#E8734A,#8E6AB0);border-radius:16px;padding:7px 10px;color:#fff;font-size:18px;font-weight:900;text-align:center;text-shadow:1px 1px 0 rgba(0,0,0,.2);box-shadow:0 3px 0 #5D4037;border:2px solid #fff;line-height:1.2}
+.subPelangi{background:#FFFBF0;border-radius:12px;padding:4px 8px;margin:5px 0;font-weight:800;color:#5D4037;font-size:11px;text-align:center;border:1px solid #FFE082}
+.menuGrid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-bottom:6px;flex-shrink:0}
+.menuBtn{border:2px solid #fff;border-radius:12px;padding:7px 4px;font-weight:900;font-size:11px;color:#fff;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.18);line-height:1.1;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-align:center}
+.menuBtn.aktif{outline:3px solid #FFD54F;transform:scale(1.03)}
+.k1{background:linear-gradient(180deg,#0E9F8A,#0B7A6B)}.k2{background:linear-gradient(180deg,#2E9E5B,#1F7A44)}.k3{background:linear-gradient(180deg,#F2A900,#E08E00);color:#5D4037!important}.k4{background:linear-gradient(180deg,#E8734A,#C94A4A)}.k5{background:linear-gradient(180deg,#8E6AB0,#6A4A8A)}.k6{background:linear-gradient(180deg,#EC407A,#C2185B)}.mGuru{background:linear-gradient(180deg,#FFD54F,#FFB300);color:#5D4037!important}
+.layar{display:none;flex:1;min-height:0;overflow:hidden;flex-direction:column}
+.layar.aktif{display:flex}
+.card{background:#FFFBF0;border-radius:16px;padding:10px;box-shadow:0 4px 10px rgba(0,0,0,.1);border:3px solid #FFD54F;flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.cardScroll{overflow-y:auto}
+.welcomeBox{background:#FFFBF0;border-radius:16px;padding:10px;border:3px dashed #FF9F43;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.judulSelamat2{font-size:22px;font-weight:900;color:#0B7A6B;margin:2px 0}
+.pembuat{font-size:14px;font-weight:900;color:#5D4037;margin:4px 0 6px;text-align:center;line-height:1.4}
+.barBawah{background:linear-gradient(90deg,#0E9F8A,#2E9E5B,#F2A900,#E8734A);color:#fff;border-radius:12px;padding:7px;font-weight:800;font-size:11px;line-height:1.4}
+.tabRow{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex-shrink:0}
+.tabBtn{padding:9px 4px;border:none;border-radius:10px;font-weight:900;font-size:11px;cursor:pointer;color:#fff}
+.tabMateri{background:#0E9F8A}.tabDaftar{background:#8E6AB0}.tabLatihan{background:#FF8A00}.tabSoal{background:#E8734A}.tabBtn.aktif{outline:3px solid #FFD54F;transform:scale(1.02)}
+.headerMini{background:linear-gradient(90deg,#0E9F8A,#2E9E5B,#F2A900,#E8734A);color:#fff;padding:7px;border-radius:14px;text-align:center;border:2px solid #fff;flex-shrink:0}
+.headerMini h1{margin:0;font-size:15px}
+.headerMini p{margin:3px 0 0;background:#FFFBF0;color:#C62828;padding:3px;border-radius:10px;font-weight:800;font-size:10px}
+.stats{display:flex;gap:6px;margin:6px 0;flex-shrink:0}
+.stat{flex:1;padding:6px;border-radius:10px;text-align:center;color:#fff;font-weight:800;font-size:11px}
+.stat:nth-child(1){background:#EC407A}.stat:nth-child(2){background:#0E9F8A}.stat:nth-child(3){background:#8E6AB0}.stat:nth-child(4){background:#FF8A00}
+.stat b{display:block;font-size:16px;line-height:1}
+.progress{height:8px;background:#FFF3E0;border-radius:20px;overflow:hidden;border:1px solid #FFD54F;flex-shrink:0}
+.progress-bar{height:100%;background:linear-gradient(90deg,#E8734A,#FFD54F,#2E9E5B);width:0%;transition:.4s}
+.q-num{display:inline-block;background:#8E6AB0;color:#fff;padding:3px 8px;border-radius:10px;font-weight:800;font-size:10px}
+.q-text{font-size:16px;line-height:1.3;font-weight:800;margin:6px 0;color:#4A148C}
+.q-arab{font-size:20px;text-align:center;background:#FFF9C4;padding:6px;border-radius:10px;margin-bottom:6px;color:#00695C;border:2px dashed #0E9F8A;line-height:1.5}
+.opt{width:100%;text-align:left;padding:9px 10px;border-radius:10px;margin-bottom:5px;cursor:pointer;font-size:13px;font-weight:700;border:none;color:#fff;flex-shrink:0}
+.opt:nth-child(1){background:#EC407A}.opt:nth-child(2){background:#0E9F8A}.opt:nth-child(3){background:#2E9E5B}.opt:nth-child(4){background:#FF8A00}
+.opt.correct{background:#00C853!important;color:#004D40!important;outline:3px solid #2E9E5B}.opt.wrong{background:#9E9E9E!important;opacity:.6}
+.feedback{padding:8px;border-radius:10px;margin-top:4px;display:none;font-size:12px;line-height:1.4;background:#FFFDE7;border:2px solid #FFD54F;flex-shrink:0}
+.feedback.show{display:block}
+.btn{width:100%;border:none;padding:10px;border-radius:12px;font-size:13px;font-weight:900;cursor:pointer;margin-top:6px;color:#fff;flex-shrink:0}
+.btn-start{background:linear-gradient(90deg,#E8734A,#F2A900)}.btn-next{background:linear-gradient(90deg,#2E9E5B,#0E9F8A)}.btn-again{background:linear-gradient(90deg,#8E6AB0,#EC407A)}.btn-guru{background:#FFFBF0;color:#6A4A8A;border:2px solid #8E6AB0}.btn-simpan{background:linear-gradient(90deg,#2E9E5B,#0E9F8A)}.btn-hapus{background:#D32F2F;color:#fff;padding:4px 8px;border-radius:8px;border:none;font-size:11px;font-weight:800;cursor:pointer}
+.hidden{display:none}
+input,select,textarea{width:100%;padding:8px;border-radius:10px;border:2px solid #FFD54F;font-size:13px;margin:4px 0;font-weight:700;background:#FFFDE7}
+textarea{height:48px;resize:none}
+.info-acak{background:#E8F5E9;border:2px dashed #2E9E5B;padding:6px;border-radius:10px;font-size:11px;font-weight:700;color:#1B5E20;margin:6px 0;flex-shrink:0}
+.info-latihan{background:#FFF3E0;border:2px dashed #FF8A00;padding:6px;border-radius:10px;font-size:11px;font-weight:700;color:#5D4037;margin:6px 0;flex-shrink:0}
+.result{text-align:center}.result .emoji{font-size:44px}.result h2{color:#C62828;font-size:18px;margin:4px 0}
+.badge-list{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:6px 0}
+.badge-list span{padding:5px 8px;border-radius:20px;font-size:11px;font-weight:800;color:#fff}
+.badge-list span:nth-child(1){background:#EC407A}.badge-list span:nth-child(2){background:#0E9F8A}.badge-list span:nth-child(3){background:#2E9E5B}.badge-list span:nth-child(4){background:#FF8A00}
+.guru-item{background:#F3E5F5;border:2px solid #CE93D8;padding:8px;border-radius:10px;margin-bottom:6px;font-size:11px;line-height:1.4}
+.guru-item b{color:#6A4A8A}
+.label-guru{font-size:11px;font-weight:900;color:#6A4A8A;margin:6px 0 0}
+.radio-box{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:5px 0}
+.radio-box label{background:#F3E5F5;padding:8px;border-radius:10px;font-size:11px;font-weight:800;text-align:center;cursor:pointer;border:2px solid #CE93D8}
+.radio-box input{display:none}
+.radio-box label:has(input:checked){background:#6A4A8A;color:#fff}
+.review-item{background:#FFFDE7;border:2px solid #FFE082;padding:6px;border-radius:10px;margin:4px 0;text-align:left;font-size:11px;line-height:1.4}
+.daftar-item{background:#fff;border:2px solid #FFE082;border-radius:12px;padding:8px;margin-bottom:6px;font-size:12px;line-height:1.4;text-align:left}
+.daftar-item b{color:#4A148C}
+.daftar-opts{margin:4px 0 0;padding-left:16px;color:#5D4037;font-weight:700}
+.daftar-jawab{display:none;background:#E8F5E9;border:2px dashed #2E9E5B;border-radius:10px;padding:6px;margin-top:5px;font-weight:700;color:#1B5E20}
+.daftar-jawab.show{display:block}
+.btn-kecil{padding:6px 10px;border:none;border-radius:10px;font-weight:900;font-size:11px;cursor:pointer;color:#fff;background:#8E6AB0;margin-top:5px}
+.footer{text-align:center;font-size:10px;color:#fff;font-weight:800;text-shadow:1px 1px 0 #6A4A8A;margin-top:4px;flex-shrink:0}
+#popupGuru{position:fixed;inset:0;background:rgba(60,40,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:12px}
+.popupGuruBox{background:#FFFBF0;border-radius:20px;padding:16px;max-width:360px;width:100%;text-align:center;border:4px solid #FFD54F;box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.popupGuruBox h3{margin:0;color:#6A4A8A;font-size:17px}
+.popupGuruBox input{text-align:center;font-size:22px;letter-spacing:8px;font-weight:900}
+@media(max-width:700px){.menuGrid{grid-template-columns:repeat(4,1fr)}.judulPelangi{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="topPelangi">
+  <div class="judulPelangi">🌈 ✨ DUNIA GAME PELANGI - AGAMA ISLAM ✨ 🌈</div>
+  <div class="subPelangi">🕌 SDN Kayakah - Amuntai | 600 Soal • 100 Soal Per Kelas • Materi + Daftar + Latihan + Main 🕌</div>
+  <div class="menuGrid">
+    <div class="menuBtn" style="background:linear-gradient(180deg,#FF9F43,#E8734A)" id="btnMenu" onclick="gantiLayar('layarMenu')">🏠 Menu</div>
+    <div class="menuBtn k1" id="btnK1" onclick="bukaKelas(1)">📗 Kls 1<br><small>100 Soal</small></div>
+    <div class="menuBtn k2" id="btnK2" onclick="bukaKelas(2)">📘 Kls 2<br><small>100 Soal</small></div>
+    <div class="menuBtn k3" id="btnK3" onclick="bukaKelas(3)">📙 Kls 3<br><small>100 Soal</small></div>
+    <div class="menuBtn k4" id="btnK4" onclick="bukaKelas(4)">📕 Kls 4<br><small>100 Soal</small></div>
+    <div class="menuBtn k5" id="btnK5" onclick="bukaKelas(5)">📓 Kls 5<br><small>100 Soal</small></div>
+    <div class="menuBtn k6" id="btnK6" onclick="bukaKelas(6)">📔 Kls 6<br><small>100 Soal</small></div>
+    <div class="menuBtn mGuru" id="btnGuruMenu" onclick="bukaGuruPopup()">👩‍🏫 Guru</div>
+  </div>
+</div>
+
+<div id="layarMenu" class="layar aktif">
+  <div class="welcomeBox">
+    <div style="font-size:22px">👋 🎉</div>
+    <div class="judulSelamat2">👋 🎉 SELAMAT DATANG! 🎉 👋</div>
+    <div class="judulSelamat2" style="font-size:18px;color:#2E9E5B">di Dunia Pelangi Agama Islam!</div>
+    <div class="pembuat">© Wahyu Aji, S.Pd.Jas. | SDN Kayakah - Amuntai</div>
+    <p style="font-size:14px;line-height:1.5;margin:6px 0;color:#5D4037">Hai anak hebat! ☀️<br>Sekarang ada <b>4 tombol di tiap kelas</b>:<br>📖 <b>MATERI</b> • 📋 <b>100 SOAL</b> • ✏️ <b>LATIHAN 100 SOAL</b> • 🎮 <b>MAIN SOAL</b><br><br>✏️ Latihan: Urut 1-100, tanpa timer.<br>Benar 👏 Tepuk Tangan, Salah 🔔 Bel + langsung ditunjukkan benarnya!</p>
+    <div style="font-size:26px;letter-spacing:4px">📗 📘 📙 📕 📓 📔</div>
+    <div style="font-size:22px;margin:4px 0">☁️ 🐰 🐥 🦋 🌸 🎈 🕌 📖 ☁️</div>
+    <div class="barBawah">✨ Kelas 1: 100 Soal | Kelas 2: 100 Soal | Kelas 3: 100 Soal ✨<br>✨ Kelas 4: 100 Soal | Kelas 5: 100 Soal | Kelas 6: 100 Soal ✨<br>Total 600 Soal Sesuai Materi!</div>
+    <div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-start" style="margin:0" onclick="bukaKelas(1)">📗 Kelas 1</button><button class="btn btn-start" style="margin:0;background:linear-gradient(90deg,#2E9E5B,#0E9F8A)" onclick="bukaKelas(3)">📙 Kelas 3</button><button class="btn btn-start" style="margin:0;background:linear-gradient(90deg,#8E6AB0,#EC407A)" onclick="bukaKelas(6)">📔 Kelas 6</button></div>
+  </div>
+</div>
+
+<div id="layarKelas" class="layar">
+  <div class="card">
+    <div class="tabRow">
+      <button id="tabMateriBtn" class="tabBtn tabMateri aktif" onclick="gantiTab('materi')">📖 MATERI</button>
+      <button id="tabDaftarBtn" class="tabBtn tabDaftar" onclick="gantiTab('daftar')">📋 100 SOAL</button>
+      <button id="tabLatihanBtn" class="tabBtn tabLatihan" onclick="gantiTab('latihan')">✏️ LATIHAN 100</button>
+      <button id="tabSoalBtn" class="tabBtn tabSoal" onclick="gantiTab('soal')">🎮 MAIN SOAL</button>
+    </div>
+    <div id="isiMateri" class="cardScroll" style="margin-top:6px"></div>
+    <div id="isiDaftar" class="hidden" style="flex:1;min-height:0;display:flex;flex-direction:column;margin-top:6px">
+      <div class="info-acak" id="infoDaftar">📋 Daftar 100 Soal Kelas 1 • Belajar satu per satu • Klik 👁️ Lihat Jawaban</div>
+      <div style="display:flex;gap:5px;flex-shrink:0">
+        <input id="cariSoal" placeholder="🔍 Cari soal... contoh: Malaikat" oninput="renderDaftar()" style="flex:2">
+        <select id="filterTopik" onchange="renderDaftar()" style="flex:1"><option value="SEMUA">Semua Topik</option></select>
+      </div>
+      <div id="listDaftar" class="cardScroll" style="margin-top:6px"></div>
+      <button class="btn btn-next" onclick="gantiTab('latihan')">✏️ LANJUT KE LATIHAN 100 SOAL ➡️</button>
+    </div>
+    <div id="isiLatihan" class="hidden" style="flex:1;min-height:0;display:flex;flex-direction:column;margin-top:6px">
+      <div class="info-latihan" id="infoLatihan">✏️ LATIHAN 100 SOAL • Urut 1-100 • Tanpa Timer • Benar 👏 Tepuk Tangan • Salah 🔔 Bel + Langsung Ditunjukkan Benarnya</div>
+      <input id="namaLatihan" placeholder="✏️ Nama Kamu... Contoh: Aisyah">
+      <button class="btn" style="background:linear-gradient(90deg,#FF8A00,#F2A900)" onclick="mulaiLatihan()">✏️ MULAI LATIHAN 100 SOAL - DARI NO 1</button>
+      <button class="btn btn-guru" onclick="gantiTab('daftar')">📋 LIHAT DAFTAR 100 SOAL DULU</button>
+      <p style="font-size:11px;color:#5D4037;text-align:center;margin:4px 0">Latihan urut 1 sampai 100. Kalau keluar, ulang dari awal lagi ya.</p>
+    </div>
+    <div id="isiSoal" class="hidden" style="flex:1;min-height:0;display:flex;flex-direction:column;margin-top:6px">
+      <div class="info-acak" id="infoSoalKelas">🔀 10 Soal Acak dari 100 Soal Kelas Ini • Timer 20 Detik • Jawaban Pindah-Pindah</div>
+      <input id="namaAnak" placeholder="✏️ Nama Kamu... Contoh: Aisyah">
+      <select id="kelasAnak"><option>Kelas 1</option><option>Kelas 2</option><option>Kelas 3</option><option>Kelas 4</option><option selected>Kelas 5</option><option>Kelas 6</option></select>
+      <button class="btn btn-start" onclick="mulaiGame()">🚀 AYO MAIN SOAL KELAS INI! 🎮</button>
+      <button class="btn btn-guru" onclick="bukaGuruPopup()">👩‍🏫 MODE GURU - TAMBAH SOAL KELAS INI</button>
+    </div>
+  </div>
+</div>
+
+<div id="layarGuru" class="layar">
+  <div class="card cardScroll">
+    <h2 style="margin:0;color:#6A4A8A;text-align:center;font-size:16px">👩‍🏫 MODE GURU</h2>
+    <p style="text-align:center;font-size:11px;color:#5D4037;margin:2px 0">Pilih kelas, soal langsung masuk ke kelas itu saja!</p>
+    <p class="label-guru">1️⃣ Pilih Kelas:</p>
+    <select id="gLevel"><option value="1">📗 Kelas 1 - 100 Soal</option><option value="2">📘 Kelas 2 - 100 Soal</option><option value="3">📙 Kelas 3 - 100 Soal</option><option value="4">📕 Kelas 4 - 100 Soal</option><option value="5">📓 Kelas 5 - 100 Soal</option><option value="6">📔 Kelas 6 - 100 Soal</option></select>
+    <p class="label-guru">2️⃣ Kategori:</p>
+    <select id="gKat"><option value="RUKUN">🕌 RUKUN ISLAM / IMAN</option><option value="QURAN">📖 SURAT / AL-QUR'AN</option><option value="SHOLAT">🕌 SHOLAT / WUDHU</option><option value="NABI">🚢 KISAH NABI</option><option value="AKHLAK">❤️ AKHLAK / DOA</option><option value="ASMAUL">✨ ASMAUL HUSNA</option><option value="PUASA">🌙 PUASA / ZAKAT / HAJI</option><option value="MALAIKAT">👼 MALAIKAT / HARI AKHIR</option></select>
+    <p class="label-guru">3️⃣ Soal:</p>
+    <textarea id="gSoal" placeholder="Contoh: Nabi yang membuat perahu besar adalah Nabi...?"></textarea>
+    <input id="gArab" placeholder="Ayat Arab (opsional)">
+    <p class="label-guru">4️⃣ 4 Jawaban:</p>
+    <input id="gA" placeholder="Jawaban A"><input id="gB" placeholder="Jawaban B"><input id="gC" placeholder="Jawaban C"><input id="gD" placeholder="Jawaban D">
+    <p class="label-guru">5️⃣ Jawaban Benar:</p>
+    <div class="radio-box"><label><input type="radio" name="benar" value="0" checked><span>🅰️ A Benar</span></label><label><input type="radio" name="benar" value="1"><span>🅱️ B Benar</span></label><label><input type="radio" name="benar" value="2"><span>🅲 C Benar</span></label><label><input type="radio" name="benar" value="3"><span>🅳 D Benar</span></label></div>
+    <p class="label-guru">6️⃣ Penjelasan:</p>
+    <textarea id="gPenjelas" placeholder="Contoh: Nabi Nuh membuat perahu atas perintah Allah..."></textarea>
+    <button class="btn btn-simpan" onclick="simpanSoalGuru()">💾 SIMPAN SOAL KE KELAS INI!</button>
+    <button class="btn" style="background:#FFFBF0;color:#6A4A8A;border:2px solid #8E6AB0" onclick="gantiLayar('layarMenu')">⬅️ KEMBALI</button>
+    <h3 style="color:#6A4A8A;font-size:13px;margin-top:10px">📋 Soal Guru (<span id="jumlahGuru">0</span>)</h3>
+    <div id="daftarGuru"></div>
+    <button class="btn" style="background:#FFE0E0;color:#B71C1C;border:2px solid #D32F2F" onclick="hapusSemuaGuru()">🗑️ HAPUS SEMUA SOAL GURU</button>
+  </div>
+</div>
+
+<div id="layarGame" class="layar">
+  <div style="display:flex;flex-direction:column;flex:1;min-height:0">
+    <div class="headerMini"><h1 id="judulGame">🎈 KELAS 1 - PENGETAHUAN AGAMA ISLAM 🕌</h1><p id="subJudulGame">🔀 100 SOAL PER KELAS • DIACAK • SDN KAYAKAH 🔀</p></div>
+    <div class="stats"><div class="stat"><b id="skor">0</b><span>⭐ BENAR</span></div><div class="stat" id="statTimer"><b id="timer">20</b><span>⏰ DETIK</span></div><div class="stat"><b id="soalKe">1/10</b><span>📚 SOAL</span></div><div class="stat"><b id="streak">0🔥</b><span>STREAK</span></div></div>
+    <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+    <div style="text-align:center"><span id="levelLabel">📗 KELAS 1</span> <span id="labelMode" style="font-size:10px;font-weight:800;background:#FFFBF0;padding:4px 8px;border-radius:20px;color:#5D4037">🔀 Soal Diacak dari 100</span></div>
+    <div class="card" style="margin-top:6px">
+      <div class="q-num" id="kategori">SHOLAT</div>
+      <div id="arabBox" class="q-arab hidden"></div>
+      <div class="q-text" id="pertanyaan"></div>
+      <div id="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <button id="nextBtn" class="btn btn-next hidden" onclick="soalBerikutnya()">LANJUT ➡️🎉</button>
+      <button class="btn" style="background:#FFFBF0;color:#C62828;border:2px solid #D32F2F;margin-top:6px" onclick="kembaliKeKelas()">🏠 KELUAR KE KELAS (ULANG DARI AWAL)</button>
+    </div>
+  </div>
+</div>
+
+<div id="layarHasil" class="layar">
+  <div class="card cardScroll result">
+    <div class="emoji" id="resultEmoji">🏆</div>
+    <h2 id="resultTitle">Penjaga Cahaya!</h2>
+    <p id="resultText" style="line-height:1.5;color:#5D4037;font-weight:700;font-size:12px"></p>
+    <div class="badge-list" id="badgeList"></div>
+    <div id="reviewBox"></div>
+    <button class="btn btn-again" onclick="ulangiGame()">🔄 MAIN LAGI - SOAL BARU! 🎮</button>
+    <button class="btn" style="background:#FFFBF0;color:#C62828;border:2px solid #D32F2F" onclick="kembaliKeKelas()">🏠 KEMBALI KE KELAS</button>
+  </div>
+</div>
+
+<p class="footer">🎈 SDN Kayakah - Amuntai • 600 Soal • Mode Guru: Kode 1234 • Belajar Sambil Bermain 🎈</p>
+</div>
+
+<div id="popupGuru"><div class="popupGuruBox">
+  <div style="font-size:36px">👩‍🏫 🔐</div>
+  <h3>Masukkan Kode Guru</h3>
+  <p style="font-size:12px;color:#5D4037;margin:4px 0">Hanya Ibu / Bapak Guru yang boleh masuk.</p>
+  <input id="inputKodeGuru" type="password" maxlength="4" placeholder="••••" inputmode="numeric">
+  <p id="pesanKode" style="font-size:12px;color:#D32F2F;font-weight:800;min-height:16px;margin:2px"></p>
+  <button class="btn btn-simpan" onclick="cekKodeGuru()">🔓 BUKA MODE GURU</button>
+  <button class="btn" style="background:#FFFBF0;color:#5D4037;border:2px solid #FFD54F" onclick="tutupPopupGuru()">⬅️ BATAL</button>
+</div></div>
+
+<script>
+const MATERI = {
+1: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#0B7A6B;margin:0">📗 MATERI KELAS 1 — Dasar Islam & Adab</h3><b>1. Rukun Islam 5:</b> Syahadat, Sholat, Zakat, Puasa, Haji. Syahadat: Tiada Tuhan selain Allah, Muhammad utusan Allah.<br><b>2. Doa Harian:</b> Sebelum makan Bismillah, Sesudah makan Alhamdulillah, Sebelum tidur Bismika Allahumma ahyaa, Bangun tidur Alhamdulillahilladzi ahyaana, Masuk WC Allahumma inni a'udzubika, Keluar WC Ghufronaka.<br><b>3. Huruf Hijaiyah:</b> 28 huruf, Alif Ba Ta Tsa Jim Ha Kha, Al-Qur'an ditulis Hijaiyah.<br><b>4. Nabi Muhammad:</b> Lahir Mekkah Tahun Gajah, Ayah Abdullah, Ibu Aminah, Kakek Abdul Muthalib.<br><b>5. Adab:</b> Hormat orang tua & guru, Salam Assalamu'alaikum, Jujur, Menolong, Bersyukur.</div>`,
+2: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#1F7A44;margin:0">📘 MATERI KELAS 2 — Iman, Surat Pendek & Wudhu</h3><b>1. Rukun Iman 6:</b> Allah, Malaikat, Kitab, Rasul, Hari Akhir, Qadha Qadar.<br><b>2. Surat:</b> Al-Fatihah 7 ayat Pembukaan, Al-Ikhlas 4 ayat Allah Esa, An-Nas Manusia, Al-Falaq Waktu Subuh, Al-Kautsar Nikmat yang banyak.<br><b>3. Wudhu:</b> Niat + Basmalah, cuci muka, tangan, kepala, kaki. Jika tidak ada air, tayamum debu.<br><b>4. Kisah Nabi:</b> Adam Nabi pertama, Nuh perahu besar, Ibrahim dibakar tidak terbakar.<br><b>5. Akhlak:</b> Jujur, menolong, tidak mengejek, bersin Alhamdulillah, dengarkan guru.</div>`,
+3: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#8A6D00;margin:0">📙 MATERI KELAS 3 — Sholat, Puasa & Asmaul Husna</h3><b>1. Sholat 5 Waktu:</b> Subuh 2, Dzuhur 4, Ashar 4, Maghrib 3, Isya 4 = 17 rakaat. Gerakan: Takbir, Rukuk, I'tidal, Sujud, Duduk, Salam.<br><b>2. Surat:</b> Al-Asr Masa, Al-Kautsar Nikmat yang banyak, Al-Falaq berlindung.<br><b>3. Puasa:</b> Wajib Ramadhan, Sahur sebelum Subuh, Buka Maghrib, Batal: makan/minum sengaja.<br><b>4. Asmaul Husna:</b> Ar-Rahman Pengasih, Ar-Rahim Penyayang, Al-Khaliq Pencipta, Al-Ghaffar Pengampun, Ar-Razzaq Pemberi Rezeki, Al-Aziz Perkasa.<br><b>5. Akhlak:</b> Doa masuk masjid kaki kanan, doa keluar rumah, doa naik kendaraan, berteman tidak pilih-pilih.</div>`,
+4: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#C94A4A;margin:0">📕 MATERI KELAS 4 — Rukun Lengkap, Fiqih & Malaikat</h3><b>1. Rukun:</b> Islam 5, Iman 6.<br><b>2. Fiqih:</b> Syarat sah sholat suci hadas & najis, menutup aurat, kiblat. Tayamum debu suci. Qobliyah Subuh 2 rakaat.<br><b>3. Malaikat:</b> Jibril Wahyu, Mikail Rezeki, Israfil Sangkakala, Malik Neraka, Ridwan Surga, Raqib baik, Atid buruk, Munkar & Nakir kubur.<br><b>4. Kisah Nabi:</b> Musa belah laut tongkat, Yunus ikan paus, Yusuf tampan jujur, Ayyub sabar sakit.<br><b>5. Zakat & Haji:</b> Zakat Fitrah akhir Ramadhan beras/uang, Zakat Mal harta, Haji Mekkah, Wukuf Arafah.</div>`,
+5: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#6A4A8A;margin:0">📓 MATERI KELAS 5 — Tafsir, Sejarah & Akhlak</h3><b>1. Tafsir:</b> Iyyaka na'budu Hanya kepada-Mu kami menyembah. Al-Fatihah Ummul Kitab. Al-Qur'an 30 juz.<br><b>2. Sejarah:</b> Wahyu pertama Gua Hira Al-Alaq 1-5, Hijrah Mekkah-Madinah 1 Hijriyah, Perang Badar 2 Hijriyah, Tahun Gajah Abrahah Ka'bah burung Ababil, Khalifah pertama Abu Bakar.<br><b>3. Kitab:</b> Taurat Musa, Zabur Daud, Injil Isa, Al-Qur'an Muhammad 23 tahun.<br><b>4. Akhlak:</b> Ghibah dosa besar, Sombong tercela, Tawadhu rendah hati, Amanah bisa dipercaya, Doa senjata mukmin.<br><b>5. Asmaul Husna:</b> As-Sami' Mendengar, Al-Bashir Melihat, Al-Hakim Bijaksana, Al-Quddus Suci, Al-Malik Merajai.</div>`,
+6: `<div style="background:#FFFDE7;border:2px dashed #FFD54F;border-radius:12px;padding:8px;font-size:12px;line-height:1.5;text-align:left"><h3 style="text-align:center;color:#C2185B;margin:0">📔 MATERI KELAS 6 — Pendalaman Iman, Fiqih & Sirah</h3><b>1. Iman:</b> Qadha Qadar sudah ditentukan Allah, manusia berusaha. Hari Akhir ada surga neraka.<br><b>2. Fiqih:</b> Dhuha pagi setelah matahari naik, Tahajud malam setelah tidur, Puasa Arafah 9 Dzulhijjah, Puasa Senin-Kamis sunnah.<br><b>3. Sirah:</b> Ibrahim & Ismail bangun Ka'bah, Al-Kahfi Jumat, Al-Baqarah terpanjang 286 ayat.<br><b>4. Asmaul Husna:</b> As-Shabur Sabar, Al-Wadud Mengasihi, Al-Hakim Bijaksana, Al-Quddus Suci, Al-Malik Merajai.<br><b>5. Akhlak:</b> Jujur, amanah, tawadhu, tidak sombong, tidak ghibah, berbakti orang tua.</div>`
+};
+const INTI = {
+1: [
+["Rukun Islam ada berapa?",["3","4","5","6"],2,"Rukun Islam 5."],["Sebelum makan kita baca?",["Doa tidur","Doa masuk masjid","Bismillah","Doa naik kendaraan"],2,"Sebelum makan Bismillah."],["Sesudah makan kita baca?",["Alhamdulillah","Bismillah","Innalillahi","Subhanallah"],0,"Sesudah makan Alhamdulillah."],["Sebelum tidur kita baca?",["Doa makan","Bismika Allahumma ahyaa","Doa hujan","Doa masuk WC"],1,"Bismika Allahumma ahyaa."],["Huruf Hijaiyah ada berapa?",["20","28","30","25"],1,"28 huruf."],["Nabi Muhammad lahir di kota?",["Madinah","Mekkah","Thaif","Yaman"],1,"Mekkah Tahun Gajah."],["Ayah Nabi Muhammad bernama?",["Abu Thalib","Abdullah","Abdul Muthalib","Hamzah"],1,"Abdullah."],["Ibu Nabi Muhammad bernama?",["Khadijah","Aminah","Fatimah","Hafsah"],1,"Aminah."],["Teman jatuh, sikap kita?",["Dibiarkan","Ditertawakan","Ditolong","Difoto"],2,"Tolong teman."],["Jika bersin, ucapkan?",["Astaghfirullah","Alhamdulillah","Bismillah","Innalillahi"],1,"Alhamdulillah."],["Ucapkan salam yang benar?",["Hai","Assalamu'alaikum","Selamat pagi saja","Diam"],1,"Assalamu'alaikum."],["Diberi hadiah, ucapkan?",["Diam saja","Terima kasih","Kenapa cuma ini?","Tidak suka"],1,"Terima kasih."],["Rukun Islam pertama?",["Sholat","Syahadat","Zakat","Puasa"],1,"Pertama Syahadat."],["Bangun tidur kita baca?",["Bismillah","Alhamdulillahilladzi ahyaana","Doa makan","Doa hujan"],1,"Alhamdulillahilladzi ahyaana."],["Al-Qur'an ditulis dengan huruf?",["Latin","Hijaiyah","Arab Pegon","Inggris"],1,"Huruf Hijaiyah."],["Kepada orang tua kita harus?",["Membentak","Berbakti & Hormat","Acuh","Marah"],1,"Berbakti."],["Rukun Islam ke-2?",["Puasa","Sholat","Haji","Zakat"],1,"Ke-2 Sholat."],["Kakek Nabi Muhammad?",["Abu Thalib","Abdul Muthalib","Hamzah","Abbas"],1,"Abdul Muthalib."],["Jujur itu?",["Buruk","Baik, dicintai Allah","Boleh bohong","Tidak penting"],1,"Jujur dicintai Allah."],["Masuk WC baca?",["Bismillah saja","Allahumma inni a'udzubika","Alhamdulillah","Doa makan"],1,"Allahumma inni a'udzubika."]
+],
+2: [
+["Rukun Iman ada berapa?",["4","5","6","7"],2,"Rukun Iman 6."],["Rukun Iman pertama?",["Malaikat","Allah","Kitab","Kiamat"],1,"Iman kepada Allah."],["Al-Fatihah ada berapa ayat?",["5","6","7","8"],2,"7 ayat."],["Al-Fatihah artinya?",["Pembukaan","Penutup","Cahaya","Manusia"],0,"Pembukaan."],["Ayat Qul Huwallahu Ahad dari Surat?",["Al-Fatihah","Al-Ikhlas","An-Nas","Al-Falaq"],1,"Al-Ikhlas."],["Al-Ikhlas ada berapa ayat?",["3","4","5","6"],1,"4 ayat."],["An-Nas artinya?",["Masa","Manusia","Cahaya","Gajah"],1,"Manusia."],["Al-Falaq artinya?",["Waktu Subuh","Manusia","Gajah","Masa"],0,"Waktu Subuh."],["Surat Inna A'thaina Kal Kautsar adalah?",["Al-Kautsar","Al-Asr","Al-Kafirun","Al-Lahab"],0,"Al-Kautsar."],["Wudhu dimulai dengan?",["Cuci kaki","Niat + Basmalah","Tidur","Makan"],1,"Niat dan Basmalah."],["Jika tidak ada air, kita?",["Tidak sholat","Tayamum pakai debu","Mandi","Tidur"],1,"Tayamum."],["Nabi pertama?",["Nuh","Adam","Musa","Isa"],1,"Nabi Adam."],["Nabi yang buat perahu besar?",["Musa","Isa","Nuh","Yusuf"],2,"Nabi Nuh."],["Nabi yang dibakar tapi tidak terbakar?",["Ibrahim","Muhammad","Adam","Yunus"],0,"Nabi Ibrahim."],["Jujur saat ujian akan?",["Dimarahi Allah","Dicintai Allah & Guru","Tidak naik kelas","Dijauhi"],1,"Dicintai Allah."],["Guru menjelaskan, kita harus?",["Main HP","Mendengarkan","Mengobrol","Tidur"],1,"Mendengarkan."],["Surat pertama Al-Qur'an?",["Al-Baqarah","Al-Ikhlas","Al-Fatihah","Yasin"],2,"Al-Fatihah."],["Al-Kautsar artinya?",["Nikmat yang banyak","Masa","Manusia","Gajah"],0,"Nikmat yang banyak."],["Tidak boleh mengejek teman karena?",["Tidak baik, menyakiti hati","Boleh","Seru","Tidak apa-apa"],0,"Menyakiti hati."],["Wudhu untuk?",["Makan","Sholat","Tidur","Main"],1,"Untuk sholat."]
+],
+3: [
+["Sholat Subuh berapa rakaat?",["1","2","3","4"],1,"Subuh 2."],["Sholat Maghrib berapa rakaat?",["2","3","4","5"],1,"Maghrib 3."],["Sholat Dzuhur berapa rakaat?",["2","3","4","5"],2,"Dzuhur 4."],["Sholat Ashar berapa rakaat?",["2","3","4","5"],2,"Ashar 4."],["Sholat Isya berapa rakaat?",["2","3","4","5"],2,"Isya 4."],["Sholat wajib sehari berapa waktu?",["3","4","5","6"],2,"5 waktu."],["Total rakaat sholat wajib sehari?",["15","17","19","20"],1,"17 rakaat."],["Surat Al-Asr artinya?",["Masa / Waktu","Manusia","Gajah","Cahaya"],0,"Masa."],["Kita puasa di bulan?",["Syawal","Ramadhan","Dzulhijjah","Muharram"],1,"Ramadhan."],["Sahur dilakukan saat?",["Siang","Sebelum Subuh","Maghrib","Tengah malam"],1,"Sebelum Subuh."],["Yang membatalkan puasa?",["Tidur","Makan sengaja","Mandi","Jalan"],1,"Makan sengaja."],["Ar-Rahman artinya?",["Maha Pengasih","Maha Penyayang","Maha Suci","Maha Besar"],0,"Maha Pengasih."],["Ar-Rahim artinya?",["Maha Pengasih","Maha Penyayang","Maha Kuat","Maha Adil"],1,"Maha Penyayang."],["Al-Khaliq artinya?",["Maha Pencipta","Maha Pengampun","Maha Kaya","Maha Hidup"],0,"Maha Pencipta."],["Al-Ghaffar artinya?",["Maha Pengampun","Maha Keras","Maha Tinggi","Maha Cepat"],0,"Maha Pengampun."],["Ar-Razzaq artinya?",["Maha Pemberi Rezeki","Maha Pemberi Hujan","Maha Pemberi Sakit","Maha Pemberi Tidur"],0,"Maha Pemberi Rezeki."],["Al-Aziz artinya?",["Maha Perkasa","Maha Lemah","Maha Kecil","Maha Tidur"],0,"Maha Perkasa."],["Gerakan setelah rukuk?",["Sujud","I'tidal","Duduk","Salam"],1,"I'tidal."],["Doa masuk masjid dibaca saat?",["Keluar rumah","Masuk masjid","Naik motor","Mau tidur"],1,"Masuk masjid."],["Berteman tidak boleh pilih-pilih karena?",["Semua sama di hadapan Allah","Harus kaya","Harus pintar","Harus cantik"],0,"Semua sama."]
+],
+4: [
+["Rukun Islam ada berapa?",["4","5","6","7"],1,"5."],["Rukun Iman ada berapa?",["4","5","6","7"],2,"6."],["Syarat sah sholat salah satunya?",["Main HP","Suci dari hadas","Makan","Tidur"],1,"Suci dari hadas."],["Tayamum pakai?",["Air","Debu / Tanah suci","Sabun","Minyak"],1,"Debu suci."],["Sholat sunnah sebelum Subuh disebut?",["Dhuha","Qobliyah Subuh","Tahajud","Witir"],1,"Qobliyah Subuh."],["Malaikat yang menyampaikan wahyu?",["Mikail","Jibril","Israfil","Malik"],1,"Jibril."],["Malaikat yang memberi rezeki?",["Jibril","Mikail","Israfil","Ridwan"],1,"Mikail."],["Malaikat yang meniup sangkakala?",["Jibril","Israfil","Mikail","Malik"],1,"Israfil."],["Malaikat penjaga surga?",["Malik","Ridwan","Atid","Munkar"],1,"Ridwan."],["Malaikat penjaga neraka?",["Ridwan","Malik","Jibril","Mikail"],1,"Malik."],["Malaikat pencatat amal baik?",["Atid","Raqib","Malik","Ridwan"],1,"Raqib."],["Malaikat pencatat amal buruk?",["Raqib","Atid","Jibril","Mikail"],1,"Atid."],["Malaikat yang bertanya di kubur?",["Munkar & Nakir","Raqib & Atid","Jibril & Mikail","Malik & Ridwan"],0,"Munkar & Nakir."],["Nabi Musa membelah laut dengan?",["Tongkat","Pedang","Tangan","Doa saja"],0,"Tongkat."],["Nabi yang ditelan ikan paus?",["Yunus","Musa","Isa","Adam"],0,"Yunus."],["Nabi Yusuf terkenal karena?",["Tampan & jujur","Kaya","Kuat","Cepat lari"],0,"Tampan & jujur."],["Nabi yang sabar saat sakit?",["Ayyub","Musa","Isa","Adam"],0,"Ayyub."],["Zakat Fitrah dibayar saat?",["Idul Adha","Akhir Ramadhan","Idul Fitri","Awal Ramadhan"],1,"Akhir Ramadhan."],["Zakat Mal artinya?",["Zakat harta","Zakat fitrah","Zakat badan","Zakat puasa"],0,"Zakat harta."],["Rukun haji yang wajib di Arafah disebut?",["Thawaf","Sa'i","Wukuf","Lempar Jumrah"],2,"Wukuf."]
+],
+5: [
+["Iyyaka na'budu artinya?",["Hanya kepada-Mu kami menyembah","Tunjuki kami jalan lurus","Segala puji bagi Allah","Maha Pengasih"],0,"Hanya kepada-Mu kami menyembah."],["Al-Fatihah disebut Ummul?",["Ummul Kitab","Ummul Mukminin","Ummul Qura","Ummul Ahad"],0,"Ummul Kitab."],["Al-Qur'an terdiri dari berapa juz?",["20","30","40","10"],1,"30 juz."],["Wahyu pertama turun di?",["Gua Hira","Gua Tsur","Masjid Nabawi","Bukit Uhud"],0,"Gua Hira."],["Nabi hijrah dari Mekkah ke?",["Thaif","Madinah","Yaman","Syam"],1,"Madinah."],["Hijrah Nabi tahun?",["1 Hijriyah","2 Hijriyah","5 Hijriyah","10 Hijriyah"],0,"1 Hijriyah."],["Perang pertama dalam Islam?",["Uhud","Badar","Khandaq","Tabuk"],1,"Badar."],["Tahun Gajah, Raja Abrahah mau hancurkan?",["Masjid","Ka'bah","Sekolah","Pasar"],1,"Ka'bah."],["Khalifah pertama setelah Nabi?",["Umar","Abu Bakar","Utsman","Ali"],1,"Abu Bakar."],["Kitab Taurat untuk Nabi?",["Isa","Daud","Musa","Muhammad"],2,"Musa."],["Kitab Zabur untuk Nabi?",["Musa","Daud","Isa","Muhammad"],1,"Daud."],["Kitab Injil untuk Nabi?",["Musa","Daud","Isa","Yusuf"],2,"Isa."],["Al-Qur'an diturunkan selama?",["10 tahun","23 tahun","15 tahun","30 tahun"],1,"23 tahun."],["Ghibah artinya?",["Membantu","Membicarakan keburukan orang","Bersedekah","Menolong"],1,"Ghibah dosa besar."],["Sombong termasuk?",["Akhlak baik","Akhlak tercela","Sunnah","Wajib"],1,"Akhlak tercela."],["Tawadhu artinya?",["Sombong","Rendah hati","Marah","Malas"],1,"Rendah hati."],["Amanah artinya?",["Bisa dipercaya","Bohong","Khianat","Malas"],0,"Bisa dipercaya."],["Doa adalah?",["Nyanyian","Senjata orang mukmin","Cerita","Permainan"],1,"Senjata mukmin."],["As-Sami' artinya?",["Maha Melihat","Maha Mendengar","Maha Mengetahui","Maha Kaya"],1,"Maha Mendengar."],["Al-Bashir artinya?",["Maha Mendengar","Maha Melihat","Maha Mengetahui","Maha Sabar"],1,"Maha Melihat."]
+],
+6: [
+["Rukun Iman ada berapa?",["4","5","6","7"],2,"6."],["Surat terpanjang dalam Al-Qur'an?",["Al-Fatihah","Al-Baqarah","Yasin","Al-Kahfi"],1,"Al-Baqarah 286 ayat."],["Surat Al-Kahfi dibaca hari?",["Senin","Jumat","Sabtu","Minggu"],1,"Jumat."],["Sholat Dhuha dilakukan saat?",["Malam","Pagi setelah matahari naik","Tengah malam","Maghrib"],1,"Pagi setelah matahari naik."],["Sholat Tahajud dilakukan saat?",["Siang","Malam setelah tidur","Pagi","Sore"],1,"Malam setelah tidur."],["Puasa Arafah tanggal?",["1 Syawal","9 Dzulhijjah","10 Muharram","15 Sya'ban"],1,"9 Dzulhijjah."],["Puasa Senin-Kamis contoh puasa?",["Wajib","Sunnah","Haram","Makruh"],1,"Sunnah."],["Al-Quddus artinya?",["Maha Suci","Maha Kotor","Maha Marah","Maha Lupa"],0,"Maha Suci."],["Al-Malik artinya?",["Maha Merajai","Maha Miskin","Maha Kecil","Maha Tidur"],0,"Maha Merajai."],["Al-Hakim artinya?",["Maha Bijaksana","Maha Bodoh","Maha Lupa","Maha Marah"],0,"Maha Bijaksana."],["As-Shabur artinya?",["Maha Sabar","Maha Marah","Maha Cepat","Maha Lupa"],0,"Maha Sabar."],["Al-Wadud artinya?",["Maha Mengasihi","Maha Membenci","Maha Marah","Maha Keras"],0,"Maha Mengasihi."],["Nabi Ibrahim & Ismail membangun?",["Masjid","Ka'bah","Sekolah","Istana"],1,"Ka'bah."],["Hijrah Nabi ke Madinah tahun?",["1 Hijriyah","2 Hijriyah","5 Hijriyah","10 Hijriyah"],0,"1 Hijriyah."],["Al-Qur'an diturunkan selama?",["10 tahun","23 tahun","15 tahun","30 tahun"],1,"23 tahun."],["Tawadhu artinya?",["Sombong","Rendah hati","Marah","Malas"],1,"Rendah hati."],["Amanah artinya?",["Bisa dipercaya","Bohong","Khianat","Malas"],0,"Bisa dipercaya."],["Doa keluar rumah dibaca saat?",["Mau tidur","Keluar rumah","Masuk WC","Makan"],1,"Keluar rumah."],["Syarat sah sholat salah satunya?",["Main HP","Suci dari hadas","Makan","Tidur"],1,"Suci dari hadas."],["Tayamum pakai?",["Air","Debu / Tanah suci","Sabun","Minyak"],1,"Debu suci."]
+]
+};
+function buatVariasi(kelas, inti){
+  let out = [];
+  inti.forEach((s,i)=>{ out.push({kat:kelas===1?"📗 KELAS 1":kelas===2?"📘 KELAS 2":kelas===3?"📙 KELAS 3":kelas===4?"📕 KELAS 4":kelas===5?"📓 KELAS 5":"📔 KELAS 6", q:s[0], opts:s[1], jawab:s[2], penjelas:s[3]}); });
+  let templates = [
+    (s)=>({q:"Manakah yang BENAR tentang: "+s[0].replace("?","")+"?", opts:[s[1][s[2]], "Salah semua", "Tidak ada yang benar", "Bukan itu"], jawab:0, penjelas:s[3]}),
+    (s)=>({q:"Jawaban yang SALAH untuk: "+s[0]+"?", opts:[s[1][(s[2]+1)%4], s[1][s[2]], s[1][(s[2]+2)%4], s[1][s[2]]], jawab:0, penjelas:"Yang benar adalah: "+s[1][s[2]]+". "+s[3]}),
+    (s)=>({q:"Apa arti / maksud dari: "+s[1][s[2]]+"? (Sesuai materi Kelas "+kelas+")", opts:[s[0], "Tidak ada artinya", "Hanya lagu", "Hanya permainan"], jawab:0, penjelas:s[3]}),
+    (s)=>({q:"Kalau ditanya '"+s[0]+"', jawaban yang tepat adalah?", opts:[s[1][s[2]], s[1][(s[2]+1)%4], s[1][(s[2]+2)%4], s[1][(s[2]+3)%4]], jawab:0, penjelas:s[3]}),
+  ];
+  let idx=0;
+  while(out.length<100){
+    let s = inti[idx % inti.length];
+    let t = templates[Math.floor(idx/inti.length) % templates.length];
+    let v = t(s);
+    let posisiBaru = (idx*2+1)%4;
+    let optsBaru = [...v.opts];
+    if(v.jawab===0){ let benar = optsBaru[0]; optsBaru.splice(0,1); optsBaru.splice(posisiBaru,0,benar); out.push({kat:out[0].kat, q:v.q+" (Variasi "+(out.length+1)+")", opts:optsBaru, jawab:posisiBaru, penjelas:v.penjelas}); }
+    else { out.push({kat:out[0].kat, q:v.q+" (Variasi "+(out.length+1)+")", opts:v.opts, jawab:v.jawab, penjelas:v.penjelas}); }
+    idx++;
+  }
+  return out.slice(0,100);
+}
+function buildBank(){ let b={}; for(let k=1;k<=6;k++){ b[k]=buatVariasi(k, INTI[k]); } return b; }
+const BANK = buildBank();
+function ambilSoalGuru(){ try{ return JSON.parse(localStorage.getItem('soalGuruKayakahPerKelas')||'[]'); }catch(e){ return []; } }
+function simpanKeLocal(data){ localStorage.setItem('soalGuruKayakahPerKelas', JSON.stringify(data)); }
+function gabungBank(kelas){ let guru = ambilSoalGuru().filter(g=>parseInt(g.kelas)===kelas); let bank = JSON.parse(JSON.stringify(BANK[kelas]||[])); guru.forEach(g=>{ bank.push(g.soal); }); return bank; }
+function updateInfo(){ let guru = ambilSoalGuru(); document.getElementById('jumlahGuru').innerText = guru.length; let div = document.getElementById('daftarGuru'); if(guru.length===0){ div.innerHTML='<p style="font-size:11px;color:#888">Belum ada soal guru.</p>'; return; } div.innerHTML = guru.map((g,i)=>`<div class="guru-item"><b>[KELAS ${g.kelas}] ${g.soal.kat}</b><br>${g.soal.q}<br><small>Jawaban: ${g.soal.opts.join(' | ')} • Benar: ${g.soal.opts[g.soal.jawab]}</small><br><button class="btn-hapus" onclick="hapusSatuGuru(${i})">🗑️ Hapus</button></div>`).join(''); }
+let kelasAktif=1, mode="main", soalTerpilih=[], idx=0, skor=0, salahHitung=0, streak=0, streakTerbaik=0, timerInt, sisa=20, nama="Anak Hebat", kelasLabel="Kelas 1", riwayat=[], totalSoalMode=10;
+function gantiLayar(id){ document.querySelectorAll('.layar').forEach(l=>l.classList.remove('aktif')); document.getElementById(id).classList.add('aktif'); document.querySelectorAll('.menuBtn').forEach(b=>b.classList.remove('aktif')); if(id==='layarMenu') document.getElementById('btnMenu').classList.add('aktif'); if(id==='layarKelas') document.getElementById('btnK'+kelasAktif).classList.add('aktif'); if(id==='layarGuru') document.getElementById('btnGuruMenu').classList.add('aktif'); if(id==='layarGame') document.getElementById('btnK'+kelasAktif).classList.add('aktif'); }
+function bukaKelas(k){ kelasAktif=k; document.getElementById('kelasAnak').value="Kelas "+k; document.getElementById('gLevel').value=String(k); document.getElementById('infoDaftar').innerHTML=`📋 Daftar 100 Soal Kelas ${k} • Belajar satu per satu • Klik 👁️ Lihat Jawaban`; document.getElementById('infoSoalKelas').innerHTML=`🔀 10 Soal Acak dari <b>${gabungBank(k).length} Soal</b> Kelas ${k} • Timer 20 Detik • Jawaban Pindah-Pindah`; document.getElementById('infoLatihan').innerHTML=`✏️ LATIHAN 100 SOAL KELAS ${k} • Urut 1-100 • Tanpa Timer • Benar 👏 Tepuk Tangan • Salah 🔔 Bel + Langsung Ditunjukkan Benarnya`; gantiTab('materi'); document.getElementById('isiMateri').innerHTML=MATERI[k]; document.getElementById('cariSoal').value=""; document.getElementById('filterTopik').value="SEMUA"; gantiLayar('layarKelas'); }
+function gantiTab(tab){
+  ['tabMateriBtn','tabDaftarBtn','tabLatihanBtn','tabSoalBtn'].forEach(id=>document.getElementById(id).classList.remove('aktif'));
+  document.getElementById('isiMateri').classList.add('hidden'); document.getElementById('isiDaftar').classList.add('hidden'); document.getElementById('isiLatihan').classList.add('hidden'); document.getElementById('isiSoal').classList.add('hidden');
+  document.getElementById('isiDaftar').style.display='none'; document.getElementById('isiLatihan').style.display='none'; document.getElementById('isiSoal').style.display='none';
+  if(tab==='materi'){ document.getElementById('tabMateriBtn').classList.add('aktif'); document.getElementById('isiMateri').classList.remove('hidden'); }
+  if(tab==='daftar'){ document.getElementById('tabDaftarBtn').classList.add('aktif'); document.getElementById('isiDaftar').classList.remove('hidden'); document.getElementById('isiDaftar').style.display='flex'; isiFilterTopik(); renderDaftar(); }
+  if(tab==='latihan'){ document.getElementById('tabLatihanBtn').classList.add('aktif'); document.getElementById('isiLatihan').classList.remove('hidden'); document.getElementById('isiLatihan').style.display='flex'; }
+  if(tab==='soal'){ document.getElementById('tabSoalBtn').classList.add('aktif'); document.getElementById('isiSoal').classList.remove('hidden'); document.getElementById('isiSoal').style.display='flex'; }
+}
+function isiFilterTopik(){
+  let bank = gabungBank(kelasAktif);
+  let topik = [...new Set(bank.slice(0,100).map(s=>s.kat))];
+  let sel = document.getElementById('filterTopik');
+  let cur = sel.value;
+  sel.innerHTML = '<option value="SEMUA">Semua Topik</option>' + topik.map(t=>`<option value="${t}">${t}</option>`).join('');
+  if(topik.includes(cur)) sel.value=cur;
+}
+function renderDaftar(){
+  let bank = gabungBank(kelasAktif).slice(0,100);
+  let cari = document.getElementById('cariSoal').value.toLowerCase();
+  let filter = document.getElementById('filterTopik').value;
+  let hasil = bank.map((s,i)=>({s, nomor:i+1})).filter(x=>{
+    if(filter!=="SEMUA" && x.s.kat!==filter) return false;
+    if(cari && !(x.s.q.toLowerCase().includes(cari) || x.s.opts.join(" ").toLowerCase().includes(cari))) return false;
+    return true;
+  });
+  let div = document.getElementById('listDaftar');
+  if(hasil.length===0){ div.innerHTML='<p style="text-align:center;color:#888">Tidak ada soal yang cocok. Coba kata lain.</p>'; return; }
+  div.innerHTML = hasil.map(x=>`
+    <div class="daftar-item">
+      <b>${x.nomor}. ${x.s.q}</b><br>
+      <span style="font-size:10px;background:#F3E5F5;color:#6A4A8A;padding:2px 6px;border-radius:10px;font-weight:800">${x.s.kat}</span>
+      <div class="daftar-opts">A. ${x.s.opts[0]}<br>B. ${x.s.opts[1]}<br>C. ${x.s.opts[2]}<br>D. ${x.s.opts[3]}</div>
+      <button class="btn-kecil" onclick="document.getElementById('jawab-${x.nomor}').classList.toggle('show');this.innerText=document.getElementById('jawab-${x.nomor}').classList.contains('show')?'🙈 Sembunyikan Jawaban':'👁️ Lihat Jawaban'">👁️ Lihat Jawaban</button>
+      <div id="jawab-${x.nomor}" class="daftar-jawab">✅ Jawaban Benar: <b>${["A","B","C","D"][x.s.jawab]}. ${x.s.opts[x.s.jawab]}</b><br>💡 ${x.s.penjelas}</div>
+    </div>`).join('');
+}
+function kembaliKeKelas(){ clearInterval(timerInt); bukaKelas(kelasAktif); gantiTab('materi'); }
+function tepuk(){ try{ let ctx=new (window.AudioContext||window.webkitAudioContext)(); for(let i=0;i<10;i++){ setTimeout(()=>{ let b=ctx.createBuffer(1,ctx.sampleRate*0.08,ctx.sampleRate); let d=b.getChannelData(0); for(let j=0;j<d.length;j++) d[j]=(Math.random()*2-1)*Math.pow(1-j/d.length,2); let s=ctx.createBufferSource(); s.buffer=b; let f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1800; let g=ctx.createGain(); g.gain.value=0.8; s.connect(f); f.connect(g); g.connect(ctx.destination); s.start(); }, i*110); } }catch(e){} }
+function bel(){ try{ let ctx=new (window.AudioContext||window.webkitAudioContext)(); [880,880,660].forEach((freq,i)=>{ setTimeout(()=>{ let o=ctx.createOscillator(); o.type='sine'; o.frequency.value=freq; let g=ctx.createGain(); g.gain.setValueAtTime(0.6,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.5); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.5); }, i*180); }); }catch(e){} }
+function acakArray(arr){ let a=[...arr]; for(let i=a.length-1;i>0;i--){ let j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function buatSoalBaruMain(){ let pool = gabungBank(kelasAktif); let soalAcak = acakArray(pool).slice(0,10); return soalAcak.map(s=>{ let optsDenganTanda = s.opts.map((teks,i)=>({teks, benar: i===s.jawab})); let optsAcak = acakArray(optsDenganTanda); return { kat:s.kat, q:s.q, arab:s.arab, penjelas:s.penjelas, opts:optsAcak.map(x=>x.teks), jawab:optsAcak.findIndex(x=>x.benar) }; }); }
+function buatSoalLatihan(){ let bank = gabungBank(kelasAktif).slice(0,100); return bank.map(s=>({kat:s.kat, q:s.q, arab:s.arab, penjelas:s.penjelas, opts:[...s.opts], jawab:s.jawab})); }
+function mulaiGame(){ mode="main"; nama=document.getElementById('namaAnak').value||document.getElementById('namaLatihan').value||"Anak Hebat"; kelasLabel=document.getElementById('kelasAnak').value; soalTerpilih=buatSoalBaruMain(); totalSoalMode=10; idx=0; skor=0; salahHitung=0; streak=0; streakTerbaik=0; riwayat=[]; document.getElementById('judulGame').innerText=`🎈 KELAS ${kelasAktif} - MAIN SOAL 🕌`; document.getElementById('subJudulGame').innerText=`🔀 10 SOAL ACAK • TIMER 20 DETIK • SDN KAYAKAH 🔀`; document.getElementById('labelMode').innerText=`🔀 Main Soal - 10 Acak`; document.getElementById('statTimer').style.display='block'; document.getElementById('levelLabel').innerText=`📗 KELAS ${kelasAktif}`; gantiLayar('layarGame'); tampilSoal(); }
+function mulaiLatihan(){ mode="latihan"; nama=document.getElementById('namaLatihan').value||document.getElementById('namaAnak').value||"Anak Hebat"; kelasLabel="Kelas "+kelasAktif; soalTerpilih=buatSoalLatihan(); totalSoalMode=100; idx=0; skor=0; salahHitung=0; streak=0; streakTerbaik=0; riwayat=[]; document.getElementById('judulGame').innerText=`✏️ KELAS ${kelasAktif} - LATIHAN 100 SOAL`; document.getElementById('subJudulGame').innerText=`✏️ URUT 1-100 • TANPA TIMER • BENAR 👏 • SALAH 🔔 • SDN KAYAKAH`; document.getElementById('labelMode').innerText=`✏️ Latihan 100 - Urut 1-100 - Tanpa Timer`; document.getElementById('statTimer').style.display='none'; document.getElementById('levelLabel').innerText=`📗 KELAS ${kelasAktif}`; gantiLayar('layarGame'); tampilSoal(); }
+function tampilSoal(){ clearInterval(timerInt); let s=soalTerpilih[idx]; document.getElementById('kategori').innerText=s.kat; document.getElementById('pertanyaan').innerText=s.q; document.getElementById('soalKe').innerText=(idx+1)+"/"+totalSoalMode; document.getElementById('progressBar').style.width=(idx/totalSoalMode*100)+"%"; document.getElementById('skor').innerText=skor; document.getElementById('streak').innerText=streak+"🔥"; let arab=document.getElementById('arabBox'); if(s.arab){arab.innerText=s.arab;arab.classList.remove('hidden');}else{arab.classList.add('hidden');} let optDiv=document.getElementById('options'); optDiv.innerHTML=""; s.opts.forEach((o,i)=>{let b=document.createElement('button');b.className='opt';b.innerText=(["🅰️","🅱️","🅲","🅳"][i])+"  "+o;b.onclick=()=>cekJawaban(i,b);optDiv.appendChild(b);}); document.getElementById('feedback').classList.remove('show'); document.getElementById('nextBtn').classList.add('hidden'); document.getElementById('nextBtn').innerText = (idx+1===totalSoalMode) ? "🏁 LIHAT HASIL 🎉" : "LANJUT ➡️🎉"; if(mode==="main"){ sisa=20; document.getElementById('timer').innerText=sisa; timerInt=setInterval(()=>{sisa--;document.getElementById('timer').innerText=sisa;if(sisa<=0){clearInterval(timerInt);cekJawaban(-1,null);}},1000); } }
+function cekJawaban(pilih,btn){ clearInterval(timerInt); let s=soalTerpilih[idx]; let semua=document.querySelectorAll('.opt'); semua.forEach(b=>b.onclick=null); let fb=document.getElementById('feedback'); let benar = pilih===s.jawab; riwayat.push({q:s.q, pilih: pilih===-1?"⏰ Habis Waktu":s.opts[pilih], benar: s.opts[s.jawab], ok:benar}); if(benar){ skor++; streak++; if(streak>streakTerbaik) streakTerbaik=streak; let bonus = streak>=3 ? " 🔥 STREAK "+streak+"! Hebat!" : ""; document.getElementById('skor').innerText=skor; document.getElementById('streak').innerText=streak+"🔥"; if(btn)btn.classList.add('correct'); fb.style.background="#E8F5E9"; fb.innerHTML="<b>✅ BENAR! MasyaAllah "+nama+"! 🎉"+bonus+"</b><br>"+s.penjelas+"<br>⭐ +1 Benar!"; tepuk(); } else{ salahHitung++; streak=0; document.getElementById('streak').innerText="0🔥"; if(btn)btn.classList.add('wrong'); semua[s.jawab].classList.add('correct'); fb.style.background="#FFF3E0"; fb.innerHTML="<b>🔔 Bel! Belum tepat, tetap semangat! 💪</b><br>Jawaban Benar: <b>"+["A","B","C","D"][s.jawab]+". "+s.opts[s.jawab]+"</b><br>"+s.penjelas; bel(); } fb.classList.add('show');document.getElementById('nextBtn').classList.remove('hidden'); }
+function soalBerikutnya(){idx++;if(idx>=soalTerpilih.length)tampilHasil();else tampilSoal();}
+function tampilHasil(){ gantiLayar('layarHasil'); let total=totalSoalMode; let gelar = mode==="latihan" ? (skor>=90?"👑 PENJAGA CAHAYA LATIHAN 100":skor>=70?"🔥 PEMBERANI LATIHAN":skor>=50?"🌟 PENJELAJAH LATIHAN":"💪 TERUS LATIHAN") : (skor>=9?"👑 PENJAGA CAHAYA":skor>=6?"🔥 PEMBERANI CAHAYA":"🌟 PENJELAJAH CAHAYA"); let emoji=skor>= (mode==="latihan"?90:9)?"🏆🎉":skor>=(mode==="latihan"?70:6)?"🌟🎈":"💪🌈"; document.getElementById('resultEmoji').innerText=emoji; document.getElementById('resultTitle').innerText=gelar; document.getElementById('resultText').innerHTML="MasyaAllah <b>"+nama+" ("+kelasLabel+")</b><br>Mode: <b>"+(mode==="latihan"?"✏️ LATIHAN 100 SOAL - Urut 1-100":"🎮 MAIN SOAL - 10 Acak")+"</b><br>Kelas: <b>KELAS "+kelasAktif+"</b><br>Kamu benar <b>"+skor+" dari "+total+" Soal! ⭐</b><br>Salah: <b>"+salahHitung+"</b> • 🔥 Streak Terbaik: <b>"+streakTerbaik+"x</b>"; document.getElementById('badgeList').innerHTML=skor>= (mode==="latihan"?90:9)?"<span>🏆 Hebat Sekali</span><span>🕌 Paham Islam</span><span>❤️ Akhlak Mulia</span><span>🔥 Streak Hebat</span>":"<span>📖 Terus Belajar</span><span>⭐ Semangat Tahfiz</span>"; document.getElementById('reviewBox').innerHTML="<h3 style='font-size:13px;color:#6A4A8A'>📋 Review Jawaban Kamu:</h3>"+riwayat.map((r,i)=>`<div class="review-item"><b>${i+1}. ${r.q}</b><br>Kamu: ${r.pilih} ${r.ok?"✅":"❌"} • Benar: <b>${r.benar}</b></div>`).join(''); updateInfo(); }
+function ulangiGame(){ if(mode==="latihan"){ mulaiLatihan(); } else { mulaiGame(); } }
+function bukaGuruPopup(){ document.getElementById('inputKodeGuru').value=""; document.getElementById('pesanKode').innerText=""; document.getElementById('popupGuru').style.display='flex'; setTimeout(()=>document.getElementById('inputKodeGuru').focus(),100); }
+function tutupPopupGuru(){ document.getElementById('popupGuru').style.display='none'; }
+function cekKodeGuru(){ let kode=document.getElementById('inputKodeGuru').value.trim(); if(kode==="1234"){ tutupPopupGuru(); document.getElementById('gLevel').value=String(kelasAktif); gantiLayar('layarGuru'); updateInfo(); } else { document.getElementById('pesanKode').innerText="❌ Kode salah! Tanya ke Ibu Guru ya 😊"; document.getElementById('inputKodeGuru').value=""; } }
+document.getElementById('inputKodeGuru').addEventListener('keydown',function(e){ if(e.key==='Enter') cekKodeGuru(); });
+function simpanSoalGuru(){ let kelas=document.getElementById('gLevel').value; let katVal=document.getElementById('gKat').value; let katLabel=document.getElementById('gKat').options[document.getElementById('gKat').selectedIndex].text; let q=document.getElementById('gSoal').value.trim(); let arab=document.getElementById('gArab').value.trim(); let a=document.getElementById('gA').value.trim(); let b=document.getElementById('gB').value.trim(); let c=document.getElementById('gC').value.trim(); let d=document.getElementById('gD').value.trim(); let penjelas=document.getElementById('gPenjelas').value.trim() || "Terus semangat belajar ya!"; let benar = parseInt(document.querySelector('input[name="benar"]:checked').value); if(!q || !a || !b || !c || !d){ alert("Pian, isi dulu Soal + 4 Jawaban ya! Belum lengkap."); return; } let soalBaru = { kat:katLabel, tag:katVal, q:q, opts:[a,b,c,d], jawab:benar, penjelas:penjelas }; if(arab) soalBaru.arab = arab; let data = ambilSoalGuru(); data.push({kelas:parseInt(kelas), soal:soalBaru}); simpanKeLocal(data); alert("✅ BERHASIL! Soal masuk ke KELAS "+kelas+"!"); document.getElementById('gSoal').value=""; document.getElementById('gArab').value=""; document.getElementById('gA').value=""; document.getElementById('gB').value=""; document.getElementById('gC').value=""; document.getElementById('gD').value=""; document.getElementById('gPenjelas').value=""; updateInfo(); }
+function hapusSatuGuru(i){ if(!confirm("Hapus soal ini?")) return; let data=ambilSoalGuru(); data.splice(i,1); simpanKeLocal(data); updateInfo(); }
+function hapusSemuaGuru(){ if(!confirm("Hapus SEMUA soal buatan Guru? Soal bawaan tidak hilang.")) return; localStorage.removeItem('soalGuruKayakahPerKelas'); updateInfo(); alert("Semua soal guru dihapus. Soal bawaan masih ada."); }
+bukaKelas(1); gantiLayar('layarMenu'); updateInfo();
+</script>
+</body>
+</html>
