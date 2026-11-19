@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitra Sekolah - SDN Kayakah</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{font-family:'Baloo 2','Comic Sans MS',Arial,sans-serif;margin:0;color:#333;padding:14px;min-height:100vh;overflow-x:hidden;background:linear-gradient(180deg,#7FB3E8 0%,#9CC3ED 30%,#B9D6F2 60%,#D6E8F8 85%,#EAF3FC 100%);position:relative}
+.wrap{max-width:920px;margin:auto;position:relative;z-index:2}
+.langit{position:relative;height:225px;overflow:hidden;border-radius:30px;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.18);background:linear-gradient(180deg,#5B9BD5,#7FB3E8,#A8CBEF,#D6E8F8);margin-bottom:14px}
+.matahari{position:absolute;top:12px;left:16px;width:66px;height:66px;background:#FFE082;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 0 0 8px rgba(255,224,130,.35),0 0 22px #FFE082;z-index:3;animation:senyum 3s ease-in-out infinite}
+@keyframes senyum{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.pelangi{position:absolute;right:10px;top:6px;font-size:72px;opacity:.85;z-index:1;transform:rotate(8deg)}
+.awan{position:absolute;background:#FDFDFD;border-radius:50px;height:30px;box-shadow:0 3px 8px rgba(0,0,0,.08);opacity:.95;z-index:2;display:flex;align-items:center;justify-content:center;font-size:20px}
+.awan::before,.awan::after{content:"";position:absolute;background:#FDFDFD;border-radius:50%}
+.awan::before{width:28px;height:28px;top:-12px;left:16px}
+.awan::after{width:20px;height:20px;top:-9px;left:44px}
+.awan1{width:105px;top:18px;left:-130px;animation:jalanAwan 24s linear infinite}
+.awan2{width:78px;top:58px;left:-100px;animation:jalanAwan 34s linear infinite;animation-delay:4s;transform:scale(.85)}
+.awan3{width:125px;top:95px;left:-150px;animation:jalanAwan 28s linear infinite;animation-delay:8s}
+.awan4{width:68px;top:28px;left:-90px;animation:jalanAwan 40s linear infinite;animation-delay:12s;transform:scale(.75)}
+.awan5{width:92px;top:125px;left:-120px;animation:jalanAwan 30s linear infinite;animation-delay:2s;transform:scale(.9)}
+@keyframes jalanAwan{from{left:-160px}to{left:105%}}
+/* BURUNG ADA SAYAP - KEPAK-KEPAK */
+.burung{position:absolute;z-index:4;display:flex;align-items:center;gap:1px;animation:terbang 15s linear infinite}
+.burung .sayap-kiri,.burung .sayap-kanan{display:inline-block;font-size:26px;animation:kepak .5s ease-in-out infinite alternate;transform-origin:bottom center}
+.burung .sayap-kanan{transform:scaleX(-1)}
+.burung .badan{font-size:22px;margin:0 -4px}
+@keyframes kepak{from{transform:rotate(-18deg) translateY(0)}to{transform:rotate(18deg) translateY(-3px)}}
+.burung1{top:42px;left:-70px;animation-duration:14s}
+.burung2{top:78px;left:-70px;animation-duration:18s;animation-delay:5s;transform:scale(.85)}
+.burung3{top:30px;left:-70px;animation-duration:21s;animation-delay:9s;transform:scale(.75)}
+@keyframes terbang{0%{left:-80px;transform:translateY(0)}25%{transform:translateY(-12px)}50%{transform:translateY(8px)}75%{transform:translateY(-8px)}100%{left:105%;transform:translateY(0)}}
+.kupu{position:absolute;font-size:26px;z-index:4;animation:kupuTerbang 6s ease-in-out infinite}
+.kupu1{bottom:16px;left:16%;animation-delay:0s}
+.kupu2{bottom:26px;left:54%;animation-delay:2s;font-size:22px}
+.kupu3{bottom:12px;left:74%;animation-delay:1s;font-size:24px}
+@keyframes kupuTerbang{0%,100%{transform:translate(0,0) rotate(-8deg)}25%{transform:translate(14px,-20px) rotate(8deg)}50%{transform:translate(-8px,-30px) rotate(-6deg)}75%{transform:translate(10px,-10px) rotate(6deg)}}
+.balon{position:absolute;font-size:30px;z-index:3;animation:balonNaik 10s ease-in-out infinite}
+.balon1{bottom:-10px;left:30%;animation-delay:0s}
+.balon2{bottom:-10px;left:60%;animation-delay:3s;font-size:26px}
+.balon3{bottom:-10px;left:44%;animation-delay:5s;font-size:24px}
+@keyframes balonNaik{0%{bottom:-10px;transform:translateX(0) rotate(-4deg);opacity:0}15%{opacity:1}50%{transform:translateX(10px) rotate(4deg)}100%{bottom:115%;transform:translateX(-8px) rotate(-3deg);opacity:0}}
+/* JUDUL BACKGROUND PELANGI */
+.judul-langit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:6;width:94%}
+.judul-langit h1{margin:0;font-family:'Fredoka',sans-serif;font-size:32px;color:white;line-height:1.15;background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);padding:10px 16px;border-radius:20px;display:inline-block;box-shadow:0 4px 10px rgba(0,0,0,.25);text-shadow:0 2px 4px rgba(0,0,0,.3);border:3px solid white}
+.judul-langit p{margin:8px 0 0;background:white;color:#1565C0;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:800;font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.top-bar{background:linear-gradient(90deg,#5B9BD5,#7FB3E8,#5B9BD5);color:white;padding:12px;text-align:center;border-radius:20px;font-size:14px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.top-bar b{color:#fff;background:#2F6BA8;padding:2px 8px;border-radius:10px}
+.btn-login{background:#fff;color:#2F6BA8;border:none;padding:8px 16px;border-radius:20px;font-weight:800;cursor:pointer;margin-left:8px;font-family:'Baloo 2',sans-serif}
+.btn-logout{background:#333;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:800;cursor:pointer;margin-left:8px;font-family:'Baloo 2',sans-serif}
+.card{background:rgba(255,255,255,.97);padding:22px;border-radius:30px;box-shadow:0 8px 20px rgba(0,0,0,.15);border:4px solid #fff;overflow:hidden}
+.banner-kartun{background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);border-radius:20px;padding:10px;text-align:center;font-size:36px;margin-bottom:6px}
+.nama-atas{text-align:center;font-size:12px;color:#555;margin:4px 0 10px;letter-spacing:.3px;font-family:'Fredoka',sans-serif}
+.card h3{text-align:center;color:#1565C0;font-size:28px;margin:8px 0 4px;font-family:'Fredoka',sans-serif}
+.lock-box{background:#EAF3FC;border:2px dashed #7FB3E8;padding:12px;border-radius:16px;text-align:center;margin:12px 0;font-weight:700;color:#2F6BA8}
+.hanya-admin{display:none}
+body.admin .hanya-admin{display:block}
+.info-admin{background:linear-gradient(90deg,#C8E6C9,#A5D6A7);padding:10px;border-radius:14px;text-align:center;font-weight:800;margin-bottom:12px;color:#1B5E20}
+.mitra-folder{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.folder-card{background:#fff;border-radius:22px;padding:18px 10px;text-align:center;cursor:pointer;border:4px solid #A8CBEF;box-shadow:0 4px 12px rgba(0,0,0,.10)}
+.folder-card:nth-child(2){border-color:#FFCC80}
+.folder-card:nth-child(3){border-color:#F48FB1}
+.folder-card .folder-emoji{font-size:62px}
+.folder-card b{font-size:17px;color:#1565C0;display:block;margin-top:8px;font-family:'Fredoka',sans-serif}
+.folder-card span{font-size:12px;color:#777;font-weight:600}
+.kegiatan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.k-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.10);border:4px solid #A8CBEF;text-align:left;padding-bottom:10px}
+.k-card img{width:100%;height:180px;object-fit:cover;display:block;cursor:pointer}
+.k-card .k-kartun{height:130px;display:flex;align-items:center;justify-content:center;font-size:72px;background:#EAF3FC}
+.k-info{padding:10px 12px 4px;font-size:14px;line-height:1.7}
+.k-info div{margin:2px 0}
+.k-del{background:#FF5252;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:800;cursor:pointer;font-size:12px;margin:6px 12px 4px;font-family:'Baloo 2',sans-serif}
+.btn-kembali{background:#5B9BD5;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:800;cursor:pointer;font-family:'Baloo 2',sans-serif}
+.btn-kembali-beranda{background:#FF9800;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:800;cursor:pointer;font-family:'Baloo 2',sans-serif}
+.tambah-box{background:#E8F5E9;border:3px dashed #4CAF50;border-radius:20px;padding:18px;text-align:center;margin-top:14px}
+.tambah-box input,.tambah-box select{width:100%;margin:6px 0;padding:10px;border:2px solid #A8CBEF;border-radius:12px;font-family:'Baloo 2',sans-serif;font-weight:600}
+.btn-tambah{background:linear-gradient(90deg,#2F6BA8,#5B9BD5);color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:800;cursor:pointer;font-size:16px;width:100%;font-family:'Baloo 2',sans-serif}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:99;justify-content:center;align-items:center}
+.modal-box{background:white;width:92%;max-width:400px;padding:22px;border-radius:24px;text-align:center;max-height:90vh;overflow:auto}
+.modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #5B9BD5;border-radius:12px;font-size:15px;font-family:'Baloo 2',sans-serif}
+.modal-box button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:15px;margin-top:6px;font-family:'Baloo 2',sans-serif}
+@media(max-width:600px){.mitra-folder,.kegiatan-grid{grid-template-columns:1fr 1fr}.judul-langit h1{font-size:24px}.langit{height:200px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top-bar"><span id="adminStatus">👀 Mode Pengunjung - Hanya Melihat</span><button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Kepsek / Staf</button><button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button></div>
+
+<div class="langit">
+<div class="matahari">☀️</div>
+<div class="pelangi">🌈</div>
+<div class="awan awan1">☁️</div>
+<div class="awan awan2">☁️</div>
+<div class="awan awan3">☁️</div>
+<div class="awan awan4">☁️</div>
+<div class="awan awan5">☁️</div>
+<div class="burung burung1"><span class="sayap-kiri">🪽</span><span class="badan">🐦</span><span class="sayap-kanan">🪽</span></div>
+<div class="burung burung2"><span class="sayap-kiri">🪽</span><span class="badan">🕊️</span><span class="sayap-kanan">🪽</span></div>
+<div class="burung burung3"><span class="sayap-kiri">🪽</span><span class="badan">🐦</span><span class="sayap-kanan">🪽</span></div>
+<div class="kupu kupu1">🦋</div>
+<div class="kupu kupu2">🦋</div>
+<div class="kupu kupu3">🦋</div>
+<div class="balon balon1">🎈</div>
+<div class="balon balon2">🎈</div>
+<div class="balon balon3">🎈</div>
+<div class="judul-langit"><h1>🤝📸 Mitra Sekolah 📸🤝</h1><br><p>✨ SDN Kayakah 2 - Meriah, Ceria! ✨</p></div>
+</div>
+
+<div class="card" id="mitra">
+<div class="banner-kartun">🏫🏡👮‍♂️🪖🩺🌈☁️🐦</div>
+<div class="nama-atas">Wahyu Aji, S.Pd.Jas</div>
+<div class="lock-box">🔒 Mode Pengunjung: Pian hanya bisa melihat foto.</div>
+<div class="hanya-admin info-admin">✅ Mode Kepsek / Staf Aktif - Pian Bisa Tambah & Hapus Foto Mitra!</div>
+<div id="mitraJalan" style="text-align:center;font-weight:800;margin-bottom:12px;color:#1565C0"></div>
+<div id="listMitra"></div>
+
+<div class="tambah-box hanya-admin">
+<h3 style="margin:0;color:#1565C0">➕ TAMBAH FOTO MITRA - KHUSUS KEPSEK & STAF</h3>
+<p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiFormMitra">-</b></p>
+<select id="mitraPilih"><option value="Desa Kayakah">🏡 Desa Kayakah</option><option value="Polsek dan Koramil Amuntai Selatan">👮‍♂️🪖 Polsek dan Koramil Amuntai Selatan</option><option value="Puskesmas Amuntai Selatan">🩺 Puskesmas Amuntai Selatan</option></select>
+<input type="text" id="mitraAcara" placeholder="🎉 Acara - Contoh: Suntik Tetanus">
+<input type="date" id="mitraKapan">
+<input type="text" id="mitraTempat" placeholder="📍 Tempat - Contoh: Halaman SDN Kayakah 2">
+<input type="file" id="fileMitra" accept="image/*">
+<button class="btn-tambah" onclick="tambahMitra()">📸 SIMPAN FOTO MITRA</button>
+<p id="pesanMitra" style="font-weight:800;color:#1565C0"></p>
+</div>
+</div>
+<p style="text-align:center;font-size:12px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)">Ini file Mitra saja, untuk dicek dulu sebelum digabung ke web besar lewat GitHub.</p>
+</div>
+
+<div class="modal" id="modalLogin"><div class="modal-box"><div style="font-size:60px">👩‍🏫👨‍🏫🏫</div><h2>🔐 Login Kepsek / Staf</h2><p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p><label><b>Pilih Nama Anda:</b></label><select id="loginNama"></select><label><b>Masukkan PIN:</b></label><input type="password" id="loginPIN" placeholder="Masukkan PIN Anda" inputmode="numeric"><p id="loginError" style="color:#D32F2F;font-weight:800"></p><button style="background:#5B9BD5;color:white" onclick="cekLogin()">✅ MASUK</button><button style="background:#BDBDBD" onclick="tutupLogin()">❌ Batal</button><p style="font-size:12px;color:#888">PIN hanya diketahui Kepala Sekolah, Guru & Staf. Pengunjung hanya bisa melihat.</p></div></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = { apiKey: "AIzaSyARTLGupKOPl1IYtborh8tMhWtY2Hhf0FU", authDomain: "sdn-kayakah-2.firebaseapp.com", projectId: "sdn-kayakah-2", storageBucket: "sdn-kayakah-2.firebasestorage.app", messagingSenderId: "285223036478", appId: "1:285223036478:web:5929f766f2c5f2960bd36f" };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window._fb = { db, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs };
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
+<script>
+let adminLogin=null; let NAMA_KEPSEK="Wahyu Aji, S.Pd.Jas"; let daftarPIN={}; let jabatanAdmin={};
+function loadPIN(){ let def={"Wahyu Aji, S.Pd.Jas":"1976","Samsul Bahri, S.Pd":"1234","Syahruni, S.Pd.SD":"1234","Norsalim, S.Pd":"1234","Hj. Siti Nuriyah, S.Pd.SD":"1234","Radinah, S.Pd":"1234","Pathuljannah, S.Pd.I":"1234","Husain":"1234","Syahida Norpah":"1234","Jannah":"1234"}; let defJab={"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah / Guru PJOK","Samsul Bahri, S.Pd":"Guru Kelas","Syahruni, S.Pd.SD":"Guru Kelas","Norsalim, S.Pd":"Guru Kelas","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas","Radinah, S.Pd":"Guru Kelas","Pathuljannah, S.Pd.I":"Guru PAI","Husain":"Operator Sekolah","Syahida Norpah":"Pembimbing Tahsin & Tahfiz","Jannah":"Pembimbing Tahsin & Tahfiz"}; try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; } window.addEventListener('firebase-ready', mulaiDengarGuru, {once:true}); if(window._fb) mulaiDengarGuru(); }
+function mulaiDengarGuru(){ if(!window._fb) return; let fb=window._fb; fb.onSnapshot(fb.collection(fb.db,'guru'), (snap)=>{ if(snap.empty) return; let pinBaru={}, jabBaru={}; snap.docs.forEach(d=>{ let g=d.data(); if(!g.nama) return; pinBaru[g.nama]=g.pin; jabBaru[g.nama]=g.jabatan; }); if(Object.keys(pinBaru).length>0){ daftarPIN=pinBaru; jabatanAdmin=jabBaru; } isiDropdownLogin(); }); }
+function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; Object.keys(daftarPIN).forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama; sel.appendChild(opt); }); }
+function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
+function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); tutupLogin(); alert("Selamat Datang, "+nama+"! ✅"); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! Hanya Kepsek & Staf!"; } }
+function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar 🔒"); }
+function updateTampilanAdmin(){ if(adminLogin){ document.body.classList.add("admin"); document.getElementById("adminStatus").innerHTML="✅ Login Sebagai Kepsek / Staf: <b>"+adminLogin+"</b>"; document.getElementById("btnLoginTop").style.display="none"; document.getElementById("btnLogoutTop").style.display="inline-block"; document.getElementById("namaAdminDiFormMitra").innerHTML=adminLogin; } else { document.body.classList.remove("admin"); document.getElementById("adminStatus").innerHTML="👀 Mode Pengunjung - Hanya Melihat"; document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none"; } tampilMitra(); }
+function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Kepsek & Staf yang bisa! Pengunjung hanya bisa melihat. Klik 🔐 Login Kepsek / Staf!"); bukaLogin(); return false; } return true; }
+function kecilkanFoto(file, cb){ let reader=new FileReader(); reader.onload=function(e){ let img=new Image(); img.onload=function(){ let canvas=document.createElement('canvas'); let max=800; let w=img.width,h=img.height; if(w>max){ h=h*max/w; w=max; } canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); cb(canvas.toDataURL('image/jpeg',0.65)); }; img.src=e.target.result; }; reader.readAsDataURL(file); }
+function formatTanggal(iso){ if(!iso) return "-"; try{ let d=new Date(iso+"T00:00:00"); return d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }catch(e){ return iso; } }
+let dataMitra=[]; let mitraFolderAktif=null;
+let daftarFolderMitra=[
+{ nama:"Desa Kayakah", emoji:"🏡", warna:"#A8CBEF", ket:"Kegiatan bersama Desa Kayakah" },
+{ nama:"Polsek dan Koramil Amuntai Selatan", emoji:"👮‍♂️🪖", warna:"#FFCC80", ket:"Kegiatan bersama Polsek dan Koramil" },
+{ nama:"Puskesmas Amuntai Selatan", emoji:"🩺", warna:"#F8BBD0", ket:"Kegiatan bersama Puskesmas" }
+];
+function mulaiDengarMitra(){ if(!window._fb){ window.addEventListener('firebase-ready', mulaiDengarMitra, {once:true}); return; } let fb=window._fb; fb.onSnapshot(fb.query(fb.collection(fb.db,'mitra'), fb.orderBy('waktu','desc')), (snap)=>{ let arr=snap.docs.map(d=>({id:d.id, ...d.data()})); dataMitra=arr; tampilMitra(); }); }
+function hitungFotoMitra(nama){ return dataMitra.filter(x=>x.mitra===nama).length; }
+function kembaliKeBeranda(){ mitraFolderAktif=null; tampilMitra(); window.scrollTo({top:0,behavior:"smooth"}); }
+function tampilMitra(){
+let wadah=document.getElementById("listMitra"); if(!wadah) return;
+let jalan=document.getElementById("mitraJalan");
+if(mitraFolderAktif===null){
+  if(jalan) jalan.innerHTML=`<button class="btn-kembali-beranda" onclick="kembaliKeBeranda()">🏠 ⬅️ Kembali ke Beranda</button> &nbsp; 📁 Mitra Sekolah`;
+  let html=`<div class="mitra-folder">`;
+  daftarFolderMitra.forEach(f=>{
+    let jml=hitungFotoMitra(f.nama);
+    html+=`<div class="folder-card" onclick="bukaFolderMitra('${f.nama}')" style="border-color:${f.warna}"><div class="folder-emoji">📁 ${f.emoji}</div><b>${f.nama}</b><span>${f.ket}<br>📸 ${jml} Foto • Klik untuk buka</span><br><button style="background:#5B9BD5;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;margin-top:8px;font-family:'Baloo 2',sans-serif">📂 BUKA FOLDER</button></div>`;
+  });
+  html+=`</div>`;
+  wadah.innerHTML=html;
+} else {
+  if(jalan) jalan.innerHTML=`<button class="btn-kembali" onclick="kembaliKeFolderMitra()">⬅️ Kembali ke Mitra Sekolah</button> &nbsp; 📂 ${mitraFolderAktif}`;
+  let list=dataMitra.filter(x=>x.mitra===mitraFolderAktif);
+  let html=`<div class="kegiatan-grid">`;
+  list.forEach((k,i)=>{
+    let gambar=k.foto?`<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">`:`<div class="k-kartun">🤝</div>`;
+    let acara=k.acara||k.kegiatan||"-";
+    let kapan=k.kapan?formatTanggal(k.kapan):(k.tanggal||"-");
+    let tempat=k.tempat||k.lokasi||"-";
+    let dibagikan=k.dibagikan||k.oleh||"Admin";
+    let tombolHapus=adminLogin?`<button class="k-del" onclick="hapusMitra('${k.id||i}')">🗑️ Hapus Foto Ini</button>`:"";
+    html+=`<div class="k-card">${gambar}<div class="k-info"><div>🎉 <b>Acara :</b> ${acara}</div><div>📅 <b>Kapan :</b> ${kapan}</div><div>📍 <b>Tempat :</b> ${tempat}</div><div>📸 <b>Dibagikan oleh :</b> ${dibagikan}</div></div>${tombolHapus}</div>`;
+  });
+  html+=`</div>`;
+  if(list.length===0) html=`<div style="text-align:center;padding:20px;background:#fff;border-radius:12px;font-weight:700">Belum ada foto di folder ${mitraFolderAktif}. Kepsek / Staf bisa tambah di bawah! 👇</div>`;
+  wadah.innerHTML=html;
+}
+}
+function bukaFolderMitra(nama){ mitraFolderAktif=nama; tampilMitra(); document.getElementById("mitra").scrollIntoView({behavior:"smooth"}); }
+function kembaliKeFolderMitra(){ mitraFolderAktif=null; tampilMitra(); document.getElementById("mitra").scrollIntoView({behavior:"smooth"}); }
+function tambahMitra(){ if(!wajibAdmin()) return; let mitra=document.getElementById("mitraPilih").value; let acara=document.getElementById("mitraAcara").value.trim(); let kapan=document.getElementById("mitraKapan").value; let tempat=document.getElementById("mitraTempat").value.trim(); let fileInput=document.getElementById("fileMitra"); if(!acara||!kapan||!tempat){alert("Isi Acara, Kapan, Tempat dulu, Pak!");return;} if(!fileInput.files[0]){alert("Pilih fotonya dulu!");return;} document.getElementById("pesanMitra").innerHTML="⏳ Sedang upload..."; kecilkanFoto(fileInput.files[0], async function(dataUrl){ let item={mitra:mitra,acara:acara,kapan:kapan,tempat:tempat,kegiatan:acara,lokasi:tempat,foto:dataUrl,oleh:adminLogin,dibagikan:adminLogin,waktu:Date.now()}; try{ if(window._fb){ await window._fb.addDoc(window._fb.collection(window._fb.db,'mitra'), item); } else { dataMitra.unshift(item); } }catch(e){ dataMitra.unshift(item); } document.getElementById("mitraAcara").value=""; document.getElementById("mitraKapan").value=""; document.getElementById("mitraTempat").value=""; fileInput.value=""; document.getElementById("pesanMitra").innerHTML="✅ Foto Berhasil Ditambah ke folder "+mitra+"!"; mitraFolderAktif=mitra; tampilMitra(); }); }
+async function hapusMitra(id){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'mitra',id)); return; } }catch(e){} let idx=dataMitra.findIndex((k,i)=> (k.id||i)==id); if(idx>=0){ dataMitra.splice(idx,1); tampilMitra(); } }
+loadPIN(); mulaiDengarMitra(); tampilMitra();
+try{ let saved=localStorage.getItem("admin_kayakah"); if(saved && daftarPIN[saved]) adminLogin=saved; }catch(e){}
+setTimeout(()=>{ updateTampilanAdmin(); },500);
+</script>
+</body>
+</html>
