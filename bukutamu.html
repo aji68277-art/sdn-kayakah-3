@@ -1,0 +1,133 @@
+<!-- 📖 BUKU TAMU DIGITAL - Tempel di index, di bawah Kritik & Saran -->
+<style>
+.tamu-wrap{background:linear-gradient(135deg,#FFF8E1,#F3E5F5);border:4px solid #FF9800;border-radius:25px;padding:22px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,.12)}
+.tamu-form{background:#fff;border:3px dashed #FF9800;border-radius:16px;padding:16px}
+.tamu-form input,.tamu-form select,.tamu-form textarea{width:100%;padding:11px;margin:6px 0;border:2px solid #FFE082;border-radius:12px;font-family:inherit;font-size:14px}
+.tamu-form textarea{min-height:80px}
+.bintang-pilih{text-align:center;font-size:30px;letter-spacing:4px;margin:6px 0}
+.bintang-pilih span{cursor:pointer;filter:grayscale(1)}
+.bintang-pilih span.aktif{filter:none}
+.tamu-item{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:2px solid #FFE082;display:flex;gap:12px;align-items:flex-start}
+.tamu-avatar{width:52px;height:52px;min-width:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:3px solid #FFEB3B}
+.btn-tamu{background:linear-gradient(90deg,#FF9800,#FF5252);color:white;border:none;padding:13px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%;font-size:16px}
+</style>
+
+<div class="tamu-wrap" id="bukutamu">
+<div style="background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);border-radius:16px;padding:16px;text-align:center;font-size:48px;margin-bottom:12px">📖✍️🌈</div>
+<h3 style="text-align:center;color:#E65100;font-size:26px;margin:0">📖 Buku Tamu Digital 📖</h3>
+<p style="text-align:center">Sudah Mampir ke SDN Kayakah? Tinggalkan Kenangan Pian di Sini!<br><b>Semua Bisa Lihat • Tanpa Login</b></p>
+
+<div style="text-align:center;background:#fff;padding:12px;border-radius:14px;border:2px dashed #FF9800;margin-bottom:14px">
+<b style="font-size:20px;color:#E65100">🌟 <span id="rataBintang">5.0</span> / 5.0</b><br>
+<span id="bintangBesar" style="font-size:26px">⭐⭐⭐⭐⭐</span><br>
+<span style="font-size:13px;color:#666">Dari <b><span id="jmlTamuAtas">0</span> Tamu</b> • <b><span id="jmlSuka">0</span> ❤️ Suka</b></span>
+</div>
+
+<div class="tamu-form">
+<input type="text" id="tamuNama" placeholder="👤 Nama Pian - Contoh: Bapak Camat / Budi Alumni 2010">
+<select id="tamuDari">
+<option value="Orang Tua / Wali Murid">👨‍👩‍👧 Orang Tua / Wali Murid</option>
+<option value="Alumni">🎓 Alumni SDN Kayakah</option>
+<option value="Tamu Dinas">🏛️ Tamu Dinas / Pejabat</option>
+<option value="Masyarakat">🏡 Masyarakat Desa Kayakah</option>
+<option value="Tamu Lainnya">👋 Tamu Lainnya</option>
+</select>
+<p style="text-align:center;font-weight:bold;margin:8px 0 2px">Kasih Bintang Untuk Sekolah Kami:</p>
+<div class="bintang-pilih" id="bintangPilih"><span data-b="1">⭐</span><span data-b="2">⭐</span><span data-b="3">⭐</span><span data-b="4">⭐</span><span data-b="5" class="aktif">⭐</span></div>
+<textarea id="tamuIsi" placeholder="💬 Tulis kesan Pian... Contoh: Sekolahnya bersih, gurunya ramah!"></textarea>
+<button class="btn-tamu" onclick="kirimBukuTamu()">📖 KIRIM KE BUKU TAMU</button>
+<p id="pesanTamu" style="font-weight:bold;color:#2E7D32;text-align:center"></p>
+</div>
+
+<br>
+<div style="text-align:center;margin-bottom:10px">
+<button onclick="filterTamu('SEMUA')" style="background:#FF9800;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🌈 Semua</button>
+<button onclick="filterTamu('Alumni')" style="background:#9C27B0;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎓 Alumni</button>
+<button onclick="filterTamu('Tamu Dinas')" style="background:#2196F3;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🏛️ Tamu Dinas</button>
+</div>
+
+<h3 style="color:#E65100">📋 Yang Sudah Mampir (<span id="jmlTamu">0</span>)</h3>
+<div id="listTamu"></div>
+<div class="hanya-admin" style="text-align:center;margin-top:10px">
+<button onclick="hapusSemuaTamu()" style="background:#FF5252;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Buku Tamu (Admin)</button>
+</div>
+</div>
+
+<script>
+let dataTamu=[]; let filterTamuAktif="SEMUA"; let bintangDipilih=5;
+document.getElementById('bintangPilih').querySelectorAll('span').forEach(sp=>{
+  sp.addEventListener('click', ()=>{
+    bintangDipilih=parseInt(sp.dataset.b);
+    document.getElementById('bintangPilih').querySelectorAll('span').forEach((s,idx)=>{ s.classList.toggle('aktif', idx < bintangDipilih); });
+  });
+});
+function loadTamu(){
+  if(!window._fb){ setTimeout(loadTamu,1000); return; }
+  let fb=window._fb;
+  fb.onSnapshot(fb.query(fb.collection(fb.db,'bukutamu'), fb.orderBy('waktu','desc')), (snap)=>{
+    let arr=snap.docs.map(d=>({id:d.id, ...d.data()}));
+    if(arr.length>0){ dataTamu=arr; tampilTamu(); }
+    else if(dataTamu.length===0){
+      dataTamu=[
+        {nama:"Bapak Camat Amuntai Selatan", dari:"Tamu Dinas", isi:"Saya bangga berkunjung ke SDN Kayakah. Sekolahnya bersih, gurunya ramah, anak-anaknya ceria!", tanggal:"16 Nov 2026", bintang:5, suka:12, waktu:Date.now()},
+        {nama:"Budi - Alumni 2010", dari:"Alumni", isi:"Kangen main bola di sini, Pak. Sekarang anak saya juga sekolah di sini. Sukses terus!", tanggal:"15 Nov 2026", bintang:5, suka:8, waktu:Date.now()-1000},
+        {nama:"Ibu Siti - Orang Tua Murid", dari:"Orang Tua / Wali Murid", isi:"Anak Ulun sekarang rajin mengaji dan rajin belajar. Terima kasih Bapak/Ibu Guru!", tanggal:"15 Nov 2026", bintang:5, suka:10, waktu:Date.now()-2000}
+      ];
+      tampilTamu();
+    }
+  });
+}
+function filterTamu(f){ filterTamuAktif=f; tampilTamu(); }
+async function kirimBukuTamu(){
+  let nama=document.getElementById("tamuNama").value.trim()||"Hamba Allah";
+  let dari=document.getElementById("tamuDari").value;
+  let isi=document.getElementById("tamuIsi").value.trim();
+  if(!isi||isi.length<5){alert("Tulis dulu kesan Pian!");return;}
+  let tgl=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"});
+  let item={nama:nama, dari:dari, isi:isi, tanggal:tgl, bintang:bintangDipilih, suka:0, waktu:Date.now()};
+  try{ if(window._fb){ await window._fb.addDoc(window._fb.collection(window._fb.db,'bukutamu'), item); } else { dataTamu.unshift(item); tampilTamu(); } }catch(e){ dataTamu.unshift(item); tampilTamu(); }
+  document.getElementById("tamuNama").value=""; document.getElementById("tamuIsi").value="";
+  document.getElementById("pesanTamu").innerHTML="✅ Terima Kasih! Sudah Masuk Buku Tamu! 🎉";
+}
+function tampilTamu(){
+  let wadah=document.getElementById("listTamu"); if(!wadah) return;
+  document.getElementById("jmlTamu").innerHTML=dataTamu.length;
+  document.getElementById("jmlTamuAtas").innerHTML=dataTamu.length;
+  let totalBintang=0, totalSuka=0;
+  dataTamu.forEach(t=>{ totalBintang+=(t.bintang||5); totalSuka+=(t.suka||0); });
+  let rata = dataTamu.length>0 ? (totalBintang/dataTamu.length).toFixed(1) : "5.0";
+  document.getElementById("rataBintang").innerHTML=rata;
+  document.getElementById("bintangBesar").innerHTML="⭐".repeat(Math.round(parseFloat(rata)));
+  document.getElementById("jmlSuka").innerHTML=totalSuka;
+  let avatars=["👨‍💼","👩‍💼","🧑‍🌾","👴","👵","👩‍🏫","🧑‍🎓","😊","🌟"];
+  let warnaAvatar=["#FFEBEE","#FFF3E0","#E3F2FD","#E8F5E9","#F3E5F5","#FFFDE7","#E0F7FA"];
+  let html="";
+  dataTamu.forEach((t,i)=>{
+    if(filterTamuAktif!=="SEMUA" && t.dari!==filterTamuAktif) return;
+    let av=avatars[i % avatars.length]; let w=warnaAvatar[i % warnaAvatar.length];
+    let bintang="⭐".repeat(t.bintang||5);
+    let tombol = (typeof adminLogin!=="undefined" && adminLogin) ? `<div style="margin-top:8px"><button onclick="sukaTamu('${t.id||i}')" style="background:#FF4081;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px">❤️ Suka (${t.suka||0})</button> <button onclick="hapusTamu('${t.id||i}')" style="background:#FF5252;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button></div>` : `<div style="margin-top:8px"><button onclick="sukaTamu('${t.id||i}')" style="background:#FFE0E0;color:#C62828;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px">❤️ Suka (${t.suka||0})</button></div>`;
+    html+=`<div class="tamu-item"><div class="tamu-avatar" style="background:${w}">${av}</div><div style="flex:1"><b>👤 ${t.nama}</b> <span style="font-size:12px;color:#888">• ${t.dari} • ${t.tanggal}</span><div style="font-size:14px;margin:2px 0">${bintang}</div><p style="margin:6px 0;line-height:1.6">${t.isi}</p>${tombol}</div></div>`;
+  });
+  if(html==="") html=`<div style="text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada yang isi. Jadilah yang pertama! 👆</div>`;
+  wadah.innerHTML=html;
+}
+async function sukaTamu(id){
+  let idx=dataTamu.findIndex((t,i)=> (t.id||i)==id); if(idx<0) return;
+  let baru=(dataTamu[idx].suka||0)+1; dataTamu[idx].suka=baru; tampilTamu();
+  try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.updateDoc(window._fb.doc(window._fb.db,'bukutamu',id), {suka: baru}); } }catch(e){}
+}
+async function hapusTamu(id){
+  if(typeof adminLogin==="undefined" || !adminLogin){alert("Hanya Admin!");return;}
+  if(!confirm("Hapus pesan ini?")) return;
+  try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'bukutamu',id)); return; } }catch(e){}
+  let idx=dataTamu.findIndex((t,i)=> (t.id||i)==id); if(idx>=0){ dataTamu.splice(idx,1); tampilTamu(); }
+}
+async function hapusSemuaTamu(){
+  if(typeof adminLogin==="undefined" || !adminLogin){alert("Hanya Admin!");return;}
+  if(!confirm("Hapus SEMUA Buku Tamu?")) return;
+  try{ if(window._fb){ let snap=await window._fb.getDocs(window._fb.collection(window._fb.db,'bukutamu')); for(let d of snap.docs){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'bukutamu',d.id)); } } }catch(e){} dataTamu=[]; tampilTamu();
+}
+// Jalan otomatis
+if(window._fb) loadTamu(); else window.addEventListener('firebase-ready', loadTamu, {once:true});
+</script>
