@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌈✨ Dunia Game Pelangi SDN Kayakah ✨🌈</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Comic Sans MS','Baloo 2',Arial,sans-serif;text-align:center;padding:8px;margin:0;min-height:100vh;color:#4a044e;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4,#ffecd2,#a1c4fd,#c2ffd8,#fbc2eb,#ff9a9e);background-size:400% 400%;animation:pel 10s ease infinite;overflow-x:hidden}
+@keyframes pel{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+/* Bintang-bintang lucu di background */
+body::before{content:'⭐ 🌈 🍭 ⭐ 🎈 🌟 🍬 ⭐ 🌈 🍭';position:fixed;top:5px;left:0;right:0;font-size:22px;opacity:.6;pointer-events:none;animation:jalan 20s linear infinite;z-index:0}
+@keyframes jalan{0%{transform:translateX(-10%)}100%{transform:translateX(10%)}}
+h1{font-size:26px;color:white;text-shadow:3px 3px 0 #ec4899,5px 5px 0 rgba(0,0,0,.15);background:linear-gradient(90deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#8b5cf6,#ec4899);background-size:200% 100%;animation:pel 3s linear infinite;display:inline-block;padding:12px 24px;border-radius:30px;border:4px solid white;box-shadow:0 8px 0 #be185d,0 12px 20px rgba(0,0,0,.3);margin:6px;position:relative;z-index:1}
+.sub{color:#7c3aed;font-weight:900;background:white;display:inline-block;padding:7px 18px;border-radius:20px;font-size:14px;border:3px solid #facc15;box-shadow:0 4px 0 #f59e0b;position:relative;z-index:1}
+/* MENU - LEBIH CANTIK, MEMBAL */
+.menu{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-width:800px;margin:12px auto;position:relative;z-index:1}
+.menu button{border:3px solid white;padding:12px 4px;border-radius:20px;font-weight:900;cursor:pointer;font-size:12.5px;color:white;box-shadow:0 5px 0 rgba(0,0,0,.25),0 8px 15px rgba(0,0,0,.2);line-height:1.2;transition:.2s;animation:melayang 3s ease-in-out infinite}
+.menu button:nth-child(2n){animation-delay:.3s}.menu button:nth-child(3n){animation-delay:.6s}
+@keyframes melayang{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.menu button:hover{transform:scale(1.12) rotate(-2deg)!important;box-shadow:0 8px 0 rgba(0,0,0,.25)}
+.menu button.aktif{outline:4px solid #111;transform:scale(1.12) rotate(-2deg);box-shadow:0 8px 0 #111}
+/* HALAMAN GAME - PELANGI */
+.halaman{display:none;max-width:720px;margin:auto;background:linear-gradient(180deg,#ffffff,#fef9c3);padding:16px;border-radius:28px;border:5px solid transparent;background-clip:padding-box;box-shadow:0 10px 25px rgba(0,0,0,.25),inset 0 0 0 4px white;position:relative;z-index:1;overflow:hidden}
+.halaman::before{content:'';position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(90deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#8b5cf6,#ec4899)}
+.halaman.aktif{display:block;animation:muncul .35s}
+@keyframes muncul{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.halaman h2{font-size:22px;color:#7c3aed;text-shadow:2px 2px 0 #fde68a;background:linear-gradient(90deg,#fef3c7,#fbcfe8,#ddd6fe);display:inline-block;padding:8px 18px;border-radius:20px;border:3px dashed #f59e0b}
+button.aksi{background:linear-gradient(45deg,#ec4899,#f97316,#facc15);color:white;border:3px solid white;padding:11px 18px;border-radius:25px;font-weight:900;cursor:pointer;margin:4px;box-shadow:0 5px 0 #be185d;transition:.15s}
+button.aksi:hover{transform:scale(1.08) rotate(-1deg)}
+button.aksi:active{transform:translateY(4px);box-shadow:0 1px 0 #be185d}
+button.hijau{background:linear-gradient(45deg,#22c55e,#06b6d4,#a3e635);color:white;border:3px solid white;padding:11px 18px;border-radius:25px;font-weight:900;cursor:pointer;margin:4px;box-shadow:0 5px 0 #15803d;transition:.15s}
+button.hijau:hover{transform:scale(1.08)}
+button.biru{background:linear-gradient(45deg,#2563eb,#8b5cf6,#ec4899);color:white;border:3px solid white;padding:11px 18px;border-radius:25px;font-weight:900;cursor:pointer;margin:4px;box-shadow:0 5px 0 #1e40af}
+input{padding:12px;font-size:16px;border-radius:15px;border:3px solid #f59e0b;width:82%;background:#fefce8;box-shadow:inset 0 3px 0 #fde68a}
+.kotakPelangi{background:linear-gradient(90deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#8b5cf6,#ec4899);background-size:200% 100%;animation:pel 3s linear infinite;color:white;padding:9px;border-radius:15px;font-weight:900;font-size:14px;border:2px solid white;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+#pg{width:320px;height:240px;margin:10px auto;display:grid;grid-template-columns:repeat(4,80px);grid-template-rows:repeat(3,80px);gap:4px;background:linear-gradient(45deg,#ef4444,#f59e0b,#22c55e,#3b82f6,#ec4899);padding:6px;border-radius:16px;border:4px solid white;box-shadow:0 8px 15px rgba(0,0,0,.25)}
+.pg-ubin{width:80px;height:80px;cursor:pointer;border-radius:10px;background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80');background-size:320px 240px;border:2px solid white}.pg-kosong{background:rgba(255,255,255,.9)!important;background-image:none!important}
+#ph{max-width:600px;margin:10px auto;display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.ubin{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:white;border-radius:16px;cursor:pointer;border:3px solid white;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:.15s}.ubin:hover{transform:scale(1.1) rotate(3deg)}.ubin.pilih{outline:4px solid #111;transform:scale(1.15)}.ubin.benar{outline:3px solid #16a34a;animation:kedip .8s infinite}@keyframes kedip{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}.kecil{font-size:11px}
+#arenaDuel{display:flex;gap:8px}.kotakDuel{flex:1;padding:8px;border-radius:18px;background:#fff7ed}.kotakDuel.p1{border:4px solid #ef4444;box-shadow:0 5px 0 #ef4444}.kotakDuel.p2{border:4px solid #2563eb;box-shadow:0 5px 0 #2563eb}.gridDuel{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.ubinDuel{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:white;border-radius:10px;cursor:pointer;border:2px solid white}.ubinDuel.pilih{outline:3px solid black}.ubinDuel.benar{outline:3px solid #16a34a}
+#arenaMat{display:flex;gap:8px}.pMat{flex:1;padding:10px;border-radius:18px;color:white;border:3px solid white;box-shadow:0 6px 0 rgba(0,0,0,.2)}.pMat.m1{background:linear-gradient(135deg,#ef4444,#f97316,#facc15)}.pMat.m2{background:linear-gradient(135deg,#2563eb,#06b6d4,#a78bfa)}.tombolMat{width:90%;padding:11px;margin:4px;font-size:18px;border:3px solid #facc15;border-radius:12px;cursor:pointer;font-weight:900;background:white;box-shadow:0 4px 0 #f59e0b}.tombolMat:hover{background:#fef08a;transform:scale(1.05)}
+#memory{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:380px;margin:auto}.kartu{aspect-ratio:1;background:linear-gradient(135deg,#f59e0b,#ec4899,#8b5cf6);color:white;font-size:30px;display:flex;align-items:center;justify-content:center;border-radius:14px;cursor:pointer;border:3px solid white;box-shadow:0 5px 0 rgba(0,0,0,.2)}.kartu:hover{transform:scale(1.08)}.kartu.buka{background:linear-gradient(135deg,#22c55e,#06b6d4)}.kartu.cocok{background:#16a34a;opacity:.85;animation:kedip .6s}
+.warna-box{width:115px;height:115px;margin:8px auto;border-radius:25px;border:5px solid white;box-shadow:0 6px 12px rgba(0,0,0,.3);animation:melayang 2s infinite}
+.pilihTT button{border:2px solid white;padding:9px 11px;border-radius:16px;font-weight:900;cursor:pointer;color:white;margin:3px;font-size:13px;box-shadow:0 4px 0 rgba(0,0,0,.2)}.pilihTT button.aktif{outline:3px solid black;transform:scale(1.08)}
+#arenaTT{position:relative;height:115px;background:linear-gradient(180deg,#fefce8,#bbf7d0,#a7f3d0);border-radius:18px;border:3px solid #92400e;margin:6px 0;overflow:hidden;box-shadow:inset 0 4px 0 white}
+#tanahTT{position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(90deg,#a16207,#ca8a04,#facc15);border-top:3px solid #92400e;font-size:12px;line-height:24px}
+#garisKiriTT{position:absolute;left:10%;top:25px;bottom:24px;width:4px;background:red;box-shadow:0 0 8px red}#garisKananTT{position:absolute;right:10%;top:25px;bottom:24px;width:4px;background:blue;box-shadow:0 0 8px blue}
+#taliTT{position:absolute;top:60px;left:0;right:0;height:7px;background:#92400e;border-radius:5px}
+#pusatTT{position:absolute;top:52px;left:50%;transform:translate(-50%,0);font-size:24px;transition:left .5s;z-index:3;animation:melayang 1s infinite}
+.monyetTT{position:absolute;top:20px;font-size:52px;transition:left .5s,right .5s;z-index:2;line-height:1;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.2));animation:melayang 2s infinite}.monyetTT.narik{animation:goy .35s}@keyframes goy{0%{transform:rotate(-10deg) scale(1.15)}50%{transform:rotate(10deg) scale(1.2)}100%{transform:rotate(0)}}
+#monyetKiriTT{left:3%}#monyetKananTT{right:3%}
+#soalBoxTT{background:linear-gradient(90deg,#fef3c7,#fde68a,#fef9c3);border:3px solid #f59e0b;border-radius:16px;padding:6px;margin:6px 0;box-shadow:0 4px 0 #f59e0b}
+#soalTT{font-size:34px;font-weight:900;color:#7c3aed;margin:2px;text-shadow:2px 2px 0 white}#pesanTT{font-size:14px;font-weight:900;margin:3px}
+.kotakJawabTT{display:flex;gap:8px}.pTT{flex:1;padding:8px;border-radius:18px;color:white;border:3px solid white;box-shadow:0 5px 0 rgba(0,0,0,.2)}.pTT.m1{background:linear-gradient(135deg,#ef4444,#f97316,#facc15)}.pTT.m2{background:linear-gradient(135deg,#2563eb,#06b6d4,#a78bfa)}
+.tombolJawabTT{width:100%;padding:10px;margin:3px 0;font-size:18px;border:3px solid #facc15;border-radius:12px;cursor:pointer;font-weight:900;background:white;box-shadow:0 4px 0 #f59e0b}.tombolJawabTT:hover{background:#fef08a;transform:scale(1.05)}
+.hurufKata{display:inline-block;background:linear-gradient(135deg,#f59e0b,#ec4899,#8b5cf6);color:white;font-size:27px;font-weight:900;padding:11px 15px;margin:4px;border-radius:14px;border:3px solid white;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.2)}.hurufKata:hover{transform:scale(1.15) rotate(3deg)}.hurufKata.pilih{background:#22c55e;transform:scale(1.1)}
+.lintasanBalap{position:relative;height:66px;background:linear-gradient(90deg,#e5e7eb,#f3f4f6);border-radius:14px;border:3px solid #111;margin:6px 0;overflow:hidden}
+.lintasanBalap.merah{background:linear-gradient(90deg,#fee2e2,#fecaca)}.lintasanBalap.biru{background:linear-gradient(90deg,#dbeafe,#bfdbfe)}
+.mobilBalap{position:absolute;left:2%;top:6px;font-size:42px;transition:left .5s;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.2));animation:melayang 1.5s infinite}
+.garisFinishBalap{position:absolute;right:5%;top:0;bottom:0;width:6px;background:repeating-linear-gradient(black 0 8px,white 8px 16px);box-shadow:0 0 10px rgba(0,0,0,.3)}
+.kotakBalap{display:flex;gap:8px}.pBalap{flex:1;padding:8px;border-radius:18px;color:white;border:3px solid white;box-shadow:0 5px 0 rgba(0,0,0,.2)}.pBalap.m1{background:linear-gradient(135deg,#ef4444,#f97316)}.pBalap.m2{background:linear-gradient(135deg,#2563eb,#06b6d4)}
+.tombolBalap{width:90%;padding:11px;margin:4px;font-size:18px;border:3px solid #facc15;border-radius:12px;cursor:pointer;font-weight:900;background:white;box-shadow:0 4px 0 #f59e0b}.tombolBalap:hover{background:#fef08a;transform:scale(1.05)}
+.pilihLogika button{border:2px solid white;padding:9px 13px;border-radius:16px;font-weight:900;cursor:pointer;color:white;margin:3px;font-size:13px;box-shadow:0 4px 0 rgba(0,0,0,.2)}.pilihLogika button.aktif{outline:3px solid black;transform:scale(1.08)}
+#soalLogikaBox{background:linear-gradient(90deg,#fef3c7,#e0e7ff,#fbcfe8);border:3px solid #f59e0b;border-radius:16px;padding:10px;margin:8px 0;box-shadow:0 4px 0 #f59e0b}
+#soalLogika{font-size:19px;font-weight:900;color:#4a044e;line-height:1.4}
+.tombolLogika{width:90%;padding:12px;margin:4px;font-size:16px;border:3px solid #facc15;border-radius:14px;cursor:pointer;font-weight:900;background:white;text-align:left;box-shadow:0 4px 0 #f59e0b}.tombolLogika:hover{background:#fef08a;transform:scale(1.03)}
+@media(max-width:600px){.menu{grid-template-columns:repeat(3,1fr)}#arenaDuel,#arenaMat,.kotakJawabTT,.kotakBalap{flex-direction:column}.monyetTT{font-size:40px}h1{font-size:19px}}
+</style></head><body>
+<h1>🌈✨ DUNIA GAME PELANGI ✨🌈</h1><br><span class="sub">🎮 SDN Kayakah - Amuntai | Klik nama game di atas, langsung main! 🎮</span>
+
+<div class="menu">
+<button style="background:linear-gradient(135deg,#f59e0b,#f97316)" onclick="tampil('menu',this)" class="aktif">🏠<br>Menu</button>
+<button style="background:linear-gradient(135deg,#16a34a,#22c55e)" onclick="tampil('gambar',this)">🧩<br>1. Puzzle Gambar</button>
+<button style="background:linear-gradient(135deg,#ec4899,#f472b6)" onclick="tampil('huruf',this)">🌈<br>2. Puzzle Huruf</button>
+<button style="background:linear-gradient(135deg,#ef4444,#f87171)" onclick="tampil('duelHuruf',this)">⚔️<br>3. Duel Huruf</button>
+<button style="background:linear-gradient(135deg,#2563eb,#60a5fa)" onclick="tampil('satu',this)">⏱️<br>4. 1 Orang</button>
+<button style="background:linear-gradient(135deg,#7c3aed,#a78bfa)" onclick="tampil('dua',this)">⚔️<br>5. Duel MTK</button>
+<button style="background:linear-gradient(135deg,#06b6d4,#22d3ee)" onclick="tampil('individu',this)">🎲<br>6. Individu</button>
+<button style="background:linear-gradient(135deg,#ef4444,#f97316,#facc15)" onclick="tampil('tarik',this)">🐵<br>7. Monyet</button>
+<button style="background:linear-gradient(135deg,#22c55e,#84cc16)" onclick="tampil('buah',this)">🍎<br>8. Tebak Buah</button>
+<button style="background:linear-gradient(135deg,#f97316,#fb923c)" onclick="tampil('kata',this)">🔤<br>9. Susun Kata</button>
+<button style="background:linear-gradient(135deg,#dc2626,#ef4444)" onclick="tampil('balap',this)">🏎️<br>10. Balap Berdua</button>
+<button style="background:linear-gradient(135deg,#7c3aed,#ec4899,#f97316)" onclick="tampil('logika',this)">🧠<br>11. Logika 4,5,6</button>
+</div>
+
+<div id="menu" class="halaman aktif">
+<h2>👋🎉 Selamat Datang di Dunia Pelangi! 🎉👋</h2>
+<p style="font-size:17px">Hai anak hebat! 🌟<br>Pilih game favoritmu di atas.<br>Tinggal <b>KLIK</b> saja, game langsung muncul.<br>Nggak perlu scroll ke bawah!</p>
+<div style="font-size:35px">🧩 🌈 ⚔️ ⏱️ 🎲 🐵 🍎 🔤 🏎️ 🧠</div>
+<div class="kotakPelangi">✨ 1.Gambar | 2.Huruf | 3.Duel Huruf | 4.1 Orang | 5.Duel MTK | 6.Individu | 7.Monyet | 8.Buah | 9.Kata | 10.Balap Berdua | 11.Logika ✨</div><br>
+<button class="aksi" onclick="tampil('logika',document.querySelectorAll('.menu button')[11])">🧠 Main Logika!</button>
+<button class="aksi" onclick="tampil('tarik',document.querySelectorAll('.menu button')[7])">🐵 Main Monyet!</button>
+<button class="aksi" onclick="tampil('balap',document.querySelectorAll('.menu button')[10])">🏎️ Main Balap!</button>
+</div>
+
+<div id="gambar" class="halaman"><h2>1. 🧩 Puzzle Gambar 12 Kotak 🎨</h2><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" style="width:170px;height:125px;object-fit:cover;border-radius:16px;border:4px solid #f59e0b;box-shadow:0 6px 12px rgba(0,0,0,.25)"><p>Klik kotak dekat kotak kosong untuk geser. 🖱️</p><div id="pg"></div><p id="pesanPG" class="kotakPelangi">Langkah: 0</p><button class="hijau" onclick="acakPG()">🔀 Acak Lagi</button></div>
+
+<div id="huruf" class="halaman"><h2>2. 🌈 Puzzle Huruf A-Z 🎨</h2><p>Klik 1 kotak, lalu klik kotak lain untuk tukar. 🔄</p><div id="ph"></div><p id="pesanPH" class="kotakPelangi">Langkah: 0</p><button class="aksi" onclick="acakPH()">🔀 Acak Lagi</button><button class="hijau" onclick="cekPH()">✅ Cek</button></div>
+
+<div id="duelHuruf" class="halaman"><h2>3. ⚔️ Duel Huruf - 2 Orang 🥊</h2><p id="waktuDuel" class="kotakPelangi">Waktu: 0 detik</p><div id="arenaDuel"><div class="kotakDuel p1"><b style="color:#ef4444">🔴 PEMAIN 1</b><div id="infoD1">Benar: 0/26</div><div class="gridDuel" id="gridD1"></div></div><div class="kotakDuel p2"><b style="color:#2563eb">🔵 PEMAIN 2</b><div id="infoD2">Benar: 0/26</div><div class="gridDuel" id="gridD2"></div></div></div><p id="pesanDuel">Siap?</p><button class="aksi" onclick="mulaiDuel()">▶ MULAI DUEL</button></div>
+
+<div id="satu" class="halaman"><h2>4. ⏱️ 1 Orang - Lomba Waktu 🏃‍♂️💨</h2><p id="waktuSatu" class="kotakPelangi">Waktu: 0 | Skor: 0 | Soal: 1/10</p><p id="soalSatu" style="font-size:38px;font-weight:900;color:#7c3aed;text-shadow:2px 2px 0 #fde68a">Tekan MULAI!</p><div id="pilSatu"></div><p id="pesanSatu"></p><button class="biru" onclick="mulaiSatu()">▶ MULAI</button></div>
+
+<div id="dua" class="halaman"><h2>5. ⚔️ Duel Matematika - Sampai 5 Poin 🏆</h2><p id="soalDua" style="font-size:30px;font-weight:900;background:#fef3c7;padding:8px;border-radius:14px;border:3px dashed #f59e0b">Tekan MULAI!</p><div id="arenaMat"><div class="pMat m1"><b>🔴 PEMAIN 1</b><div style="font-size:42px;font-weight:900" id="sM1">0</div><div id="pilM1"></div></div><div class="pMat m2"><b>🔵 PEMAIN 2</b><div style="font-size:42px;font-weight:900" id="sM2">0</div><div id="pilM2"></div></div></div><p id="pesanDua">Siap?</p><button class="hijau" onclick="mulaiDua()">▶ MULAI DUEL</button></div>
+
+<div id="individu" class="halaman"><h2>6. 🎲 Game Individu 🎁</h2><h3>🧠 Memory - Cari Pasangan</h3><p id="infoMem" class="kotakPelangi">Pasangan: 0/6</p><div id="memory"></div><br><button class="aksi" onclick="buatMemory()">🔀 Acak Memory</button><hr><h3>🎨 Tebak Warna</h3><div class="warna-box" id="kotakWarna" style="background:red"></div><input id="jawabWarna" placeholder="merah / kuning..."><br><br><button class="hijau" onclick="cekWarna()">Cek</button><button class="aksi" onclick="warnaBaru()">🌈 Warna Baru</button><p id="hasilWarna"></p><hr><h3>🐾 Tebak Hewan</h3><p id="emojiHewan" style="font-size:65px;animation:melayang 2s infinite">🐱</p><input id="jawabHewan" placeholder="kucing..."><br><br><button class="hijau" onclick="cekHewan()">Cek</button><button class="aksi" onclick="hewanBaru()">🐾 Hewan Baru</button><p id="hasilHewan"></p><p>Skor Hewan: <span id="skorHewan">0</span></p></div>
+
+<div id="tarik" class="halaman">
+<h2>7. 🐵🌈 Tarik Tambang Monyet 🐒🌈</h2>
+<p><b>Pilih Soal:</b></p><div class="pilihTT" id="opPilihTT">
+<button style="background:#22c55e" onclick="pilihOpTT('tambah',this)" class="aktif">➕ Tambah</button>
+<button style="background:#ef4444" onclick="pilihOpTT('kurang',this)">➖ Kurang</button>
+<button style="background:#2563eb" onclick="pilihOpTT('bagi',this)">➗ Bagi</button>
+<button style="background:#8b5cf6" onclick="pilihOpTT('campur',this)">🎲 Campur!</button></div>
+<p><b>Pilih Lawan:</b></p><div class="pilihTT">
+<button style="background:#f97316" onclick="pilihModeTT('komputer')">🐵 Kamu VS 🤖 Komputer</button>
+<button style="background:#ec4899" onclick="pilihModeTT('dua')">🐵 Momo VS 🐒 Mimi</button></div>
+<p id="infoModeTT" class="kotakPelangi">Mode: Kamu VS Komputer | Soal: Tambah</p>
+<div id="arenaTT">
+<div style="position:absolute;top:2px;left:4px;background:white;padding:2px 8px;border-radius:12px;font-weight:900;color:#ef4444;font-size:11px">🐵 MOMO</div>
+<div style="position:absolute;top:2px;right:4px;background:white;padding:2px 8px;border-radius:12px;font-weight:900;color:#2563eb;font-size:11px">🐒 MIMI</div>
+<div id="garisKiriTT"></div><div id="garisKananTT"></div><div id="taliTT"></div>
+<div class="monyetTT" id="monyetKiriTT">🐵</div><div id="pusatTT">🎀</div><div class="monyetTT" id="monyetKananTT">🐒</div>
+<div id="tanahTT">🌿 🌴 🌿 🌴 🌿</div></div>
+<div id="soalBoxTT"><p id="soalTT">Tekan MULAI dulu!</p><p id="pesanTT">Siap? Monyet sudah pegang tali! 💪</p></div>
+<div class="kotakJawabTT">
+<div class="pTT m1"><b id="nama1TT">🐵 MOMO</b> - <span id="skor1TT">Tarik: 0</span><div id="pil1TT"></div></div>
+<div class="pTT m2"><b id="nama2TT">🐒 MIMI</b> - <span id="skor2TT">Tarik: 0</span><div id="pil2TT"></div></div>
+</div><br><button class="hijau" onclick="mulaiTT()">▶ MULAI TARIK TAMBANG!</button>
+</div>
+
+<div id="buah" class="halaman">
+<h2>8. 🍎 Tebak Buah 🍌🍇</h2><p>Lihat buahnya, tulis namanya!</p>
+<p id="emojiBuah" style="font-size:75px;animation:melayang 2s infinite">🍎</p>
+<input id="jawabBuah" placeholder="apel / pisang..."><br><br>
+<button class="hijau" onclick="cekBuah()">Cek</button>
+<button class="aksi" onclick="buahBaru()">🍎 Buah Baru</button>
+<p id="hasilBuah"></p><p>Skor Buah: <span id="skorBuah" class="kotakPelangi">0</span></p>
+</div>
+
+<div id="kata" class="halaman">
+<h2>9. 🔤 Susun Kata 📝</h2><p>Klik huruf-huruf sampai jadi kata yang benar! Lihat gambarnya!</p>
+<p id="emojiKata" style="font-size:65px;animation:melayang 2s infinite">🐱</p><p id="petunjukKata">Hewan yang suka bilang meong</p>
+<div id="kotakHurufKata"></div>
+<p>Jawaban Kamu: <b id="jawabKata" style="font-size:24px;color:#7c3aed"></b></p>
+<p id="hasilKata"></p>
+<button class="aksi" onclick="hapusKata()">⌫ Hapus</button>
+<button class="hijau" onclick="cekKata()">✅ Cek</button>
+<button class="aksi" onclick="kataBaru()">🔤 Kata Baru</button>
+<p>Skor Kata: <span id="skorKata" class="kotakPelangi">0</span></p>
+</div>
+
+<div id="balap" class="halaman">
+<h2>10. 🏎️🏁 Balap Mobil Berdua! 🏁🚙</h2>
+<p><b>Pilih Mode Balap:</b></p>
+<div class="pilihTT">
+<button style="background:#f97316" onclick="pilihBalapMode('komputer')">🏎️ Kamu VS 🤖 Komputer</button>
+<button style="background:#ec4899" onclick="pilihBalapMode('dua')">🏎️ Merah VS 🚙 Biru - 2 Orang</button>
+</div>
+<p id="infoBalapMode" class="kotakPelangi">Mode: Kamu VS Komputer</p>
+<div style="font-weight:900;color:#ef4444;text-align:left">🏎️ <span id="labelBalap1">PEMAIN 1 - MERAH</span> : <span id="posBalap1">0 / 8</span></div>
+<div class="lintasanBalap merah"><div class="garisFinishBalap"></div><div class="mobilBalap" id="mobil1">🏎️</div></div>
+<div style="font-weight:900;color:#2563eb;text-align:left">🚙 <span id="labelBalap2">KOMPUTER - BIRU</span> : <span id="posBalap2">0 / 8</span></div>
+<div class="lintasanBalap biru"><div class="garisFinishBalap"></div><div class="mobilBalap" id="mobil2">🚙</div></div>
+<p id="soalBalap" style="font-size:32px;font-weight:900;color:#7c3aed;background:#fef3c7;padding:6px;border-radius:14px">Tekan MULAI dulu!</p>
+<p id="pesanBalap" style="font-weight:900">Siap balapan?</p>
+<div class="kotakBalap">
+<div class="pBalap m1"><b>🔴 <span id="namaBalap1">PEMAIN 1</span></b><div id="pilBalap1"></div></div>
+<div class="pBalap m2"><b>🔵 <span id="namaBalap2">KOMPUTER</span></b><div id="pilBalap2"></div></div>
+</div><br>
+<button class="hijau" onclick="mulaiBalap()">▶ MULAI BALAP BERDUA!</button>
+</div>
+
+<div id="logika" class="halaman">
+<h2>11. 🧠🔍 Teka Teki Logika - Kelas 4,5,6 💡</h2>
+<p><b>Pilih Kelas:</b></p>
+<div class="pilihLogika" id="pilihKelasLogika">
+<button style="background:#22c55e" onclick="pilihKelasLogika('4',this)" class="aktif">📗 Kelas 4 - Mudah</button>
+<button style="background:#f97316" onclick="pilihKelasLogika('5',this)">📙 Kelas 5 - Sedang</button>
+<button style="background:#ef4444" onclick="pilihKelasLogika('6',this)">📕 Kelas 6 - Sulit</button>
+<button style="background:#8b5cf6" onclick="pilihKelasLogika('campur',this)">🎲 Campur Semua!</button>
+</div>
+<p id="infoLogika" class="kotakPelangi">Kelas 4 | Soal: 1 / 10 | Skor: 0 | ⭐ Bintang: 0</p>
+<div id="soalLogikaBox">
+<p id="emojiLogika" style="font-size:50px;margin:2px;animation:melayang 2s infinite">🧠</p>
+<p id="soalLogika">Tekan MULAI dulu!</p>
+</div>
+<div id="pilLogika"></div>
+<p id="pesanLogika" style="font-weight:900">Siap mikir? 🧠💡</p>
+<p id="penjelasanLogika" style="background:#dcfce7;padding:8px;border-radius:14px;font-weight:bold;display:none;border:2px dashed #22c55e"></p>
+<button class="hijau" onclick="mulaiLogika()">▶ MULAI TEKA TEKI LOGIKA!</button>
+</div>
+
+<script>
+function tampil(id,btn){document.querySelectorAll('.halaman').forEach(e=>e.classList.remove('aktif'));document.getElementById(id).classList.add('aktif');if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('aktif'));btn.classList.add('aktif');}window.scrollTo(0,0);}
+let pgArr=[0,1,2,3,4,5,6,7,8,9,10,11],langkahPG=0;
+function gambarPG(){let k=document.getElementById('pg');k.innerHTML='';pgArr.forEach((n,i)=>{let d=document.createElement('div');if(n===11){d.className='pg-ubin pg-kosong';}else{d.className='pg-ubin';d.style.backgroundPosition=(-(n%4)*80)+'px '+(-Math.floor(n/4)*80)+'px';d.onclick=()=>{let kos=pgArr.indexOf(11);let boleh=(i===kos+1&&i%4!==0)||(i===kos-1&&kos%4!==0)||i===kos+4||i===kos-4;if(boleh){[pgArr[i],pgArr[kos]]=[pgArr[kos],pgArr[i]];langkahPG++;gambarPG();}};}k.appendChild(d);});document.getElementById('pesanPG').innerText='Langkah: '+langkahPG+(pgArr.join(',')==='0,1,2,3,4,5,6,7,8,9,10,11'?' - 🎉 HEBAT!':'');}
+function acakPG(){for(let j=0;j<120;j++){let kos=pgArr.indexOf(11);let pil=[];if(kos%4!==0)pil.push(kos-1);if((kos+1)%4!==0)pil.push(kos+1);if(kos-4>=0)pil.push(kos-4);if(kos+4<12)pil.push(kos+4);let p=pil[Math.floor(Math.random()*pil.length)];[pgArr[p],pgArr[kos]]=[pgArr[kos],pgArr[p]];}langkahPG=0;gambarPG();}
+acakPG();
+let hurufPH="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),warnaPH=["#ef4444","#f97316","#f59e0b","#eab308","#84cc16","#22c55e","#10b981","#06b6d4","#0ea5e9","#3b82f6","#6366f1","#8b5cf6","#a855f7","#d946ef","#ec4899","#f43f5e","#ef4444","#f97316","#f59e0b","#84cc16","#22c55e","#06b6d4","#3b82f6","#8b5cf6","#ec4899","#f43f5e"],emojiPH=["🍎","🍌","🐱","🐶","🐘","🐸","🍇","🏠","🍦","🧃","🪁","🦁","🌙","🥜","🍊","🐧","👑","🌹","⭐","🐢","☂️","🎻","🐳","🎄","🧶","🦓"],langkahPH=0,dipilihPH=-1;
+function gambarPH(){let k=document.getElementById('ph');k.innerHTML='';hurufPH.forEach((h,i)=>{let d=document.createElement('div');d.className='ubin'+(i===dipilihPH?' pilih':'')+(h==="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]?' benar':'');d.style.background='linear-gradient(135deg,'+warnaPH[i]+',#f97316)';d.innerHTML=h+'<div class="kecil">'+emojiPH["ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(h)]+'</div>';d.onclick=()=>{if(dipilihPH===-1){dipilihPH=i;gambarPH();}else{if(dipilihPH!==i){[hurufPH[dipilihPH],hurufPH[i]]=[hurufPH[i],hurufPH[dipilihPH]];langkahPH++;}dipilihPH=-1;gambarPH();}};k.appendChild(d);});let b=0;hurufPH.forEach((h,i)=>{if(h==="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i])b++;});document.getElementById('pesanPH').innerText='Langkah: '+langkahPH+' | Benar: '+b+'/26'+(b===26?' - 🎉 HEBAT!':'');}
+function acakPH(){for(let j=0;j<50;j++){let a=Math.floor(Math.random()*26),b=Math.floor(Math.random()*26);[hurufPH[a],hurufPH[b]]=[hurufPH[b],hurufPH[a]];}langkahPH=0;dipilihPH=-1;gambarPH();}
+function cekPH(){let b=0;hurufPH.forEach((h,i)=>{if(h==="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i])b++;});alert(b===26?'🎉 SEMPURNA!':'Sudah benar '+b+' huruf, kurang '+(26-b)+' lagi!');}
+acakPH();
+let benar="ABCDEFGHIJKLMNOPQRSTUVWXYZ",duel=[{huruf:[],pilih:-1,langkah:0,menang:false},{huruf:[],pilih:-1,langkah:0,menang:false}],mainDuel=false,waktuDuel=0,timerDuel=null;
+function acakHurufDuel(){let arr=benar.split('');for(let i=0;i<60;i++){let a=Math.floor(Math.random()*26),b=Math.floor(Math.random()*26);[arr[a],arr[b]]=[arr[b],arr[a]];}return arr;}
+function mulaiDuel(){duel=[{huruf:acakHurufDuel(),pilih:-1,langkah:0,menang:false},{huruf:acakHurufDuel(),pilih:-1,langkah:0,menang:false}];mainDuel=true;waktuDuel=0;clearInterval(timerDuel);timerDuel=setInterval(()=>{waktuDuel++;document.getElementById('waktuDuel').innerText='Waktu: '+waktuDuel+' detik';},1000);document.getElementById('pesanDuel').innerText='GO! Siapa cepat A-Z?';gambarDuel();}
+function gambarDuel(){[0,1].forEach(idx=>{let p=duel[idx];let grid=document.getElementById('gridD'+(idx+1));grid.innerHTML='';p.huruf.forEach((h,i)=>{let d=document.createElement('div');d.className='ubinDuel'+(i===p.pilih?' pilih':'')+(h===benar[i]?' benar':'');d.style.background='linear-gradient(135deg,'+warnaPH[benar.indexOf(h)]+',#ec4899)';d.innerText=h;d.onclick=()=>{if(!mainDuel)return;if(p.pilih===-1){p.pilih=i;gambarDuel();}else{if(p.pilih!==i){[p.huruf[p.pilih],p.huruf[i]]=[p.huruf[i],p.huruf[p.pilih]];p.langkah++;}p.pilih=-1;gambarDuel();}};grid.appendChild(d);});let b=0;p.huruf.forEach((h,i)=>{if(h===benar[i])b++;});document.getElementById('infoD'+(idx+1)).innerText='Benar: '+b+'/26 | Langkah: '+p.langkah;if(b===26&&mainDuel&&!p.menang){p.menang=true;mainDuel=false;clearInterval(timerDuel);document.getElementById('pesanDuel').innerText='🏆 '+(idx===0?'🔴 PEMAIN 1':'🔵 PEMAIN 2')+' MENANG! Waktu '+waktuDuel+' detik!';}});}
+mulaiDuel();
+let skorSatu=0,noSatu=0,waktuSatu=0,timerSatu=null,jawabSatu=0;
+function mulaiSatu(){skorSatu=0;noSatu=0;waktuSatu=0;clearInterval(timerSatu);timerSatu=setInterval(()=>{waktuSatu++;document.getElementById('waktuSatu').innerText='Waktu: '+waktuSatu+' detik | Skor: '+skorSatu+' | Soal: '+(noSatu+1)+'/10';},1000);soalSatu();}
+function soalSatu(){if(noSatu>=10){clearInterval(timerSatu);document.getElementById('soalSatu').innerText='🏁 SELESAI!';document.getElementById('pilSatu').innerHTML='';document.getElementById('pesanSatu').innerText='🎉 Skor '+skorSatu+'/10, Waktu '+waktuSatu+' detik!';return;}let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1;jawabSatu=a+b;document.getElementById('soalSatu').innerText=a+' + '+b+' = ?';let pil=[jawabSatu,jawabSatu+1,jawabSatu-1,jawabSatu+2].sort(()=>Math.random()-0.5);let el=document.getElementById('pilSatu');el.innerHTML='';pil.forEach(p=>{let btn=document.createElement('button');btn.className='aksi';btn.innerText=p;btn.onclick=()=>{if(p===jawabSatu){skorSatu++;document.getElementById('pesanSatu').innerText='✅ BENAR!';}else{document.getElementById('pesanSatu').innerText='❌ Salah, jawaban '+jawabSatu;}noSatu++;setTimeout(soalSatu,500);};el.appendChild(btn);});}
+let skorM1=0,skorM2=0,jawabDua=0,mainDua=false;
+function mulaiDua(){skorM1=0;skorM2=0;mainDua=true;document.getElementById('sM1').innerText='0';document.getElementById('sM2').innerText='0';soalDua();}
+function soalDua(){if(skorM1>=5){mainDua=false;document.getElementById('pesanDua').innerText='🏆 PEMAIN 1 MENANG!';document.getElementById('soalDua').innerText='🏆 PEMAIN 1 JUARA!';return;}if(skorM2>=5){mainDua=false;document.getElementById('pesanDua').innerText='🏆 PEMAIN 2 MENANG!';document.getElementById('soalDua').innerText='🏆 PEMAIN 2 JUARA!';return;}let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1;jawabDua=a+b;document.getElementById('soalDua').innerText=a+' + '+b+' = ?';let pil=[jawabDua,jawabDua+1,jawabDua-1,jawabDua+2].sort(()=>Math.random()-0.5);['pilM1','pilM2'].forEach((id,idx)=>{let el=document.getElementById(id);el.innerHTML='';pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolMat';btn.innerText=p;btn.onclick=()=>{if(!mainDua)return;if(p===jawabDua){if(idx===0){skorM1++;document.getElementById('sM1').innerText=skorM1;document.getElementById('pesanDua').innerText='🔴 Pemain 1 Cepat!';}else{skorM2++;document.getElementById('sM2').innerText=skorM2;document.getElementById('pesanDua').innerText='🔵 Pemain 2 Cepat!';}setTimeout(soalDua,500);}else{document.getElementById('pesanDua').innerText='Salah! Yang lain masih bisa jawab!';}};el.appendChild(btn);});});}
+let kartuArr=['🍎','🍎','🍌','🍌','🐱','🐱','⭐','⭐','🚀','🚀','⚽','⚽'],bukaMem=[],cocokMem=0,lockMem=false;
+function buatMemory(){kartuArr=kartuArr.sort(()=>Math.random()-0.5);cocokMem=0;bukaMem=[];lockMem=false;let m=document.getElementById('memory');m.innerHTML='';document.getElementById('infoMem').innerText='Pasangan: 0/6';kartuArr.forEach(e=>{let d=document.createElement('div');d.className='kartu';d.innerText='?';d.onclick=()=>{if(lockMem||d.classList.contains('buka'))return;d.classList.add('buka');d.innerText=e;bukaMem.push({el:d,val:e});if(bukaMem.length===2){if(bukaMem[0].val===bukaMem[1].val){bukaMem.forEach(x=>x.el.classList.add('cocok'));cocokMem++;document.getElementById('infoMem').innerText='Pasangan: '+cocokMem+'/6';bukaMem=[];if(cocokMem===6)alert('🎉 HEBAT! Semua ketemu!');}else{lockMem=true;setTimeout(()=>{bukaMem.forEach(x=>{x.el.classList.remove('buka');x.el.innerText='?';});bukaMem=[];lockMem=false;},800);}}};m.appendChild(d);});}
+buatMemory();
+let daftarWarna=[{nama:'merah',kode:'red'},{nama:'kuning',kode:'yellow'},{nama:'biru',kode:'blue'},{nama:'hijau',kode:'green'},{nama:'ungu',kode:'purple'},{nama:'orange',kode:'orange'},{nama:'pink',kode:'pink'},{nama:'hitam',kode:'black'}],warnaSekarang=daftarWarna[0];
+function warnaBaru(){warnaSekarang=daftarWarna[Math.floor(Math.random()*daftarWarna.length)];document.getElementById('kotakWarna').style.background=warnaSekarang.kode;document.getElementById('hasilWarna').innerText='';document.getElementById('jawabWarna').value='';}
+function cekWarna(){let j=document.getElementById('jawabWarna').value.toLowerCase().trim();document.getElementById('hasilWarna').innerText=(j===warnaSekarang.nama)?'🎉 BENAR! Itu '+warnaSekarang.nama:'Belum tepat, coba lagi!';}
+let daftarHewan=[{emoji:'🐱',nama:'kucing'},{emoji:'🐶',nama:'anjing'},{emoji:'🐘',nama:'gajah'},{emoji:'🦁',nama:'singa'},{emoji:'🐵',nama:'monyet'},{emoji:'🐰',nama:'kelinci'},{emoji:'🐔',nama:'ayam'},{emoji:'🐟',nama:'ikan'},{emoji:'🐸',nama:'katak'}],hewanSekarang=daftarHewan[0],skorH=0;
+function hewanBaru(){hewanSekarang=daftarHewan[Math.floor(Math.random()*daftarHewan.length)];document.getElementById('emojiHewan').innerText=hewanSekarang.emoji;document.getElementById('hasilHewan').innerText='';document.getElementById('jawabHewan').value='';}
+function cekHewan(){let j=document.getElementById('jawabHewan').value.toLowerCase().trim();if(j===hewanSekarang.nama){skorH++;document.getElementById('skorHewan').innerText=skorH;document.getElementById('hasilHewan').innerText='🎉 BENAR! Itu '+hewanSekarang.nama;setTimeout(hewanBaru,800);}else{document.getElementById('hasilHewan').innerText='Belum tepat, coba lagi!';}}
+let operasiTT='tambah', modeTT='komputer', posisiTT=0, jawabanTT=0, mainTT=false;
+function pilihOpTT(op,el){operasiTT=op;document.querySelectorAll('#opPilihTT button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');updateInfoTT();}
+function pilihModeTT(m){modeTT=m;document.getElementById('nama2TT').innerText=(m==='komputer'?'🐒 MIMI 🤖':'🐒 MIMI');document.getElementById('monyetKananTT').innerText=(m==='komputer'?'🤖':'🐒');updateInfoTT();}
+function updateInfoTT(){let n=operasiTT==='tambah'?'Tambah':operasiTT==='kurang'?'Kurang / Pengurangan':operasiTT==='bagi'?'Bagi / Pembagian':'Campur Semua!';document.getElementById('infoModeTT').innerText='Mode: '+(modeTT==='komputer'?'Kamu VS Komputer':'Momo VS Mimi')+' | Soal: '+n;}
+function mulaiTT(){posisiTT=0;mainTT=true;document.getElementById('monyetKiriTT').innerText='🐵';document.getElementById('monyetKananTT').innerText=modeTT==='komputer'?'🤖':'🐒';document.getElementById('pesanTT').innerText='GO! 🐵💪🐒 Siapa monyet paling kuat?';updateTaliTT();buatSoalTT();}
+function buatSoalTT(){
+ if(posisiTT<=-5){mainTT=false;document.getElementById('pesanTT').innerText='🏆🏆 🐵 MOMO MENANG! 🍌🍌';document.getElementById('soalTT').innerText='🎉 MOMO MENANG!';document.getElementById('monyetKiriTT').innerText='🐵🏆';return;}
+ if(posisiTT>=5){mainTT=false;document.getElementById('pesanTT').innerText=modeTT==='komputer'?'🤖 Komputer Menang! Coba lagi!':'🏆🏆 🐒 MIMI MENANG! 🍌🍌';document.getElementById('soalTT').innerText='🎉 MIMI MENANG!';document.getElementById('monyetKananTT').innerText='🐒🏆';return;}
+ let op=operasiTT; if(op==='campur'){let arr=['tambah','kurang','bagi'];op=arr[Math.floor(Math.random()*3)];}
+ let a,b;
+ if(op==='tambah'){a=Math.floor(Math.random()*20)+1;b=Math.floor(Math.random()*20)+1;jawabanTT=a+b;document.getElementById('soalTT').innerText=a+' + '+b+' = ?';}
+ if(op==='kurang'){a=Math.floor(Math.random()*20)+10;b=Math.floor(Math.random()*a);jawabanTT=a-b;document.getElementById('soalTT').innerText=a+' - '+b+' = ?';}
+ if(op==='bagi'){b=Math.floor(Math.random()*9)+2;jawabanTT=Math.floor(Math.random()*10)+1;a=b*jawabanTT;document.getElementById('soalTT').innerText=a+' ÷ '+b+' = ?';}
+ let pil=[jawabanTT,jawabanTT+1,jawabanTT-1,jawabanTT+2].filter((v,i,arr)=>arr.indexOf(v)===i&&v>=0).sort(()=>Math.random()-0.5);
+ while(pil.length<4) pil.push(jawabanTT+3+pil.length);
+ if(modeTT==='komputer'){
+   document.getElementById('pil2TT').innerHTML='<p style="font-size:13px;margin:4px">🤖 Komputer mikir...</p>';
+   let el=document.getElementById('pil1TT');el.innerHTML='';
+   pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolJawabTT';btn.innerText=p;btn.onclick=()=>cekJawabTT(p,1);el.appendChild(btn);});
+   setTimeout(()=>{if(!mainTT) return; if(Math.random()<0.55){posisiTT++;document.getElementById('pesanTT').innerText='🤖 Komputer benar! Mimi narik!';narikTT(2);updateTaliTT();setTimeout(buatSoalTT,600);} },2200);
+ } else {
+   ['pil1TT','pil2TT'].forEach((id,idx)=>{let el=document.getElementById(id);el.innerHTML='';pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolJawabTT';btn.innerText=p;btn.onclick=()=>cekJawabTT(p,idx+1);el.appendChild(btn);});});
+ }
+}
+function cekJawabTT(p,pemain){
+ if(!mainTT) return;
+ if(p===jawabanTT){
+   if(pemain===1){posisiTT--;document.getElementById('pesanTT').innerText='✅ 🐵 Momo BENAR! Tarik! 💪🍌';}
+   else{posisiTT++;document.getElementById('pesanTT').innerText='✅ 🐒 Mimi BENAR! Tarik! 💪🍌';}
+   narikTT(pemain);updateTaliTT();setTimeout(buatSoalTT,500);
+ } else {document.getElementById('pesanTT').innerText='❌ Salah! Monyetnya diam saja, coba lagi!';}
+}
+function narikTT(pemain){let el=document.getElementById(pemain===1?'monyetKiriTT':'monyetKananTT');el.classList.remove('narik');void el.offsetWidth;el.classList.add('narik');}
+function updateTaliTT(){
+ document.getElementById('pusatTT').style.left=(50+posisiTT*8)+'%';
+ document.getElementById('monyetKiriTT').style.left=(3 - posisiTT*6)+'%';
+ document.getElementById('monyetKananTT').style.right=(3 + posisiTT*6)+'%';
+ document.getElementById('skor1TT').innerText='Tarik: '+(-posisiTT);
+ document.getElementById('skor2TT').innerText='Tarik: '+(posisiTT);
+}
+updateInfoTT();
+let daftarBuah=[{emoji:'🍎',nama:'apel'},{emoji:'🍌',nama:'pisang'},{emoji:'🍇',nama:'anggur'},{emoji:'🍊',nama:'jeruk'},{emoji:'🍓',nama:'stroberi'},{emoji:'🥭',nama:'mangga'},{emoji:'🍉',nama:'semangka'},{emoji:'🍍',nama:'nanas'},{emoji:'🥥',nama:'kelapa'}],buahSekarang=daftarBuah[0],skorBuah=0;
+function buahBaru(){buahSekarang=daftarBuah[Math.floor(Math.random()*daftarBuah.length)];document.getElementById('emojiBuah').innerText=buahSekarang.emoji;document.getElementById('hasilBuah').innerText='';document.getElementById('jawabBuah').value='';}
+function cekBuah(){let j=document.getElementById('jawabBuah').value.toLowerCase().trim();if(j===buahSekarang.nama){skorBuah++;document.getElementById('skorBuah').innerText=skorBuah;document.getElementById('hasilBuah').innerText='🎉 BENAR! Itu '+buahSekarang.nama;setTimeout(buahBaru,800);}else{document.getElementById('hasilBuah').innerText='Belum tepat, coba lagi!';}}
+let daftarKata=[{emoji:'🐱',kata:'KUCING',petunjuk:'Hewan yang suka bilang meong'},{emoji:'🐶',kata:'ANJING',petunjuk:'Hewan yang suka bilang guk guk'},{emoji:'🍎',kata:'APEL',petunjuk:'Buah merah, rasanya manis'},{emoji:'🐘',kata:'GAJAH',petunjuk:'Hewan besar ada belalainya'},{emoji:'🦁',kata:'SINGA',petunjuk:'Raja hutan'},{emoji:'🐟',kata:'IKAN',petunjuk:'Hidup di air, bisa berenang'}],kataSekarang=daftarKata[0],jawabKataArr=[],skorKata=0;
+function kataBaru(){kataSekarang=daftarKata[Math.floor(Math.random()*daftarKata.length)];jawabKataArr=[];document.getElementById('emojiKata').innerText=kataSekarang.emoji;document.getElementById('petunjukKata').innerText=kataSekarang.petunjuk;document.getElementById('jawabKata').innerText='';document.getElementById('hasilKata').innerText='';let huruf=kataSekarang.kata.split('').sort(()=>Math.random()-0.5);let box=document.getElementById('kotakHurufKata');box.innerHTML='';huruf.forEach(h=>{let s=document.createElement('span');s.className='hurufKata';s.innerText=h;s.onclick=()=>{if(s.classList.contains('pilih'))return;s.classList.add('pilih');jawabKataArr.push(h);document.getElementById('jawabKata').innerText=jawabKataArr.join('');};box.appendChild(s);});}
+function hapusKata(){jawabKataArr=[];document.getElementById('jawabKata').innerText='';document.querySelectorAll('#kotakHurufKata .hurufKata').forEach(e=>e.classList.remove('pilih'));}
+function cekKata(){if(jawabKataArr.join('')===kataSekarang.kata){skorKata++;document.getElementById('skorKata').innerText=skorKata;document.getElementById('hasilKata').innerText='🎉 BENAR! Kata itu '+kataSekarang.kata;setTimeout(kataBaru,900);}else{document.getElementById('hasilKata').innerText='Belum tepat, coba lagi!';}}
+kataBaru();
+let balapMode='komputer', posB1=0, posB2=0, jawabBalap=0, mainBalap=false;
+function pilihBalapMode(m){balapMode=m;document.getElementById('infoBalapMode').innerText='Mode: '+(m==='komputer'?'Kamu VS Komputer':'Merah VS Biru - 2 Orang');document.getElementById('labelBalap2').innerText=(m==='komputer'?'KOMPUTER - BIRU':'PEMAIN 2 - BIRU');document.getElementById('namaBalap2').innerText=(m==='komputer'?'KOMPUTER':'PEMAIN 2');document.getElementById('mobil2').innerText=(m==='komputer'?'🤖':'🚙');}
+function mulaiBalap(){posB1=0;posB2=0;mainBalap=true;document.getElementById('mobil1').style.left='2%';document.getElementById('mobil2').style.left='2%';document.getElementById('mobil1').innerText='🏎️';document.getElementById('mobil2').innerText=balapMode==='komputer'?'🤖':'🚙';document.getElementById('posBalap1').innerText='0 / 8';document.getElementById('posBalap2').innerText='0 / 8';document.getElementById('pesanBalap').innerText='GO! 🏎️💨🚙 Siapa paling cepat?';soalBalap();}
+function soalBalap(){
+ if(posB1>=8){mainBalap=false;document.getElementById('soalBalap').innerText='🏆🏆 PEMAIN 1 / MERAH MENANG!';document.getElementById('pesanBalap').innerText='🎉 Mobil Merah sampai finish duluan!';document.getElementById('mobil1').innerText='🏎️🏆';return;}
+ if(posB2>=8){mainBalap=false;document.getElementById('soalBalap').innerText=balapMode==='komputer'?'🤖 KOMPUTER MENANG! Coba lagi!':'🏆🏆 PEMAIN 2 / BIRU MENANG!';document.getElementById('pesanBalap').innerText=balapMode==='komputer'?'Komputer lebih cepat!':'🎉 Mobil Biru sampai finish duluan!';document.getElementById('mobil2').innerText='🚙🏆';return;}
+ let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1;jawabBalap=a+b;document.getElementById('soalBalap').innerText=a+' + '+b+' = ?';
+ let pil=[jawabBalap,jawabBalap+1,jawabBalap-1,jawabBalap+2].sort(()=>Math.random()-0.5);
+ if(balapMode==='komputer'){
+   document.getElementById('pilBalap2').innerHTML='<p style="font-size:13px;margin:4px">🤖 Komputer mikir...</p>';
+   let el=document.getElementById('pilBalap1');el.innerHTML='';
+   pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolBalap';btn.innerText=p;btn.onclick=()=>cekBalap(p,1);el.appendChild(btn);});
+   setTimeout(()=>{if(!mainBalap) return; if(Math.random()<0.5){posB2++;document.getElementById('mobil2').style.left=(2+posB2*10)+'%';document.getElementById('posBalap2').innerText=posB2+' / 8';document.getElementById('pesanBalap').innerText='🤖 Komputer benar! Mobil biru maju!';setTimeout(soalBalap,600);} },2000);
+ } else {
+   ['pilBalap1','pilBalap2'].forEach((id,idx)=>{let el=document.getElementById(id);el.innerHTML='';pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolBalap';btn.innerText=p;btn.onclick=()=>cekBalap(p,idx+1);el.appendChild(btn);});});
+ }
+}
+function cekBalap(p,pemain){
+ if(!mainBalap) return;
+ if(p===jawabBalap){
+   if(pemain===1){posB1++;document.getElementById('mobil1').style.left=(2+posB1*10)+'%';document.getElementById('posBalap1').innerText=posB1+' / 8';document.getElementById('pesanBalap').innerText='✅ 🔴 Merah BENAR! Mobil merah maju! 💨';}
+   else{posB2++;document.getElementById('mobil2').style.left=(2+posB2*10)+'%';document.getElementById('posBalap2').innerText=posB2+' / 8';document.getElementById('pesanBalap').innerText='✅ 🔵 Biru BENAR! Mobil biru maju! 💨';}
+   setTimeout(soalBalap,500);
+ } else {document.getElementById('pesanBalap').innerText='❌ Salah! Mobil diam, coba lagi!';}
+}
+pilihBalapMode('komputer');
+let kelasLogika='4', daftarLogika=[], noLogika=0, skorLogika=0, bintangLogika=0, jawabanLogika='';
+let soalK4=[
+{emoji:'🔢',soal:'Lanjutkan pola ini: 2, 4, 6, 8, ... Berapa selanjutnya?',pil:['10','9','12','7'],jawab:'10',jelas:'Pola +2: 2,4,6,8, lalu 10. Kamu hebat!'},
+{emoji:'🍎',soal:'Budi punya 3 apel. Dia beli lagi 2 keranjang, tiap keranjang isi 4 apel. Berapa apel Budi sekarang?',pil:['11','10','8','14'],jawab:'11',jelas:'3 + (2 x 4) = 3 + 8 = 11 apel.'},
+{emoji:'🐱',soal:'Ada 5 kucing. Tiap kucing punya 4 kaki. Berapa kaki semua kucing?',pil:['20','15','10','25'],jawab:'20',jelas:'5 x 4 = 20 kaki.'},
+{emoji:'🔺',soal:'Pola gambar: 🔺 🔵 🔺 🔵 🔺 ... Gambar apa selanjutnya?',pil:['🔵','🔺','⭐','🟩'],jawab:'🔵',jelas:'Polanya selang-seling segitiga - lingkaran. Setelah 🔺 pasti 🔵.'},
+{emoji:'🚀',soal:'Andi di urutan ke-3 dari depan, dan ke-4 dari belakang dalam antrean. Ada berapa anak di antrean?',pil:['6','7','5','8'],jawab:'6',jelas:'3 + 4 - 1 = 6 anak. Andi jangan dihitung 2 kali!'},
+{emoji:'🍰',soal:'Sebuah kue dipotong jadi 8 bagian sama besar. Siti makan 3 bagian. Sisa kue Siti berapa bagian?',pil:['5','3','4','6'],jawab:'5',jelas:'8 - 3 = 5 bagian.'}
+];
+let soalK5=[
+{emoji:'🔢',soal:'Lanjutkan pola: 5, 10, 20, 40, ... Berapa selanjutnya?',pil:['80','50','60','70'],jawab:'80',jelas:'Polanya x2: 5,10,20,40, lalu 80.'},
+{emoji:'🚗',soal:'Sebuah mobil jalan 60 km dalam 1 jam. Kalau jalan 3 jam dengan kecepatan sama, berapa km?',pil:['180','120','60','200'],jawab:'180',jelas:'60 x 3 = 180 km.'},
+{emoji:'📦',soal:'Ada 3 kotak. Kotak 1 ada 5 bola, Kotak 2 ada 8 bola, Kotak 3 ada 11 bola. Kotak 4 ada berapa bola? (Lihat polanya)',pil:['14','12','13','15'],jawab:'14',jelas:'Pola +3: 5,8,11, lalu 14.'},
+{emoji:'🧩',soal:'Jika hari ini Rabu, 10 hari lagi hari apa?',pil:['Sabtu','Jumat','Minggu','Senin'],jawab:'Sabtu',jelas:'10 hari = 1 minggu (7 hari) + 3 hari. Rabu + 3 = Sabtu.'},
+{emoji:'🍬',soal:'Ibu bagi 24 permen sama rata ke 4 anak. Tiap anak dapat berapa permen?',pil:['6','8','4','12'],jawab:'6',jelas:'24 ÷ 4 = 6 permen.'},
+{emoji:'🤔',soal:'Aku bilangan genap, lebih dari 10, kurang dari 20, kalau dibagi 3 sisanya 1. Aku bilangan berapa?',pil:['16','14','12','18'],jawab:'16',jelas:'16 ÷ 3 = 5 sisa 1. Dan 16 genap, di antara 10-20.'}
+];
+let soalK6=[
+{emoji:'🔢',soal:'Lanjutkan pola: 1, 1, 2, 3, 5, 8, ... Berapa selanjutnya? (Ini pola Fibonacci)',pil:['13','11','10','12'],jawab:'13',jelas:'5 + 8 = 13. Tiap angka = jumlah 2 angka sebelumnya.'},
+{emoji:'💰',soal:'Harga 1 buku Rp 5.000. Harga 3 buku + 1 pensil Rp 17.000. Harga 1 pensil berapa?',pil:['Rp 2.000','Rp 3.000','Rp 5.000','Rp 1.000'],jawab:'Rp 2.000',jelas:'3 buku = Rp 15.000. 17.000 - 15.000 = Rp 2.000.'},
+{emoji:'🕵️',soal:'Ada 3 anak: Ani, Budi, Cici. Ani bilang: Budi bohong. Budi bilang: Cici bohong. Cici bilang: Ani dan Budi bohong. Siapa yang jujur?',pil:['Cici','Ani','Budi','Tidak ada'],jawab:'Cici',jelas:'Kalau Cici jujur, berarti Ani dan Budi bohong, itu cocok!'},
+{emoji:'🧃',soal:'1 botol besar isi 5 botol kecil. 1 botol kecil isi 2 gelas. Berapa gelas dari 3 botol besar?',pil:['30','15','10','20'],jawab:'30',jelas:'3 x 5 x 2 = 30 gelas.'},
+{emoji:'📐',soal:'Sebuah persegi panjang panjangnya 8 cm, lebarnya 5 cm. Luasnya berapa?',pil:['40 cm²','13 cm²','26 cm²','30 cm²'],jawab:'40 cm²',jelas:'Luas = panjang x lebar = 8 x 5 = 40.'},
+{emoji:'🚀',soal:'Urutan: 100, 90, 81, 73, 66, ... Angka berikutnya? (Kurangi 10,9,8,7...)',pil:['60','61','59','62'],jawab:'60',jelas:'66 - 6 = 60. Pengurangnya berkurang 1 tiap langkah.'}
+];
+function pilihKelasLogika(k,el){kelasLogika=k;document.querySelectorAll('#pilihKelasLogika button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');document.getElementById('infoLogika').innerText='Kelas '+k+' | Soal: 1 / 10 | Skor: 0 | ⭐ Bintang: 0';}
+function mulaiLogika(){noLogika=0;skorLogika=0;bintangLogika=0;let gab=[];if(kelasLogika==='4') gab=[...soalK4];else if(kelasLogika==='5') gab=[...soalK5];else if(kelasLogika==='6') gab=[...soalK6];else gab=[...soalK4,...soalK5,...soalK6];daftarLogika=gab.sort(()=>Math.random()-0.5).slice(0,10);while(daftarLogika.length<10) daftarLogika.push(gab[Math.floor(Math.random()*gab.length)]);document.getElementById('pesanLogika').innerText='GO! 🧠 Siap mikir?';document.getElementById('penjelasanLogika').style.display='none';soalLogikaBaru();}
+function soalLogikaBaru(){
+ if(noLogika>=10){document.getElementById('soalLogika').innerText='🏁 SELESAI!';document.getElementById('pilLogika').innerHTML='';document.getElementById('emojiLogika').innerText='🏆';document.getElementById('pesanLogika').innerText='🎉 Skor kamu '+skorLogika+'/10, Bintang ⭐ '+bintangLogika+'! '+(skorLogika>=8?'Kamu MASTER LOGIKA! 🧠👑':skorLogika>=5?'Hebat! Terus latih otakmu! 💪':'Jangan menyerah, coba lagi ya!');return;}
+ let s=daftarLogika[noLogika];jawabanLogika=s.jawab;document.getElementById('emojiLogika').innerText=s.emoji;document.getElementById('soalLogika').innerText='Soal '+(noLogika+1)+' - '+s.soal;document.getElementById('infoLogika').innerText='Kelas '+kelasLogika+' | Soal: '+(noLogika+1)+' / 10 | Skor: '+skorLogika+' | ⭐ Bintang: '+bintangLogika;document.getElementById('penjelasanLogika').style.display='none';
+ let pil=[...s.pil].sort(()=>Math.random()-0.5);let el=document.getElementById('pilLogika');el.innerHTML='';
+ pil.forEach(p=>{let btn=document.createElement('button');btn.className='tombolLogika';btn.innerText='👉 '+p;btn.onclick=()=>cekLogika(p,s);el.appendChild(btn);});
+}
+function cekLogika(p,s){
+ if(p===jawabanLogika){skorLogika++;bintangLogika++;document.getElementById('pesanLogika').innerText='✅ BENAR! Kamu pintar! ⭐ +1';}
+ else{document.getElementById('pesanLogika').innerText='❌ Belum tepat. Jawaban benar: '+jawabanLogika;}
+ document.getElementById('penjelasanLogika').innerText='💡 Penjelasan: '+s.jelas;document.getElementById('penjelasanLogika').style.display='block';
+ noLogika++;setTimeout(soalLogikaBaru,1800);
+}
+</script></body></html>
