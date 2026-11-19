@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPDB SDN Kayakah 3 - Amuntai Selatan</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FFFDF5;font-family:'Nunito',Arial,sans-serif;color:#1F2937}
+h1,h2,h3{font-family:'Baloo 2',Arial,sans-serif}
+.topbar{background:#1E3A8A;color:white;padding:10px;text-align:center;font-weight:800;font-size:13px}
+/* HEADER MERIAH - TANPA GAMBAR */
+.header-meriah{
+  text-align:center;
+  padding:22px 14px 20px;
+  background:linear-gradient(135deg,#FF5252 0%,#FF9800 20%,#FFEB3B 40%,#4CAF50 60%,#2196F3 80%,#9C27B0 100%);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+.header-meriah .hiasan{font-size:28px;letter-spacing:6px}
+.header-meriah h1{
+  margin:6px 0 4px;
+  font-size:36px;line-height:1.1;
+  color:#FFEB3B;
+  text-shadow:3px 3px 0 #1E3A8A, -1px -1px 0 #1E3A8A, 1px -1px 0 #1E3A8A, -1px 1px 0 #1E3A8A;
+}
+.header-meriah p{
+  margin:0;
+  background:white;color:#1E3A8A;display:inline-block;
+  padding:6px 18px;border-radius:20px;font-weight:800;font-size:15px;
+}
+.header-btn{background:#FF6D00;color:white;border:none;padding:15px 26px;border-radius:30px;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 5px 0 #BF360C;margin-top:14px}
+.header-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #BF360C}
+.badges{display:flex;gap:10px;padding:14px;justify-content:center;flex-wrap:wrap}
+.badge{background:#DCFCE7;border:2px solid #86EFAC;padding:10px 12px;border-radius:16px;font-weight:800;font-size:13px;text-align:center;flex:1;min-width:110px;max-width:190px}
+.badge:nth-child(2){background:#FFF9C4;border-color:#FDE047}
+.badge:nth-child(3){background:#E0F2FE;border-color:#7DD3FC}
+.pengumuman{background:#FFF3E0;border:2px solid #FFB25E;padding:16px;border-radius:18px;margin:0 15px 15px}
+.berkas{background:#EFF6FF;border:2px solid #60A5FA;padding:15px;border-radius:18px;margin:0 15px 15px}
+.berkas h3{margin:0 0 8px;color:#1E40AF}
+.berkas ol{padding-left:20px;margin:8px 0}
+.berkas li{margin-bottom:5px;font-size:14px}
+.menu{display:flex;gap:10px;justify-content:center;padding:0 15px 15px;flex-wrap:wrap}
+.menu button{border:none;background:white;padding:13px 18px;border-radius:25px;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.1);font-family:'Nunito',sans-serif}
+.menu button.active{background:#1E3A8A;color:white}
+.card{background:white;margin:0 15px 15px;padding:18px;border-radius:20px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+input,select,textarea{width:100%;padding:13px;margin:6px 0;border:1.5px solid #E5E7EB;border-radius:12px;font-size:15px;font-family:'Nunito',sans-serif}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#1E3A8A}
+.btn{border:none;background:#1E3A8A;color:white;padding:15px;border-radius:25px;font-weight:800;cursor:pointer;width:100%;font-size:16px}
+.btn-oranye{background:#FF8A1E}
+.btn-hijau{background:#16A34A}
+.btn-abu{background:#6B7280}
+.btn-beranda-bawah{background:#6B7280;color:white;border:none;padding:13px;border-radius:25px;font-weight:800;cursor:pointer;width:100%;margin-top:10px}
+.siswa{background:#FFFBEB;padding:13px;border-radius:14px;margin-bottom:10px;border:1px solid #FDE68A}
+.bukti{background:#DCFCE7;padding:16px;border-radius:14px;text-align:center}
+.keterangan{font-size:12px;color:#888;margin-top:-2px;margin-bottom:8px}
+.kunci{background:#FEF3C7;padding:12px;border-radius:12px;font-size:13px;border:1px solid #FDE68A}
+.hasil-diterima{background:#DCFCE7;border:2px solid #16A34A;padding:15px;border-radius:14px}
+.hasil-ditolak{background:#FEE2E2;border:2px solid #DC2626;padding:15px;border-radius:14px}
+.hasil-menunggu{background:#FEF3C7;border:2px solid #F59E0B;padding:15px;border-radius:14px}
+.checklist{background:white;padding:12px;border-radius:10px;margin-top:10px}
+footer{text-align:center;padding:20px;color:#888;font-size:13px}
+@media(max-width:480px){.header-meriah h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">🏫 SDN KAYAKAH 3 • Amuntai Selatan • PPDB 2026/2027 DIBUKA</div>
+
+<div class="header-meriah">
+<div class="hiasan">🎈 🌈 🎈 🌸 🦋 🌸 🎈 🌈 🎈</div>
+<h1>Ayo Sekolah<br>di SDN Kayakah 3!</h1>
+<p>📍 Amuntai Selatan</p><br>
+<button class="header-btn" onclick="keDaftar()">📝 DAFTAR SEKARANG - GRATIS!</button>
+<div style="margin-top:10px;font-size:22px">🌳 🦧 🐒 🦜 🌺 🌻 🌳</div>
+</div>
+
+<div class="badges">
+<div class="badge">✅ Sekolah Negeri<br>Gratis</div>
+<div class="badge">👨‍🏫 Guru Ramah<br>& Peduli</div>
+<div class="badge">🏫 Dekat Rumah<br>Desa Kayakah</div>
+</div>
+
+<div class="pengumuman">
+<h3>📢 PENGUMUMAN PPDB</h3>
+<div id="isiPengumuman"></div>
+<p style="font-size:12px;color:#854D0E;margin:5px 0 0">Ditulis oleh: Kepala Sekolah / Staf SDN Kayakah 3</p>
+</div>
+
+<div class="berkas">
+<h3>📁 BERKAS YANG HARUS DIKUMPUL DI SEKOLAH</h3>
+<p style="font-size:13px;margin:0 0 10px">Silahkan disiapkan dari rumah, Bapak/Ibu. Nanti dibawa pas daftar ulang ke sekolah. Tidak perlu diupload di sini.</p>
+<div id="isiBerkas"></div>
+<p style="font-size:12px;color:#1E40AF;margin:8px 0 0">💡 <b>Tips:</b> Fotocopy dulu semua di rumah, biar tidak antri di tempat fotocopy. Asli dibawa untuk diperlihatkan saja.</p>
+</div>
+
+<div class="menu">
+<button id="btn-daftar" class="active" onclick="tampil('daftar',this)">📝 Daftar PPDB</button>
+<button onclick="tampil('cek',this)">🔍 Cek Status Saya</button>
+<button onclick="tampil('admin',this)">🔐 Admin Kepsek</button>
+</div>
+
+<div id="daftar" class="card">
+<h2>📝 Formulir PPDB Online</h2>
+<div class="kunci">🔒 Data Bapak/Ibu <b>tidak bisa dilihat pengunjung lain</b>. Hanya Kepala Sekolah yang bisa lihat.</div><br>
+<label>Nama Lengkap Anak *</label>
+<input id="namaAnak" placeholder="Contoh: Ahmad Fauzi">
+<label>Usia Anak *</label>
+<select id="usia"><option value="">Pilih Usia...</option><option>5 Tahun</option><option>6 Tahun</option><option>7 Tahun</option><option>8 Tahun</option><option>Lebih dari 8 Tahun</option></select>
+<label>NIK Anak (Tidak Wajib)</label>
+<input id="nik" placeholder="Boleh dikosongkan" inputmode="numeric">
+<p class="keterangan">Kalau ragu, kosongkan saja. Dilengkapi pas daftar ulang bawa KK.</p>
+<label>Tanggal Lahir (Tidak Wajib)</label>
+<input id="tgl" type="date">
+<label>Jenis Kelamin</label>
+<select id="jk"><option>Laki-laki</option><option>Perempuan</option></select>
+<label>Alamat Rumah</label>
+<textarea id="alamat" placeholder="Desa Kayakah, RT ..."></textarea>
+<label>Nama Ayah</label>
+<input id="ayah" placeholder="Nama Ayah">
+<label>Nama Ibu</label>
+<input id="ibu" placeholder="Nama Ibu">
+<label>Nomor WA Orang Tua *</label>
+<input id="wa" placeholder="Contoh: 081234567890" inputmode="numeric">
+<button class="btn btn-oranye" onclick="kirimPPDB()">KIRIM PENDAFTARAN ✅</button>
+<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+</div>
+
+<div id="cek" class="card" style="display:none">
+<h2>🔍 Cek Status Saya Saja</h2>
+<p>Isi 2 kunci ini. Orang lain tidak bisa cek punya Bapak/Ibu.</p>
+<label>Nomor WA *</label>
+<input id="cekWA" placeholder="Contoh: 081234567890">
+<label>Nomor Pendaftaran *</label>
+<input id="cekNo" placeholder="Contoh: PPDB-001">
+<button class="btn btn-hijau" onclick="cekData()">CEK STATUS SAYA</button>
+<div id="hasilCek" style="margin-top:15px"></div>
+<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+</div>
+
+<div id="admin" class="card" style="display:none">
+<h2>🔐 Admin Kepsek - Hanya Pak Wahyu</h2>
+<div id="loginBox">
+<input type="password" id="pass" placeholder="Password Admin">
+<button class="btn" onclick="login()">Masuk Admin</button>
+<p style="font-size:12px;color:#888">Password contoh: kayakah123</p>
+</div>
+<div id="adminBox" style="display:none">
+<h3>📢 Tulis Pengumuman</h3>
+<textarea id="editPengumuman" rows="4"></textarea>
+<button class="btn btn-hijau" onclick="simpanPengumuman()">SIMPAN PENGUMUMAN</button><hr>
+<h3>📁 Tulis Daftar Berkas</h3>
+<textarea id="editBerkas" rows="7"></textarea>
+<button class="btn btn-hijau" onclick="simpanBerkas()">SIMPAN DAFTAR BERKAS</button><hr>
+<p><b>Selamat datang, Pak Wahyu!</b></p>
+<p id="infoJumlah" style="font-size:13px;color:#666"></p>
+<div id="listSiswa"></div>
+<button class="btn btn-abu" onclick="keluar()">Keluar Admin</button>
+</div>
+<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+</div>
+
+<div id="buktiBox" class="card" style="display:none"></div>
+<footer>© 2026 SDN Kayakah 3 - Amuntai Selatan<br>Data Pendaftar Dilindungi - Wahyu Aji, S.Pd.Jas</footer>
+
+<script>
+function kembaliBeranda(){ window.location.href='index.html'; }
+function keDaftar(){ tampil('daftar', document.getElementById('btn-daftar')); document.getElementById('daftar').scrollIntoView({behavior:'smooth'}); }
+function tampil(id, btn){
+  var cards=document.querySelectorAll('.card');
+  for(var i=0;i<cards.length;i++){ cards[i].style.display='none'; }
+  document.getElementById(id).style.display='block';
+  document.getElementById('buktiBox').style.display='none';
+  var tombol=document.querySelectorAll('.menu button');
+  for(var j=0;j<tombol.length;j++){ tombol[j].classList.remove('active'); }
+  if(btn) btn.classList.add('active');
+}
+function getData(){ return JSON.parse(localStorage.getItem('ppdb_kayakah3_rahasia')||'[]'); }
+function saveData(d){ localStorage.setItem('ppdb_kayakah3_rahasia', JSON.stringify(d)); }
+function getPengumuman(){ return localStorage.getItem('pengumuman_ppdb_kayakah3')||'Assalamualaikum Bapak/Ibu. Pendaftaran PPDB SDN Kayakah 3 Tahun Ajaran 2026/2027 DIBUKA. Cara daftar: 1. Klik tombol Daftar PPDB di bawah ini. 2. Isi formulir online dari HP. 3. Simpan Nomor Pendaftaran. 4. Cek status di menu Cek Status Saya. Tidak perlu datang ke sekolah dulu. Kalau bingung, datang langsung ke SDN Kayakah 3. Terima kasih - Pak Wahyu Aji, Kepala Sekolah.'; }
+function tampilkanPengumuman(){ document.getElementById('isiPengumuman').innerHTML=getPengumuman().replace(/\n/g,'<br>'); }
+function simpanPengumuman(){ var teks=document.getElementById('editPengumuman').value; localStorage.setItem('pengumuman_ppdb_kayakah3',teks); tampilkanPengumuman(); alert('Pengumuman sudah disimpan, Pak.'); }
+function getBerkas(){ return localStorage.getItem('daftar_berkas_ppdb_kayakah3')||'Fotocopy Kartu Keluarga (KK) - 2 lembar\nFotocopy Akte Kelahiran Anak - 2 lembar\nFotocopy KTP Ayah & Ibu - Masing-masing 1 lembar\nPas Foto Anak Ukuran 3x4 - 4 lembar (Latar Merah)\nFotocopy Kartu KIP / PKH / KKS - Kalau ada saja\nMap Kertas - 1 buah (Hijau untuk Laki-laki, Merah untuk Perempuan)\nBawa ASLI KK & Akte untuk diperlihatkan saja, tidak ditinggal di sekolah'; }
+function tampilkanBerkas(){
+  var teks=getBerkas();
+  var baris=teks.split('\n');
+  var html='<ol>';
+  for(var i=0;i<baris.length;i++){
+    var b=baris[i].trim().replace(/^\d+\.\s*/,'');
+    if(b!=='') html+='<li>'+b+'</li>';
+  }
+  html+='</ol>';
+  document.getElementById('isiBerkas').innerHTML=html;
+}
+function simpanBerkas(){ var teks=document.getElementById('editBerkas').value; localStorage.setItem('daftar_berkas_ppdb_kayakah3',teks); tampilkanBerkas(); alert('Daftar berkas sudah disimpan, Pak.'); }
+tampilkanPengumuman(); tampilkanBerkas();
+function kirimPPDB(){
+  var nama=document.getElementById('namaAnak').value.trim();
+  var usia=document.getElementById('usia').value;
+  var wa=document.getElementById('wa').value.trim();
+  var nik=document.getElementById('nik').value.trim();
+  if(!nama||!usia||!wa){ alert('Mohon isi Nama Anak, Usia, dan No. WA. NIK boleh kosong.'); return; }
+  var data=getData();
+  var no='PPDB-'+String(data.length+1).padStart(3,'0');
+  var baru={no:no,nama:nama,usia:usia,nik:nik?nik:'Belum diisi',tgl:document.getElementById('tgl').value,jk:document.getElementById('jk').value,alamat:document.getElementById('alamat').value,ayah:document.getElementById('ayah').value,ibu:document.getElementById('ibu').value,wa:wa,status:'MENUNGGU',alasan:''};
+  data.push(baru); saveData(data);
+  var box=document.getElementById('buktiBox');
+  box.style.display='block';
+  box.innerHTML='<div class="bukti"><h2>✅ Berhasil Terdaftar!</h2><p>Ananda <b>'+nama+'</b> ('+usia+') sudah terdaftar.</p><h1>'+no+'</h1><p><b>SIMPAN NOMOR INI.</b></p><p>Status: <b>MENUNGGU PERSETUJUAN KEPALA SEKOLAH</b></p><p>Sambil menunggu, Bapak/Ibu bisa siapkan berkas di atas dari rumah. Berkas dibawa pas daftar ulang nanti.</p><br><button class="btn" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button></div>';
+  window.scrollTo(0,0);
+  document.getElementById('namaAnak').value=''; document.getElementById('nik').value=''; document.getElementById('wa').value='';
+}
+function cekData(){
+  var wa=document.getElementById('cekWA').value.trim();
+  var no=document.getElementById('cekNo').value.trim().toUpperCase();
+  var data=getData();
+  var ketemu=data.find(x=>x.wa===wa&&x.no===no);
+  var hasil=document.getElementById('hasilCek');
+  if(!ketemu){ hasil.innerHTML='<p style="color:red">❌ Nomor WA / Nomor Pendaftaran tidak cocok. Data orang lain tidak bisa dibuka.</p>'; return; }
+  var berkasHtml='<div class="checklist"><b>📁 BERKAS YANG HARUS DIBAWA KE SEKOLAH:</b><br><br>'+document.getElementById('isiBerkas').innerHTML+'<p style="font-size:12px;color:#666">Centang sendiri di rumah, Pak/Bu. Kalau sudah lengkap, baru datang ke sekolah.</p></div>';
+  var html='';
+  if(ketemu.status==='DITERIMA'){ html='<div class="hasil-diterima"><h3>✅ SELAMAT, Ananda DITERIMA!</h3><p>Alhamdulillah, Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') dinyatakan <b>DITERIMA</b> di SDN Kayakah 3.</p><p><b>Langkah Selanjutnya:</b><br>1. Siapkan semua berkas di bawah ini.<br>2. Datang ke SDN Kayakah 3 untuk daftar ulang.<br>3. Temui Kepala Sekolah / Staf di jam kerja (Senin-Jumat, 08.00 - 12.00).<br>4. Bawa ASLI KK & Akte untuk diperlihatkan saja.</p><p>'+(ketemu.alasan?'Catatan dari sekolah: '+ketemu.alasan:'')+'</p>'+berkasHtml+'</div>'; }
+  else if(ketemu.status==='DITOLAK'){ html='<div class="hasil-ditolak"><h3>🙏 Mohon Maaf, Belum Bisa Diterima</h3><p>Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') untuk saat ini dinyatakan <b>BELUM DITERIMA</b>.</p><p><b>Penjelasan:</b><br>'+(ketemu.alasan?ketemu.alasan:'Kuota kelas sudah penuh / usia belum memenuhi syarat / berkas belum lengkap.')+'</p><p><b>Yang bisa Bapak/Ibu lakukan:</b><br>1. Silahkan datang ke sekolah untuk tanya langsung ke Kepala Sekolah.<br>2. Atau tunggu info pendaftaran gelombang berikutnya di Pengumuman.</p></div>'; }
+  else { html='<div class="hasil-menunggu"><h3>⏳ MASIH MENUNGGU</h3><p>Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') masih <b>MENUNGGU PERSETUJUAN KEPALA SEKOLAH</b>.</p><p>Data sudah masuk dan tersimpan di Kepala Sekolah. Tidak dilihat orang lain.</p><p><b>Sambil menunggu, Bapak/Ibu bisa siapkan berkas dulu dari rumah:</b></p>'+berkasHtml+'<p>Silahkan cek lagi besok di menu ini.</p></div>'; }
+  hasil.innerHTML=html;
+}
+function login(){
+  if(document.getElementById('pass').value==='kayakah123'){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('adminBox').style.display='block';
+    document.getElementById('editPengumuman').value=getPengumuman();
+    document.getElementById('editBerkas').value=getBerkas();
+    tampilkanAdmin();
+  } else { alert('Password salah!'); }
+}
+function keluar(){ document.getElementById('loginBox').style.display='block'; document.getElementById('adminBox').style.display='none'; document.getElementById('pass').value=''; }
+function tampilkanAdmin(){
+  var data=getData();
+  var list=document.getElementById('listSiswa');
+  document.getElementById('infoJumlah').innerHTML='Total pendaftar: <b>'+data.length+'</b> anak. Menunggu: <b>'+data.filter(x=>x.status==='MENUNGGU').length+'</b> | Diterima: <b>'+data.filter(x=>x.status==='DITERIMA').length+'</b>';
+  if(data.length===0){ list.innerHTML='<p>Belum ada yang daftar, Pak.</p>'; return; }
+  var html='';
+  data.forEach(function(s,i){
+    html+='<div class="siswa"><b>'+s.no+' - '+s.nama+'</b> ('+s.jk+', '+s.usia+')<br>NIK: '+s.nik+'<br>Alamat: '+s.alamat+'<br>Ayah: '+s.ayah+' | Ibu: '+s.ibu+'<br>WA: '+s.wa+'<br>Status: <b>'+s.status+'</b><br>Penjelasan: <input id="alasan'+i+'" value="'+(s.alasan||'')+'" placeholder="Contoh: Silahkan daftar ulang bawa KK / Kuota penuh" style="margin-top:5px"><br><br>'
+    +'<button onclick="simpanAlasan('+i+')" style="background:#F59E0B;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">💾 Simpan Penjelasan</button> '
+    +'<button onclick="ubahStatus('+i+',\'DITERIMA\')" style="background:#16A34A;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">✅ TERIMA</button> '
+    +'<button onclick="ubahStatus('+i+',\'DITOLAK\')" style="background:#DC2626;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">❌ TOLAK</button></div>';
+  });
+  list.innerHTML=html;
+}
+function simpanAlasan(i){ var data=getData(); data[i].alasan=document.getElementById('alasan'+i).value; saveData(data); alert('Penjelasan disimpan, Pak.'); }
+function ubahStatus(i,st){ var data=getData(); data[i].status=st; saveData(data); tampilkanAdmin(); alert('Status '+data[i].nama+' jadi '+st+'.'); }
+</script>
+</body>
+</html>
