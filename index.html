@@ -14,82 +14,82 @@ window.dispatchEvent(new Event('firebase-ready'));
 </script>
 <style>
 *{box-sizing:border-box}
-body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#FFF9C4;color:#333}
-header{background:linear-gradient(180deg,#FF4081,#FF9800,#FFEB3B);color:#fff;padding:18px 14px 22px;text-align:center}
-header h1{margin:4px 0;font-size:48px;color:white;text-shadow:3px 3px 0 #7C4DFF,6px 6px 0 #2196F3}
-header p{margin:6px 0 0;font-weight:bold;background:#fff;color:#E91E63;display:inline-block;padding:8px 16px;border-radius:20px}
+body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#EAF6F6;color:#2D3436}
+header{background:linear-gradient(180deg,#0E7C7B,#FF8A00,#FFD93D);color:#fff;padding:18px 14px 22px;text-align:center}
+header h1{margin:4px 0;font-size:48px;color:white;text-shadow:3px 3px 0 #1E3A5F,6px 6px 0 #0E7C7B}
+header p{margin:6px 0 0;font-weight:bold;background:#fff;color:#0E7C7B;display:inline-block;padding:8px 16px;border-radius:20px}
 .pembuat-kecil{font-size:12px;color:#fff;background:rgba(0,0,0,.25);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
 .awan{font-size:38px;animation:jalan 6s ease-in-out infinite}
 @keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
 .kartun-besar{font-size:72px;line-height:1;margin:10px 0;letter-spacing:8px;animation:lompat 1.2s ease-in-out infinite}
 @keyframes lompat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.pengumuman{background:#FFEB3B;padding:12px 10px;border-bottom:4px solid #FF9800;font-weight:bold;font-size:17px;color:#BF360C;overflow:hidden;white-space:nowrap}
-.pengumuman span{background:#FF5252;color:white;padding:5px 12px;border-radius:20px;margin-right:10px}
+.pengumuman{background:#FFD93D;padding:12px 10px;border-bottom:4px solid #FF8A00;font-weight:bold;font-size:17px;color:#7C2D12;overflow:hidden;white-space:nowrap}
+.pengumuman span{background:#0E7C7B;color:white;padding:5px 12px;border-radius:20px;margin-right:10px}
 nav{background:#fff;padding:12px;text-align:center;box-shadow:0 3px 8px #ddd;position:sticky;top:0;z-index:10}
 nav a{margin:4px;display:inline-block;padding:9px 16px;border-radius:20px;text-decoration:none;color:white;font-weight:bold;font-size:14px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
-nav a:nth-child(1){background:#FF5252}nav a:nth-child(2){background:#FF9800}nav a:nth-child(3){background:#4CAF50}nav a:nth-child(4){background:#2196F3}nav a:nth-child(5){background:#9C27B0}nav a:nth-child(6){background:#FF4081}nav a:nth-child(7){background:#FF6D00}nav a:nth-child(8){background:#00BCD4}
+nav a:nth-child(1){background:#E11D63}nav a:nth-child(2){background:#FF8A00}nav a:nth-child(3){background:#2E9E5B}nav a:nth-child(4){background:#2563EB}nav a:nth-child(5){background:#7C3AED}nav a:nth-child(6){background:#0E7C7B}nav a:nth-child(7){background:#EA580C}nav a:nth-child(8){background:#0891B2}
 .wrap{max-width:920px;margin:auto;padding:0 14px 20px}
-.hero{background:white;margin:20px 0;padding:0 0 22px;border-radius:30px;text-align:center;border:5px solid #FF4081;overflow:hidden;box-shadow:0 8px 20px rgba(255,64,129,.3)}
-.hero-banner{background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);padding:22px 10px}
+.hero{background:white;margin:20px 0;padding:0 0 22px;border-radius:30px;text-align:center;border:5px solid #0E7C7B;overflow:hidden;box-shadow:0 8px 20px rgba(14,124,123,.3)}
+.hero-banner{background:linear-gradient(90deg,#0E7C7B,#FF8A00,#FFD93D,#2E9E5B,#2563EB,#7C3AED);padding:22px 10px}
 .hero-banner div{font-size:64px}
-.hero h2{color:#E91E63;font-size:30px;margin:14px 10px 0}
-.visi{background:#E3F2FD;padding:14px;border-radius:12px;margin:15px}
-.btn{display:inline-block;background:linear-gradient(90deg,#FF5252,#FF9800);color:white;padding:16px 26px;border-radius:30px;text-decoration:none;font-weight:bold;font-size:18px;box-shadow:0 4px 0 #c62828}
-.btn2{display:inline-block;background:#4CAF50;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;font-weight:bold;margin:6px}
-.btn-kembali{display:inline-block;background:#fff;color:#E91E63;border:2px solid #E91E63;padding:10px 20px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:14px;margin-top:14px}
-.btn-kembali:hover{background:#E91E63;color:#fff}
+.hero h2{color:#0E7C7B;font-size:30px;margin:14px 10px 0}
+.visi{background:#E0F2F1;padding:14px;border-radius:12px;margin:15px}
+.btn{display:inline-block;background:linear-gradient(90deg,#0E7C7B,#FF8A00);color:white;padding:16px 26px;border-radius:30px;text-decoration:none;font-weight:bold;font-size:18px;box-shadow:0 4px 0 #7C2D12}
+.btn2{display:inline-block;background:#2E9E5B;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;font-weight:bold;margin:6px}
+.btn-kembali{display:inline-block;background:#fff;color:#0E7C7B;border:2px solid #0E7C7B;padding:10px 20px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:14px;margin-top:14px}
+.btn-kembali:hover{background:#0E7C7B;color:#fff}
 .kartun-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 8px}
-.kartun-kotak{width:150px;background:#FFF3E0;border-radius:18px;padding:12px 6px;border:3px solid #FFEB3B}
+.kartun-kotak{width:150px;background:#FFF7E6;border-radius:18px;padding:12px 6px;border:3px solid #FFD93D}
 .kartun-kotak div{font-size:48px}
 .kartun-kotak b{font-size:12px}
 .stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin:15px 0}
 .stats div{padding:16px;border-radius:16px;color:white;text-align:center;font-weight:bold;box-shadow:0 4px 0 rgba(0,0,0,.2)}
 .stats div b{font-size:26px;display:block}
-.c1{background:#FF5252}.c2{background:#FF9800}.c3{background:#2196F3}.c4{background:#4CAF50}
-.card{background:white;padding:22px;border-radius:25px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,.12);border:3px solid #FFE082;overflow:hidden}
+.c1{background:#0E7C7B}.c2{background:#FF8A00}.c3{background:#2563EB}.c4{background:#2E9E5B}
+.card{background:white;padding:22px;border-radius:25px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,.12);border:3px solid #FFD93D;overflow:hidden}
 .card h3{margin-top:0;font-size:22px}
-.banner-kartun{background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);border-radius:16px;padding:16px;text-align:center;font-size:48px;margin-bottom:12px;letter-spacing:6px}
+.banner-kartun{background:linear-gradient(90deg,#0E7C7B,#FF8A00,#FFD93D,#2E9E5B,#2563EB,#7C3AED);border-radius:16px;padding:16px;text-align:center;font-size:48px;margin-bottom:12px;letter-spacing:6px}
 table{width:100%;border-collapse:collapse}
 td{padding:9px;border-bottom:1px solid #eee}
-td:first-child{font-weight:bold;width:35%;color:#E91E63}
+td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .guru{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .guru div{padding:14px;border-radius:14px;font-size:14px}
-.guru div:nth-child(odd){background:#FFF3E0}.guru div:nth-child(even){background:#E3F2FD}
+.guru div:nth-child(odd){background:#FFF7E6}.guru div:nth-child(even){background:#E0F2F1}
 .ekstra{display:flex;flex-wrap:wrap;gap:8px}
-.ekstra span{background:#F3E5F5;padding:10px 14px;border-radius:20px;font-weight:bold}
-.peng-card{background:#FFF3E0;border:3px solid #FF9800}.peng-card li{margin-bottom:8px;line-height:1.5}
-.galeri-wrap{background:linear-gradient(135deg,#FFF3E0,#E3F2FD,#F3E5F5);border:4px solid #FF9800!important}
+.ekstra span{background:#EDE9FE;padding:10px 14px;border-radius:20px;font-weight:bold}
+.peng-card{background:#FFF7E6;border:3px solid #FF8A00}.peng-card li{margin-bottom:8px;line-height:1.5}
+.galeri-wrap{background:linear-gradient(135deg,#FFF7E6,#E0F2F1,#EDE9FE);border:4px solid #FF8A00!important}
 .galeri{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.g-card{background:white;border-radius:18px;overflow:hidden;text-align:center;padding-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #FFEB3B}
-.g-card.kepsek{grid-column:1 / -1;max-width:320px;margin:auto;width:100%;border-color:#FF5252}
+.g-card{background:white;border-radius:18px;overflow:hidden;text-align:center;padding-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #FFD93D}
+.g-card.kepsek{grid-column:1 / -1;max-width:320px;margin:auto;width:100%;border-color:#0E7C7B}
 .g-card .foto-kartun{height:170px;display:flex;align-items:center;justify-content:center;font-size:90px}
 .g-card.kepsek .foto-kartun{height:200px;font-size:110px}
-.g-card b{display:block;margin:10px 8px 2px;font-size:16px;color:#1565C0}.g-card span{font-size:13px;color:#666;display:block;padding:0 8px}
-.g-btn{margin-top:8px;background:#FF4081;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}
-.kegiatan-wrap{background:linear-gradient(135deg,#E8F5E9,#E3F2FD,#FFF3E0);border:4px solid #4CAF50!important}
+.g-card b{display:block;margin:10px 8px 2px;font-size:16px;color:#1E3A5F}.g-card span{font-size:13px;color:#666;display:block;padding:0 8px}
+.g-btn{margin-top:8px;background:#0E7C7B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}
+.kegiatan-wrap{background:linear-gradient(135deg,#E8F5E9,#E0F2F1,#FFF7E6);border:4px solid #2E9E5B!important}
 .kegiatan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.k-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #C8E6C9;text-align:center;padding-bottom:10px}
+.k-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #A7E8C0;text-align:center;padding-bottom:10px}
 .k-card .k-kartun{height:130px;display:flex;align-items:center;justify-content:center;font-size:72px}
 .k-card img{width:100%;height:180px;object-fit:cover;display:block;cursor:pointer}
-.k-card b{display:block;margin:8px 6px 2px;font-size:14px;color:#2E7D32}.k-card span{font-size:12px;color:#777;display:block;padding:0 6px}
-.k-del{background:#FF5252;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px}
-.tambah-box{background:#fff;border:3px dashed #4CAF50;border-radius:16px;padding:18px;text-align:center}
+.k-card b{display:block;margin:8px 6px 2px;font-size:14px;color:#1B5E20}.k-card span{font-size:12px;color:#777;display:block;padding:0 6px}
+.k-del{background:#E11D63;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px}
+.tambah-box{background:#fff;border:3px dashed #2E9E5B;border-radius:16px;padding:18px;text-align:center}
 .tambah-box input{width:100%;margin:6px 0;padding:9px;border:1px solid #ccc;border-radius:10px}.tambah-box select{width:100%;padding:9px;border:1px solid #ccc;border-radius:10px;margin:6px 0}
-.btn-tambah{background:#4CAF50;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px;width:100%}
-.admin-bar{background:#333;color:white;padding:12px;text-align:center;position:sticky;top:0;z-index:20;font-size:14px}.admin-bar b{color:#FFEB3B}
-.btn-login{background:#FFEB3B;color:#333;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}.btn-logout{background:#FF5252;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}
+.btn-tambah{background:#2E9E5B;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px;width:100%}
+.admin-bar{background:#1E3A5F;color:white;padding:12px;text-align:center;position:sticky;top:0;z-index:20;font-size:14px}.admin-bar b{color:#FFD93D}
+.btn-login{background:#FFD93D;color:#1E3A5F;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}.btn-logout{background:#E11D63;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:99;justify-content:center;align-items:center}
 .modal-box{background:white;width:92%;max-width:400px;padding:22px;border-radius:20px;text-align:center;max-height:90vh;overflow:auto}
-.modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #FF9800;border-radius:12px;font-size:15px}
+.modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #FF8A00;border-radius:12px;font-size:15px}
 .modal-box button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;font-size:15px;margin-top:6px}
-.lock-box{background:#FFF3E0;border:2px dashed #FF9800;padding:14px;border-radius:12px;text-align:center;margin:12px 0}
+.lock-box{background:#FFF7E6;border:2px dashed #FF8A00;padding:14px;border-radius:12px;text-align:center;margin:12px 0}
 .hanya-admin{display:none}body.admin .hanya-admin{display:block}
-.kepsek-panel{background:linear-gradient(135deg,#FFEBEE,#FFF3E0);border:4px solid #FF5252!important}.kepsek-panel input{padding:8px;border:1px solid #ccc;border-radius:8px;width:100%}
+.kepsek-panel{background:linear-gradient(135deg,#FEF3C7,#FFF7E6);border:4px solid #E11D63!important}.kepsek-panel input{padding:8px;border:1px solid #ccc;border-radius:8px;width:100%}
 .hanya-kepsek{display:none}body.kepsek .hanya-kepsek{display:block}
 #tabelPIN table{border:1px solid #ddd;background:#fff}
 #tabelPIN td{border-bottom:1px solid #eee;color:#333}
 #tabelPIN td:first-child{width:auto;color:#333}
-footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px solid #FFEB3B}
+footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
 @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
 </style>
 </head>
@@ -102,14 +102,14 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <div class="modal" id="modalLogin">
 <div class="modal-box">
 <div style="font-size:60px">👩‍🏫👨‍🏫🏫</div>
-<h2 style="margin:8px 0 0;color:#E65100">🔐 Login Admin</h2>
+<h2 style="margin:8px 0 0;color:#7C2D12">🔐 Login Admin</h2>
 <p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p>
 <label style="font-weight:bold">Pilih Nama Anda:</label>
 <select id="loginNama"></select>
 <label style="font-weight:bold">Masukkan PIN 6 Angka:</label>
 <input type="password" id="loginPIN" placeholder="Masukkan PIN 6 angka" inputmode="numeric" maxlength="6">
 <p id="loginError" style="color:#D32F2F;font-weight:bold;min-height:20px"></p>
-<button style="background:#4CAF50;color:white" onclick="cekLogin()">✅ MASUK SEBAGAI ADMIN</button>
+<button style="background:#2E9E5B;color:white" onclick="cekLogin()">✅ MASUK SEBAGAI ADMIN</button>
 <button style="background:#BDBDBD" onclick="tutupLogin()">⬅️ Kembali ke Beranda</button>
 </div>
 </div>
@@ -124,7 +124,7 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 </header>
 <div class="pengumuman"><span>📢 PENGUMUMAN</span><marquee id="marqueePengumuman" behavior="scroll" scrollamount="6">🎉 Selamat Datang di SDN Kayakah! &nbsp;&nbsp; 💬 Ada Kritik & Saran? Isi di Kotak Saran Di Bawah Ya! &nbsp;&nbsp; 📚 Senin: Upacara Bendera Jam 07.30 WITA &nbsp;&nbsp; 🕌 Jumat: Yasinan & Infaq &nbsp;&nbsp; 🥁 Sabtu: Pramuka Jam 15.00 WITA &nbsp;&nbsp;</marquee></div>
 <nav>
-<a href="ppdb.html">🎓 PPDB</a><a href="#">🏠 Beranda</a><a href="#profil">📚 Profil</a><a href="#guru">👩‍🏫 Guru</a><a href="#galeri">📸 Galeri Guru</a><a href="#kegiatan">🎉 Galeri Kegiatan</a><a href="game.html">🎮 Kuis Seru</a><a href="asmaul-husna.html">🕌 Asmaul Husna</a><a href="agama-islam.html" style="background:#b91c1c;color:white">🕌 Agama Islam</a><a href="sdn-kayakah-belajar.html" style="background:#8e44ad; color:white; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold;">📚 Kayakah Belajar</a><a href="saran.html" style="background:#90EE90;">💬 Kritik & Saran</a><a href="bukutamu.html" style="background:#90EE90;">📖 Buku Tamu</a><a href="#kontak" style="background:#FFEB3B;color:#333;">📞 Kontak</a><a href="mitra-sdn-kayakah.html" style="background:#FF9800;">🤝 Mitra</a>
+<a href="ppdb.html">🎓 PPDB</a><a href="#">🏠 Beranda</a><a href="#profil">📚 Profil</a><a href="#guru">👩‍🏫 Guru</a><a href="#galeri">📸 Galeri Guru</a><a href="#kegiatan">🎉 Galeri Kegiatan</a><a href="game.html">🎮 Kuis Seru</a><a href="asmaul-husna.html">🕌 Asmaul Husna</a><a href="agama-islam.html" style="background:#b91c1c;color:white">🕌 Agama Islam</a><a href="sdn-kayakah-belajar.html" style="background:#8e44ad; color:white; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold;">📚 Kayakah Belajar</a><a href="saran.html" style="background:#90EE90;">💬 Kritik & Saran</a><a href="bukutamu.html" style="background:#90EE90;">📖 Buku Tamu</a><a href="#kontak" style="background:#FFD93D;color:#333;">📞 Kontak</a><a href="mitra-sdn-kayakah.html" style="background:#FF8A00;">🤝 Mitra</a>
 </nav>
 <div class="wrap">
 <div class="hero">
@@ -152,56 +152,56 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <input type="text" id="pinBaru" placeholder="PIN Baru 6 angka - Contoh: 567890" inputmode="numeric" maxlength="6" style="margin-top:6px">
 <input type="text" id="jabatanBaru" placeholder="Jabatan - Contoh: Guru Kelas" style="margin-top:6px">
 <input type="file" id="fotoBaru" accept="image/*" style="margin-top:6px">
-<button onclick="tambahAdminBaru()" style="background:#4CAF50;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">➕ TAMBAH GURU BARU + BUATKAN PIN</button>
+<button onclick="tambahAdminBaru()" style="background:#2E9E5B;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">➕ TAMBAH GURU BARU + BUATKAN PIN</button>
 <p id="pesanTambahAdmin" style="font-weight:bold;color:#2E7D32;text-align:center"></p>
 </div><br>
 <b>📋 Daftar Guru & Staf - Ganti PIN / Hapus Guru:</b>
 <div id="tabelPIN"></div>
 <div style="text-align:center;margin-top:10px">
-<button onclick="resetSemuaPIN()" style="background:#FF9800;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔄 Reset Semua PIN Guru Jadi 123456</button>
+<button onclick="resetSemuaPIN()" style="background:#FF8A00;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔄 Reset Semua PIN Guru Jadi 123456</button>
 <button onclick="gantiPINkepsek()" style="background:#C62828;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔐 Ganti PIN Kepala Sekolah</button>
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
 <div class="card galeri-wrap" id="galeri">
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
-<h3 style="text-align:center;color:#E65100;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
+<h3 style="text-align:center;color:#7C2D12;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
 <p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
 <p id="statusGaleri" style="text-align:center;font-size:13px;color:#666">Memuat foto guru dari Firebase...</p>
 <div class="lock-box" id="lockGuru">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto. Untuk ganti foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
 <div class="galeri" id="listGaleriGuru"></div>
-<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#4CAF50;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU KE FIREBASE</button></div>
+<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#2E9E5B;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU KE FIREBASE</button></div>
 <p id="pesanGaleri" style="text-align:center;font-weight:bold;color:#2E7D32"></p>
-<div class="hanya-admin" style="background:#FFF3E0;border:3px dashed #FF9800;border-radius:16px;padding:16px;margin-top:16px;text-align:center">
-<h3 style="margin:0;color:#E65100">🔐 Ganti PIN Saya Sendiri</h3>
+<div class="hanya-admin" style="background:#FFF7E6;border:3px dashed #FF8A00;border-radius:16px;padding:16px;margin-top:16px;text-align:center">
+<h3 style="margin:0;color:#7C2D12">🔐 Ganti PIN Saya Sendiri</h3>
 <p style="font-size:13px;color:#666;margin:6px 0">Login sebagai: <b id="namaPinSendiri">-</b><br>Anda hanya bisa ganti PIN Anda sendiri. Tidak bisa lihat PIN orang lain.</p>
 <input type="password" id="pinLamaSaya" placeholder="PIN Lama 6 angka" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
 <input type="password" id="pinBaruSaya" placeholder="PIN Baru 6 angka - Contoh: 654321" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
 <input type="password" id="pinBaruSaya2" placeholder="Ulangi PIN Baru 6 angka" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
-<button onclick="gantiPINsendiri()" style="background:#FF9800;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">🔐 GANTI PIN SAYA JADI 6 ANGKA</button>
+<button onclick="gantiPINsendiri()" style="background:#FF8A00;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">🔐 GANTI PIN SAYA JADI 6 ANGKA</button>
 <p id="pesanPinSendiri" style="font-weight:bold;color:#2E7D32"></p>
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
 <div class="card kegiatan-wrap" id="kegiatan">
 <div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
-<h3 style="text-align:center;color:#2E7D32;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
+<h3 style="text-align:center;color:#1B5E20;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
 <p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱</p>
 <p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666">Memuat foto kegiatan dari Firebase...</p>
 <div class="lock-box" id="lockKegiatan">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto kegiatan. Untuk tambah / hapus foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin Aktif - Pian Bisa Tambah & Hapus Foto Kegiatan!</div>
 <div style="text-align:center;margin-bottom:12px">
-<button onclick="filterKegiatan('SEMUA')" style="background:#4CAF50;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🌈 Semua</button>
-<button onclick="filterKegiatan('Upacara')" style="background:#FF5252;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📚 Upacara</button>
+<button onclick="filterKegiatan('SEMUA')" style="background:#2E9E5B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🌈 Semua</button>
+<button onclick="filterKegiatan('Upacara')" style="background:#E11D63;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📚 Upacara</button>
 <button onclick="filterKegiatan('Pramuka')" style="background:#795548;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🥁 Pramuka</button>
-<button onclick="filterKegiatan('Habsy')" style="background:#9C27B0;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎤 Habsy</button>
-<button onclick="filterKegiatan('Olahraga')" style="background:#2196F3;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">⚽ Olahraga</button>
-<button onclick="filterKegiatan('Lainnya')" style="background:#FF9800;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎨 Lainnya</button>
+<button onclick="filterKegiatan('Habsy')" style="background:#7C3AED;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎤 Habsy</button>
+<button onclick="filterKegiatan('Olahraga')" style="background:#2563EB;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">⚽ Olahraga</button>
+<button onclick="filterKegiatan('Lainnya')" style="background:#FF8A00;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎨 Lainnya</button>
 </div>
 <div class="kegiatan-grid" id="listKegiatan"></div>
 <div class="tambah-box hanya-admin" style="margin-top:14px">
-<h3 style="margin:0;color:#2E7D32">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
+<h3 style="margin:0;color:#1B5E20">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
 <p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiForm">-</b></p>
 <input type="text" id="judulKegiatan" placeholder="📝 Judul Kegiatan - Contoh: Upacara Bendera Senin">
 <select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option></select>
@@ -210,15 +210,15 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN KE FIREBASE</button>
 <p id="pesanKegiatan" style="font-weight:bold;color:#2E7D32"></p>
 </div>
-<div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#FF5252;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
+<div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#E11D63;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
 <div class="card peng-card"><div class="banner-kartun">📢🎉📚</div><h3>📢 Pengumuman Sekolah</h3><ul id="listPengumuman"><li>Memuat pengumuman...</li></ul>
-<div class="hanya-admin" style="background:#fff;border:3px dashed #FF9800;border-radius:16px;padding:14px;margin-top:12px;text-align:center">
+<div class="hanya-admin" style="background:#fff;border:3px dashed #FF8A00;border-radius:16px;padding:14px;margin-top:12px;text-align:center">
 <b>➕ TAMBAH PENGUMUMAN BARU - KHUSUS ADMIN / KEPSEK</b><br>
 <input id="judulPengumuman" placeholder="Judul - Contoh: Senin Upacara" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
 <input id="isiPengumuman" placeholder="Isi - Contoh: Jam 07.30 WITA, pakai seragam lengkap" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
-<button onclick="tambahPengumuman()" style="background:#4CAF50;color:white;border:none;padding:12px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%">📢 SIMPAN PENGUMUMAN</button>
+<button onclick="tambahPengumuman()" style="background:#2E9E5B;color:white;border:none;padding:12px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%">📢 SIMPAN PENGUMUMAN</button>
 <p id="pesanPengumuman" style="font-weight:bold;color:#2E7D32"></p>
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
@@ -235,7 +235,7 @@ let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
 let URUTAN_GURU = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
 let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
-let warnaGuru = ["#FFEBEE","#FFF3E0","#E3F2FD","#E8F5E9","#F3E5F5","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
+let warnaGuru = ["#FFEBEE","#FFF7E6","#E0F2F1","#E8F5E9","#EDE9FE","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
 function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
 function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
 function loadPIN(){
@@ -324,7 +324,7 @@ function renderGaleriGuru(){
     let fotoHtml = fotoGuru[nama] ? `<img src="${fotoGuru[nama]}" style="width:100%;height:170px;object-fit:cover;display:block">` : `<div class="foto-kartun" style="background:${warna}">${emoji}</div>`;
     if(isKepsek && fotoGuru[nama]) fotoHtml=`<img src="${fotoGuru[nama]}" style="width:100%;height:200px;object-fit:cover;display:block">`;
     let tombol = adminLogin ? `<br><input type="file" id="input-${idx}" accept="image/*" style="display:none" onchange="gantiFotoBaru(this,'${nama.replace(/'/g,"")}')"><button class="g-btn" onclick="document.getElementById('input-${idx}').click()">📸 Ganti Foto Asli</button>` : ``;
-    let tombolHapus = (adminLogin===NAMA_KEPSEK && !isKepsek) ? `<br><button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#FF5252;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px">🗑️ Hapus Guru Ini</button>` : ``;
+    let tombolHapus = (adminLogin===NAMA_KEPSEK && !isKepsek) ? `<br><button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#E11D63;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px">🗑️ Hapus Guru Ini</button>` : ``;
     html+=`<div class="g-card ${isKepsek?"kepsek":""}">${fotoHtml}<b>${isKepsek?"👑 ":""}${nama}</b><span>${jab}</span>${tombol}${tombolHapus}</div>`;
   });
   wadah.innerHTML=html;
@@ -344,7 +344,7 @@ function tampilTabelPIN(){
   let html=`<table><tr><td><b>Nama</b></td><td><b>Jabatan</b></td><td><b>PIN (6 angka)</b></td><td><b>Aksi</b></td></tr>`;
   urutanNama().forEach(nama=>{
     let idAman = "pin_" + nama.replace(/[^a-zA-Z0-9]/g,"_");
-    html+=`<tr><td>${nama}${nama===NAMA_KEPSEK?" 👑":""}</td><td>${jabatanAdmin[nama]||""}</td><td><input type="text" id="${idAman}" value="${daftarPIN[nama]}" maxlength="6" inputmode="numeric" style="width:90px;text-align:center"></td><td><button onclick="simpanSatuPIN('${nama.replace(/'/g,"")}','${idAman}')" style="background:#4CAF50;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">💾 Simpan</button> <button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#FF5252;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">🗑️</button></td></tr>`;
+    html+=`<tr><td>${nama}${nama===NAMA_KEPSEK?" 👑":""}</td><td>${jabatanAdmin[nama]||""}</td><td><input type="text" id="${idAman}" value="${daftarPIN[nama]}" maxlength="6" inputmode="numeric" style="width:90px;text-align:center"></td><td><button onclick="simpanSatuPIN('${nama.replace(/'/g,"")}','${idAman}')" style="background:#2E9E5B;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">💾 Simpan</button> <button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#E11D63;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">🗑️</button></td></tr>`;
   });
   html+=`</table>`; wadah.innerHTML=html;
 }
@@ -431,7 +431,7 @@ async function loadPengumuman(){
 }
 function renderPengumuman(){
   let wadah=document.getElementById("listPengumuman"); if(!wadah) return; let html="";
-  dataPengumuman.forEach((p,i)=>{ let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#FF5252;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : ""; html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`; });
+  dataPengumuman.forEach((p,i)=>{ let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#E11D63;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : ""; html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`; });
   wadah.innerHTML = html || "<li>Belum ada pengumuman.</li>";
   let marq=document.getElementById("marqueePengumuman"); 
   if(marq){ 
