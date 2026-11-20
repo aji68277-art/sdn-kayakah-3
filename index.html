@@ -234,6 +234,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <script>
 let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
+let PIN_MASTER_KEPSEK = "197601";
 let URUTAN_GURU = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
 let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
@@ -281,7 +282,7 @@ function urutanNama(){ let out=[]; URUTAN_GURU.forEach(n=>{ if(daftarPIN[n]) out
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; urutanNama().forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; kembaliBeranda(); }
-function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; alert("Selamat Datang, "+nama+"! ✅"); document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); let bolehMasuk = (daftarPIN[nama] && pin===daftarPIN[nama]) || (nama===NAMA_KEPSEK && pin===PIN_MASTER_KEPSEK); if(bolehMasuk){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; alert("Selamat Datang, "+nama+"! ✅"); document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
 function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar Dari Mode Admin 🔒"); }
 function updateTampilanAdmin(){
   if(adminLogin){
@@ -308,13 +309,14 @@ function gantiPINsendiri(){
   let lama=document.getElementById("pinLamaSaya").value.trim();
   let baru=document.getElementById("pinBaruSaya").value.trim();
   let baru2=document.getElementById("pinBaruSaya2").value.trim();
-  if(lama!==daftarPIN[adminLogin]){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Lama Salah!"; return; }
+  let lamaBenar = (lama===daftarPIN[adminLogin]) || (adminLogin===NAMA_KEPSEK && lama===PIN_MASTER_KEPSEK);
+  if(!lamaBenar){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Lama Salah!"; return; }
   if(!cekPIN6(baru)){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru harus 6 angka! Contoh: 654321"; return; }
   if(baru!==baru2){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru tidak sama! Ulangi lagi!"; return; }
   daftarPIN[adminLogin]=baru; simpanPIN();
   document.getElementById("pinLamaSaya").value=""; document.getElementById("pinBaruSaya").value=""; document.getElementById("pinBaruSaya2").value="";
-  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Tersimpan di Firebase!";
-  alert("PIN Anda berhasil diganti! PIN baru: "+baru);
+  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Tersimpan di Firebase! Tapi PIN Master 197601 tetap bisa dipakai.";
+  alert("PIN Anda berhasil diganti! PIN baru: "+baru+" - PIN Master 197601 tetap bisa dipakai!");
 }
 function renderGaleriGuru(){
   let wadah=document.getElementById("listGaleriGuru"); if(!wadah) return;
@@ -348,13 +350,13 @@ function tampilTabelPIN(){
     let idAman = "pin_" + nama.replace(/[^a-zA-Z0-9]/g,"_");
     html+=`<tr><td>${nama}${nama===NAMA_KEPSEK?" 👑":""}</td><td>${jabatanAdmin[nama]||""}</td><td><input type="text" id="${idAman}" value="${daftarPIN[nama]}" maxlength="6" inputmode="numeric" style="width:90px;text-align:center"></td><td><button onclick="simpanSatuPIN('${nama.replace(/'/g,"")}','${idAman}')" style="background:#2E9E5B;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">💾 Simpan</button> <button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#E11D63;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">🗑️</button></td></tr>`;
   });
-  html+=`</table>`; wadah.innerHTML=html;
+  html+=`</table><p style="font-size:12px;color:#666;text-align:center">📌 PIN Master Kepsek 197601 selalu bisa dipakai, walaupun PIN di tabel diganti.</p>`; wadah.innerHTML=html;
 }
 function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru+" - Tersimpan di Firebase!"); }
 function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus dari Firebase!"); }
 function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin+" - Tersimpan di Firebase!"); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ if(fileInput.files[0].size>800000){alert("Fotonya kebesaran! Pilih di bawah 800KB.");return;} let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
 function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456! Tersimpan di Firebase!"); }
-function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru); }
+function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru+" - Tapi PIN Master 197601 tetap bisa dipakai!"); }
 let filterAktif="SEMUA"; let dataKegiatan=[];
 function getKegiatanBawaan(){ return [{judul:"Upacara Bendera Senin",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin",bawaan:true},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin",bawaan:true},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin",bawaan:true},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin",bawaan:true},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin",bawaan:true},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin",bawaan:true}]; }
 async function loadKegiatan(){
