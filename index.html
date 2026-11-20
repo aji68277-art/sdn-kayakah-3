@@ -9,7 +9,7 @@
 <script>
 firebase.initializeApp({apiKey:"AIzaSyCSMvh7xlAKMQbWf-YbNjMVyTAnHOUMkM0",authDomain:"sdn-kayakah-3.firebaseapp.com",projectId:"sdn-kayakah-3",storageBucket:"sdn-kayakah-3.firebasestorage.app",messagingSenderId:"615927561449",appId:"1:615927561449:web:3570adc875d4a7987b4478"});
 const db=firebase.firestore();
-window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
+window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()},setDoc:async function(r,d){return await r.set(d)}};
 window.dispatchEvent(new Event('firebase-ready'));
 </script>
 <style>
@@ -145,7 +145,7 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 </div>
 <div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
 <h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA GURU & PIN 👑</h3>
-<p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini!</p>
+<p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini! Galeri Guru sekarang tersimpan di Firebase - muncul di semua HP.</p>
 <div style="background:#fff;padding:12px;border-radius:12px">
 <b>➕ Tambah Guru / Staf Baru - Langsung Jadi Kartu Galeri!</b><br>
 <input type="text" id="namaBaru" placeholder="Nama Lengkap - Contoh: Budi Santoso, S.Pd.">
@@ -167,10 +167,11 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
 <h3 style="text-align:center;color:#E65100;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
 <p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
+<p id="statusGaleri" style="text-align:center;font-size:13px;color:#666">Memuat foto guru dari Firebase...</p>
 <div class="lock-box" id="lockGuru">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto. Untuk ganti foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
 <div class="galeri" id="listGaleriGuru"></div>
-<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#4CAF50;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU</button></div>
+<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#4CAF50;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU KE FIREBASE</button></div>
 <p id="pesanGaleri" style="text-align:center;font-weight:bold;color:#2E7D32"></p>
 <div class="hanya-admin" style="background:#FFF3E0;border:3px dashed #FF9800;border-radius:16px;padding:16px;margin-top:16px;text-align:center">
 <h3 style="margin:0;color:#E65100">🔐 Ganti PIN Saya Sendiri</h3>
@@ -236,60 +237,50 @@ let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"�
 let warnaGuru = ["#FFEBEE","#FFF3E0","#E3F2FD","#E8F5E9","#F3E5F5","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
 function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
 function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
-function pindahNamaLama(){
-  let peta = {
-    "Pathuljannah, S.Pd.I":"Pathul Jannah, S.Pd.I",
-    "Pathuljannah, S.Pd.":"Pathul Jannah, S.Pd.I",
-    "Pathul Jannah, S. Pd. I":"Pathul Jannah, S.Pd.I",
-    "Husain":"M. Husain",
-    "Syahida Norpah":"Syahida Norpah, S.Pd.",
-    "Syahida Norpah, S.Pd":"Syahida Norpah, S.Pd.",
-    "Syahida Norpah, S. Pd.":"Syahida Norpah, S.Pd.",
-    "Jannah":"Jannah, S.Pd.",
-    "Jannah, S.Pd":"Jannah, S.Pd.",
-    "Siti Nuriyah, S.Pd.SD":"Hj. Siti Nuriyah, S.Pd.SD",
-    "Siti Nuriyah, S. Pd. SD":"Hj. Siti Nuriyah, S.Pd.SD",
-    "Hj. Siti Nuriyah, S. Pd. SD":"Hj. Siti Nuriyah, S.Pd.SD",
-    "Wahyu Aji, S. Pd. Jas":"Wahyu Aji, S.Pd.Jas",
-    "Samsul Bahri, S. Pd.":"Samsul Bahri, S.Pd.",
-    "Samsul Bahri, S.Pd":"Samsul Bahri, S.Pd.",
-    "Syahruni, S. Pd. SD":"Syahruni, S.Pd.SD",
-    "Norsalim, S. Pd.":"Norsalim, S.Pd.",
-    "Norsalim, S.Pd":"Norsalim, S.Pd.",
-    "Radinah, S. Pd.":"Radinah, S.Pd.",
-    "Radinah, S.Pd":"Radinah, S.Pd.",
-    "Jannah, S. Pd.":"Jannah, S.Pd."
-  };
-  let berubah=false;
-  Object.keys(peta).forEach(lama=>{
-    let baru=peta[lama];
-    if(lama===baru) return;
-    if(daftarPIN[lama]){
-      if(!daftarPIN[baru]) daftarPIN[baru]=daftarPIN[lama];
-      delete daftarPIN[lama]; berubah=true;
-    }
-    if(jabatanAdmin[lama]){ if(!jabatanAdmin[baru]) jabatanAdmin[baru]=jabatanAdmin[lama]; delete jabatanAdmin[lama]; berubah=true; }
-    if(fotoGuru[lama]){ if(!fotoGuru[baru]) fotoGuru[baru]=fotoGuru[lama]; delete fotoGuru[lama]; berubah=true; }
-    if(adminLogin===lama) adminLogin=baru;
-  });
-  if(berubah){ try{ simpanPIN(); }catch(e){} }
-}
 function loadPIN(){
   let def = {"Wahyu Aji, S.Pd.Jas":"197601","Samsul Bahri, S.Pd.":"123456","Syahruni, S.Pd.SD":"123456","Norsalim, S.Pd.":"123456","Pathul Jannah, S.Pd.I":"123456","Hj. Siti Nuriyah, S.Pd.SD":"123456","Radinah, S.Pd.":"123456","Syahida Norpah, S.Pd.":"123456","Jannah, S.Pd.":"123456","M. Husain":"123456"};
   let defJab = {"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah & Guru PJOK","Samsul Bahri, S.Pd.":"Guru Kelas 6","Syahruni, S.Pd.SD":"Guru Kelas 5","Norsalim, S.Pd.":"Guru Kelas 4","Pathul Jannah, S.Pd.I":"Guru PAI dan Guru Kelas 3","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas 2","Radinah, S.Pd.":"Guru Kelas 1","Syahida Norpah, S.Pd.":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd.":"Pembimbing Tahsin & Tahfiz","M. Husain":"Operator Sekolah"};
   try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); let f=localStorage.getItem("foto_guru_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; fotoGuru=f?JSON.parse(f):{}; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; fotoGuru={}; }
-  pindahNamaLama();
-  URUTAN_GURU.forEach(n=>{ if(!daftarPIN[n]) daftarPIN[n]=def[n]; jabatanAdmin[n]=defJab[n]; });
-  Object.keys(daftarPIN).forEach(n=>{ if(URUTAN_GURU.indexOf(n)===-1){ delete daftarPIN[n]; delete jabatanAdmin[n]; delete fotoGuru[n]; } });
+  URUTAN_GURU.forEach(n=>{ if(!daftarPIN[n]) daftarPIN[n]=def[n]; if(!jabatanAdmin[n]) jabatanAdmin[n]=defJab[n]; });
   if(!daftarPIN[NAMA_KEPSEK]) daftarPIN[NAMA_KEPSEK]="197601";
-  try{ simpanPIN(); }catch(e){}
 }
-function simpanPIN(){ localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru)); }
+// === GALERI GURU FIREBASE - BARU ===
+async function simpanGuruKeFirebase(){
+  try{
+    let data={daftarPIN:daftarPIN,jabatan:jabatanAdmin,foto:fotoGuru,urutan:URUTAN_GURU,waktu:Date.now()};
+    let r=window._fb.doc(window._fb.db,"guru_kayakah","daftar");
+    await window._fb.setDoc(r,data);
+    let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Galeri Guru tersimpan di Firebase - muncul di semua HP";
+    // backup lokal juga
+    try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
+  }catch(e){ console.log("Gagal simpan guru ke Firebase",e); }
+}
+async function loadGuruDariFirebase(){
+  try{
+    let r=window._fb.doc(window._fb.db,"guru_kayakah","daftar");
+    let snap=await r.get();
+    if(snap.exists){
+      let d=snap.data();
+      if(d.daftarPIN) daftarPIN=d.daftarPIN;
+      if(d.jabatan) jabatanAdmin=d.jabatan;
+      if(d.foto) fotoGuru=d.foto;
+      if(d.urutan && d.urutan.length>0) URUTAN_GURU=d.urutan;
+      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
+      try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
+      return true;
+    }
+  }catch(e){ console.log("Firebase guru belum ada, pakai lokal",e); }
+  return false;
+}
+function simpanPIN(){ // sekarang simpan ke Firebase + lokal
+  try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
+  simpanGuruKeFirebase();
+}
 function urutanNama(){ let out=[]; URUTAN_GURU.forEach(n=>{ if(daftarPIN[n]) out.push(n); }); Object.keys(daftarPIN).forEach(n=>{ if(out.indexOf(n)===-1) out.push(n); }); return out; }
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; urutanNama().forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; kembaliBeranda(); }
-function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; if(!cekPIN6(pin)){ alert("PIN Anda masih "+pin.length+" digit! Silakan ganti jadi 6 angka di kotak Ganti PIN Saya di bawah Galeri Guru ya, "+nama+"!"); } else { alert("Selamat Datang, "+nama+"! ✅"); } document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; alert("Selamat Datang, "+nama+"! ✅"); document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
 function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar Dari Mode Admin 🔒"); }
 function updateTampilanAdmin(){
   if(adminLogin){
@@ -321,7 +312,7 @@ function gantiPINsendiri(){
   if(baru!==baru2){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru tidak sama! Ulangi lagi!"; return; }
   daftarPIN[adminLogin]=baru; simpanPIN();
   document.getElementById("pinLamaSaya").value=""; document.getElementById("pinBaruSaya").value=""; document.getElementById("pinBaruSaya2").value="";
-  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Ingat PIN baru Anda!";
+  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Tersimpan di Firebase!";
   alert("PIN Anda berhasil diganti! PIN baru: "+baru);
 }
 function renderGaleriGuru(){
@@ -340,8 +331,15 @@ function renderGaleriGuru(){
   wadah.innerHTML=html;
   let profil=document.getElementById("listGuruProfil"); if(profil){ let hp=""; names.forEach(nama=>{ hp+=`<div>${nama===NAMA_KEPSEK?"👨‍🏫 ":"👩‍🏫 "}<b>${nama}</b><br>${jabatanAdmin[nama]||""}</div>`; }); profil.innerHTML=hp; }
 }
-function gantiFotoBaru(input,nama){ if(!wajibAdmin()){input.value="";return;} let file=input.files[0]; if(!file) return; let reader=new FileReader(); reader.onload=function(e){ fotoGuru[nama]=e.target.result; simpanPIN(); renderGaleriGuru(); document.getElementById("pesanGaleri").innerHTML="✅ Foto "+nama+" berhasil diganti!"; }; reader.readAsDataURL(file); }
-function simpanGaleri(){ if(!wajibAdmin()) return; simpanPIN(); alert("Foto Berhasil Disimpan!"); }
+function gantiFotoBaru(input,nama){
+  if(!wajibAdmin()){input.value="";return;}
+  let file=input.files[0]; if(!file) return;
+  if(file.size>800000){ alert("Fotonya kebesaran, Pak! Pilih foto di bawah 800KB. Foto HP bisa dikecilkan dulu."); input.value=""; return; }
+  let reader=new FileReader();
+  reader.onload=function(e){ fotoGuru[nama]=e.target.result; simpanPIN(); renderGaleriGuru(); document.getElementById("pesanGaleri").innerHTML="✅ Foto "+nama+" berhasil diganti! Tersimpan di Firebase!"; };
+  reader.readAsDataURL(file);
+}
+function simpanGaleri(){ if(!wajibAdmin()) return; simpanPIN(); alert("Foto Berhasil Disimpan di Firebase! Muncul di semua HP!"); }
 function tampilTabelPIN(){
   let wadah=document.getElementById("tabelPIN"); if(!wadah) return;
   let html=`<table><tr><td><b>Nama</b></td><td><b>Jabatan</b></td><td><b>PIN (6 angka)</b></td><td><b>Aksi</b></td></tr>`;
@@ -351,10 +349,10 @@ function tampilTabelPIN(){
   });
   html+=`</table>`; wadah.innerHTML=html;
 }
-function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru); }
-function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus!"); }
-function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
-function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456!"); }
+function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru+" - Tersimpan di Firebase!"); }
+function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus dari Firebase!"); }
+function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin+" - Tersimpan di Firebase!"); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ if(fileInput.files[0].size>800000){alert("Fotonya kebesaran! Pilih di bawah 800KB.");return;} let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
+function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456! Tersimpan di Firebase!"); }
 function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru); }
 let filterAktif="SEMUA"; let dataKegiatan=[];
 function loadKegiatan(){ try{ dataKegiatan=JSON.parse(localStorage.getItem("kegiatan_kayakah")||"[]"); }catch(e){ dataKegiatan=[]; } if(dataKegiatan.length===0){ dataKegiatan=[{judul:"Upacara Bendera Senin",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin"},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin"},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin"},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin"},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin"},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin"}]; } tampilKegiatan(); }
@@ -364,101 +362,36 @@ function tambahKegiatan(){ if(!wajibAdmin()) return; let judul=document.getEleme
 function hapusKegiatan(i){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; dataKegiatan.splice(i,1); localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan)); tampilKegiatan(); }
 function hapusSemuaKegiatan(){ if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA?")) return; dataKegiatan=[]; localStorage.removeItem("kegiatan_kayakah"); loadKegiatan(); }
 let dataPengumuman=[];
-function getPengumumanBawaan(){
-  return [
-    {judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA",bawaan:true},
-    {judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA",bawaan:true},
-    {judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA",bawaan:true},
-    {judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA",bawaan:true},
-    {judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA",bawaan:true}
-  ];
-}
-function getPengumumanDihapus(){
-  try{ return JSON.parse(localStorage.getItem("pengumuman_dihapus_kayakah")||"[]"); }catch(e){ return []; }
-}
+function getPengumumanBawaan(){ return [{judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA",bawaan:true},{judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA",bawaan:true},{judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA",bawaan:true},{judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA",bawaan:true},{judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA",bawaan:true}]; }
+function getPengumumanDihapus(){ try{ return JSON.parse(localStorage.getItem("pengumuman_dihapus_kayakah")||"[]"); }catch(e){ return []; } }
 async function loadPengumuman(){
-  let bawaan = getPengumumanBawaan();
-  let dihapus = getPengumumanDihapus();
-  let dariFirebase=[];
-  try{
-    let r = window._fb.collection(window._fb.db,"pengumuman");
-    let s = await window._fb.getDocs(r);
-    dariFirebase = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;});
-    dariFirebase.sort((a,b)=>(b.waktu||0)-(a.waktu||0));
-  }catch(e){ dariFirebase=[]; }
-  let dariHP=[];
-  try{ dariHP = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dariHP=[]; }
-  let gabung=[...dariFirebase, ...dariHP, ...bawaan];
-  let sudahAda={};
-  dataPengumuman=[];
-  gabung.forEach(p=>{
-    let kunci=(p.judul||"")+"|"+(p.isi||"");
-    if(dihapus.indexOf(kunci)!==-1) return;
-    if(sudahAda[kunci]) return;
-    sudahAda[kunci]=true;
-    dataPengumuman.push(p);
-  });
+  let bawaan = getPengumumanBawaan(); let dihapus = getPengumumanDihapus(); let dariFirebase=[];
+  try{ let r = window._fb.collection(window._fb.db,"pengumuman"); let s = await window._fb.getDocs(r); dariFirebase = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;}); dariFirebase.sort((a,b)=>(b.waktu||0)-(a.waktu||0)); }catch(e){ dariFirebase=[]; }
+  let dariHP=[]; try{ dariHP = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dariHP=[]; }
+  let gabung=[...dariFirebase, ...dariHP, ...bawaan]; let sudahAda={}; dataPengumuman=[];
+  gabung.forEach(p=>{ let kunci=(p.judul||"")+"|"+(p.isi||""); if(dihapus.indexOf(kunci)!==-1) return; if(sudahAda[kunci]) return; sudahAda[kunci]=true; dataPengumuman.push(p); });
   renderPengumuman();
 }
 function renderPengumuman(){
-  let wadah=document.getElementById("listPengumuman"); if(!wadah) return;
-  let html="";
-  dataPengumuman.forEach((p,i)=>{
-    let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#FF5252;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : "";
-    html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`;
-  });
+  let wadah=document.getElementById("listPengumuman"); if(!wadah) return; let html="";
+  dataPengumuman.forEach((p,i)=>{ let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#FF5252;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : ""; html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`; });
   wadah.innerHTML = html || "<li>Belum ada pengumuman.</li>";
-  let marq=document.getElementById("marqueePengumuman");
-  if(marq){
-    if(dataPengumuman.length>0){
-      marq.innerHTML = dataPengumuman.map(p=>"🎉 "+(p.judul||"")+" : "+(p.isi||"")+" &nbsp;&nbsp; ").join("");
-    } else {
-      marq.innerHTML = "🎉 Selamat Datang di SDN Kayakah!";
-    }
-  }
+  let marq=document.getElementById("marqueePengumuman"); if(marq){ if(dataPengumuman.length>0){ marq.innerHTML = dataPengumuman.map(p=>"🎉 "+(p.judul||"")+" : "+(p.isi||"")+" &nbsp;&nbsp; ").join(""); } else { marq.innerHTML = "🎉 Selamat Datang di SDN Kayakah!"; } }
 }
 async function tambahPengumuman(){
-  if(!wajibAdmin()) return;
-  let j=document.getElementById("judulPengumuman").value.trim();
-  let isi=document.getElementById("isiPengumuman").value.trim();
-  if(!j||!isi){ alert("Isi Judul & Isi dulu, Pak!"); return; }
+  if(!wajibAdmin()) return; let j=document.getElementById("judulPengumuman").value.trim(); let isi=document.getElementById("isiPengumuman").value.trim(); if(!j||!isi){ alert("Isi Judul & Isi dulu, Pak!"); return; }
   let data={judul:j, isi:isi, waktu:Date.now(), oleh:adminLogin};
-  try{
-    let r=window._fb.collection(window._fb.db,"pengumuman");
-    await window._fb.addDoc(r,data);
-  }catch(e){}
-  dataPengumuman.unshift(data);
-  try{
-    let simpan = dataPengumuman.filter(p=>!p.bawaan);
-    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
-  }catch(e){}
-  document.getElementById("judulPengumuman").value="";
-  document.getElementById("isiPengumuman").value="";
-  document.getElementById("pesanPengumuman").innerHTML="✅ Pengumuman berhasil disimpan!";
-  renderPengumuman();
-  alert("Berhasil, Pak! Pengumuman sudah muncul di semua HP!");
+  try{ let r=window._fb.collection(window._fb.db,"pengumuman"); await window._fb.addDoc(r,data); }catch(e){}
+  dataPengumuman.unshift(data); try{ let simpan = dataPengumuman.filter(p=>!p.bawaan); localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan)); }catch(e){}
+  document.getElementById("judulPengumuman").value=""; document.getElementById("isiPengumuman").value=""; document.getElementById("pesanPengumuman").innerHTML="✅ Pengumuman berhasil disimpan!"; renderPengumuman(); alert("Berhasil, Pak! Pengumuman sudah muncul di semua HP!");
 }
 async function hapusPengumuman(i){
-  if(!wajibAdmin()) return;
-  if(!confirm("Hapus pengumuman ini?")) return;
-  let p=dataPengumuman[i];
-  try{
-    if(p._id){
-      let r=window._fb.doc(window._fb.db,"pengumuman",p._id);
-      await window._fb.deleteDoc(r);
-    }
-  }catch(e){}
-  let kunci=(p.judul||"")+"|"+(p.isi||"");
-  let dihapus=getPengumumanDihapus();
-  if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
-  dataPengumuman.splice(i,1);
-  try{
-    let simpan = dataPengumuman.filter(p=>!p.bawaan);
-    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
-  }catch(e){}
-  renderPengumuman();
+  if(!wajibAdmin()) return; if(!confirm("Hapus pengumuman ini?")) return; let p=dataPengumuman[i];
+  try{ if(p._id){ let r=window._fb.doc(window._fb.db,"pengumuman",p._id); await window._fb.deleteDoc(r); } }catch(e){}
+  let kunci=(p.judul||"")+"|"+(p.isi||""); let dihapus=getPengumumanDihapus(); if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
+  dataPengumuman.splice(i,1); try{ let simpan = dataPengumuman.filter(p=>!p.bawaan); localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan)); }catch(e){} renderPengumuman();
 }
-window.addEventListener("load",function(){ loadPIN(); loadPengumuman(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); renderGaleriGuru(); loadKegiatan(); });
+window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
 </script>
 </body>
 </html>
