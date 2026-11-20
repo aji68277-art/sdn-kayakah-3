@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitra Sekolah - SDN Kayakah</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
@@ -6,13 +13,6 @@ const db=firebase.firestore();
 window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
 window.dispatchEvent(new Event('firebase-ready'));
 </script>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mitra Sekolah - SDN Kayakah</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 body{font-family:'Baloo 2','Comic Sans MS',Arial,sans-serif;margin:0;color:#333;padding:14px;min-height:100vh;overflow-x:hidden;background:linear-gradient(180deg,#7FB3E8 0%,#9CC3ED 30%,#B9D6F2 60%,#D6E8F8 85%,#EAF3FC 100%);position:relative}
@@ -31,7 +31,6 @@ body{font-family:'Baloo 2','Comic Sans MS',Arial,sans-serif;margin:0;color:#333;
 .awan4{width:68px;top:28px;left:-90px;animation:jalanAwan 40s linear infinite;animation-delay:12s;transform:scale(.75)}
 .awan5{width:92px;top:125px;left:-120px;animation:jalanAwan 30s linear infinite;animation-delay:2s;transform:scale(.9)}
 @keyframes jalanAwan{from{left:-160px}to{left:105%}}
-/* BURUNG ADA SAYAP - KEPAK-KEPAK */
 .burung{position:absolute;z-index:4;display:flex;align-items:center;gap:1px;animation:terbang 15s linear infinite}
 .burung .sayap-kiri,.burung .sayap-kanan{display:inline-block;font-size:26px;animation:kepak .5s ease-in-out infinite alternate;transform-origin:bottom center}
 .burung .sayap-kanan{transform:scaleX(-1)}
@@ -51,7 +50,6 @@ body{font-family:'Baloo 2','Comic Sans MS',Arial,sans-serif;margin:0;color:#333;
 .balon2{bottom:-10px;left:60%;animation-delay:3s;font-size:26px}
 .balon3{bottom:-10px;left:44%;animation-delay:5s;font-size:24px}
 @keyframes balonNaik{0%{bottom:-10px;transform:translateX(0) rotate(-4deg);opacity:0}15%{opacity:1}50%{transform:translateX(10px) rotate(4deg)}100%{bottom:115%;transform:translateX(-8px) rotate(-3deg);opacity:0}}
-/* JUDUL BACKGROUND PELANGI */
 .judul-langit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:6;width:94%}
 .judul-langit h1{margin:0;font-family:'Fredoka',sans-serif;font-size:32px;color:white;line-height:1.15;background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);padding:10px 16px;border-radius:20px;display:inline-block;box-shadow:0 4px 10px rgba(0,0,0,.25);text-shadow:0 2px 4px rgba(0,0,0,.3);border:3px solid white}
 .judul-langit p{margin:8px 0 0;background:white;color:#1565C0;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:800;font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,.18)}
@@ -94,10 +92,9 @@ body.admin .hanya-admin{display:block}
 </style>
 </head>
 <body>
-  <a href="index.html" style="display:inline-block;font-size:12px;padding:5px 10px;background:white;border:1px solid #ccc;border-radius:20px;text-decoration:none;color:#333;">← Kembali ke Beranda</a>
+<a href="index.html" style="display:inline-block;font-size:12px;padding:5px 10px;background:white;border:1px solid #ccc;border-radius:20px;text-decoration:none;color:#333;">← Kembali ke Beranda</a>
 <div class="wrap">
 <div class="top-bar"><span id="adminStatus">👀 Mode Pengunjung - Hanya Melihat</span><button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Kepsek / Staf</button><button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button></div>
-
 <div class="langit">
 <div class="matahari">☀️</div>
 <div class="pelangi">🌈</div>
@@ -117,7 +114,6 @@ body.admin .hanya-admin{display:block}
 <div class="balon balon3">🎈</div>
 <div class="judul-langit"><h1>🤝📸 Mitra Sekolah 📸🤝</h1><br><p>✨ SDN Kayakah 2 - Meriah, Ceria! ✨</p></div>
 </div>
-
 <div class="card" id="mitra">
 <div class="banner-kartun">🏫🏡👮‍♂️🪖🩺🌈☁️🐦</div>
 <div class="nama-atas">Wahyu Aji, S.Pd.Jas</div>
@@ -125,7 +121,6 @@ body.admin .hanya-admin{display:block}
 <div class="hanya-admin info-admin">✅ Mode Kepsek / Staf Aktif - Pian Bisa Tambah & Hapus Foto Mitra!</div>
 <div id="mitraJalan" style="text-align:center;font-weight:800;margin-bottom:12px;color:#1565C0"></div>
 <div id="listMitra"></div>
-
 <div class="tambah-box hanya-admin">
 <h3 style="margin:0;color:#1565C0">➕ TAMBAH FOTO MITRA - KHUSUS KEPSEK & STAF</h3>
 <p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiFormMitra">-</b></p>
@@ -140,26 +135,15 @@ body.admin .hanya-admin{display:block}
 </div>
 <p style="text-align:center;font-size:12px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)">Ini file Mitra saja, untuk dicek dulu sebelum digabung ke web besar lewat GitHub.</p>
 </div>
-
-<div class="modal" id="modalLogin"><div class="modal-box"><div style="font-size:60px">👩‍🏫👨‍🏫🏫</div><h2>🔐 Login Kepsek / Staf</h2><p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p><label><b>Pilih Nama Anda:</b></label><select id="loginNama"></select><label><b>Masukkan PIN:</b></label><input type="password" id="loginPIN" placeholder="Masukkan PIN Anda" inputmode="numeric"><p id="loginError" style="color:#D32F2F;font-weight:800"></p><button style="background:#5B9BD5;color:white" onclick="cekLogin()">✅ MASUK</button><button style="background:#BDBDBD" onclick="tutupLogin()">❌ Batal</button><p style="font-size:12px;color:#888">PIN hanya diketahui Kepala Sekolah, Guru & Staf. Pengunjung hanya bisa melihat.</p></div></div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-const firebaseConfig = { apiKey: "AIzaSyARTLGupKOPl1IYtborh8tMhWtY2Hhf0FU", authDomain: "sdn-kayakah-2.firebaseapp.com", projectId: "sdn-kayakah-2", storageBucket: "sdn-kayakah-2.firebasestorage.app", messagingSenderId: "285223036478", appId: "1:285223036478:web:5929f766f2c5f2960bd36f" };
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window._fb = { db, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs };
-window.dispatchEvent(new Event('firebase-ready'));
-</script>
+<div class="modal" id="modalLogin"><div class="modal-box"><div style="font-size:60px">👩‍🏫👨‍🏫🏫</div><h2>🔐 Login Kepsek / Staf</h2><p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p><label><b>Pilih Nama Anda:</b></label><select id="loginNama"></select><label><b>Masukkan PIN:</b></label><input type="password" id="loginPIN" placeholder="Masukkan PIN Anda" inputmode="numeric" maxlength="6"><p id="loginError" style="color:#D32F2F;font-weight:800"></p><button style="background:#5B9BD5;color:white" onclick="cekLogin()">✅ MASUK</button><button style="background:#BDBDBD" onclick="tutupLogin()">❌ Batal</button><p style="font-size:12px;color:#888">PIN hanya diketahui Kepala Sekolah, Guru & Staf. Pengunjung hanya bisa melihat.</p></div></div>
 <script>
-let adminLogin=null; let NAMA_KEPSEK="Wahyu Aji, S.Pd.Jas"; let daftarPIN={}; let jabatanAdmin={};
-function loadPIN(){ let def={"Wahyu Aji, S.Pd.Jas":"1976","Samsul Bahri, S.Pd":"1234","Syahruni, S.Pd.SD":"1234","Norsalim, S.Pd":"1234","Hj. Siti Nuriyah, S.Pd.SD":"1234","Radinah, S.Pd":"1234","Pathuljannah, S.Pd.I":"1234","Husain":"1234","Syahida Norpah":"1234","Jannah":"1234"}; let defJab={"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah / Guru PJOK","Samsul Bahri, S.Pd":"Guru Kelas","Syahruni, S.Pd.SD":"Guru Kelas","Norsalim, S.Pd":"Guru Kelas","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas","Radinah, S.Pd":"Guru Kelas","Pathuljannah, S.Pd.I":"Guru PAI","Husain":"Operator Sekolah","Syahida Norpah":"Pembimbing Tahsin & Tahfiz","Jannah":"Pembimbing Tahsin & Tahfiz"}; try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; } window.addEventListener('firebase-ready', mulaiDengarGuru, {once:true}); if(window._fb) mulaiDengarGuru(); }
-function mulaiDengarGuru(){ if(!window._fb) return; let fb=window._fb; fb.onSnapshot(fb.collection(fb.db,'guru'), (snap)=>{ if(snap.empty) return; let pinBaru={}, jabBaru={}; snap.docs.forEach(d=>{ let g=d.data(); if(!g.nama) return; pinBaru[g.nama]=g.pin; jabBaru[g.nama]=g.jabatan; }); if(Object.keys(pinBaru).length>0){ daftarPIN=pinBaru; jabatanAdmin=jabBaru; } isiDropdownLogin(); }); }
+let adminLogin=null; let NAMA_KEPSEK="Wahyu Aji, S.Pd.Jas";
+let daftarPIN={"Wahyu Aji, S.Pd.Jas":"197601","Samsul Bahri, S.Pd":"123456","Syahruni, S.Pd.SD":"123456","Norsalim, S.Pd":"123456","Hj. Siti Nuriyah, S.Pd.SD":"123456","Radinah, S.Pd":"123456","Pathuljannah, S.Pd.I":"123456","M. Husain":"123456","Syahida Norpah, S.Pd":"123456","Jannah, S.Pd":"123456"};
+let jabatanAdmin={"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah / Guru PJOK","Samsul Bahri, S.Pd":"Guru Kelas","Syahruni, S.Pd.SD":"Guru Kelas","Norsalim, S.Pd":"Guru Kelas","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas","Radinah, S.Pd":"Guru Kelas","Pathuljannah, S.Pd.I":"Guru PAI","M. Husain":"Operator Sekolah","Syahida Norpah, S.Pd":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd":"Pembimbing Tahsin & Tahfiz"};
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; Object.keys(daftarPIN).forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama; sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; }
-function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); tutupLogin(); alert("Selamat Datang, "+nama+"! ✅"); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! Hanya Kepsek & Staf!"; } }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(!/^[0-9]{6}$/.test(pin)){ document.getElementById("loginError").innerHTML="❌ PIN harus 6 angka!"; return; } if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); tutupLogin(); alert("Selamat Datang, "+nama+"! ✅"); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! Hanya Kepsek & Staf!"; } }
 function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar 🔒"); }
 function updateTampilanAdmin(){ if(adminLogin){ document.body.classList.add("admin"); document.getElementById("adminStatus").innerHTML="✅ Login Sebagai Kepsek / Staf: <b>"+adminLogin+"</b>"; document.getElementById("btnLoginTop").style.display="none"; document.getElementById("btnLogoutTop").style.display="inline-block"; document.getElementById("namaAdminDiFormMitra").innerHTML=adminLogin; } else { document.body.classList.remove("admin"); document.getElementById("adminStatus").innerHTML="👀 Mode Pengunjung - Hanya Melihat"; document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none"; } tampilMitra(); }
 function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Kepsek & Staf yang bisa! Pengunjung hanya bisa melihat. Klik 🔐 Login Kepsek / Staf!"); bukaLogin(); return false; } return true; }
@@ -171,7 +155,11 @@ let daftarFolderMitra=[
 { nama:"Polsek dan Koramil Amuntai Selatan", emoji:"👮‍♂️🪖", warna:"#FFCC80", ket:"Kegiatan bersama Polsek dan Koramil" },
 { nama:"Puskesmas Amuntai Selatan", emoji:"🩺", warna:"#F8BBD0", ket:"Kegiatan bersama Puskesmas" }
 ];
-function mulaiDengarMitra(){ if(!window._fb){ window.addEventListener('firebase-ready', mulaiDengarMitra, {once:true}); return; } let fb=window._fb; fb.onSnapshot(fb.query(fb.collection(fb.db,'mitra'), fb.orderBy('waktu','desc')), (snap)=>{ let arr=snap.docs.map(d=>({id:d.id, ...d.data()})); dataMitra=arr; tampilMitra(); }); }
+function mulaiDengarMitra(){
+  if(!window._fb){ setTimeout(mulaiDengarMitra,500); return; }
+  let fb=window._fb;
+  try{ fb.collection(fb.db,'mitra').orderBy('waktu','desc').onSnapshot(function(snap){ let arr=snap.docs.map(function(d){ let x=d.data(); x.id=d.id; return x; }); dataMitra=arr; tampilMitra(); }); }catch(e){}
+}
 function hitungFotoMitra(nama){ return dataMitra.filter(x=>x.mitra===nama).length; }
 function kembaliKeBeranda(){ mitraFolderAktif=null; tampilMitra(); window.scrollTo({top:0,behavior:"smooth"}); }
 function tampilMitra(){
@@ -208,7 +196,7 @@ function bukaFolderMitra(nama){ mitraFolderAktif=nama; tampilMitra(); document.g
 function kembaliKeFolderMitra(){ mitraFolderAktif=null; tampilMitra(); document.getElementById("mitra").scrollIntoView({behavior:"smooth"}); }
 function tambahMitra(){ if(!wajibAdmin()) return; let mitra=document.getElementById("mitraPilih").value; let acara=document.getElementById("mitraAcara").value.trim(); let kapan=document.getElementById("mitraKapan").value; let tempat=document.getElementById("mitraTempat").value.trim(); let fileInput=document.getElementById("fileMitra"); if(!acara||!kapan||!tempat){alert("Isi Acara, Kapan, Tempat dulu, Pak!");return;} if(!fileInput.files[0]){alert("Pilih fotonya dulu!");return;} document.getElementById("pesanMitra").innerHTML="⏳ Sedang upload..."; kecilkanFoto(fileInput.files[0], async function(dataUrl){ let item={mitra:mitra,acara:acara,kapan:kapan,tempat:tempat,kegiatan:acara,lokasi:tempat,foto:dataUrl,oleh:adminLogin,dibagikan:adminLogin,waktu:Date.now()}; try{ if(window._fb){ await window._fb.addDoc(window._fb.collection(window._fb.db,'mitra'), item); } else { dataMitra.unshift(item); } }catch(e){ dataMitra.unshift(item); } document.getElementById("mitraAcara").value=""; document.getElementById("mitraKapan").value=""; document.getElementById("mitraTempat").value=""; fileInput.value=""; document.getElementById("pesanMitra").innerHTML="✅ Foto Berhasil Ditambah ke folder "+mitra+"!"; mitraFolderAktif=mitra; tampilMitra(); }); }
 async function hapusMitra(id){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'mitra',id)); return; } }catch(e){} let idx=dataMitra.findIndex((k,i)=> (k.id||i)==id); if(idx>=0){ dataMitra.splice(idx,1); tampilMitra(); } }
-loadPIN(); mulaiDengarMitra(); tampilMitra();
+mulaiDengarMitra(); tampilMitra();
 try{ let saved=localStorage.getItem("admin_kayakah"); if(saved && daftarPIN[saved]) adminLogin=saved; }catch(e){}
 setTimeout(()=>{ updateTampilanAdmin(); },500);
 </script>
