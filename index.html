@@ -117,7 +117,6 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <header id="beranda">
 <div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
 <div class="bintang-terbang">⭐ ✨ 🌟 ✨ ⭐ 🌟 ✨ ⭐</div>
-<!-- TANPA LOGO -->
 <div class="kartun-besar">👧🏫👦 📚 🎨</div>
 <h1>🌈 SDN KAYAKAH 🌈</h1>
 <p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br>
@@ -246,7 +245,7 @@ function loadPIN(){
   let defJab = {"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah & Guru PJOK","Samsul Bahri, S.Pd.":"Guru Kelas 6","Syahruni, S.Pd.SD":"Guru Kelas 5","Norsalim, S.Pd.":"Guru Kelas 4","Pathul Jannah, S.Pd.I":"Guru PAI dan Guru Kelas 3","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas 2","Radinah, S.Pd.":"Guru Kelas 1","Syahida Norpah, S.Pd.":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd.":"Pembimbing Tahsin & Tahfiz","M. Husain":"Operator Sekolah"};
   try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); let f=localStorage.getItem("foto_guru_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; fotoGuru=f?JSON.parse(f):{}; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; fotoGuru={}; }
   URUTAN_GURU.forEach(n=>{ if(!daftarPIN[n]) daftarPIN[n]=def[n]; if(!jabatanAdmin[n]) jabatanAdmin[n]=defJab[n]; });
-  daftarPIN[NAMA_KEPSEK]="197601";
+  if(!daftarPIN[NAMA_KEPSEK]) daftarPIN[NAMA_KEPSEK]="197601";
 }
 async function simpanGuruKeFirebase(){
   try{
@@ -267,10 +266,7 @@ async function loadGuruDariFirebase(){
       if(d.jabatan) jabatanAdmin=d.jabatan;
       if(d.foto) fotoGuru=d.foto;
       if(d.urutan && d.urutan.length>0) URUTAN_GURU=d.urutan;
-      // RESET DARURAT - PIN KEPSEK BALIK JADI 197601
-      daftarPIN[NAMA_KEPSEK]="197601";
-      await simpanGuruKeFirebase();
-      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ PIN Kepsek sudah di-reset jadi 197601 - Silakan Login";
+      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
       try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
       return true;
     }
