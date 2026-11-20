@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDN Kayakah</title>
+<style>body{margin:0;font-family:Arial;background:#f0f2f5}.top{background:linear-gradient(90deg,#ff5e00,#ffcc00,#00c853,#2979ff,#9c27b0);padding:14px;text-align:center;color:#fff}.top h1{margin:0}.top p{background:#fff;color:#d81b60;display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}.nav{background:#fff;display:flex;gap:6px;overflow-x:auto;padding:8px;white-space:nowrap}.nav a{background:#f0f2f5;padding:8px 12px;border-radius:20px;text-decoration:none;color:#000;font-weight:bold;font-size:13px}.wrap{max-width:620px;margin:10px auto;padding:0 10px}.card{background:#fff;border-radius:12px;padding:12px;margin-bottom:12px}input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:12px;margin-top:6px}button{background:#1877f2;color:#fff;border:0;padding:10px;border-radius:20px;font-weight:bold;width:100%;margin-top:8px;cursor:pointer}.aksi{display:flex;gap:8px;margin-top:8px}.aksi button{background:#f0f2f5;color:#000}.komen{background:#f0f2f5;padding:8px;border-radius:12px;margin-top:6px;font-size:14px}</style></head>
+<body>
+<div class="top"><h1>🌈 SDN KAYAKAH 🌈</h1><p>Desa Kayakah - Amuntai Selatan - NPSN 30302788</p></div>
+<div class="nav">
+<a href="index.html">Beranda</a><a href="ppdb.html">PPDB</a><a href="saran.html">Kritik & Saran</a><a href="bukutamu.html">Buku Tamu</a><a href="agama-islam.html">Agama Islam</a><a href="asmaul-husna.html">Asmaul Husna</a><a href="sdn-kayakah-belajar.html">Kayakah Belajar</a><a href="game.html">Kuis Seru</a><a href="mitra-sdn-kayakah.html">Mitra</a>
+</div>
+<div class="wrap">
+<div class="card"><b>Posting seperti di FB</b><br><small>Semua bisa posting, like, komentar</small>
+<input id="nama" placeholder="Nama Anda"><select id="kat"><option>Beranda</option><option>PPDB</option><option>Profil</option><option>Guru</option><option>Galeri Kegiatan</option><option>Kuis Seru</option><option>Kritik & Saran</option><option>Buku Tamu</option></select>
+<textarea id="isi" rows="3" placeholder="Apa yang ingin dibagikan?"></textarea>
+<input id="foto" placeholder="Link foto (boleh kosong)">
+<button onclick="kirim()">Posting Sekarang</button></div>
+<div id="feed"></div>
+</div>
+<script>
+function get(){try{let d=JSON.parse(localStorage.getItem('kayakah_fb'));return d&&d.length?d:[{nama:"SDN Kayakah",kat:"Beranda",isi:"Selamat datang di SDN Kayakah! Sekolah Ceria, Anak Hebat. Silakan Like dan Komentar seperti di FB.",suka:12,komen:[{nama:"Orang Tua",isi:"Semangat SDN Kayakah!"}]}]}catch(e){return[]}}
+function simpan(d){localStorage.setItem('kayakah_fb',JSON.stringify(d))}
+function kirim(){let n=document.getElementById('nama').value||"Hamba Allah";let k=document.getElementById('kat').value;let i=document.getElementById('isi').value;if(!i){alert("Tulis dulu");return}let d=get();d.unshift({nama:n,kat:k,isi:i,suka:0,komen:[]});simpan(d);document.getElementById('isi').value="";tampil()}
+function tampil(){let d=get();let f=document.getElementById('feed');f.innerHTML="";d.forEach((p,idx)=>{let div=document.createElement('div');div.className='card';div.innerHTML='<b>'+p.nama+'</b> • '+p.kat+'<p>'+p.isi+'</p><div>❤️ '+p.suka+' Suka • 💬 '+p.komen.length+' Komentar</div><div class="aksi"><button onclick="suka('+idx+')">👍 Suka</button><button onclick="document.getElementById(\'c'+idx+'\').focus()">💬 Komentar</button></div><div>'+p.komen.map(c=>'<div class="komen"><b>'+c.nama+'</b><br>'+c.isi+'</div>').join('')+'</div><input id="c'+idx+'" placeholder="Tulis komentar..."><button onclick="komen('+idx+')">Kirim Komentar</button>';f.appendChild(div)})}
+function suka(i){let d=get();d[i].suka++;simpan(d);tampil()}
+function komen(i){let v=document.getElementById('c'+i).value;if(!v)return;let d=get();d[i].komen.push({nama:"Pengunjung",isi:v});simpan(d);tampil()}
+tampil();
+</script></body></html>
