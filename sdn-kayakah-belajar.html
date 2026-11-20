@@ -118,12 +118,10 @@ MATERI_DATA["Kelas 1|Matematika"]=[{judul:"Materi 1: Mengenal Angka 1-10",isi:"1
 MATERI_DATA["Kelas 1|Tahsin"]=[{judul:"Materi 1: Huruf Hijaiyah Alif - Ya",isi:"Anak mengenal huruf Hijaiyah Alif sampai Ya.",video:"https://www.youtube.com/results?search_query=belajar+huruf+hijaiyah+anak",latihan:"Sebutkan Alif, Ba, Ta."},{judul:"Materi 2: Makhraj Huruf",isi:"Ha dari tenggorokan, Ba dari bibir.",video:"",latihan:"Tirukan Ha, Kha, Ba."}];
 MATERI_DATA["Kelas 1|Tahfiz"]=[{judul:"Hafalan 1: Al-Fatihah",isi:"Anak menghafal Al-Fatihah ayat 1-7.",video:"https://www.youtube.com/results?search_query=hafalan+surat+al-fatihah+anak",latihan:"Setoran: Baca Al-Fatihah."},{judul:"Hafalan 2: An-Nas",isi:"Anak menghafal An-Nas ayat 1-6.",video:"",latihan:"Setoran: Baca An-Nas."}];
 MATERI_DATA["Kelas 1|Pramuka"]=[{judul:"Materi 1: Pramuka Siaga",isi:"Praja Muda Karana. Pembina: Wahyu Aji & M. Husain.",video:"https://www.youtube.com/results?search_query=pramuka+siaga+anak+SD",latihan:"Praktek Salam Pramuka."},{judul:"Materi 2: Baris-Berbaris",isi:"Sikap sempurna, hormat, berbaris rapi.",video:"",latihan:"Baris rapi!"}];
-// === PIN SAMAKAN DENGAN FILE LAIN - 6 ANGKA ===
 var PIN_DEFAULT={kepsek:"197601", admin:"123456", guru:{"Radinah, S.Pd":"123456","Siti Nuriyah, S.Pd.SD":"123456","Pathul Jannah, S.Pd.I":"123456","Norsalim, S.Pd":"123456","Syahruni, S.Pd.SD":"123456","Samsul Bahri, S.Pd":"123456","Syahida Norpah, S.Pd":"123456","Jannah, S.Pd":"123456","M. Husain":"123456"}};
 var PIN_DATA=JSON.parse(JSON.stringify(PIN_DEFAULT));
 function simpanPIN(){try{localStorage.setItem('PIN_KAYAKAH',JSON.stringify(PIN_DATA));}catch(e){}}
 try{var sp=localStorage.getItem('PIN_KAYAKAH'); if(sp){var pp=JSON.parse(sp); if(pp.kepsek) PIN_DATA.kepsek=pp.kepsek; if(pp.admin) PIN_DATA.admin=pp.admin; if(pp.guru) for(var k in pp.guru) PIN_DATA.guru[k]=pp.guru[k];}}catch(e){}
-// === MATERI PINDAH KE FIREBASE - BIAR TERLIHAT DI SEMUA HP ===
 var materiSudahDimuat=false;
 function idDokumen(kelas,mapel){ return (kelas+"_"+mapel).replace(/[^a-zA-Z0-9]/g,'_'); }
 function simpanMateriKeFirebase(kelas,mapel){
@@ -151,10 +149,6 @@ function muatMateriDariFirebase(){
       });
       if(adaBaru){
         try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}
-        var pop=document.getElementById('popupMapel');
-        if(pop && pop.style.display==='block'){
-          // biar popup ikut update kalau ada materi baru dari HP lain
-        }
       }
       materiSudahDimuat=true;
       var st=document.getElementById('statusSync'); if(st) st.innerHTML='✅ Terhubung ke Firebase - Materi terlihat di semua HP';
@@ -163,7 +157,6 @@ function muatMateriDariFirebase(){
     });
   }catch(e){}
 }
-// load lokal dulu biar cepat, nanti ditimpa Firebase
 try{var s5=localStorage.getItem('MATERI_KAYAKAH_FINAL'); if(s5){var md=JSON.parse(s5); for(var mk in md) MATERI_DATA[mk]=md[mk];}}catch(e){}
 var loginSaatIni=null;
 function toggleLaci(){document.getElementById('laciPIN').classList.toggle('buka');}
