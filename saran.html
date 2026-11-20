@@ -1,17 +1,17 @@
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script>
-firebase.initializeApp({apiKey:"AIzaSyCSMvh7xlAKMQbWf-YbNjMVyTAnHOUMkM0",authDomain:"sdn-kayakah-3.firebaseapp.com",projectId:"sdn-kayakah-3",storageBucket:"sdn-kayakah-3.firebasestorage.app",messagingSenderId:"615927561449",appId:"1:615927561449:web:3570adc875d4a7987b4478"});
-const db=firebase.firestore();
-window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
-window.dispatchEvent(new Event('firebase-ready'));
-</script>
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDN Kayakah - Kritik & Saran</title>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({apiKey:"AIzaSyCSMvh7xlAKMQbWf-YbNjMVyTAnHOUMkM0",authDomain:"sdn-kayakah-3.firebaseapp.com",projectId:"sdn-kayakah-3",storageBucket:"sdn-kayakah-3.firebasestorage.app",messagingSenderId:"615927561449",appId:"1:615927561449:web:3570adc875d4a7987b4478"});
+const db=firebase.firestore();
+window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()},setDoc:async function(r,d){return await r.set(d)},onSnapshot:function(r,cb){return r.onSnapshot(function(s){cb({docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})})},query:function(c,o){return c.orderBy(o)},orderBy:function(f,d){return {field:f,dir:d}}}};
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
 <style>
 *{box-sizing:border-box}
 body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#FFF9C4;color:#333}
@@ -53,7 +53,7 @@ footer a{color:#BDBDBD;font-size:11px;text-decoration:none}
 </head>
 <body>
 <div class="modal" id="modalLogin"><div class="modal-box"><div style="font-size:60px">👩‍🏫👨‍🏫🏫</div><h2 style="margin:8px 0 0;color:#E65100">🔐 Login Admin - Hapus & Kelola PIN</h2><p style="font-size:13px;color:#666">Hanya untuk hapus saran yang tidak pantas & ganti PIN - PIN 6 Angka</p><label style="font-weight:bold">Pilih Nama Anda:</label><select id="loginNama"></select><label style="font-weight:bold">Masukkan PIN (6 Angka):</label><input type="password" id="loginPIN" placeholder="Contoh: 123456" inputmode="numeric" maxlength="6"><p id="loginError" style="color:#D32F2F;font-weight:bold;min-height:20px"></p><button style="background:#4CAF50;color:white" onclick="cekLogin()">✅ MASUK SEBAGAI ADMIN</button><button style="background:#BDBDBD" onclick="tutupLogin()">❌ Batal</button></div></div>
-<header><div style="font-size:38px">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div><div style="font-size:60px">👧🏫👦 📚 🎨</div><h1>🌈 SDN KAYAKAH 🌈</h1><p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br><a href="../index.html">🏠 ← Kembali ke Beranda Kayakah 3</a></header>
+<header><div style="font-size:38px">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div><div style="font-size:60px">👧🏫👦 📚 🎨</div><h1>🌈 SDN KAYAKAH 🌈</h1><p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br><a href="index.html">🏠 ← Kembali ke Beranda</a></header>
 <div class="wrap">
 <div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
 <h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA PIN 👑</h3>
@@ -97,19 +97,10 @@ footer a{color:#BDBDBD;font-size:11px;text-decoration:none}
 <br>
 <h3 style="color:#1565C0">📋 Semua Kritik & Saran Yang Masuk (<span id="jmlSaran">0</span>)</h3>
 <div class="hanya-admin" style="background:#FFF3E0;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin: Pian Bisa Hapus Saran Yang Tidak Pantas!</div>
-<div id="listSaran"></div>
+<div id="listSaran"><p style="text-align:center">Memuat saran dari Firebase...</p></div>
 </div>
 </div>
 <footer><div style="font-size:36px">🏫 🌈 📚 🎨 ⚽ 🎤 🥁 💻 🌱</div>© 2026 SDN Kayakah - Amuntai Selatan 🌈<br>Belajar Ceria, Berkarakter, Berprestasi!<br><br><a href="#" onclick="bukaLogin();return false;">Admin</a></footer>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-const firebaseConfig = { apiKey: "AIzaSyARTLGupKOPl1IYtborh8tMhWtY2Hhf0FU", authDomain: "sdn-kayakah-2.firebaseapp.com", projectId: "sdn-kayakah-2", storageBucket: "sdn-kayakah-2.firebasestorage.app", messagingSenderId: "285223036478", appId: "1:285223036478:web:5929f766f2c5f2960bd36f" };
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window._fb = { db, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, getDocs };
-window.dispatchEvent(new Event('firebase-ready'));
-</script>
 <script>
 let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
@@ -118,7 +109,7 @@ let myIdSaran = localStorage.getItem('my_id_saran_kayakah3');
 if(!myIdSaran){ myIdSaran = 'hp_' + Date.now() + '_' + Math.random().toString(36).slice(2,8); localStorage.setItem('my_id_saran_kayakah3', myIdSaran); }
 function perbaikiPIN(pin, nama){
   pin = String(pin||"").trim();
-  if(nama===NAMA_KEPSEK){ if(pin==="1976"||pin==="197619") return "197619"; if(/^[0-9]{6}$/.test(pin)) return pin; return "197619"; }
+  if(nama===NAMA_KEPSEK){ if(/^[0-9]{6}$/.test(pin)) return pin; return "197601"; }
   if(pin==="1234") return "123456";
   if(/^[0-9]{4}$/.test(pin)) return pin+"56";
   if(/^[0-9]{6}$/.test(pin)) return pin;
@@ -126,7 +117,7 @@ function perbaikiPIN(pin, nama){
 }
 function loadPIN(){
   let def = {
-    "Wahyu Aji, S.Pd.Jas":"197619",
+    "Wahyu Aji, S.Pd.Jas":"197601",
     "Samsul Bahri, S.Pd":"123456",
     "Syahruni, S.Pd.SD":"123456",
     "Norsalim, S.Pd":"123456",
@@ -155,7 +146,6 @@ function loadPIN(){
     let j=localStorage.getItem("jabatan_kayakah");
     let pinLama = s?JSON.parse(s):{};
     let jabLama = j?JSON.parse(j):{};
-    ["Husain","Syahida Norpah","Jannah","Pathul Jannah, S.Pd.I","Pathul Jannah, S.Pd","Husain, S.Pd","jannah, S.Pd"].forEach(n=>{ delete pinLama[n]; delete jabLama[n]; });
     Object.keys(pinLama).forEach(n=>{
       if(def[n]){
         if(/^[0-9]{6}$/.test(String(pinLama[n])) && pinLama[n]!=="123456" && pinLama[n]!=="1234"){ daftarPIN[n]=pinLama[n]; }
@@ -166,30 +156,28 @@ function loadPIN(){
     localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN));
     localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin));
   }catch(e){ daftarPIN=def; jabatanAdmin=defJab; }
-  window.addEventListener('firebase-ready', mulaiDengarGuru, {once:true});
-  if(window._fb) mulaiDengarGuru();
+  mulaiDengarGuru();
 }
 function mulaiDengarGuru(){
   if(!window._fb) return;
   let fb=window._fb;
-  fb.onSnapshot(fb.collection(fb.db,'guru'), (snap)=>{
-    if(snap.empty){ simpanPIN(); return; }
-    let pinBaru={}, jabBaru={};
-    snap.docs.forEach(d=>{ let g=d.data(); if(!g.nama) return; if(g.pin) pinBaru[g.nama]=g.pin; if(g.jabatan) jabBaru[g.nama]=g.jabatan; });
-    let defNama = Object.keys(daftarPIN);
-    let adaYang4Digit = false;
-    Object.keys(pinBaru).forEach(n=>{
-      if(defNama.includes(n)){
-        if(String(pinBaru[n]).length!==6) adaYang4Digit = true;
-        if(String(pinBaru[n])!=="1234" && /^[0-9]{6}$/.test(String(pinBaru[n]))){ daftarPIN[n]=perbaikiPIN(pinBaru[n], n); }
-        if(jabBaru[n]) jabatanAdmin[n]=jabBaru[n];
-      }
+  try{
+    let r=fb.collection(fb.db,'guru');
+    r.onSnapshot(function(snap){
+      if(!snap.docs || snap.docs.length===0){ return; }
+      let pinBaru={}, jabBaru={};
+      snap.docs.forEach(d=>{ let g=d.data(); if(!g.nama) return; if(g.pin) pinBaru[g.nama]=g.pin; if(g.jabatan) jabBaru[g.nama]=g.jabatan; });
+      Object.keys(pinBaru).forEach(n=>{
+        if(daftarPIN[n]){
+          if(String(pinBaru[n])!=="1234" && /^[0-9]{6}$/.test(String(pinBaru[n]))){ daftarPIN[n]=perbaikiPIN(pinBaru[n], n); }
+          if(jabBaru[n]) jabatanAdmin[n]=jabBaru[n];
+        }
+      });
+      Object.keys(daftarPIN).forEach(n=>{ daftarPIN[n]=perbaikiPIN(daftarPIN[n], n); });
+      try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin));}catch(e){}
+      isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN();
     });
-    Object.keys(daftarPIN).forEach(n=>{ daftarPIN[n]=perbaikiPIN(daftarPIN[n], n); });
-    try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin));}catch(e){}
-    isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN();
-    if(adaYang4Digit && adminLogin===NAMA_KEPSEK){ simpanPIN(); }
-  });
+  }catch(e){}
 }
 async function simpanPIN(){
   try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin));}catch(e){}
@@ -205,23 +193,20 @@ async function simpanPIN(){
       if(sudahAda[nama]) await fb.updateDoc(fb.doc(fb.db,'guru',sudahAda[nama]), data);
       else await fb.addDoc(fb.collection(fb.db,'guru'), data);
     }
-    for(let nama of Object.keys(sudahAda)){
-      if(!daftarPIN[nama]){ try{ await fb.deleteDoc(fb.doc(fb.db,'guru',sudahAda[nama])); }catch(e){} }
-    }
   }catch(e){}
 }
 async function perbaikiSemuaPIN(){
   if(adminLogin!==NAMA_KEPSEK){ alert("Hanya Kepsek!"); return; }
-  if(!confirm("Perbaiki semua PIN jadi 6 digit? Yang 1234 jadi 123456. Kepsek tetap 197619.")) return;
+  if(!confirm("Perbaiki semua PIN jadi 6 digit? Kepsek tetap 197601.")) return;
   Object.keys(daftarPIN).forEach(n=>{ daftarPIN[n]=perbaikiPIN(daftarPIN[n], n); });
   await simpanPIN();
   tampilTabelPIN();
-  alert("✅ BERHASIL! Semua PIN sekarang 6 digit! Silakan refresh (Ctrl + R).");
+  alert("✅ BERHASIL! Semua PIN sekarang 6 digit! Silakan refresh.");
 }
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); if(!sel) return; sel.innerHTML=""; Object.keys(daftarPIN).forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; }
-function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(!/^[0-9]{6}$/.test(pin)){ document.getElementById("loginError").innerHTML="❌ PIN harus 6 angka!"; return; } if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); tutupLogin(); alert("Selamat Datang, "+nama+"! ✅ Sekarang Pian bisa hapus yang tidak pantas."); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! Hubungi Kepala Sekolah!"; } }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(!/^[0-9]{6}$/.test(pin)){ document.getElementById("loginError").innerHTML="❌ PIN harus 6 angka!"; return; } if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); tutupLogin(); alert("Selamat Datang, "+nama+"! ✅"); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! Hubungi Kepala Sekolah!"; } }
 function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar Dari Mode Admin 🔒"); }
 function updateTampilanAdmin(){
   if(adminLogin){
@@ -235,28 +220,38 @@ function updateTampilanAdmin(){
   }
   tampilSaran();
 }
-function wajibAdmin(){ if(!adminLogin){ bukaLogin(); return false; } return true; }
 function wajibKepsek(){ if(adminLogin!==NAMA_KEPSEK){ alert("🔒 Hanya Kepala Sekolah!"); return false; } return true; }
 function tampilTabelPIN(){
   let wadah=document.getElementById("tabelPIN"); if(!wadah) return;
-  let html=`<table style="width:100%;border-collapse:collapse"><tr><td><b>Nama</b></td><td><b>PIN (6 angka)</b></td><td><b>Aksi</b></td></tr>`;
+  let html=`<table style="width:100%;border-collapse:collapse"><tr><td><b>Nama</b></td><td><b>PIN</b></td><td><b>Aksi</b></td></tr>`;
   Object.keys(daftarPIN).forEach(nama=>{
     let aman=nama.replace(/'/g,"").replace(/"/g,"");
     html+=`<tr><td style="padding:8px;border-bottom:1px solid #eee">${nama}${nama===NAMA_KEPSEK?" 👑":""}</td><td style="padding:8px;border-bottom:1px solid #eee"><input type="text" id="pin-${aman}" value="${daftarPIN[nama]}" style="width:90px;text-align:center;padding:8px;border-radius:8px;border:1px solid #ccc"></td><td style="padding:8px;border-bottom:1px solid #eee"><button onclick="simpanSatuPIN('${aman}')" style="background:#4CAF50;color:white;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer">💾 Simpan</button></td></tr>`;
   });
   html+=`</table>`; wadah.innerHTML=html;
 }
-function simpanSatuPIN(nama){ if(!wajibKepsek()) return; let baru=document.getElementById("pin-"+nama).value.trim(); if(!/^[0-9]{6}$/.test(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru); }
+function simpanSatuPIN(nama){ if(!wajibKepsek()) return; let baru=document.getElementById("pin-"+nama).value.trim(); if(!/^[0-9]{6}$/.test(baru)){alert("PIN harus 6 angka!");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru); }
 function gantiPINkepsekBaru(){ if(!wajibKepsek()) return; let baru=document.getElementById("pinBaruKepsek").value.trim(); if(!/^[0-9]{6}$/.test(baru)){alert("PIN harus 6 angka!");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); document.getElementById("pinBaruKepsek").value=""; tampilTabelPIN(); alert("PIN Kepsek berhasil diganti jadi: "+baru); }
 function gantiPinSaya(){ if(!adminLogin){alert("Login dulu");return;} if(adminLogin===NAMA_KEPSEK){alert("Kepsek pakai panel di atas");return;} let baru=document.getElementById("pinBaruSaya").value.trim(); if(!/^[0-9]{6}$/.test(baru)){alert("PIN harus 6 angka!");return;} daftarPIN[adminLogin]=baru; simpanPIN(); document.getElementById("pinBaruSaya").value=""; alert("PIN Anda berhasil diganti jadi: "+baru); }
 let dataSaran=[]; let filterSaranAktif="SEMUA";
-function loadSaran(){ try{ let lama=JSON.parse(localStorage.getItem("saran_kayakah")||"[]"); if(lama.length>0){ dataSaran=lama; tampilSaran(); } }catch(e){} if(dataSaran.length===0){ dataSaran=[{nama:"Ibu Ani - Orang Tua Murid",peran:"Orang Tua / Wali Murid",jenis:"Saran",isi:"Terima kasih Bapak / Ibu Guru, anak Ulun sekarang rajin belajar dan rajin mengaji. Semoga SDN Kayakah makin maju! 🙏",tanggal:"14 Nov 2026",komentar:[{nama:"Wahyu Aji, S.Pd.Jas",teks:"Terima kasih Ibu Ani! 🙏",tanggal:"14 Nov 2026",isAdmin:true,isKepsek:true}],ownerId:"contoh"}]; tampilSaran(); } mulaiDengarSaran(); }
-function mulaiDengarSaran(){ if(!window._fb){ window.addEventListener('firebase-ready', mulaiDengarSaran, {once:true}); return; } let fb=window._fb; fb.onSnapshot(fb.query(fb.collection(fb.db,'saran'), fb.orderBy('waktu','desc')), (snap)=>{ let arr=snap.docs.map(d=>({id:d.id, ...d.data()})); if(arr.length>0){ dataSaran=arr; tampilSaran(); } }); }
-async function kirimSaran(){ let nama=document.getElementById("saranNama").value.trim()||"Hamba Allah (Anonim)"; let peran=document.getElementById("saranPeran").value; let jenis=document.getElementById("saranJenis").value; let isi=document.getElementById("saranIsi").value.trim(); if(!isi||isi.length<5){alert("Tulis dulu sarannya!");return;} let tgl=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"}); let item={nama:nama,peran:peran,jenis:jenis,isi:isi,tanggal:tgl,komentar:[],ownerId:myIdSaran,waktu:Date.now()}; try{ if(window._fb){ await window._fb.addDoc(window._fb.collection(window._fb.db,'saran'), item); } else { dataSaran.unshift(item); localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran)); } }catch(e){ dataSaran.unshift(item); localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran)); } document.getElementById("saranNama").value=""; document.getElementById("saranIsi").value=""; document.getElementById("pesanSaran").innerHTML="✅ Terima Kasih! Saran Pian Sudah Terkirim!"; filterSaranAktif="SEMUA"; tampilSaran(); }
+function loadSaran(){ mulaiDengarSaran(); }
+function mulaiDengarSaran(){
+  if(!window._fb) return;
+  let fb=window._fb;
+  try{
+    let col=fb.collection(fb.db,'saran');
+    col.orderBy('waktu','desc').onSnapshot(function(snap){
+      let arr=snap.docs.map(function(d){ let x=d.data(); x.id=d.id; return x; });
+      dataSaran=arr;
+      tampilSaran();
+    });
+  }catch(e){}
+}
+async function kirimSaran(){ let nama=document.getElementById("saranNama").value.trim()||"Hamba Allah (Anonim)"; let peran=document.getElementById("saranPeran").value; let jenis=document.getElementById("saranJenis").value; let isi=document.getElementById("saranIsi").value.trim(); if(!isi||isi.length<5){alert("Tulis dulu sarannya!");return;} let tgl=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"}); let item={nama:nama,peran:peran,jenis:jenis,isi:isi,tanggal:tgl,komentar:[],ownerId:myIdSaran,waktu:Date.now()}; try{ if(window._fb){ await window._fb.addDoc(window._fb.collection(window._fb.db,'saran'), item); } }catch(e){ alert("Gagal kirim. Cek internet, Pak."); return; } document.getElementById("saranNama").value=""; document.getElementById("saranIsi").value=""; document.getElementById("pesanSaran").innerHTML="✅ Terima Kasih! Saran Pian Sudah Terkirim! Muncul di semua HP!"; filterSaranAktif="SEMUA"; }
 function filterSaran(jenis){ filterSaranAktif=jenis; tampilSaran(); }
 function cekBadge(nama){
   let n = (nama||"").trim().toLowerCase();
-  if(n===NAMA_KEPSEK.toLowerCase() || n==="wahyu aji" || n==="pak wahyu" || n.includes("wahyu aji")) return "kepsek";
+  if(n===NAMA_KEPSEK.toLowerCase() || n.includes("wahyu aji")) return "kepsek";
   for(let k of Object.keys(daftarPIN)){ if(n===k.toLowerCase() || n.includes(k.toLowerCase().split(",")[0])) return "admin"; }
   return "";
 }
@@ -272,7 +267,7 @@ function tampilSaran(){
     let badgeSaran = cekBadge(s.nama)==="kepsek" ? ` <span class="badge-kepsek">👑 KEPSEK</span>` : cekBadge(s.nama)==="admin" ? ` <span class="badge-admin">✅ ADMIN - Guru</span>` : "";
     let punyaSaya=(s.ownerId && s.ownerId===myIdSaran && !adminLogin);
     let labelSaya=punyaSaya?` <span style="background:#C8E6C9;color:#1B5E20;font-size:11px;padding:2px 8px;border-radius:10px">✍️ Tulisan Anda</span>`:"";
-    let komentar = s.komentar || (s.balas ? [{nama:"Sekolah",teks:s.balas,tanggal:s.tanggal}] : []);
+    let komentar = s.komentar || [];
     let komentarHtml = "";
     if(komentar.length>0){
       komentarHtml = `<div class="balas-box"><b>💬 Balasan (${komentar.length}):</b>`;
@@ -285,12 +280,12 @@ function tampilSaran(){
       });
       komentarHtml += `</div>`;
     } else {
-      komentarHtml = `<div style="font-size:12px;color:#888;margin-top:6px">💬 Belum ada balasan - Jadilah yang pertama balas!</div>`;
+      komentarHtml = `<div style="font-size:12px;color:#888;margin-top:6px">💬 Belum ada balasan</div>`;
     }
     let kotakBalas = `<div style="margin-top:10px;background:#F9F9F9;padding:10px;border-radius:12px">
       <b style="font-size:13px">💬 Balas:</b>
       <input type="text" id="namaBalas-${s.id||i}" placeholder="👤 Nama Pian..." class="komen-input">
-      <input type="text" id="teksBalas-${s.id||i}" placeholder="💬 Tulis balasan Pian di sini..." class="komen-input">
+      <input type="text" id="teksBalas-${s.id||i}" placeholder="💬 Tulis balasan..." class="komen-input">
       <button onclick="kirimBalasan('${s.id||i}')" style="background:#2196F3;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%">💬 KIRIM BALASAN</button>
     </div>`;
     let tombolHapus = "";
@@ -298,7 +293,7 @@ function tampilSaran(){
     else if(punyaSaya) tombolHapus = `<div style="margin-top:10px"><button onclick="hapusSaran('${s.id||i}')" style="background:#FF7043;color:white;border:none;padding:8px 14px;border-radius:15px;font-weight:bold;cursor:pointer">🗑️ Hapus Tulisan Saya</button></div>`;
     html+=`<div class="saran-item ${kelas}"><span class="chip" style="background:${chipWarna}">${chipEmoji} ${s.jenis}</span><span style="font-size:12px;color:#888">${s.tanggal} • ${s.peran}</span><br><b>👤 ${s.nama}</b>${badgeSaran}${labelSaya}<p style="margin:8px 0;line-height:1.6">${s.isi}</p>${komentarHtml}${kotakBalas}${tombolHapus}</div>`;
   });
-  if(html==="") html=`<div style="text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada saran. Jadilah yang pertama! 👆</div>`;
+  if(html==="") html=`<div style="text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada saran. Jadilah yang pertama! 👆<br><span style="font-size:12px;color:#888">Saran lama dari Firebase lama (sdn-kayakah-2) tidak ikut pindah, Pak. Saran baru akan masuk di sini.</span></div>`;
   wadah.innerHTML=html;
 }
 async function kirimBalasan(id){
@@ -315,14 +310,10 @@ async function kirimBalasan(id){
   if(idx<0) return;
   let s = dataSaran[idx];
   let listKomen = s.komentar || [];
-  if(s.balas && listKomen.length===0) listKomen = [{nama:"Sekolah",teks:s.balas,tanggal:s.tanggal}];
   listKomen.push(komenBaru);
   try{
-    if(window._fb && typeof id==='string' && id.length>5){ await window._fb.updateDoc(window._fb.doc(window._fb.db,'saran',id), {komentar:listKomen}); return; }
-  }catch(e){}
-  dataSaran[idx].komentar=listKomen;
-  localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran));
-  tampilSaran();
+    if(window._fb && typeof id==='string'){ await window._fb.updateDoc(window._fb.doc(window._fb.db,'saran',id), {komentar:listKomen}); return; }
+  }catch(e){ alert("Gagal balas. Cek internet."); }
 }
 async function hapusKomentar(id, ki){
   if(!adminLogin){ alert("Hanya Admin yang bisa hapus balasan."); return; }
@@ -332,25 +323,22 @@ async function hapusKomentar(id, ki){
   let listKomen = dataSaran[idx].komentar || [];
   listKomen.splice(ki,1);
   try{
-    if(window._fb && typeof id==='string' && id.length>5){ await window._fb.updateDoc(window._fb.doc(window._fb.db,'saran',id), {komentar:listKomen}); return; }
+    if(window._fb && typeof id==='string'){ await window._fb.updateDoc(window._fb.doc(window._fb.db,'saran',id), {komentar:listKomen}); return; }
   }catch(e){}
-  dataSaran[idx].komentar=listKomen;
-  localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran));
-  tampilSaran();
 }
 async function hapusSaran(id){
   let idx=dataSaran.findIndex((s,i)=> (s.id||i)==id); if(idx<0) return; let s=dataSaran[idx];
   if(adminLogin){
     if(!confirm("Hapus saran ini? (Admin)")) return;
-    try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'saran',id)); return; } }catch(e){}
-    dataSaran.splice(idx,1); localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran)); tampilSaran(); return;
+    try{ if(window._fb && typeof id==='string'){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'saran',id)); return; } }catch(e){}
+    return;
   }
   if(s.ownerId && s.ownerId===myIdSaran){
     if(!confirm("Hapus tulisan Anda ini?")) return;
-    try{ if(window._fb && typeof id==='string' && id.length>5){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'saran',id)); return; } }catch(e){}
-    dataSaran.splice(idx,1); localStorage.setItem("saran_kayakah",JSON.stringify(dataSaran)); tampilSaran(); return;
+    try{ if(window._fb && typeof id==='string'){ await window._fb.deleteDoc(window._fb.doc(window._fb.db,'saran',id)); return; } }catch(e){}
+    return;
   }
-  alert("Ini bukan tulisan Anda. Anda hanya bisa hapus tulisan Anda sendiri.");
+  alert("Ini bukan tulisan Anda.");
 }
 window.addEventListener("load",function(){ loadPIN(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); loadSaran(); });
 </script>
