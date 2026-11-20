@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDN Kayakah - Amuntai Selatan | Belajar Asyik, Berakhlak, Berprestasi</title>
+<meta name="description" content="SDN Kayakah, Amuntai Selatan, Hulu Sungai Utara. Sekolah dasar dengan Tahsin, Tahfiz, Pramuka. Belajar Asyik, Berakhlak, Berprestasi.">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
@@ -6,16 +13,6 @@ const db=firebase.firestore();
 window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
 window.dispatchEvent(new Event('firebase-ready'));
 </script>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SDN Kayakah - Amuntai Selatan | Belajar Asyik, Berakhlak, Berprestasi</title>
-<meta name="description" content="SDN Kayakah, Amuntai Selatan, Hulu Sungai Utara. Sekolah dasar dengan Tahsin, Tahfiz, Pramuka. Belajar Asyik, Berakhlak, Berprestasi.">
-<meta name="keywords" content="SDN Kayakah, SD Amuntai Selatan, Sekolah Amuntai, Tahsin Tahfiz">
-<meta property="og:title" content="SDN Kayakah 🌈">
-<meta property="og:description" content="Belajar Asyik, Berakhlak, Berprestasi - Amuntai Selatan">
 <style>
   *{box-sizing:border-box;font-family:'Comic Sans MS',Arial,sans-serif}
   body{margin:0;background:#FFF9DB}
@@ -58,7 +55,6 @@ window.dispatchEvent(new Event('firebase-ready'));
 </style>
 </head>
 <body>
- <!-- TOMBOL KEMBALI KE BERANDA -->
 <div style="position:fixed; top:10px; left:10px; z-index:9999;">
 <a href="index.html" style="display:inline-block; background:#ff5722; color:white; padding:12px 18px; border-radius:25px; text-decoration:none; font-weight:bold; font-size:16px; box-shadow:0 3px 8px rgba(0,0,0,0.3);">🏠 Kembali ke Beranda</a>
 </div>
@@ -67,8 +63,7 @@ window.dispatchEvent(new Event('firebase-ready'));
 <div class="menu">
 <button onclick="toggleLaci()">🔒 PIN Guru</button><button class="active" onclick="tampil('beranda',this)">🏠 Beranda</button><button onclick="tampil('soal',this)">📝 Soal</button><button onclick="tampil('nilai',this)">🏆 Nilai</button><button onclick="tampil('jejak',this)">📜 Rekam Jejak</button><button onclick="tampil('siswa',this)">👦 Data Siswa</button><button onclick="tampil('guru',this)">👩‍🏫 Guru</button><button onclick="tampil('kelas1',this)">📚 Kelas 1</button><button onclick="tampil('kelas2',this)">📚 Kelas 2</button><button onclick="tampil('kelas3',this)">📚 Kelas 3</button><button onclick="tampil('kelas4',this)">📚 Kelas 4</button><button onclick="tampil('kelas5',this)">📚 Kelas 5</button><button onclick="tampil('kelas6',this)">📚 Kelas 6</button>
 </div>
-
-<div id="beranda" class="card"><h2>🎉 Selamat Datang di SDN Kayakah 🌈</h2><p>Pengunjung bisa lihat semua. Guru / Kepsek / Admin klik tombol 🔒 PIN Guru di Menu, masukkan PIN 6 angka untuk tambah / hapus materi.</p><span class="pill" style="background:#FF4757">🌈 <span id="totalSiswaBeranda">60</span> Siswa Hebat</span><span class="pill" style="background:#2ED573">✅ <span id="totalGuruBeranda">10</span> Guru Hebat</span><div style="background:#FFF3C4;padding:12px;border-radius:16px;margin-top:10px;border:2px dashed #FFA502"><b>🌈 Jumlah Per Kelas:</b><div id="rincianKelas"></div></div></div>
+<div id="beranda" class="card"><h2>🎉 Selamat Datang di SDN Kayakah 🌈</h2><p>Pengunjung bisa lihat semua. Guru / Kepsek / Admin klik tombol 🔒 PIN Guru di Menu, masukkan PIN 6 angka untuk tambah / hapus materi.</p><p id="statusSync" style="font-size:12px;color:#059669;font-weight:bold">⏳ Menghubungkan ke Firebase...</p><span class="pill" style="background:#FF4757">🌈 <span id="totalSiswaBeranda">60</span> Siswa Hebat</span><span class="pill" style="background:#2ED573">✅ <span id="totalGuruBeranda">10</span> Guru Hebat</span><div style="background:#FFF3C4;padding:12px;border-radius:16px;margin-top:10px;border:2px dashed #FFA502"><b>🌈 Jumlah Per Kelas:</b><div id="rincianKelas"></div></div></div>
 <div id="soal" class="card" style="display:none"><h2>📝 Soal</h2><select id="filterSoal" onchange="filterSoal()"><option value="semua">Semua Kelas</option><option>Kelas 1</option><option>Kelas 2</option><option>Kelas 3</option><option>Kelas 4</option><option>Kelas 5</option><option>Kelas 6</option></select><div id="listSoal"><div class="soal-box" data-kelas="Kelas 1"><p><b>Kelas 1 - Soal 1: 2 + 3 = ? 🎈</b></p><label><input type="radio" name="s1" value="4"> 4</label><br><label><input type="radio" name="s1" value="5"> 5</label><br><label><input type="radio" name="s1" value="6"> 6</label><br><button class="btn-kecil" onclick="cekSoal('s1','5',this)">Cek Jawaban</button><p class="hasil"></p></div></div><div id="formSoal" style="display:none"><input id="soKelas" placeholder="Kelas, misal Kelas 2"><input id="soTanya" placeholder="Tulis soal"><input id="soA" placeholder="Pilihan A"><input id="soB" placeholder="Pilihan B"><input id="soC" placeholder="Pilihan C"><input id="soKunci" placeholder="Jawaban benar"><button class="btn" onclick="tambahSoal()">Tambah Soal</button></div><p id="infoSoal" style="color:#888;font-size:12px">Pengunjung cuma bisa jawab. Guru / Admin bisa tambah soal setelah masuk PIN.</p></div>
 <div id="nilai" class="card" style="display:none"><h2>🏆 Nilai</h2><table><thead><tr><th>Nama</th><th>Kelas</th><th>Mapel</th><th>Nilai</th><th>Ket</th></tr></thead><tbody id="listNilai"><tr><td>Aida Salsabila</td><td>Kelas 1</td><td>Matematika</td><td><b>90</b></td><td>Bagus</td></tr></tbody></table><div id="formNilai" style="display:none"><input id="nNama" placeholder="Nama Siswa"><select id="nKelas"><option>Kelas 1</option><option>Kelas 2</option><option>Kelas 3</option><option>Kelas 4</option><option>Kelas 5</option><option>Kelas 6</option></select><input id="nMapel" placeholder="Mapel"><input id="nAngka" type="number" placeholder="Nilai"><input id="nKet" placeholder="Keterangan"><button class="btn" onclick="tambahNilai()">Tambah Nilai</button></div></div>
 <div id="jejak" class="card" style="display:none"><h2>📜 Rekam Jejak</h2><div id="listJejak"><div class="jejak"><span class="badge">CONTOH</span> <b>Rekam Jejak</b><br><span>Diisi oleh Guru. Contoh: Masuk sekolah, naik kelas, juara lomba.</span></div></div><div id="formJejak" style="display:none"><input id="jNama" placeholder="Nama Siswa"><input id="jJudul" placeholder="Judul"><textarea id="jDetail" placeholder="Detail..."></textarea><button class="btn" onclick="tambahJejak()">Tambah Rekam Jejak</button></div></div>
@@ -81,7 +76,6 @@ window.dispatchEvent(new Event('firebase-ready'));
 <div id="kelas5" class="card" style="display:none"><h2>📚 Kelas 5</h2><p><b>Wali Kelas:</b> Syahruni, S.Pd.SD | <b>Jumlah:</b> <span id="jmlKelas5">12</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 5:</b><button class="aktif" onclick="tampilNamaSiswa('kelas5',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas5',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas5"><h3>👦 Nama Siswa - Kelas 5</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas5')"><div id="listKelas5"></div></div><div id="boxMapelKelas5" style="display:none"><h3>📚 Mata Pelajaran - Kelas 5 - 14 Mapel</h3><div id="listMapelKelas5"></div></div></div>
 <div id="kelas6" class="card" style="display:none"><h2>📚 Kelas 6</h2><p><b>Wali Kelas:</b> Samsul Bahri, S.Pd | <b>Jumlah:</b> <span id="jmlKelas6">9</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 6:</b><button class="aktif" onclick="tampilNamaSiswa('kelas6',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas6',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas6"><h3>👦 Nama Siswa - Kelas 6</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas6')"><div id="listKelas6"></div></div><div id="boxMapelKelas6" style="display:none"><h3>📚 Mata Pelajaran - Kelas 6 - 14 Mapel</h3><div id="listMapelKelas6"></div></div></div>
 <footer>🌈 © 2026 SDN Kayakah - Amuntai Selatan - Belajar Asyik, Berakhlak, Berprestasi 🌈<br>🕌 Tahsin & Tahfiz - Pembimbing: Syahida Norpah, S.Pd & Jannah, S.Pd | 🏕️ Pramuka - Pembina: Wahyu Aji & M. Husain</footer>
-
 <div id="laciPIN">
   <h2 style="color:#7C3AED;margin:0">🔒 Laci PIN - Di Menu</h2>
   <p style="font-size:13px;color:#666">Pengunjung cuma bisa lihat. Guru / Kepsek / Admin masukkan PIN 6 angka disini.</p>
@@ -89,7 +83,7 @@ window.dispatchEvent(new Event('firebase-ready'));
     <label><b>Masukkan PIN 6 Angka:</b></label>
     <input id="inputPIN" type="password" inputmode="numeric" maxlength="6" placeholder="•••••• - 6 angka" style="font-size:22px;text-align:center;letter-spacing:8px">
     <button class="btn" onclick="cekPIN()">🔓 Buka Dengan PIN</button>
-    <p style="font-size:12px;color:#888">Lupa PIN? Guru tanya Kepala Sekolah. Kepala Sekolah bisa melihat & merubah PIN guru.</p>
+    <p style="font-size:12px;color:#888">Lupa PIN? Guru tanya Kepala Sekolah.</p>
   </div>
   <div id="boxSudahLogin" style="display:none">
     <div id="infoLoginPIN" style="background:#D1FAE5;padding:12px;border-radius:14px;font-weight:bold;color:#059669"></div>
@@ -100,26 +94,19 @@ window.dispatchEvent(new Event('firebase-ready'));
       <button class="btn" onclick="gantiPINSendiri()" style="background:#7C3AED">💾 Simpan PIN Baru Saya</button>
     </div>
     <div id="areaKepsek" style="display:none">
-      <h4>👑 Area Kepala Sekolah - Lihat & Rubah PIN Guru</h4>
-      <p style="font-size:12px;color:#666">Kepala Sekolah bisa melihat semua PIN guru dan merubahnya.</p>
+      <h4>👑 Area Kepala Sekolah - Lihat PIN Guru</h4>
+      <p style="font-size:12px;color:#666">Kepala Sekolah bisa melihat PIN guru. PIN sama dengan di Beranda / Mitra / Saran.</p>
       <div id="listPINguru"></div>
-      <h4>🔑 Ganti PIN Kepsek Sendiri</h4>
-      <input id="pinKepsekBaru" type="password" inputmode="numeric" maxlength="6" placeholder="PIN Kepsek Baru - 6 angka">
-      <button class="btn" onclick="gantiPINKepsek()" style="background:#DC2626">💾 Simpan PIN Kepsek Baru</button>
     </div>
     <div id="areaAdmin" style="display:none">
       <h4>🛠️ Area Admin - Bebas</h4>
-      <p style="font-size:12px;color:#666">Admin bebas isi seluruh materi pelajaran dan hapus yang tidak perlu. Buka mapel mana saja, langsung bisa tambah / hapus.</p>
-      <input id="pinAdminBaru" type="password" inputmode="numeric" maxlength="6" placeholder="PIN Admin Baru - 6 angka">
-      <button class="btn" onclick="gantiPINAdmin()" style="background:#0891B2">💾 Simpan PIN Admin Baru</button>
+      <p style="font-size:12px;color:#666">Admin bebas isi seluruh materi pelajaran dan hapus yang tidak perlu.</p>
     </div>
     <button class="btn" onclick="keluarPIN()" style="background:#FF4757">🚪 Keluar - Kembali Jadi Pengunjung</button>
   </div>
   <button class="btn" onclick="toggleLaci()" style="background:#888">❌ Tutup Laci</button>
 </div>
-
 <div id="popupMapel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:998;overflow:auto;padding:15px"><div style="background:white;max-width:600px;margin:20px auto;padding:18px;border-radius:20px;border:4px solid #FFD700"><div id="isiPopupMapel"></div><button onclick="document.getElementById('popupMapel').style.display='none'" style="background:#FF4757;color:white;border:none;padding:12px;border-radius:20px;width:100%;font-weight:bold;margin-top:10px;cursor:pointer">❌ TUTUP</button></div></div>
-
 <script>
 var DATA={"Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Latif","Muhammad Luthfi","Muhammad Nafis Al Ikhwan","Muhammad Zulkifli","Rahmawati","Salsabila Ayu Hanifa","Wirda Aulia"],"Kelas 2":["Ahmad Riduan","Ahmad Yasir","Ahmad Zainul Majerdi","Eirlangga Saputra","Humaira Munawwarah","Nadia","Nazril Kamari","Via Anggraini"],"Kelas 3":["Ahmad Fazrianur","Ahmad Jailani","Arsita","Jaki Habibi","Maria Ulfah","Muhammad Baihaki","Muhammad Rijani","Mutiara Anastasya","Naira Amelia Ulfa","Nia Ramadhani","Novita"],"Kelas 4":["Asyifa Putri Aura Zaskia","Hadi Rahman","M. Nafis Mubarak","Muhammad Al Farisqi","Muhammad Fauzi Akbar","Muhammad Salman Al-Farisy","Nafisya Azzahrah","Naura Aqila Wilda","Nayla Amanda","Nor Azizah Mutahharah"],"Kelas 5":["Abdul Karim","Ahmad Badali","Alika Naila Putri","Ikrimah","Ilmina","Iqbal Al Jailani","Khanza Alifia","M. Ajrul Ilmi","Muhammad Habil","Muhammad Zakaria","Muslimah","Nurlatifah"],"Kelas 6":["Ifdhal","M. Nafis Ihsan","M. Rizalul Fikri","M. Zaidan Akmal","Muhammad Maulana","Nazwa","Nikmah","Siti Fatimatuz Zahra","Siti Rahmah"]};
 var GURU_DATA=[{nama:"Wahyu Aji, S.Pd.Jas",jabatan:"Kepala Sekolah + PJOK + Pembina Pramuka",kelas:"Kepala Sekolah",mapel:"PJOK & Pramuka"},{nama:"Radinah, S.Pd",jabatan:"Guru Kelas 1",kelas:"Kelas 1",mapel:"Semua Mapel Kelas 1"},{nama:"Siti Nuriyah, S.Pd.SD",jabatan:"Guru Kelas 2",kelas:"Kelas 2",mapel:"Semua Mapel Kelas 2"},{nama:"Pathul Jannah, S.Pd.I",jabatan:"Guru PAI + Wali Kelas 3",kelas:"Kelas 3",mapel:"PAI"},{nama:"Norsalim, S.Pd",jabatan:"Guru Kelas 4",kelas:"Kelas 4",mapel:"Semua Mapel Kelas 4"},{nama:"Syahruni, S.Pd.SD",jabatan:"Guru Kelas 5",kelas:"Kelas 5",mapel:"Semua Mapel Kelas 5"},{nama:"Samsul Bahri, S.Pd",jabatan:"Guru Kelas 6",kelas:"Kelas 6",mapel:"Semua Mapel Kelas 6"},{nama:"Syahida Norpah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"Jannah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"M. Husain",jabatan:"Operator Sekolah + Pembina Pramuka",kelas:"Operator + Pramuka",mapel:"Operator + Pramuka"}];
@@ -131,17 +118,58 @@ MATERI_DATA["Kelas 1|Matematika"]=[{judul:"Materi 1: Mengenal Angka 1-10",isi:"1
 MATERI_DATA["Kelas 1|Tahsin"]=[{judul:"Materi 1: Huruf Hijaiyah Alif - Ya",isi:"Anak mengenal huruf Hijaiyah Alif sampai Ya.",video:"https://www.youtube.com/results?search_query=belajar+huruf+hijaiyah+anak",latihan:"Sebutkan Alif, Ba, Ta."},{judul:"Materi 2: Makhraj Huruf",isi:"Ha dari tenggorokan, Ba dari bibir.",video:"",latihan:"Tirukan Ha, Kha, Ba."}];
 MATERI_DATA["Kelas 1|Tahfiz"]=[{judul:"Hafalan 1: Al-Fatihah",isi:"Anak menghafal Al-Fatihah ayat 1-7.",video:"https://www.youtube.com/results?search_query=hafalan+surat+al-fatihah+anak",latihan:"Setoran: Baca Al-Fatihah."},{judul:"Hafalan 2: An-Nas",isi:"Anak menghafal An-Nas ayat 1-6.",video:"",latihan:"Setoran: Baca An-Nas."}];
 MATERI_DATA["Kelas 1|Pramuka"]=[{judul:"Materi 1: Pramuka Siaga",isi:"Praja Muda Karana. Pembina: Wahyu Aji & M. Husain.",video:"https://www.youtube.com/results?search_query=pramuka+siaga+anak+SD",latihan:"Praktek Salam Pramuka."},{judul:"Materi 2: Baris-Berbaris",isi:"Sikap sempurna, hormat, berbaris rapi.",video:"",latihan:"Baris rapi!"}];
-try{var s5=localStorage.getItem('MATERI_KAYAKAH_FINAL'); if(s5){var md=JSON.parse(s5); for(var mk in md) MATERI_DATA[mk]=md[mk];}}catch(e){}
-function simpanMateri(){try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}}
-var PIN_DEFAULT={kepsek:"123456", admin:"654321", guru:{"Radinah, S.Pd":"111111","Siti Nuriyah, S.Pd.SD":"222222","Pathul Jannah, S.Pd.I":"333333","Norsalim, S.Pd":"444444","Syahruni, S.Pd.SD":"555555","Samsul Bahri, S.Pd":"666666","Syahida Norpah, S.Pd":"777777","Jannah, S.Pd":"888888"}};
+// === PIN SAMAKAN DENGAN FILE LAIN - 6 ANGKA ===
+var PIN_DEFAULT={kepsek:"197601", admin:"123456", guru:{"Radinah, S.Pd":"123456","Siti Nuriyah, S.Pd.SD":"123456","Pathul Jannah, S.Pd.I":"123456","Norsalim, S.Pd":"123456","Syahruni, S.Pd.SD":"123456","Samsul Bahri, S.Pd":"123456","Syahida Norpah, S.Pd":"123456","Jannah, S.Pd":"123456","M. Husain":"123456"}};
 var PIN_DATA=JSON.parse(JSON.stringify(PIN_DEFAULT));
-try{var sp=localStorage.getItem('PIN_KAYAKAH'); if(sp){var pp=JSON.parse(sp); if(pp.kepsek) PIN_DATA.kepsek=pp.kepsek; if(pp.admin) PIN_DATA.admin=pp.admin; if(pp.guru) for(var k in pp.guru) PIN_DATA.guru[k]=pp.guru[k];}}catch(e){}
 function simpanPIN(){try{localStorage.setItem('PIN_KAYAKAH',JSON.stringify(PIN_DATA));}catch(e){}}
+try{var sp=localStorage.getItem('PIN_KAYAKAH'); if(sp){var pp=JSON.parse(sp); if(pp.kepsek) PIN_DATA.kepsek=pp.kepsek; if(pp.admin) PIN_DATA.admin=pp.admin; if(pp.guru) for(var k in pp.guru) PIN_DATA.guru[k]=pp.guru[k];}}catch(e){}
+// === MATERI PINDAH KE FIREBASE - BIAR TERLIHAT DI SEMUA HP ===
+var materiSudahDimuat=false;
+function idDokumen(kelas,mapel){ return (kelas+"_"+mapel).replace(/[^a-zA-Z0-9]/g,'_'); }
+function simpanMateriKeFirebase(kelas,mapel){
+  if(!window._fb) return;
+  try{
+    var key=kelas+"|"+mapel;
+    var docId=idDokumen(kelas,mapel);
+    window._fb.db.collection('materi_belajar').doc(docId).set({kelas:kelas,mapel:mapel,list:MATERI_DATA[key],waktu:Date.now()});
+  }catch(e){}
+}
+function simpanMateri(kelas,mapel){
+  try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}
+  if(kelas && mapel) simpanMateriKeFirebase(kelas,mapel);
+}
+function muatMateriDariFirebase(){
+  if(!window._fb){ setTimeout(muatMateriDariFirebase,500); return; }
+  try{
+    window._fb.db.collection('materi_belajar').onSnapshot(function(snap){
+      var adaBaru=false;
+      snap.forEach(function(d){
+        var v=d.data(); if(!v || !v.kelas || !v.mapel) return;
+        var key=v.kelas+"|"+v.mapel;
+        MATERI_DATA[key]=v.list||[];
+        adaBaru=true;
+      });
+      if(adaBaru){
+        try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}
+        var pop=document.getElementById('popupMapel');
+        if(pop && pop.style.display==='block'){
+          // biar popup ikut update kalau ada materi baru dari HP lain
+        }
+      }
+      materiSudahDimuat=true;
+      var st=document.getElementById('statusSync'); if(st) st.innerHTML='✅ Terhubung ke Firebase - Materi terlihat di semua HP';
+    }, function(err){
+      var st=document.getElementById('statusSync'); if(st) st.innerHTML='⚠️ Firebase belum terhubung, pakai data di HP ini dulu';
+    });
+  }catch(e){}
+}
+// load lokal dulu biar cepat, nanti ditimpa Firebase
+try{var s5=localStorage.getItem('MATERI_KAYAKAH_FINAL'); if(s5){var md=JSON.parse(s5); for(var mk in md) MATERI_DATA[mk]=md[mk];}}catch(e){}
 var loginSaatIni=null;
 function toggleLaci(){document.getElementById('laciPIN').classList.toggle('buka');}
 function cekPIN(){
   var pin=document.getElementById('inputPIN').value.trim();
-  if(pin.length!==6 || isNaN(pin)) return alert('PIN harus 6 angka! Contoh: 123456');
+  if(pin.length!==6 || isNaN(pin)) return alert('PIN harus 6 angka! Contoh: 197601');
   if(pin===PIN_DATA.kepsek){ loginSaatIni={peran:'kepsek',nama:'Wahyu Aji, S.Pd.Jas (Kepala Sekolah)'}; }
   else if(pin===PIN_DATA.admin){ loginSaatIni={peran:'admin',nama:'M. Husain (Admin)'}; }
   else { var ketemu=null; for(var g in PIN_DATA.guru){ if(PIN_DATA.guru[g]===pin){ ketemu=g; break; } } if(ketemu){ loginSaatIni={peran:'guru',nama:ketemu}; } else return alert('PIN salah! Pengunjung cuma bisa melihat. Guru yang lupa, tanya Kepala Sekolah.'); }
@@ -152,7 +180,7 @@ function cekPIN(){
   if(loginSaatIni.peran==='kepsek') renderListPINGuru(); updateBar(); updateFormAkses(); alert('Berhasil! Selamat datang, '+loginSaatIni.nama+' 🎉');
 }
 function keluarPIN(){ loginSaatIni=null; document.getElementById('boxLoginPIN').style.display='block'; document.getElementById('boxSudahLogin').style.display='none'; document.getElementById('inputPIN').value=''; updateBar(); updateFormAkses(); alert('Sudah keluar. Kembali jadi Pengunjung.'); }
-function updateBar(){ var bar=document.getElementById('barStatus'); if(!loginSaatIni){ bar.innerText='👀 Mode Pengunjung - Cuma Bisa Melihat & Membaca - Untuk Guru / Kepsek / Admin, Klik Tombol 🔒 PIN Guru Di Menu'; bar.style.background='#D1FAE5'; bar.style.color='#059669'; } else if(loginSaatIni.peran==='kepsek'){ bar.innerText='👑 Mode KEPALA SEKOLAH - '+loginSaatIni.nama+' - Bisa Lihat & Rubah PIN Guru + Tambah/Hapus Semua Materi'; bar.style.background='#FDE68A'; bar.style.color='#92400E'; } else if(loginSaatIni.peran==='admin'){ bar.innerText='🛠️ Mode ADMIN - '+loginSaatIni.nama+' - BEBAS Isi Seluruh Materi + Hapus Yang Tidak Perlu'; bar.style.background='#DBEAFE'; bar.style.color='#1E40AF'; } else { bar.innerText='👩‍🏫 Mode GURU - '+loginSaatIni.nama+' - Bisa Tambah/Hapus Materi Kelasnya + Ganti PIN Sendiri'; bar.style.background='#D1FAE5'; bar.style.color='#059669'; } }
+function updateBar(){ var bar=document.getElementById('barStatus'); if(!loginSaatIni){ bar.innerText='👀 Mode Pengunjung - Cuma Bisa Melihat & Membaca - Untuk Guru / Kepsek / Admin, Klik Tombol 🔒 PIN Guru Di Menu'; bar.style.background='#D1FAE5'; bar.style.color='#059669'; } else if(loginSaatIni.peran==='kepsek'){ bar.innerText='👑 Mode KEPALA SEKOLAH - '+loginSaatIni.nama+' - Bisa Lihat PIN Guru + Tambah/Hapus Semua Materi'; bar.style.background='#FDE68A'; bar.style.color='#92400E'; } else if(loginSaatIni.peran==='admin'){ bar.innerText='🛠️ Mode ADMIN - '+loginSaatIni.nama+' - BEBAS Isi Seluruh Materi + Hapus Yang Tidak Perlu'; bar.style.background='#DBEAFE'; bar.style.color='#1E40AF'; } else { bar.innerText='👩‍🏫 Mode GURU - '+loginSaatIni.nama+' - Bisa Tambah/Hapus Materi Kelasnya + Ganti PIN Sendiri'; bar.style.background='#D1FAE5'; bar.style.color='#059669'; } }
 function updateFormAkses(){ var bisa = !!loginSaatIni; ['formSoal','formNilai','formJejak'].forEach(function(id){var el=document.getElementById(id); if(el) el.style.display=bisa?'block':'none';}); }
 function cek6(pin){ return pin && pin.length===6 && !isNaN(pin); }
 function gantiPINSendiri(){
@@ -163,13 +191,9 @@ function gantiPINSendiri(){
 }
 function renderListPINGuru(){
   var div=document.getElementById('listPINguru'); div.innerHTML='';
-  for(var g in PIN_DATA.guru){ var d=document.createElement('div'); d.style.cssText='background:#FFFBEB;border:2px solid #FFA502;padding:10px;border-radius:12px;margin-bottom:8px'; d.innerHTML='<b>'+g+'</b><br>PIN Saat Ini: <b style="color:#DC2626;font-size:18px;letter-spacing:2px">'+PIN_DATA.guru[g]+'</b><br><input id="pin_guru_'+g.replace(/[^a-zA-Z0-9]/g,'_')+'" placeholder="PIN Baru Guru Ini - 6 angka" inputmode="numeric" maxlength="6" style="margin-top:6px"><button class="btn-edit" onclick="rubahPINGuru(\''+g.replace(/'/g,'')+'\')">💾 Rubah PIN Guru Ini</button> <button class="btn-hapus" onclick="resetPINGuru(\''+g.replace(/'/g,'')+'\')">🔄 Reset Jadi 000000</button>'; div.appendChild(d); }
-  var info=document.createElement('div'); info.style.cssText='background:#DBEAFE;padding:10px;border-radius:12px;font-size:12px'; info.innerHTML='<b>PIN Kepsek Saat Ini:</b> '+PIN_DATA.kepsek+'<br><b>PIN Admin Saat Ini:</b> '+PIN_DATA.admin+'<br><span style="color:#666">Kepsek bisa melihat semua ini. Guru tidak bisa melihat ini.</span>'; div.appendChild(info);
+  for(var g in PIN_DATA.guru){ var d=document.createElement('div'); d.style.cssText='background:#FFFBEB;border:2px solid #FFA502;padding:10px;border-radius:12px;margin-bottom:8px'; d.innerHTML='<b>'+g+'</b><br>PIN Saat Ini: <b style="color:#DC2626;font-size:18px;letter-spacing:2px">'+PIN_DATA.guru[g]+'</b>'; div.appendChild(d); }
+  var info=document.createElement('div'); info.style.cssText='background:#DBEAFE;padding:10px;border-radius:12px;font-size:12px'; info.innerHTML='<b>PIN Kepsek Saat Ini:</b> '+PIN_DATA.kepsek+'<br><b>PIN Admin Saat Ini:</b> '+PIN_DATA.admin; div.appendChild(info);
 }
-function rubahPINGuru(namaGuru){ if(!loginSaatIni || loginSaatIni.peran!=='kepsek') return alert('Cuma Kepala Sekolah yang bisa rubah PIN guru!'); var id='pin_guru_'+namaGuru.replace(/[^a-zA-Z0-9]/g,'_'); var baru=document.getElementById(id).value.trim(); if(!cek6(baru)) return alert('PIN Baru harus 6 angka!'); PIN_DATA.guru[namaGuru]=baru; simpanPIN(); renderListPINGuru(); alert('Berhasil! PIN '+namaGuru+' sudah dirubah jadi: '+baru); }
-function resetPINGuru(namaGuru){ if(!loginSaatIni || loginSaatIni.peran!=='kepsek') return alert('Cuma Kepala Sekolah yang bisa reset!'); if(!confirm('Reset PIN '+namaGuru+' jadi 000000? Guru nanti ganti sendiri.')) return; PIN_DATA.guru[namaGuru]='000000'; simpanPIN(); renderListPINGuru(); alert('Berhasil! PIN '+namaGuru+' direset jadi 000000. Suruh guru ganti sendiri.'); }
-function gantiPINKepsek(){ if(!loginSaatIni || loginSaatIni.peran!=='kepsek') return alert('Cuma Kepsek!'); var baru=document.getElementById('pinKepsekBaru').value.trim(); if(!cek6(baru)) return alert('PIN harus 6 angka!'); PIN_DATA.kepsek=baru; simpanPIN(); document.getElementById('pinKepsekBaru').value=''; renderListPINGuru(); alert('Berhasil! PIN Kepsek baru: '+baru); }
-function gantiPINAdmin(){ if(!loginSaatIni || loginSaatIni.peran!=='admin') return alert('Cuma Admin!'); var baru=document.getElementById('pinAdminBaru').value.trim(); if(!cek6(baru)) return alert('PIN harus 6 angka!'); PIN_DATA.admin=baru; simpanPIN(); document.getElementById('pinAdminBaru').value=''; alert('Berhasil! PIN Admin baru: '+baru); }
 function bisaEdit(kelas,mapel){
   if(!loginSaatIni) return false; if(loginSaatIni.peran==='kepsek' || loginSaatIni.peran==='admin') return true;
   if(loginSaatIni.peran==='guru'){ var g=loginSaatIni.nama; if(g==='Radinah, S.Pd' && kelas==='Kelas 1') return true; if(g==='Siti Nuriyah, S.Pd.SD' && kelas==='Kelas 2') return true; if(g==='Pathul Jannah, S.Pd.I' && kelas==='Kelas 3') return true; if(g==='Norsalim, S.Pd' && kelas==='Kelas 4') return true; if(g==='Syahruni, S.Pd.SD' && kelas==='Kelas 5') return true; if(g==='Samsul Bahri, S.Pd' && kelas==='Kelas 6') return true; if((g==='Syahida Norpah, S.Pd' || g==='Jannah, S.Pd') && (mapel==='Tahsin' || mapel==='Tahfiz')) return true; if(g==='Pathul Jannah, S.Pd.I' && mapel==='Pendidikan Agama Islam (PAI)') return true; return false; } return false;
@@ -186,7 +210,7 @@ function tampilDetailMapel(kelas,mapel){
   var html='<h2 style="margin-top:0;color:#7C3AED">📚 '+mapel+' - '+kelas+' ✅ TERBUKA</h2>';
   if(!loginSaatIni) html+='<p style="background:#FEF3C7;padding:10px;border-radius:12px;font-weight:bold;color:#92400E">👀 Mode Pengunjung - Cuma Bisa Melihat & Membaca. Untuk tambah / hapus, klik tombol 🔒 PIN Guru di Menu, masukkan PIN 6 angka.</p>';
   else if(edit) html+='<p style="background:#D1FAE5;padding:10px;border-radius:12px;font-weight:bold;color:#059669">✅ Mode '+loginSaatIni.peran.toUpperCase()+' - '+loginSaatIni.nama+' - Pian bisa Tambah & Hapus Materi disini.</p>';
-  else html+='<p style="background:#FEE2E2;padding:10px;border-radius:12px;font-weight:bold;color:#991B1B">🔒 Mode GURU - '+loginSaatIni.nama+' - Pian cuma bisa lihat mapel ini. Untuk edit kelas lain, hubungi Kepsek / Admin.</p>';
+  else html+='<p style="background:#FEE2E2;padding:10px;border-radius:12px;font-weight:bold;color:#991B1B">🔒 Mode GURU - '+loginSaatIni.nama+' - Pian cuma bisa lihat mapel ini.</p>';
   list.forEach(function(m,idx){
     html+='<div style="background:#FFFBEB;border:3px solid #FFA502;padding:12px;border-radius:16px;margin:10px 0"><h4 style="margin:0;color:#7C3AED">'+m.judul+'</h4>';
     html+='<p><b>📖 Materi:</b><br>'+m.isi+'</p>';
@@ -201,9 +225,9 @@ function tampilDetailMapel(kelas,mapel){
 function tambahMateriPopup(kelas,mapel){
   if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa tambah di mapel ini. Cuma Guru kelasnya / Kepsek / Admin yang bisa.');
   var judul=document.getElementById('popupJudul').value.trim(); var isi=document.getElementById('popupIsi').value.trim(); var video=document.getElementById('popupVideo').value.trim(); var latihan=document.getElementById('popupLatihan').value.trim();
-  if(!judul||!isi) return alert('Isi Judul dan Isi dulu!'); var key=kelas+"|"+mapel; if(!MATERI_DATA[key]) MATERI_DATA[key]=[]; MATERI_DATA[key].push({judul:judul,isi:isi,video:video,latihan:latihan}); simpanMateri(); alert('Berhasil! Materi baru sudah muncul! 🎉'); tampilDetailMapel(kelas,mapel);
+  if(!judul||!isi) return alert('Isi Judul dan Isi dulu!'); var key=kelas+"|"+mapel; if(!MATERI_DATA[key]) MATERI_DATA[key]=[]; MATERI_DATA[key].push({judul:judul,isi:isi,video:video,latihan:latihan}); simpanMateri(kelas,mapel); alert('Berhasil! Materi baru sudah muncul di semua HP! 🎉'); tampilDetailMapel(kelas,mapel);
 }
-function hapusMateriPopup(kelas,mapel,idx){ if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa hapus di mapel ini.'); if(!confirm('Hapus materi ini? Yang tidak perlu saja yang dihapus ya.')) return; var key=kelas+"|"+mapel; MATERI_DATA[key].splice(idx,1); simpanMateri(); tampilDetailMapel(kelas,mapel); }
+function hapusMateriPopup(kelas,mapel,idx){ if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa hapus di mapel ini.'); if(!confirm('Hapus materi ini? Yang tidak perlu saja yang dihapus ya.')) return; var key=kelas+"|"+mapel; MATERI_DATA[key].splice(idx,1); simpanMateri(kelas,mapel); tampilDetailMapel(kelas,mapel); }
 function cariDiKelas(input,listId){var q=input.value.toLowerCase(); document.querySelectorAll('#'+listId+' .anak-kelas').forEach(function(el){el.style.display=el.innerText.toLowerCase().includes(q)?'block':'none';});}
 function renderSiswa(){var div=document.getElementById('listSiswa'); div.innerHTML=''; Object.keys(DATA).forEach(k=>{DATA[k].forEach(n=>{var d=document.createElement('div'); d.className='siswa'; d.innerHTML='<b>🧒 '+n+'</b><br>Kelas: '+k; div.appendChild(d);});});}
 function renderGuru(){var div=document.getElementById('listGuru'); div.innerHTML=''; GURU_DATA.forEach(function(g){var d=document.createElement('div'); d.className='guru'; d.innerHTML='<b>👩‍🏫 '+g.nama+'</b><br>Jabatan: '+g.jabatan+' | Kelas: <b>'+g.kelas+'</b><br>Mapel: '+g.mapel; div.appendChild(d);});}
@@ -213,7 +237,7 @@ function tambahSoal(){if(!loginSaatIni) return alert('Login PIN dulu!'); var k=d
 function tambahNilai(){if(!loginSaatIni) return alert('Login PIN dulu!'); var nama=document.getElementById('nNama').value; var kelas=document.getElementById('nKelas').value; var mapel=document.getElementById('nMapel').value; var angka=document.getElementById('nAngka').value; var ket=document.getElementById('nKet').value; if(!nama||!angka) return alert('Isi Nama dan Nilai dulu!'); var tr=document.createElement('tr'); tr.innerHTML='<td>'+nama+'</td><td>'+kelas+'</td><td>'+mapel+'</td><td><b>'+angka+'</b></td><td>'+ket+'</td>'; document.getElementById('listNilai').appendChild(tr); alert('Nilai ditambah!');}
 function tambahJejak(){if(!loginSaatIni) return alert('Login PIN dulu!'); var nama=document.getElementById('jNama').value; var judul=document.getElementById('jJudul').value; var detail=document.getElementById('jDetail').value; if(!nama||!judul) return alert('Isi Nama dan Judul dulu!'); var div=document.createElement('div'); div.className='jejak'; div.innerHTML='<span class="badge">BARU</span> <b>'+judul+' - '+nama+'</b><br><span>'+detail+'</span>'; document.getElementById('listJejak').appendChild(div); alert('Rekam Jejak ditambah!');}
 function cariSiswa(){var q=document.getElementById('cariSiswa').value.toLowerCase(); document.querySelectorAll('#listSiswa .siswa').forEach(s=>{s.style.display=s.innerText.toLowerCase().includes(q)?'block':'none';});}
-updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); renderMapel(); updateBar(); updateFormAkses();
+updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); renderMapel(); updateBar(); updateFormAkses(); muatMateriDariFirebase();
 </script>
 </body>
 </html>
