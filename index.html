@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PPDB SDN Kayakah 3 - Amuntai Selatan</title>
+<title>SDN Kayakah - Beranda Ceria</title>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
@@ -12,279 +12,453 @@ const db=firebase.firestore();
 window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
 window.dispatchEvent(new Event('firebase-ready'));
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#FFFDF5;font-family:'Nunito',Arial,sans-serif;color:#1F2937}
-h1,h2,h3{font-family:'Baloo 2',Arial,sans-serif}
-.topbar{background:#1E3A8A;color:white;padding:10px;text-align:center;font-weight:800;font-size:13px}
-.header-meriah{text-align:center;padding:22px 14px 20px;background:linear-gradient(135deg,#FF5252 0%,#FF9800 20%,#FFEB3B 40%,#4CAF50 60%,#2196F3 80%,#9C27B0 100%);color:white;position:relative;overflow:hidden}
-.header-meriah .hiasan{font-size:28px;letter-spacing:6px}
-.header-meriah h1{margin:6px 0 4px;font-size:36px;line-height:1.1;color:#FFEB3B;text-shadow:3px 3px 0 #1E3A8A, -1px -1px 0 #1E3A8A, 1px -1px 0 #1E3A8A, -1px 1px 0 #1E3A8A}
-.header-meriah p{margin:0;background:white;color:#1E3A8A;display:inline-block;padding:6px 18px;border-radius:20px;font-weight:800;font-size:15px}
-.header-btn{background:#FF6D00;color:white;border:none;padding:15px 26px;border-radius:30px;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 5px 0 #BF360C;margin-top:14px}
-.header-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #BF360C}
-.badges{display:flex;gap:10px;padding:14px;justify-content:center;flex-wrap:wrap}
-.badge{background:#DCFCE7;border:2px solid #86EFAC;padding:10px 12px;border-radius:16px;font-weight:800;font-size:13px;text-align:center;flex:1;min-width:110px;max-width:190px}
-.badge:nth-child(2){background:#FFF9C4;border-color:#FDE047}
-.badge:nth-child(3){background:#E0F2FE;border-color:#7DD3FC}
-.pengumuman{background:#FFF3E0;border:2px solid #FFB25E;padding:16px;border-radius:18px;margin:0 15px 15px}
-.berkas{background:#EFF6FF;border:2px solid #60A5FA;padding:15px;border-radius:18px;margin:0 15px 15px}
-.berkas h3{margin:0 0 8px;color:#1E40AF}
-.berkas ol{padding-left:20px;margin:8px 0}
-.berkas li{margin-bottom:5px;font-size:14px}
-.menu{display:flex;gap:10px;justify-content:center;padding:0 15px 15px;flex-wrap:wrap}
-.menu button{border:none;background:white;padding:13px 18px;border-radius:25px;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.1);font-family:'Nunito',sans-serif}
-.menu button.active{background:#1E3A8A;color:white}
-.card{background:white;margin:0 15px 15px;padding:18px;border-radius:20px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
-input,select,textarea{width:100%;padding:13px;margin:6px 0;border:1.5px solid #E5E7EB;border-radius:12px;font-size:15px;font-family:'Nunito',sans-serif}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#1E3A8A}
-.btn{border:none;background:#1E3A8A;color:white;padding:15px;border-radius:25px;font-weight:800;cursor:pointer;width:100%;font-size:16px}
-.btn-oranye{background:#FF8A1E}
-.btn-hijau{background:#16A34A}
-.btn-abu{background:#6B7280}
-.btn-beranda-bawah{background:#6B7280;color:white;border:none;padding:13px;border-radius:25px;font-weight:800;cursor:pointer;width:100%;margin-top:10px}
-.siswa{background:#FFFBEB;padding:13px;border-radius:14px;margin-bottom:10px;border:1px solid #FDE68A}
-.bukti{background:#DCFCE7;padding:16px;border-radius:14px;text-align:center}
-.keterangan{font-size:12px;color:#888;margin-top:-2px;margin-bottom:8px}
-.kunci{background:#FEF3C7;padding:12px;border-radius:12px;font-size:13px;border:1px solid #FDE68A}
-.hasil-diterima{background:#DCFCE7;border:2px solid #16A34A;padding:15px;border-radius:14px}
-.hasil-ditolak{background:#FEE2E2;border:2px solid #DC2626;padding:15px;border-radius:14px}
-.hasil-menunggu{background:#FEF3C7;border:2px solid #F59E0B;padding:15px;border-radius:14px}
-.checklist{background:white;padding:12px;border-radius:10px;margin-top:10px}
-footer{text-align:center;padding:20px;color:#888;font-size:13px}
-@media(max-width:480px){.header-meriah h1{font-size:28px}}
+body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#FFF9C4;color:#333}
+header{background:linear-gradient(180deg,#FF4081,#FF9800,#FFEB3B);color:#fff;padding:18px 14px 22px;text-align:center}
+header h1{margin:4px 0;font-size:48px;color:white;text-shadow:3px 3px 0 #7C4DFF,6px 6px 0 #2196F3}
+header p{margin:6px 0 0;font-weight:bold;background:#fff;color:#E91E63;display:inline-block;padding:8px 16px;border-radius:20px}
+.pembuat-kecil{font-size:12px;color:#fff;background:rgba(0,0,0,.25);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
+.awan{font-size:38px;animation:jalan 6s ease-in-out infinite}
+@keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
+.kartun-besar{font-size:72px;line-height:1;margin:10px 0;letter-spacing:8px;animation:lompat 1.2s ease-in-out infinite}
+@keyframes lompat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pengumuman{background:#FFEB3B;padding:12px 10px;border-bottom:4px solid #FF9800;font-weight:bold;font-size:17px;color:#BF360C;overflow:hidden;white-space:nowrap}
+.pengumuman span{background:#FF5252;color:white;padding:5px 12px;border-radius:20px;margin-right:10px}
+nav{background:#fff;padding:12px;text-align:center;box-shadow:0 3px 8px #ddd;position:sticky;top:0;z-index:10}
+nav a{margin:4px;display:inline-block;padding:9px 16px;border-radius:20px;text-decoration:none;color:white;font-weight:bold;font-size:14px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+nav a:nth-child(1){background:#FF5252}nav a:nth-child(2){background:#FF9800}nav a:nth-child(3){background:#4CAF50}nav a:nth-child(4){background:#2196F3}nav a:nth-child(5){background:#9C27B0}nav a:nth-child(6){background:#FF4081}nav a:nth-child(7){background:#FF6D00}nav a:nth-child(8){background:#00BCD4}
+.wrap{max-width:920px;margin:auto;padding:0 14px 20px}
+.hero{background:white;margin:20px 0;padding:0 0 22px;border-radius:30px;text-align:center;border:5px solid #FF4081;overflow:hidden;box-shadow:0 8px 20px rgba(255,64,129,.3)}
+.hero-banner{background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);padding:22px 10px}
+.hero-banner div{font-size:64px}
+.hero h2{color:#E91E63;font-size:30px;margin:14px 10px 0}
+.visi{background:#E3F2FD;padding:14px;border-radius:12px;margin:15px}
+.btn{display:inline-block;background:linear-gradient(90deg,#FF5252,#FF9800);color:white;padding:16px 26px;border-radius:30px;text-decoration:none;font-weight:bold;font-size:18px;box-shadow:0 4px 0 #c62828}
+.btn2{display:inline-block;background:#4CAF50;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;font-weight:bold;margin:6px}
+.btn-kembali{display:inline-block;background:#fff;color:#E91E63;border:2px solid #E91E63;padding:10px 20px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:14px;margin-top:14px}
+.btn-kembali:hover{background:#E91E63;color:#fff}
+.kartun-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 8px}
+.kartun-kotak{width:150px;background:#FFF3E0;border-radius:18px;padding:12px 6px;border:3px solid #FFEB3B}
+.kartun-kotak div{font-size:48px}
+.kartun-kotak b{font-size:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin:15px 0}
+.stats div{padding:16px;border-radius:16px;color:white;text-align:center;font-weight:bold;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.stats div b{font-size:26px;display:block}
+.c1{background:#FF5252}.c2{background:#FF9800}.c3{background:#2196F3}.c4{background:#4CAF50}
+.card{background:white;padding:22px;border-radius:25px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,.12);border:3px solid #FFE082;overflow:hidden}
+.card h3{margin-top:0;font-size:22px}
+.banner-kartun{background:linear-gradient(90deg,#FF5252,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0);border-radius:16px;padding:16px;text-align:center;font-size:48px;margin-bottom:12px;letter-spacing:6px}
+table{width:100%;border-collapse:collapse}
+td{padding:9px;border-bottom:1px solid #eee}
+td:first-child{font-weight:bold;width:35%;color:#E91E63}
+.guru{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.guru div{padding:14px;border-radius:14px;font-size:14px}
+.guru div:nth-child(odd){background:#FFF3E0}.guru div:nth-child(even){background:#E3F2FD}
+.ekstra{display:flex;flex-wrap:wrap;gap:8px}
+.ekstra span{background:#F3E5F5;padding:10px 14px;border-radius:20px;font-weight:bold}
+.peng-card{background:#FFF3E0;border:3px solid #FF9800}.peng-card li{margin-bottom:8px;line-height:1.5}
+.galeri-wrap{background:linear-gradient(135deg,#FFF3E0,#E3F2FD,#F3E5F5);border:4px solid #FF9800!important}
+.galeri{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g-card{background:white;border-radius:18px;overflow:hidden;text-align:center;padding-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #FFEB3B}
+.g-card.kepsek{grid-column:1 / -1;max-width:320px;margin:auto;width:100%;border-color:#FF5252}
+.g-card .foto-kartun{height:170px;display:flex;align-items:center;justify-content:center;font-size:90px}
+.g-card.kepsek .foto-kartun{height:200px;font-size:110px}
+.g-card b{display:block;margin:10px 8px 2px;font-size:16px;color:#1565C0}.g-card span{font-size:13px;color:#666;display:block;padding:0 8px}
+.g-btn{margin-top:8px;background:#FF4081;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}
+.kegiatan-wrap{background:linear-gradient(135deg,#E8F5E9,#E3F2FD,#FFF3E0);border:4px solid #4CAF50!important}
+.kegiatan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.k-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.12);border:3px solid #C8E6C9;text-align:center;padding-bottom:10px}
+.k-card .k-kartun{height:130px;display:flex;align-items:center;justify-content:center;font-size:72px}
+.k-card img{width:100%;height:180px;object-fit:cover;display:block;cursor:pointer}
+.k-card b{display:block;margin:8px 6px 2px;font-size:14px;color:#2E7D32}.k-card span{font-size:12px;color:#777;display:block;padding:0 6px}
+.k-del{background:#FF5252;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px}
+.tambah-box{background:#fff;border:3px dashed #4CAF50;border-radius:16px;padding:18px;text-align:center}
+.tambah-box input{width:100%;margin:6px 0;padding:9px;border:1px solid #ccc;border-radius:10px}.tambah-box select{width:100%;padding:9px;border:1px solid #ccc;border-radius:10px;margin:6px 0}
+.btn-tambah{background:#4CAF50;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px;width:100%}
+.admin-bar{background:#333;color:white;padding:12px;text-align:center;position:sticky;top:0;z-index:20;font-size:14px}.admin-bar b{color:#FFEB3B}
+.btn-login{background:#FFEB3B;color:#333;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}.btn-logout{background:#FF5252;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:99;justify-content:center;align-items:center}
+.modal-box{background:white;width:92%;max-width:400px;padding:22px;border-radius:20px;text-align:center;max-height:90vh;overflow:auto}
+.modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #FF9800;border-radius:12px;font-size:15px}
+.modal-box button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;font-size:15px;margin-top:6px}
+.lock-box{background:#FFF3E0;border:2px dashed #FF9800;padding:14px;border-radius:12px;text-align:center;margin:12px 0}
+.hanya-admin{display:none}body.admin .hanya-admin{display:block}
+.kepsek-panel{background:linear-gradient(135deg,#FFEBEE,#FFF3E0);border:4px solid #FF5252!important}.kepsek-panel input{padding:8px;border:1px solid #ccc;border-radius:8px;width:100%}
+.hanya-kepsek{display:none}body.kepsek .hanya-kepsek{display:block}
+#tabelPIN table{border:1px solid #ddd;background:#fff}
+#tabelPIN td{border-bottom:1px solid #eee;color:#333}
+#tabelPIN td:first-child{width:auto;color:#333}
+footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px solid #FFEB3B}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
 </style>
 </head>
 <body>
-<div class="topbar">🏫 SDN KAYAKAH 3 • Amuntai Selatan • PPDB 2026/2027 DIBUKA</div>
-<div class="header-meriah">
-<div class="hiasan">🎈 🌈 🎈 🌸 🦋 🌸 🎈 🌈 🎈</div>
-<h1>Ayo Sekolah<br>di SDN Kayakah 3!</h1>
-<p>📍 Amuntai Selatan</p><br>
-<button class="header-btn" onclick="keDaftar()">📝 DAFTAR SEKARANG - GRATIS!</button>
-<div style="margin-top:10px;font-size:22px">🌳 🦧 🐒 🦜 🌺 🌻 🌳</div>
+<div class="admin-bar">
+<span id="adminStatus">👀 Mode Pengunjung - Hanya Melihat Galeri</span>
+<button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Admin Guru</button>
+<button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button>
 </div>
-<div class="badges">
-<div class="badge">✅ Sekolah Negeri<br>Gratis</div>
-<div class="badge">👨‍🏫 Guru Ramah<br>& Peduli</div>
-<div class="badge">🏫 Dekat Rumah<br>Desa Kayakah</div>
+<div class="modal" id="modalLogin">
+<div class="modal-box">
+<div style="font-size:60px">👩‍🏫👨‍🏫🏫</div>
+<h2 style="margin:8px 0 0;color:#E65100">🔐 Login Admin</h2>
+<p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p>
+<label style="font-weight:bold">Pilih Nama Anda:</label>
+<select id="loginNama"></select>
+<label style="font-weight:bold">Masukkan PIN 6 Angka:</label>
+<input type="password" id="loginPIN" placeholder="Masukkan PIN 6 angka" inputmode="numeric" maxlength="6">
+<p id="loginError" style="color:#D32F2F;font-weight:bold;min-height:20px"></p>
+<button style="background:#4CAF50;color:white" onclick="cekLogin()">✅ MASUK SEBAGAI ADMIN</button>
+<button style="background:#BDBDBD" onclick="tutupLogin()">⬅️ Kembali ke Beranda</button>
 </div>
-<div class="pengumuman">
-<h3>📢 PENGUMUMAN PPDB</h3>
-<div id="isiPengumuman">Memuat pengumuman dari Firebase...</div>
-<p style="font-size:12px;color:#854D0E;margin:5px 0 0">Ditulis oleh: Kepala Sekolah / Staf SDN Kayakah 3</p>
 </div>
-<div class="berkas">
-<h3>📁 BERKAS YANG HARUS DIKUMPUL DI SEKOLAH</h3>
-<p style="font-size:13px;margin:0 0 10px">Silahkan disiapkan dari rumah, Bapak/Ibu. Nanti dibawa pas daftar ulang ke sekolah. Tidak perlu diupload di sini.</p>
-<div id="isiBerkas"></div>
-<p style="font-size:12px;color:#1E40AF;margin:8px 0 0">💡 <b>Tips:</b> Fotocopy dulu semua di rumah, biar tidak antri di tempat fotocopy. Asli dibawa untuk diperlihatkan saja.</p>
+<header id="beranda">
+<div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
+<div class="kartun-besar">👧🏫👦 📚 🎨</div>
+<h1>🌈 SDN KAYAKAH 🌈</h1>
+<p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br>
+<p>⭐ NPSN 30302788 | Berdiri Tahun 1976 ⭐</p><br>
+<span class="pembuat-kecil">Wahyu Aji, S.Pd.Jas</span>
+<div style="font-size:30px;margin-top:8px">🏫 📚 🎨 ⚽ 🎤 🥁 💻 🌱 🎉</div>
+</header>
+<div class="pengumuman"><span>📢 PENGUMUMAN</span><marquee id="marqueePengumuman" behavior="scroll" scrollamount="6">🎉 Selamat Datang di SDN Kayakah! &nbsp;&nbsp; 💬 Ada Kritik & Saran? Isi di Kotak Saran Di Bawah Ya! &nbsp;&nbsp; 📚 Senin: Upacara Bendera Jam 07.30 WITA &nbsp;&nbsp; 🕌 Jumat: Yasinan & Infaq &nbsp;&nbsp; 🥁 Sabtu: Pramuka Jam 15.00 WITA &nbsp;&nbsp;</marquee></div>
+<nav>
+<a href="ppdb.html">🎓 PPDB</a><a href="#">🏠 Beranda</a><a href="#profil">📚 Profil</a><a href="#guru">👩‍🏫 Guru</a><a href="#galeri">📸 Galeri Guru</a><a href="#kegiatan">🎉 Galeri Kegiatan</a><a href="game.html">🎮 Kuis Seru</a><a href="asmaul-husna.html">🕌 Asmaul Husna</a><a href="agama-islam.html" style="background:#b91c1c;color:white">🕌 Agama Islam</a><a href="sdn-kayakah-belajar.html" style="background:#8e44ad; color:white; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold;">📚 Kayakah Belajar</a><a href="saran.html" style="background:#90EE90;">💬 Kritik & Saran</a><a href="bukutamu.html" style="background:#90EE90;">📖 Buku Tamu</a><a href="#kontak" style="background:#FFEB3B;color:#333;">📞 Kontak</a><a href="mitra-sdn-kayakah.html" style="background:#FF9800;">🤝 Mitra</a>
+</nav>
+<div class="wrap">
+<div class="hero">
+<div class="hero-banner"><div>👧📚👦🎨⚽🕌🌱🎉</div><div style="font-size:18px;color:white;font-weight:bold;margin-top:6px">SEKOLAH CERIA • ANAK HEBAT • GURU HEBAT</div></div>
+<h2>🎉 Selamat Datang di Website SDN Kayakah 🎉</h2>
+<p style="padding:0 16px">Tempat Anak Hebat Belajar, Bermain & Berprestasi! 🌟</p>
+<div class="kartun-row">
+<div class="kartun-kotak"><div>📚😊</div><b>📚 Rajin Belajar</b></div>
+<div class="kartun-kotak"><div>🎨🌈</div><b>🎨 Kreatif</b></div>
+<div class="kartun-kotak"><div>⚽💪</div><b>⚽ Sehat & Kuat</b></div>
+<div class="kartun-kotak"><div>🕌❤️</div><b>🕌 Berakhlak Mulia</b></div>
 </div>
-<div class="menu">
-<button id="btn-daftar" class="active" onclick="tampil('daftar',this)">📝 Daftar PPDB</button>
-<button onclick="tampil('cek',this)">🔍 Cek Status Saya</button>
-<button onclick="tampil('admin',this)">🔐 Admin Kepsek</button>
+<div class="visi"><b>🌟 Visi Kami:</b><br>"Terwujudnya Insan Pembelajar yang Berbudi Luhur, Mandiri, dan Sehat"</div>
+<a class="btn" href="game.html">🎮 MAIN KUIS, YUK!</a><br><br>
+<a class="btn2" href="#galeri">📸 Galeri Guru</a>
+<a class="btn2" href="#kegiatan">🎉 Galeri Kegiatan</a>
+<a class="btn2" href="saran.html">💬 Kritik & Saran</a>
 </div>
-<div id="daftar" class="card">
-<h2>📝 Formulir PPDB Online</h2>
-<div class="kunci">🔒 Data Bapak/Ibu <b>tidak bisa dilihat pengunjung lain</b>. Hanya Kepala Sekolah yang bisa lihat. Data tersimpan aman di Firebase, bisa dibuka di HP mana saja oleh Kepsek.</div><br>
-<label>Nama Lengkap Anak *</label>
-<input id="namaAnak" placeholder="Contoh: Ahmad Fauzi">
-<label>Usia Anak *</label>
-<select id="usia"><option value="">Pilih Usia...</option><option>5 Tahun</option><option>6 Tahun</option><option>7 Tahun</option><option>8 Tahun</option><option>Lebih dari 8 Tahun</option></select>
-<label>NIK Anak (Tidak Wajib)</label>
-<input id="nik" placeholder="Boleh dikosongkan" inputmode="numeric">
-<p class="keterangan">Kalau ragu, kosongkan saja. Dilengkapi pas daftar ulang bawa KK.</p>
-<label>Tanggal Lahir (Tidak Wajib)</label>
-<input id="tgl" type="date">
-<label>Jenis Kelamin</label>
-<select id="jk"><option>Laki-laki</option><option>Perempuan</option></select>
-<label>Alamat Rumah</label>
-<textarea id="alamat" placeholder="Desa Kayakah, RT ..."></textarea>
-<label>Nama Ayah</label>
-<input id="ayah" placeholder="Nama Ayah">
-<label>Nama Ibu</label>
-<input id="ibu" placeholder="Nama Ibu">
-<label>Nomor WA Orang Tua *</label>
-<input id="wa" placeholder="Contoh: 081234567890" inputmode="numeric">
-<button class="btn btn-oranye" id="btnKirim" onclick="kirimPPDB()">KIRIM PENDAFTARAN ✅</button>
-<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+<div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
+<h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA GURU & PIN 👑</h3>
+<p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini!</p>
+<div style="background:#fff;padding:12px;border-radius:12px">
+<b>➕ Tambah Guru / Staf Baru - Langsung Jadi Kartu Galeri!</b><br>
+<input type="text" id="namaBaru" placeholder="Nama Lengkap - Contoh: Budi Santoso, S.Pd.">
+<input type="text" id="pinBaru" placeholder="PIN Baru 6 angka - Contoh: 567890" inputmode="numeric" maxlength="6" style="margin-top:6px">
+<input type="text" id="jabatanBaru" placeholder="Jabatan - Contoh: Guru Kelas" style="margin-top:6px">
+<input type="file" id="fotoBaru" accept="image/*" style="margin-top:6px">
+<button onclick="tambahAdminBaru()" style="background:#4CAF50;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">➕ TAMBAH GURU BARU + BUATKAN PIN</button>
+<p id="pesanTambahAdmin" style="font-weight:bold;color:#2E7D32;text-align:center"></p>
+</div><br>
+<b>📋 Daftar Guru & Staf - Ganti PIN / Hapus Guru:</b>
+<div id="tabelPIN"></div>
+<div style="text-align:center;margin-top:10px">
+<button onclick="resetSemuaPIN()" style="background:#FF9800;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔄 Reset Semua PIN Guru Jadi 123456</button>
+<button onclick="gantiPINkepsek()" style="background:#C62828;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔐 Ganti PIN Kepala Sekolah</button>
 </div>
-<div id="cek" class="card" style="display:none">
-<h2>🔍 Cek Status Saya Saja</h2>
-<p>Isi 2 kunci ini. Orang lain tidak bisa cek punya Bapak/Ibu.</p>
-<label>Nomor WA *</label>
-<input id="cekWA" placeholder="Contoh: 081234567890">
-<label>Nomor Pendaftaran *</label>
-<input id="cekNo" placeholder="Contoh: PPDB-001">
-<button class="btn btn-hijau" onclick="cekData()">CEK STATUS SAYA</button>
-<div id="hasilCek" style="margin-top:15px"></div>
-<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
-<div id="admin" class="card" style="display:none">
-<h2>🔐 Admin Kepsek - Hanya Pak Wahyu - PIN 6 Digit</h2>
-<div id="loginBox">
-<label style="font-weight:800">Masukkan PIN 6 Angka Kepsek:</label>
-<input type="password" id="pass" placeholder="PIN 6 angka - 197601" inputmode="numeric" maxlength="6">
-<button class="btn" onclick="login()">Masuk Admin</button>
-<p style="font-size:12px;color:#888">PIN sama seperti di Beranda - PIN Kepsek Wahyu Aji</p>
+<div class="card galeri-wrap" id="galeri">
+<div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
+<h3 style="text-align:center;color:#E65100;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
+<p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
+<div class="lock-box" id="lockGuru">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto. Untuk ganti foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
+<div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
+<div class="galeri" id="listGaleriGuru"></div>
+<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#4CAF50;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU</button></div>
+<p id="pesanGaleri" style="text-align:center;font-weight:bold;color:#2E7D32"></p>
+<div class="hanya-admin" style="background:#FFF3E0;border:3px dashed #FF9800;border-radius:16px;padding:16px;margin-top:16px;text-align:center">
+<h3 style="margin:0;color:#E65100">🔐 Ganti PIN Saya Sendiri</h3>
+<p style="font-size:13px;color:#666;margin:6px 0">Login sebagai: <b id="namaPinSendiri">-</b><br>Anda hanya bisa ganti PIN Anda sendiri. Tidak bisa lihat PIN orang lain.</p>
+<input type="password" id="pinLamaSaya" placeholder="PIN Lama 6 angka" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
+<input type="password" id="pinBaruSaya" placeholder="PIN Baru 6 angka - Contoh: 654321" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
+<input type="password" id="pinBaruSaya2" placeholder="Ulangi PIN Baru 6 angka" inputmode="numeric" maxlength="6" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:4px 0">
+<button onclick="gantiPINsendiri()" style="background:#FF9800;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">🔐 GANTI PIN SAYA JADI 6 ANGKA</button>
+<p id="pesanPinSendiri" style="font-weight:bold;color:#2E7D32"></p>
 </div>
-<div id="adminBox" style="display:none">
-<h3>📢 Tulis Pengumuman</h3>
-<textarea id="editPengumuman" rows="4"></textarea>
-<button class="btn btn-hijau" onclick="simpanPengumuman()">SIMPAN PENGUMUMAN</button><hr>
-<h3>📁 Tulis Daftar Berkas</h3>
-<textarea id="editBerkas" rows="7"></textarea>
-<button class="btn btn-hijau" onclick="simpanBerkas()">SIMPAN DAFTAR BERKAS</button><hr>
-<p><b>Selamat datang, Pak Wahyu!</b></p>
-<p id="infoJumlah" style="font-size:13px;color:#666"></p>
-<div id="listSiswa">Memuat data dari Firebase...</div>
-<button class="btn btn-abu" onclick="keluar()">Keluar Admin</button>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
-<button class="btn-beranda-bawah" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button>
+<div class="card kegiatan-wrap" id="kegiatan">
+<div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
+<h3 style="text-align:center;color:#2E7D32;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
+<p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱</p>
+<div class="lock-box" id="lockKegiatan">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto kegiatan. Untuk tambah / hapus foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
+<div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin Aktif - Pian Bisa Tambah & Hapus Foto Kegiatan!</div>
+<div style="text-align:center;margin-bottom:12px">
+<button onclick="filterKegiatan('SEMUA')" style="background:#4CAF50;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🌈 Semua</button>
+<button onclick="filterKegiatan('Upacara')" style="background:#FF5252;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📚 Upacara</button>
+<button onclick="filterKegiatan('Pramuka')" style="background:#795548;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🥁 Pramuka</button>
+<button onclick="filterKegiatan('Habsy')" style="background:#9C27B0;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎤 Habsy</button>
+<button onclick="filterKegiatan('Olahraga')" style="background:#2196F3;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">⚽ Olahraga</button>
+<button onclick="filterKegiatan('Lainnya')" style="background:#FF9800;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎨 Lainnya</button>
 </div>
-<div id="buktiBox" class="card" style="display:none"></div>
-<footer>© 2026 SDN Kayakah 3 - Amuntai Selatan<br>Data Pendaftar Dilindungi - Wahyu Aji, S.Pd.Jas</footer>
+<div class="kegiatan-grid" id="listKegiatan"></div>
+<div class="tambah-box hanya-admin" style="margin-top:14px">
+<h3 style="margin:0;color:#2E7D32">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
+<p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiForm">-</b></p>
+<input type="text" id="judulKegiatan" placeholder="📝 Judul Kegiatan - Contoh: Upacara Bendera Senin">
+<select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option></select>
+<input type="text" id="ketKegiatan" placeholder="✏️ Keterangan - Contoh: Bersama Pak Wahyu & Bu Syahruni">
+<input type="file" id="fileKegiatan" accept="image/*">
+<button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN</button>
+<p id="pesanKegiatan" style="font-weight:bold;color:#2E7D32"></p>
+</div>
+<div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#FF5252;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
+</div>
+<div class="card peng-card"><div class="banner-kartun">📢🎉📚</div><h3>📢 Pengumuman Sekolah</h3><ul id="listPengumuman"><li>Memuat pengumuman...</li></ul>
+<div class="hanya-admin" style="background:#fff;border:3px dashed #FF9800;border-radius:16px;padding:14px;margin-top:12px;text-align:center">
+<b>➕ TAMBAH PENGUMUMAN BARU - KHUSUS ADMIN / KEPSEK</b><br>
+<input id="judulPengumuman" placeholder="Judul - Contoh: Senin Upacara" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
+<input id="isiPengumuman" placeholder="Isi - Contoh: Jam 07.30 WITA, pakai seragam lengkap" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
+<button onclick="tambahPengumuman()" style="background:#4CAF50;color:white;border:none;padding:12px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%">📢 SIMPAN PENGUMUMAN</button>
+<p id="pesanPengumuman" style="font-weight:bold;color:#2E7D32"></p>
+</div>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+<div class="stats"><div class="c1"><b>60</b>😊 Siswa Hebat</div><div class="c2"><b>6</b>📚 Kelas Ceria</div><div class="c3"><b>10</b>👩‍🏫 Guru & Staf</div><div class="c4"><b>1976</b>🏫 Berdiri</div></div>
+<div class="card" id="profil"><div class="banner-kartun">🏫🌈📚</div><h3>📚 Profil Sekolah Kita</h3><table><tr><td>🏫 Nama Sekolah</td><td>SD Negeri Kayakah</td></tr><tr><td>📍 Alamat</td><td>Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara, Kalimantan Selatan 71452</td></tr><tr><td>🆔 NPSN / NSS</td><td>30302788 / 101150702012</td></tr><tr><td>🎂 Tahun Berdiri</td><td>1976</td></tr><tr><td>👧👦 Jumlah Siswa</td><td>60 Siswa (30 Laki-laki, 30 Perempuan)</td></tr><tr><td>📖 Rombel</td><td>6 Rombel - Kelas I s.d VI</td></tr></table><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+<div class="card" id="guru"><div class="banner-kartun">👩‍🏫👨‍🏫❤️</div><h3>👩‍🏫 Guru & Staf Hebat Kami</h3><div class="guru" id="listGuruProfil"></div><p style="margin-top:12px">📖 Pembimbing Tahsin & Tahfiz: <b>Syahida Norpah, S.Pd.</b> dan <b>Jannah, S.Pd.</b><br>🤝 Ketua Komite: <b>H. M. Husni</b></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+<div class="card" id="ekstra"><div class="banner-kartun">🥁🎤💻🌱⚽🛍️</div><h3>🎨 Kegiatan Seru di Sekolah!</h3><div class="ekstra"><span>🥁 Pramuka - Sabtu</span><span>🎤 Habsy / Hadrah - Minggu</span><span>💻 Komputer - Selasa, Rabu, Kamis</span><span>📖 Tahsin & Tahfiz</span><span>🌱 Kebun Sekolah</span><span>⚽ Senam Sehat</span><span>🛍️ Market Day</span></div><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+<div class="card" id="kontak"><div class="banner-kartun">📞🏫💬</div><h3>📞 Yuk, Hubungi Kami!</h3><p><b>📍 Alamat:</b> Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara 71452</p><p><b>👨‍🏫 Plt. Kepala Sekolah:</b> Wahyu Aji, S.Pd.Jas</p><p><b>🤝 Ketua Komite:</b> H. M. Husni</p><p><b>💬 Kritik & Saran:</b> <a href="saran.html">Klik di sini - saran.html</a></p><p><b>🎮 Kuis Siswa:</b> <a href="game.html">Klik di sini - game.html</a></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+</div>
+<footer><div style="font-size:36px">🏫 🌈 📚 🎨 ⚽ 🎤 🥁 💻 🌱</div>© 2026 SDN Kayakah - Amuntai Selatan 🌈<br>Belajar Ceria, Berkarakter, Berprestasi!</footer>
 <script>
-var _pengumumanDefault='Assalamualaikum Bapak/Ibu. Pendaftaran PPDB SDN Kayakah 3 Tahun Ajaran 2026/2027 DIBUKA. Cara daftar: 1. Klik tombol Daftar PPDB di bawah ini. 2. Isi formulir online dari HP. 3. Simpan Nomor Pendaftaran. 4. Cek status di menu Cek Status Saya. Tidak perlu datang ke sekolah dulu. Kalau bingung, datang langsung ke SDN Kayakah 3. Terima kasih - Pak Wahyu Aji, Kepala Sekolah.';
-var _berkasDefault='Fotocopy Kartu Keluarga (KK) - 2 lembar\nFotocopy Akte Kelahiran Anak - 2 lembar\nFotocopy KTP Ayah & Ibu - Masing-masing 1 lembar\nPas Foto Anak Ukuran 3x4 - 4 lembar (Latar Merah)\nFotocopy Kartu KIP / PKH / KKS - Kalau ada saja\nMap Kertas - 1 buah (Hijau untuk Laki-laki, Merah untuk Perempuan)\nBawa ASLI KK & Akte untuk diperlihatkan saja, tidak ditinggal di sekolah';
-var _cachePengumuman=_pengumumanDefault;
-var _cacheBerkas=_berkasDefault;
-var _cacheSiswa=[];
-function kembaliBeranda(){ window.location.href='index.html'; }
-function keDaftar(){ tampil('daftar', document.getElementById('btn-daftar')); document.getElementById('daftar').scrollIntoView({behavior:'smooth'}); }
-function tampil(id, btn){
-  var cards=document.querySelectorAll('.card');
-  for(var i=0;i<cards.length;i++){ cards[i].style.display='none'; }
-  document.getElementById(id).style.display='block';
-  document.getElementById('buktiBox').style.display='none';
-  var tombol=document.querySelectorAll('.menu button');
-  for(var j=0;j<tombol.length;j++){ tombol[j].classList.remove('active'); }
-  if(btn) btn.classList.add('active');
+let adminLogin = null;
+let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
+let URUTAN_GURU = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
+let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
+let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
+let warnaGuru = ["#FFEBEE","#FFF3E0","#E3F2FD","#E8F5E9","#F3E5F5","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
+function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
+function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
+function pindahNamaLama(){
+  let peta = {
+    "Pathuljannah, S.Pd.I":"Pathul Jannah, S.Pd.I",
+    "Pathuljannah, S.Pd.":"Pathul Jannah, S.Pd.I",
+    "Pathul Jannah, S. Pd. I":"Pathul Jannah, S.Pd.I",
+    "Husain":"M. Husain",
+    "Syahida Norpah":"Syahida Norpah, S.Pd.",
+    "Syahida Norpah, S.Pd":"Syahida Norpah, S.Pd.",
+    "Syahida Norpah, S. Pd.":"Syahida Norpah, S.Pd.",
+    "Jannah":"Jannah, S.Pd.",
+    "Jannah, S.Pd":"Jannah, S.Pd.",
+    "Siti Nuriyah, S.Pd.SD":"Hj. Siti Nuriyah, S.Pd.SD",
+    "Siti Nuriyah, S. Pd. SD":"Hj. Siti Nuriyah, S.Pd.SD",
+    "Hj. Siti Nuriyah, S. Pd. SD":"Hj. Siti Nuriyah, S.Pd.SD",
+    "Wahyu Aji, S. Pd. Jas":"Wahyu Aji, S.Pd.Jas",
+    "Samsul Bahri, S. Pd.":"Samsul Bahri, S.Pd.",
+    "Samsul Bahri, S.Pd":"Samsul Bahri, S.Pd.",
+    "Syahruni, S. Pd. SD":"Syahruni, S.Pd.SD",
+    "Norsalim, S. Pd.":"Norsalim, S.Pd.",
+    "Norsalim, S.Pd":"Norsalim, S.Pd.",
+    "Radinah, S. Pd.":"Radinah, S.Pd.",
+    "Radinah, S.Pd":"Radinah, S.Pd.",
+    "Jannah, S. Pd.":"Jannah, S.Pd."
+  };
+  let berubah=false;
+  Object.keys(peta).forEach(lama=>{
+    let baru=peta[lama];
+    if(lama===baru) return;
+    if(daftarPIN[lama]){
+      if(!daftarPIN[baru]) daftarPIN[baru]=daftarPIN[lama];
+      delete daftarPIN[lama]; berubah=true;
+    }
+    if(jabatanAdmin[lama]){ if(!jabatanAdmin[baru]) jabatanAdmin[baru]=jabatanAdmin[lama]; delete jabatanAdmin[lama]; berubah=true; }
+    if(fotoGuru[lama]){ if(!fotoGuru[baru]) fotoGuru[baru]=fotoGuru[lama]; delete fotoGuru[lama]; berubah=true; }
+    if(adminLogin===lama) adminLogin=baru;
+  });
+  if(berubah){ try{ simpanPIN(); }catch(e){} }
 }
-function fbCol(nama){ return window._fb.collection(window._fb.db, nama); }
-async function ambilInfo(){
+function loadPIN(){
+  let def = {"Wahyu Aji, S.Pd.Jas":"197601","Samsul Bahri, S.Pd.":"123456","Syahruni, S.Pd.SD":"123456","Norsalim, S.Pd.":"123456","Pathul Jannah, S.Pd.I":"123456","Hj. Siti Nuriyah, S.Pd.SD":"123456","Radinah, S.Pd.":"123456","Syahida Norpah, S.Pd.":"123456","Jannah, S.Pd.":"123456","M. Husain":"123456"};
+  let defJab = {"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah & Guru PJOK","Samsul Bahri, S.Pd.":"Guru Kelas 6","Syahruni, S.Pd.SD":"Guru Kelas 5","Norsalim, S.Pd.":"Guru Kelas 4","Pathul Jannah, S.Pd.I":"Guru PAI dan Guru Kelas 3","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas 2","Radinah, S.Pd.":"Guru Kelas 1","Syahida Norpah, S.Pd.":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd.":"Pembimbing Tahsin & Tahfiz","M. Husain":"Operator Sekolah"};
+  try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); let f=localStorage.getItem("foto_guru_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; fotoGuru=f?JSON.parse(f):{}; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; fotoGuru={}; }
+  pindahNamaLama();
+  URUTAN_GURU.forEach(n=>{ if(!daftarPIN[n]) daftarPIN[n]=def[n]; jabatanAdmin[n]=defJab[n]; });
+  Object.keys(daftarPIN).forEach(n=>{ if(URUTAN_GURU.indexOf(n)===-1){ delete daftarPIN[n]; delete jabatanAdmin[n]; delete fotoGuru[n]; } });
+  if(!daftarPIN[NAMA_KEPSEK]) daftarPIN[NAMA_KEPSEK]="197601";
+  try{ simpanPIN(); }catch(e){}
+}
+function simpanPIN(){ localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru)); }
+function urutanNama(){ let out=[]; URUTAN_GURU.forEach(n=>{ if(daftarPIN[n]) out.push(n); }); Object.keys(daftarPIN).forEach(n=>{ if(out.indexOf(n)===-1) out.push(n); }); return out; }
+function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; urutanNama().forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
+function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
+function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; kembaliBeranda(); }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); if(daftarPIN[nama] && pin===daftarPIN[nama]){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; if(!cekPIN6(pin)){ alert("PIN Anda masih "+pin.length+" digit! Silakan ganti jadi 6 angka di kotak Ganti PIN Saya di bawah Galeri Guru ya, "+nama+"!"); } else { alert("Selamat Datang, "+nama+"! ✅"); } document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
+function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar Dari Mode Admin 🔒"); }
+function updateTampilanAdmin(){
+  if(adminLogin){
+    document.body.classList.add("admin");
+    if(adminLogin===NAMA_KEPSEK) document.body.classList.add("kepsek"); else document.body.classList.remove("kepsek");
+    document.getElementById("adminStatus").innerHTML=adminLogin===NAMA_KEPSEK?"👑 Login Sebagai KEPALA SEKOLAH: <b>"+adminLogin+"</b>":"✅ Login Sebagai Admin: <b>"+adminLogin+"</b>";
+    document.getElementById("btnLoginTop").style.display="none"; document.getElementById("btnLogoutTop").style.display="inline-block";
+    document.getElementById("lockGuru").style.display="none"; document.getElementById("lockKegiatan").style.display="none";
+    document.getElementById("namaAdminDiForm").innerHTML=adminLogin;
+    let elPin=document.getElementById("namaPinSendiri"); if(elPin) elPin.innerHTML=adminLogin;
+    if(adminLogin===NAMA_KEPSEK) tampilTabelPIN();
+  } else {
+    document.body.classList.remove("admin"); document.body.classList.remove("kepsek");
+    document.getElementById("adminStatus").innerHTML="👀 Mode Pengunjung - Hanya Melihat Galeri";
+    document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none";
+    document.getElementById("lockGuru").style.display="block"; document.getElementById("lockKegiatan").style.display="block";
+  }
+  renderGaleriGuru(); tampilKegiatan(); renderPengumuman();
+}
+function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Admin yang bisa! Klik 🔐 Login Admin Guru di atas!"); bukaLogin(); return false; } return true; }
+function wajibKepsek(){ if(adminLogin!==NAMA_KEPSEK){ alert("🔒 Hanya Kepala Sekolah!"); return false; } return true; }
+function gantiPINsendiri(){
+  if(!wajibAdmin()) return;
+  let lama=document.getElementById("pinLamaSaya").value.trim();
+  let baru=document.getElementById("pinBaruSaya").value.trim();
+  let baru2=document.getElementById("pinBaruSaya2").value.trim();
+  if(lama!==daftarPIN[adminLogin]){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Lama Salah!"; return; }
+  if(!cekPIN6(baru)){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru harus 6 angka! Contoh: 654321"; return; }
+  if(baru!==baru2){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru tidak sama! Ulangi lagi!"; return; }
+  daftarPIN[adminLogin]=baru; simpanPIN();
+  document.getElementById("pinLamaSaya").value=""; document.getElementById("pinBaruSaya").value=""; document.getElementById("pinBaruSaya2").value="";
+  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Ingat PIN baru Anda!";
+  alert("PIN Anda berhasil diganti! PIN baru: "+baru);
+}
+function renderGaleriGuru(){
+  let wadah=document.getElementById("listGaleriGuru"); if(!wadah) return;
+  let names=urutanNama();
+  document.getElementById("jumlahGuru").innerHTML="("+names.length+" Orang)";
+  let html="";
+  names.forEach((nama,idx)=>{
+    let isKepsek=nama===NAMA_KEPSEK; let warna=warnaGuru[idx%warnaGuru.length]; let emoji=kartunGuru[nama]||"👩‍🏫"; let jab=jabatanAdmin[nama]||"Guru / Staf";
+    let fotoHtml = fotoGuru[nama] ? `<img src="${fotoGuru[nama]}" style="width:100%;height:170px;object-fit:cover;display:block">` : `<div class="foto-kartun" style="background:${warna}">${emoji}</div>`;
+    if(isKepsek && fotoGuru[nama]) fotoHtml=`<img src="${fotoGuru[nama]}" style="width:100%;height:200px;object-fit:cover;display:block">`;
+    let tombol = adminLogin ? `<br><input type="file" id="input-${idx}" accept="image/*" style="display:none" onchange="gantiFotoBaru(this,'${nama.replace(/'/g,"")}')"><button class="g-btn" onclick="document.getElementById('input-${idx}').click()">📸 Ganti Foto Asli</button>` : ``;
+    let tombolHapus = (adminLogin===NAMA_KEPSEK && !isKepsek) ? `<br><button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#FF5252;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px">🗑️ Hapus Guru Ini</button>` : ``;
+    html+=`<div class="g-card ${isKepsek?"kepsek":""}">${fotoHtml}<b>${isKepsek?"👑 ":""}${nama}</b><span>${jab}</span>${tombol}${tombolHapus}</div>`;
+  });
+  wadah.innerHTML=html;
+  let profil=document.getElementById("listGuruProfil"); if(profil){ let hp=""; names.forEach(nama=>{ hp+=`<div>${nama===NAMA_KEPSEK?"👨‍🏫 ":"👩‍🏫 "}<b>${nama}</b><br>${jabatanAdmin[nama]||""}</div>`; }); profil.innerHTML=hp; }
+}
+function gantiFotoBaru(input,nama){ if(!wajibAdmin()){input.value="";return;} let file=input.files[0]; if(!file) return; let reader=new FileReader(); reader.onload=function(e){ fotoGuru[nama]=e.target.result; simpanPIN(); renderGaleriGuru(); document.getElementById("pesanGaleri").innerHTML="✅ Foto "+nama+" berhasil diganti!"; }; reader.readAsDataURL(file); }
+function simpanGaleri(){ if(!wajibAdmin()) return; simpanPIN(); alert("Foto Berhasil Disimpan!"); }
+function tampilTabelPIN(){
+  let wadah=document.getElementById("tabelPIN"); if(!wadah) return;
+  let html=`<table><tr><td><b>Nama</b></td><td><b>Jabatan</b></td><td><b>PIN (6 angka)</b></td><td><b>Aksi</b></td></tr>`;
+  urutanNama().forEach(nama=>{
+    let idAman = "pin_" + nama.replace(/[^a-zA-Z0-9]/g,"_");
+    html+=`<tr><td>${nama}${nama===NAMA_KEPSEK?" 👑":""}</td><td>${jabatanAdmin[nama]||""}</td><td><input type="text" id="${idAman}" value="${daftarPIN[nama]}" maxlength="6" inputmode="numeric" style="width:90px;text-align:center"></td><td><button onclick="simpanSatuPIN('${nama.replace(/'/g,"")}','${idAman}')" style="background:#4CAF50;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">💾 Simpan</button> <button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#FF5252;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer">🗑️</button></td></tr>`;
+  });
+  html+=`</table>`; wadah.innerHTML=html;
+}
+function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru); }
+function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus!"); }
+function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
+function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456!"); }
+function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru); }
+let filterAktif="SEMUA"; let dataKegiatan=[];
+function loadKegiatan(){ try{ dataKegiatan=JSON.parse(localStorage.getItem("kegiatan_kayakah")||"[]"); }catch(e){ dataKegiatan=[]; } if(dataKegiatan.length===0){ dataKegiatan=[{judul:"Upacara Bendera Senin",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin"},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin"},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin"},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin"},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin"},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin"}]; } tampilKegiatan(); }
+function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; }
+function filterKegiatan(kat){ filterAktif=kat; tampilKegiatan(); }
+function tambahKegiatan(){ if(!wajibAdmin()) return; let judul=document.getElementById("judulKegiatan").value.trim(); let kat=document.getElementById("kategoriKegiatan").value; let ket=document.getElementById("ketKegiatan").value.trim(); let fileInput=document.getElementById("fileKegiatan"); if(!judul){alert("Isi Judul dulu!");return;} if(!fileInput.files[0]){alert("Pilih fotonya dulu!");return;} let reader=new FileReader(); reader.onload=function(e){ let emoji=kat==="Upacara"?"📚🇮🇩":kat==="Pramuka"?"🥁🏕️":kat==="Habsy"?"🎤🥁":kat==="Olahraga"?"⚽🏃":"🎨🌈"; dataKegiatan.unshift({judul:judul,kat:kat,ket:ket,foto:e.target.result,emoji:emoji,oleh:adminLogin}); try{localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan));}catch(err){alert("Fotonya kebesaran!");return;} document.getElementById("judulKegiatan").value=""; document.getElementById("ketKegiatan").value=""; fileInput.value=""; document.getElementById("pesanKegiatan").innerHTML="✅ Foto Berhasil Ditambah!"; filterAktif="SEMUA"; tampilKegiatan(); document.getElementById("kegiatan").scrollIntoView({behavior:"smooth"}); }; reader.readAsDataURL(fileInput.files[0]); }
+function hapusKegiatan(i){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; dataKegiatan.splice(i,1); localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan)); tampilKegiatan(); }
+function hapusSemuaKegiatan(){ if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA?")) return; dataKegiatan=[]; localStorage.removeItem("kegiatan_kayakah"); loadKegiatan(); }
+let dataPengumuman=[];
+function getPengumumanBawaan(){
+  return [
+    {judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA",bawaan:true},
+    {judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA",bawaan:true},
+    {judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA",bawaan:true},
+    {judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA",bawaan:true},
+    {judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA",bawaan:true}
+  ];
+}
+function getPengumumanDihapus(){
+  try{ return JSON.parse(localStorage.getItem("pengumuman_dihapus_kayakah")||"[]"); }catch(e){ return []; }
+}
+async function loadPengumuman(){
+  let bawaan = getPengumumanBawaan();
+  let dihapus = getPengumumanDihapus();
+  let dariFirebase=[];
   try{
-    var s = await window._fb.getDocs(fbCol('ppdb_info'));
-    var dok = null;
-    for(var i=0;i<s.docs.length;i++){ if(s.docs[i].id==='pengaturan'){ dok=s.docs[i]; break; } }
-    if(!dok && s.docs.length>0) dok=s.docs[0];
-    if(dok){
-      var d=dok.data();
-      if(d.pengumuman) _cachePengumuman=d.pengumuman;
-      if(d.berkas) _cacheBerkas=d.berkas;
+    let r = window._fb.collection(window._fb.db,"pengumuman");
+    let s = await window._fb.getDocs(r);
+    dariFirebase = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;});
+    dariFirebase.sort((a,b)=>(b.waktu||0)-(a.waktu||0));
+  }catch(e){ dariFirebase=[]; }
+  let dariHP=[];
+  try{ dariHP = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dariHP=[]; }
+  let gabung=[...dariFirebase, ...dariHP, ...bawaan];
+  let sudahAda={};
+  dataPengumuman=[];
+  gabung.forEach(p=>{
+    let kunci=(p.judul||"")+"|"+(p.isi||"");
+    if(dihapus.indexOf(kunci)!==-1) return;
+    if(sudahAda[kunci]) return;
+    sudahAda[kunci]=true;
+    dataPengumuman.push(p);
+  });
+  renderPengumuman();
+}
+function renderPengumuman(){
+  let wadah=document.getElementById("listPengumuman"); if(!wadah) return;
+  let html="";
+  dataPengumuman.forEach((p,i)=>{
+    let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#FF5252;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : "";
+    html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`;
+  });
+  wadah.innerHTML = html || "<li>Belum ada pengumuman.</li>";
+  let marq=document.getElementById("marqueePengumuman");
+  if(marq){
+    if(dataPengumuman.length>0){
+      marq.innerHTML = dataPengumuman.map(p=>"🎉 "+(p.judul||"")+" : "+(p.isi||"")+" &nbsp;&nbsp; ").join("");
+    } else {
+      marq.innerHTML = "🎉 Selamat Datang di SDN Kayakah!";
+    }
+  }
+}
+async function tambahPengumuman(){
+  if(!wajibAdmin()) return;
+  let j=document.getElementById("judulPengumuman").value.trim();
+  let isi=document.getElementById("isiPengumuman").value.trim();
+  if(!j||!isi){ alert("Isi Judul & Isi dulu, Pak!"); return; }
+  let data={judul:j, isi:isi, waktu:Date.now(), oleh:adminLogin};
+  try{
+    let r=window._fb.collection(window._fb.db,"pengumuman");
+    await window._fb.addDoc(r,data);
+  }catch(e){}
+  dataPengumuman.unshift(data);
+  try{
+    let simpan = dataPengumuman.filter(p=>!p.bawaan);
+    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
+  }catch(e){}
+  document.getElementById("judulPengumuman").value="";
+  document.getElementById("isiPengumuman").value="";
+  document.getElementById("pesanPengumuman").innerHTML="✅ Pengumuman berhasil disimpan!";
+  renderPengumuman();
+  alert("Berhasil, Pak! Pengumuman sudah muncul di semua HP!");
+}
+async function hapusPengumuman(i){
+  if(!wajibAdmin()) return;
+  if(!confirm("Hapus pengumuman ini?")) return;
+  let p=dataPengumuman[i];
+  try{
+    if(p._id){
+      let r=window._fb.doc(window._fb.db,"pengumuman",p._id);
+      await window._fb.deleteDoc(r);
     }
   }catch(e){}
-  tampilkanPengumuman(); tampilkanBerkas();
-}
-function tampilkanPengumuman(){ document.getElementById('isiPengumuman').innerHTML=_cachePengumuman.replace(/\n/g,'<br>'); }
-function tampilkanBerkas(){
-  var baris=_cacheBerkas.split('\n');
-  var html='<ol>';
-  for(var i=0;i<baris.length;i++){ var b=baris[i].trim().replace(/^\d+\.\s*/,''); if(b!=='') html+='<li>'+b+'</li>'; }
-  html+='</ol>';
-  document.getElementById('isiBerkas').innerHTML=html;
-}
-async function simpanInfo(){
+  let kunci=(p.judul||"")+"|"+(p.isi||"");
+  let dihapus=getPengumumanDihapus();
+  if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
+  dataPengumuman.splice(i,1);
   try{
-    var s = await window._fb.getDocs(fbCol('ppdb_info'));
-    var ada=null;
-    for(var i=0;i<s.docs.length;i++){ if(s.docs[i].id==='pengaturan'){ ada=s.docs[i]; break; } }
-    if(ada){
-      var r = window._fb.doc(window._fb.db,'ppdb_info','pengaturan');
-      await window._fb.updateDoc(r,{pengumuman:_cachePengumuman,berkas:_cacheBerkas,waktu:Date.now()});
-    } else {
-      await window._fb.addDoc(fbCol('ppdb_info'),{pengumuman:_cachePengumuman,berkas:_cacheBerkas,waktu:Date.now()});
-    }
-  }catch(e){ alert('Gagal simpan ke Firebase. Cek internet, Pak.'); }
+    let simpan = dataPengumuman.filter(p=>!p.bawaan);
+    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
+  }catch(e){}
+  renderPengumuman();
 }
-async function simpanPengumuman(){
-  _cachePengumuman=document.getElementById('editPengumuman').value;
-  await simpanInfo(); tampilkanPengumuman(); alert('Pengumuman sudah disimpan di Firebase, Pak. Muncul di semua HP.');
-}
-async function simpanBerkas(){
-  _cacheBerkas=document.getElementById('editBerkas').value;
-  await simpanInfo(); tampilkanBerkas(); alert('Daftar berkas sudah disimpan di Firebase, Pak.');
-}
-async function ambilSiswa(){
-  try{
-    var s = await window._fb.getDocs(fbCol('ppdb_pendaftar'));
-    _cacheSiswa = s.docs.map(function(d){ var x=d.data(); x._id=d.id; return x; });
-    _cacheSiswa.sort(function(a,b){ return (a.waktu||0)-(b.waktu||0); });
-  }catch(e){ _cacheSiswa=[]; }
-  return _cacheSiswa;
-}
-async function kirimPPDB(){
-  var nama=document.getElementById('namaAnak').value.trim();
-  var usia=document.getElementById('usia').value;
-  var wa=document.getElementById('wa').value.trim();
-  var nik=document.getElementById('nik').value.trim();
-  if(!nama||!usia||!wa){ alert('Mohon isi Nama Anak, Usia, dan No. WA. NIK boleh kosong.'); return; }
-  var btn=document.getElementById('btnKirim'); btn.disabled=true; btn.innerText='MENGIRIM KE FIREBASE...';
-  try{
-    var semua=await ambilSiswa();
-    var no='PPDB-'+String(semua.length+1).padStart(3,'0');
-    var baru={no:no,nama:nama,usia:usia,nik:nik?nik:'Belum diisi',tgl:document.getElementById('tgl').value,jk:document.getElementById('jk').value,alamat:document.getElementById('alamat').value,ayah:document.getElementById('ayah').value,ibu:document.getElementById('ibu').value,wa:wa,status:'MENUNGGU',alasan:'',waktu:Date.now()};
-    await window._fb.addDoc(fbCol('ppdb_pendaftar'),baru);
-    var box=document.getElementById('buktiBox');
-    box.style.display='block';
-    box.innerHTML='<div class="bukti"><h2>✅ Berhasil Terdaftar!</h2><p>Ananda <b>'+nama+'</b> ('+usia+') sudah terdaftar di Firebase.</p><h1>'+no+'</h1><p><b>SIMPAN NOMOR INI.</b></p><p>Status: <b>MENUNGGU PERSETUJUAN KEPALA SEKOLAH</b></p><p>Sambil menunggu, Bapak/Ibu bisa siapkan berkas di atas dari rumah. Berkas dibawa pas daftar ulang nanti.</p><br><button class="btn" onclick="kembaliBeranda()">🏠 Kembali ke Beranda</button></div>';
-    window.scrollTo(0,0);
-    document.getElementById('namaAnak').value=''; document.getElementById('nik').value=''; document.getElementById('wa').value='';
-  }catch(e){ alert('Gagal kirim. Cek internet, Pak. Coba lagi.'); }
-  btn.disabled=false; btn.innerText='KIRIM PENDAFTARAN ✅';
-}
-async function cekData(){
-  var wa=document.getElementById('cekWA').value.trim();
-  var no=document.getElementById('cekNo').value.trim().toUpperCase();
-  var hasil=document.getElementById('hasilCek');
-  hasil.innerHTML='⏳ Mencari di Firebase...';
-  var data=await ambilSiswa();
-  var ketemu=data.find(function(x){ return x.wa===wa && x.no===no; });
-  if(!ketemu){ hasil.innerHTML='<p style="color:red">❌ Nomor WA / Nomor Pendaftaran tidak cocok. Data orang lain tidak bisa dibuka.</p>'; return; }
-  var berkasHtml='<div class="checklist"><b>📁 BERKAS YANG HARUS DIBAWA KE SEKOLAH:</b><br><br>'+document.getElementById('isiBerkas').innerHTML+'<p style="font-size:12px;color:#666">Centang sendiri di rumah, Pak/Bu. Kalau sudah lengkap, baru datang ke sekolah.</p></div>';
-  var html='';
-  if(ketemu.status==='DITERIMA'){ html='<div class="hasil-diterima"><h3>✅ SELAMAT, Ananda DITERIMA!</h3><p>Alhamdulillah, Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') dinyatakan <b>DITERIMA</b> di SDN Kayakah 3.</p><p><b>Langkah Selanjutnya:</b><br>1. Siapkan semua berkas di bawah ini.<br>2. Datang ke SDN Kayakah 3 untuk daftar ulang.<br>3. Temui Kepala Sekolah / Staf di jam kerja (Senin-Jumat, 08.00 - 12.00).<br>4. Bawa ASLI KK & Akte untuk diperlihatkan saja.</p><p>'+(ketemu.alasan?'Catatan dari sekolah: '+ketemu.alasan:'')+'</p>'+berkasHtml+'</div>'; }
-  else if(ketemu.status==='DITOLAK'){ html='<div class="hasil-ditolak"><h3>🙏 Mohon Maaf, Belum Bisa Diterima</h3><p>Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') untuk saat ini dinyatakan <b>BELUM DITERIMA</b>.</p><p><b>Penjelasan:</b><br>'+(ketemu.alasan?ketemu.alasan:'Kuota kelas sudah penuh / usia belum memenuhi syarat / berkas belum lengkap.')+'</p><p><b>Yang bisa Bapak/Ibu lakukan:</b><br>1. Silahkan datang ke sekolah untuk tanya langsung ke Kepala Sekolah.<br>2. Atau tunggu info pendaftaran gelombang berikutnya di Pengumuman.</p></div>'; }
-  else { html='<div class="hasil-menunggu"><h3>⏳ MASIH MENUNGGU</h3><p>Ananda <b>'+ketemu.nama+'</b> ('+ketemu.no+') masih <b>MENUNGGU PERSETUJUAN KEPALA SEKOLAH</b>.</p><p>Data sudah masuk dan tersimpan di Firebase. Tidak dilihat orang lain.</p><p><b>Sambil menunggu, Bapak/Ibu bisa siapkan berkas dulu dari rumah:</b></p>'+berkasHtml+'<p>Silahkan cek lagi besok di menu ini.</p></div>'; }
-  hasil.innerHTML=html;
-}
-function login(){
-  var pin=document.getElementById('pass').value.trim();
-  if(pin==='197601'){
-    document.getElementById('loginBox').style.display='none';
-    document.getElementById('adminBox').style.display='block';
-    document.getElementById('editPengumuman').value=_cachePengumuman;
-    document.getElementById('editBerkas').value=_cacheBerkas;
-    tampilkanAdmin();
-  } else { alert('PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!'); }
-}
-function keluar(){ document.getElementById('loginBox').style.display='block'; document.getElementById('adminBox').style.display='none'; document.getElementById('pass').value=''; }
-async function tampilkanAdmin(){
-  var data=await ambilSiswa();
-  var list=document.getElementById('listSiswa');
-  document.getElementById('infoJumlah').innerHTML='Total pendaftar di Firebase: <b>'+data.length+'</b> anak. Menunggu: <b>'+data.filter(function(x){return x.status==='MENUNGGU'}).length+'</b> | Diterima: <b>'+data.filter(function(x){return x.status==='DITERIMA'}).length+'</b>';
-  if(data.length===0){ list.innerHTML='<p>Belum ada yang daftar, Pak. Data dari Firebase kosong.</p>'; return; }
-  var html='';
-  data.forEach(function(s,i){
-    html+='<div class="siswa"><b>'+s.no+' - '+s.nama+'</b> ('+s.jk+', '+s.usia+')<br>NIK: '+s.nik+'<br>Alamat: '+s.alamat+'<br>Ayah: '+s.ayah+' | Ibu: '+s.ibu+'<br>WA: '+s.wa+'<br>Status: <b>'+s.status+'</b><br>Penjelasan: <input id="alasan'+i+'" value="'+(s.alasan||'')+'" placeholder="Contoh: Silahkan daftar ulang bawa KK / Kuota penuh" style="margin-top:5px"><br><br>'
-    +'<button onclick="simpanAlasan('+i+')" style="background:#F59E0B;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">💾 Simpan Penjelasan</button> '
-    +'<button onclick="ubahStatus('+i+',\'DITERIMA\')" style="background:#16A34A;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">✅ TERIMA</button> '
-    +'<button onclick="ubahStatus('+i+',\'DITOLAK\')" style="background:#DC2626;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer">❌ TOLAK</button></div>';
-  });
-  list.innerHTML=html;
-}
-async function simpanAlasan(i){
-  var s=_cacheSiswa[i]; if(!s) return;
-  var val=document.getElementById('alasan'+i).value;
-  try{ var r=window._fb.doc(window._fb.db,'ppdb_pendaftar',s._id); await window._fb.updateDoc(r,{alasan:val}); alert('Penjelasan disimpan di Firebase, Pak.'); }catch(e){ alert('Gagal simpan. Cek internet, Pak.'); }
-}
-async function ubahStatus(i,st){
-  var s=_cacheSiswa[i]; if(!s) return;
-  try{ var r=window._fb.doc(window._fb.db,'ppdb_pendaftar',s._id); await window._fb.updateDoc(r,{status:st}); await tampilkanAdmin(); alert('Status '+s.nama+' jadi '+st+'. Tersimpan di Firebase.'); }catch(e){ alert('Gagal. Cek internet, Pak.'); }
-}
-ambilInfo();
+window.addEventListener("load",function(){ loadPIN(); loadPengumuman(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); renderGaleriGuru(); loadKegiatan(); });
 </script>
 </body>
 </html>
