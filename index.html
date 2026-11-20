@@ -12,7 +12,6 @@ const db=firebase.firestore();
 window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
 window.dispatchEvent(new Event('firebase-ready'));
 </script>
- 
 <style>
 *{box-sizing:border-box}
 body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#FFF9C4;color:#333}
@@ -95,13 +94,11 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 </style>
 </head>
 <body>
-
 <div class="admin-bar">
 <span id="adminStatus">👀 Mode Pengunjung - Hanya Melihat Galeri</span>
 <button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Admin Guru</button>
 <button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button>
 </div>
-
 <div class="modal" id="modalLogin">
 <div class="modal-box">
 <div style="font-size:60px">👩‍🏫👨‍🏫🏫</div>
@@ -116,7 +113,6 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <button style="background:#BDBDBD" onclick="tutupLogin()">⬅️ Kembali ke Beranda</button>
 </div>
 </div>
-
 <header id="beranda">
 <div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
 <div class="kartun-besar">👧🏫👦 📚 🎨</div>
@@ -126,16 +122,11 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <span class="pembuat-kecil">Wahyu Aji, S.Pd.Jas</span>
 <div style="font-size:30px;margin-top:8px">🏫 📚 🎨 ⚽ 🎤 🥁 💻 🌱 🎉</div>
 </header>
-
 <div class="pengumuman"><span>📢 PENGUMUMAN</span><marquee behavior="scroll" scrollamount="6">🎉 Selamat Datang di SDN Kayakah! &nbsp;&nbsp; 💬 Ada Kritik & Saran? Isi di Kotak Saran Di Bawah Ya! &nbsp;&nbsp; 📚 Senin: Upacara Bendera Jam 07.30 WITA &nbsp;&nbsp; 🕌 Jumat: Yasinan & Infaq &nbsp;&nbsp; 🥁 Sabtu: Pramuka Jam 15.00 WITA &nbsp;&nbsp;</marquee></div>
-
-<!-- INI YANG SUDAH DIPERBAIKI - NAV DULUNYA RUSAK DI BAGIAN KONTAK -->
 <nav>
 <a href="ppdb.html">🎓 PPDB</a><a href="#">🏠 Beranda</a><a href="#profil">📚 Profil</a><a href="#guru">👩‍🏫 Guru</a><a href="#galeri">📸 Galeri Guru</a><a href="#kegiatan">🎉 Galeri Kegiatan</a><a href="game.html">🎮 Kuis Seru</a><a href="asmaul-husna.html">🕌 Asmaul Husna</a><a href="agama-islam.html" style="background:#b91c1c;color:white">🕌 Agama Islam</a><a href="sdn-kayakah-belajar.html" style="background:#8e44ad; color:white; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold;">📚 Kayakah Belajar</a><a href="saran.html" style="background:#90EE90;">💬 Kritik & Saran</a><a href="bukutamu.html" style="background:#90EE90;">📖 Buku Tamu</a><a href="#kontak" style="background:#FFEB3B;color:#333;">📞 Kontak</a><a href="mitra-sdn-kayakah.html" style="background:#FF9800;">🤝 Mitra</a>
 </nav>
-
 <div class="wrap">
-
 <div class="hero">
 <div class="hero-banner"><div>👧📚👦🎨⚽🕌🌱🎉</div><div style="font-size:18px;color:white;font-weight:bold;margin-top:6px">SEKOLAH CERIA • ANAK HEBAT • GURU HEBAT</div></div>
 <h2>🎉 Selamat Datang di Website SDN Kayakah 🎉</h2>
@@ -152,7 +143,6 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <a class="btn2" href="#kegiatan">🎉 Galeri Kegiatan</a>
 <a class="btn2" href="saran.html">💬 Kritik & Saran</a>
 </div>
-
 <div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
 <h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA GURU & PIN 👑</h3>
 <p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini!</p>
@@ -173,7 +163,6 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
-
 <div class="card galeri-wrap" id="galeri">
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
 <h3 style="text-align:center;color:#E65100;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
@@ -194,7 +183,6 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
-
 <div class="card kegiatan-wrap" id="kegiatan">
 <div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
 <h3 style="text-align:center;color:#2E7D32;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
@@ -223,8 +211,15 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#FF5252;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
-
-<div class="card peng-card"><div class="banner-kartun">📢🎉📚</div><h3>📢 Pengumuman Sekolah</h3><ul><li>📚 <b>Senin:</b> Upacara Bendera - Jam 07.30 WITA</li><li>🕌 <b>Jumat:</b> Yasinan, Infaq, dan Tahsin - Jam 07.30 WITA</li><li>🥁 <b>Sabtu:</b> Pramuka Kelas 4, 5, 6 - Jam 15.00 WITA</li><li>💻 <b>Selasa, Rabu, Kamis:</b> Ekstra Komputer - Jam 13.00 WITA</li><li>🎤 <b>Minggu:</b> Habsy / Hadrah - Jam 08.30 WITA</li></ul><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
+<div class="card peng-card"><div class="banner-kartun">📢🎉📚</div><h3>📢 Pengumuman Sekolah</h3><ul id="listPengumuman"><li>Memuat pengumuman...</li></ul>
+<div class="hanya-admin" style="background:#fff;border:3px dashed #FF9800;border-radius:16px;padding:14px;margin-top:12px;text-align:center">
+<b>➕ TAMBAH PENGUMUMAN BARU - KHUSUS ADMIN / KEPSEK</b><br>
+<input id="judulPengumuman" placeholder="Judul - Contoh: Senin Upacara" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
+<input id="isiPengumuman" placeholder="Isi - Contoh: Jam 07.30 WITA, pakai seragam lengkap" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0">
+<button onclick="tambahPengumuman()" style="background:#4CAF50;color:white;border:none;padding:12px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%">📢 SIMPAN PENGUMUMAN</button>
+<p id="pesanPengumuman" style="font-weight:bold;color:#2E7D32"></p>
+</div>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 <div class="stats"><div class="c1"><b>60</b>😊 Siswa Hebat</div><div class="c2"><b>6</b>📚 Kelas Ceria</div><div class="c3"><b>10</b>👩‍🏫 Guru & Staf</div><div class="c4"><b>1976</b>🏫 Berdiri</div></div>
 <div class="card" id="profil"><div class="banner-kartun">🏫🌈📚</div><h3>📚 Profil Sekolah Kita</h3><table><tr><td>🏫 Nama Sekolah</td><td>SD Negeri Kayakah</td></tr><tr><td>📍 Alamat</td><td>Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara, Kalimantan Selatan 71452</td></tr><tr><td>🆔 NPSN / NSS</td><td>30302788 / 101150702012</td></tr><tr><td>🎂 Tahun Berdiri</td><td>1976</td></tr><tr><td>👧👦 Jumlah Siswa</td><td>60 Siswa (30 Laki-laki, 30 Perempuan)</td></tr><tr><td>📖 Rombel</td><td>6 Rombel - Kelas I s.d VI</td></tr></table><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 <div class="card" id="guru"><div class="banner-kartun">👩‍🏫👨‍🏫❤️</div><h3>👩‍🏫 Guru & Staf Hebat Kami</h3><div class="guru" id="listGuruProfil"></div><p style="margin-top:12px">📖 Pembimbing Tahsin & Tahfiz: <b>Syahida Norpah, S.Pd.</b> dan <b>Jannah, S.Pd.</b><br>🤝 Ketua Komite: <b>H. M. Husni</b></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
@@ -232,7 +227,6 @@ footer{background:#333;color:white;text-align:center;padding:18px;border-top:6px
 <div class="card" id="kontak"><div class="banner-kartun">📞🏫💬</div><h3>📞 Yuk, Hubungi Kami!</h3><p><b>📍 Alamat:</b> Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara 71452</p><p><b>👨‍🏫 Plt. Kepala Sekolah:</b> Wahyu Aji, S.Pd.Jas</p><p><b>🤝 Ketua Komite:</b> H. M. Husni</p><p><b>💬 Kritik & Saran:</b> <a href="saran.html">Klik di sini - saran.html</a></p><p><b>🎮 Kuis Siswa:</b> <a href="game.html">Klik di sini - game.html</a></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 </div>
 <footer><div style="font-size:36px">🏫 🌈 📚 🎨 ⚽ 🎤 🥁 💻 🌱</div>© 2026 SDN Kayakah - Amuntai Selatan 🌈<br>Belajar Ceria, Berkarakter, Berprestasi!</footer>
-
 <script>
 let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
@@ -313,7 +307,7 @@ function updateTampilanAdmin(){
     document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none";
     document.getElementById("lockGuru").style.display="block"; document.getElementById("lockKegiatan").style.display="block";
   }
-  renderGaleriGuru(); tampilKegiatan();
+  renderGaleriGuru(); tampilKegiatan(); renderPengumuman();
 }
 function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Admin yang bisa! Klik 🔐 Login Admin Guru di atas!"); bukaLogin(); return false; } return true; }
 function wajibKepsek(){ if(adminLogin!==NAMA_KEPSEK){ alert("🔒 Hanya Kepala Sekolah!"); return false; } return true; }
@@ -369,7 +363,70 @@ function filterKegiatan(kat){ filterAktif=kat; tampilKegiatan(); }
 function tambahKegiatan(){ if(!wajibAdmin()) return; let judul=document.getElementById("judulKegiatan").value.trim(); let kat=document.getElementById("kategoriKegiatan").value; let ket=document.getElementById("ketKegiatan").value.trim(); let fileInput=document.getElementById("fileKegiatan"); if(!judul){alert("Isi Judul dulu!");return;} if(!fileInput.files[0]){alert("Pilih fotonya dulu!");return;} let reader=new FileReader(); reader.onload=function(e){ let emoji=kat==="Upacara"?"📚🇮🇩":kat==="Pramuka"?"🥁🏕️":kat==="Habsy"?"🎤🥁":kat==="Olahraga"?"⚽🏃":"🎨🌈"; dataKegiatan.unshift({judul:judul,kat:kat,ket:ket,foto:e.target.result,emoji:emoji,oleh:adminLogin}); try{localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan));}catch(err){alert("Fotonya kebesaran!");return;} document.getElementById("judulKegiatan").value=""; document.getElementById("ketKegiatan").value=""; fileInput.value=""; document.getElementById("pesanKegiatan").innerHTML="✅ Foto Berhasil Ditambah!"; filterAktif="SEMUA"; tampilKegiatan(); document.getElementById("kegiatan").scrollIntoView({behavior:"smooth"}); }; reader.readAsDataURL(fileInput.files[0]); }
 function hapusKegiatan(i){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; dataKegiatan.splice(i,1); localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan)); tampilKegiatan(); }
 function hapusSemuaKegiatan(){ if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA?")) return; dataKegiatan=[]; localStorage.removeItem("kegiatan_kayakah"); loadKegiatan(); }
-window.addEventListener("load",function(){ loadPIN(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); renderGaleriGuru(); loadKegiatan(); });
+let dataPengumuman=[];
+async function loadPengumuman(){
+  try{
+    let r = window._fb.collection(window._fb.db,"pengumuman");
+    let s = await window._fb.getDocs(r);
+    dataPengumuman = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;});
+    dataPengumuman.sort((a,b)=>(b.waktu||0)-(a.waktu||0));
+    if(dataPengumuman.length===0) throw new Error("kosong");
+  }catch(e){
+    try{ dataPengumuman = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dataPengumuman=[]; }
+    if(dataPengumuman.length===0){
+      dataPengumuman=[
+        {judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA"},
+        {judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA"},
+        {judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA"},
+        {judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA"},
+        {judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA"}
+      ];
+    }
+  }
+  renderPengumuman();
+}
+function renderPengumuman(){
+  let wadah=document.getElementById("listPengumuman"); if(!wadah) return;
+  let html="";
+  dataPengumuman.forEach((p,i)=>{
+    let hapus = adminLogin ? ` <button onclick="hapusPengumuman(${i})" style="background:#FF5252;color:white;border:none;padding:4px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:12px">🗑️ Hapus</button>` : "";
+    html+=`<li>📢 <b>${p.judul||""}:</b> ${p.isi||""}${hapus}</li>`;
+  });
+  wadah.innerHTML = html || "<li>Belum ada pengumuman.</li>";
+}
+async function tambahPengumuman(){
+  if(!wajibAdmin()) return;
+  let j=document.getElementById("judulPengumuman").value.trim();
+  let isi=document.getElementById("isiPengumuman").value.trim();
+  if(!j||!isi){ alert("Isi Judul & Isi dulu, Pak!"); return; }
+  let data={judul:j, isi:isi, waktu:Date.now(), oleh:adminLogin};
+  try{
+    let r=window._fb.collection(window._fb.db,"pengumuman");
+    await window._fb.addDoc(r,data);
+  }catch(e){}
+  dataPengumuman.unshift(data);
+  try{ localStorage.setItem("pengumuman_kayakah", JSON.stringify(dataPengumuman)); }catch(e){}
+  document.getElementById("judulPengumuman").value="";
+  document.getElementById("isiPengumuman").value="";
+  document.getElementById("pesanPengumuman").innerHTML="✅ Pengumuman berhasil disimpan!";
+  renderPengumuman();
+  alert("Berhasil, Pak! Pengumuman sudah muncul di semua HP!");
+}
+async function hapusPengumuman(i){
+  if(!wajibAdmin()) return;
+  if(!confirm("Hapus pengumuman ini?")) return;
+  let p=dataPengumuman[i];
+  try{
+    if(p._id){
+      let r=window._fb.doc(window._fb.db,"pengumuman",p._id);
+      await window._fb.deleteDoc(r);
+    }
+  }catch(e){}
+  dataPengumuman.splice(i,1);
+  try{ localStorage.setItem("pengumuman_kayakah", JSON.stringify(dataPengumuman)); }catch(e){}
+  renderPengumuman();
+}
+window.addEventListener("load",function(){ loadPIN(); loadPengumuman(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); renderGaleriGuru(); loadKegiatan(); });
 </script>
 </body>
 </html>
