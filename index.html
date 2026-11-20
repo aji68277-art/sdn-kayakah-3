@@ -33,12 +33,48 @@ textarea{resize:none}
 </div>
 <div id="feed"></div>
 </div>
-<script>
-function get(){try{let d=JSON.parse(localStorage.getItem('kayakah_fb'));return d&&d.length?d:[{nama:"SDN Kayakah",kat:"Beranda",isi:"Selamat datang di SDN Kayakah! Sekolah Ceria, Anak Hebat, Guru Hebat.",suka:12,komen:[{nama:"Orang Tua",isi:"Semangat SDN Kayakah!"}]}]}catch(e){return[]}}
-function simpan(d){localStorage.setItem('kayakah_fb',JSON.stringify(d))}
-function kirim(){let n=document.getElementById('nama').value||"Hamba Allah";let k=document.getElementById('kat').value;let i=document.getElementById('isi').value;if(!i){alert("Tulis dulu");return}let d=get();d.unshift({nama:n,kat:k,isi:i,suka:0,komen:[]});simpan(d);document.getElementById('isi').value="";tampil()}
-function tampil(){let d=get();let f=document.getElementById('feed');f.innerHTML="";d.forEach((p,idx)=>{let div=document.createElement('div');div.className='card';let h=p.nama?p.nama[0].toUpperCase():"S";div.innerHTML='<div class="row"><div class="ava">'+h+'</div><div><b>'+p.nama+'</b><div class="small">'+p.kat+'</div></div></div><p style="white-space:pre-wrap">'+p.isi+'</p><div class="small">❤️ '+p.suka+' Suka • 💬 '+p.komen.length+' Komentar</div><div class="aksi"><button onclick="suka('+idx+')">👍 Suka</button><button onclick="document.getElementById(\'c'+idx+'\').focus()">💬 Komentar</button></div><div>'+p.komen.map(c=>'<div class="komen"><b>'+c.nama+'</b><br>'+c.isi+'</div>').join('')+'</div><input id="c'+idx+'" placeholder="Tulis komentar..."><button class="btn" onclick="komen('+idx+')">Kirim Komentar</button>';f.appendChild(div)})}
-function suka(i){let d=get();d[i].suka++;simpan(d);tampil()}
-function komen(i){let v=document.getElementById('c'+i).value;if(!v)return;let d=get();d[i].komen.push({nama:"Pengunjung",isi:v});simpan(d);tampil()}
-tampil();
+<!-- FIREBASE: ISI DI SINI NANTI KALAU SUDAH BUAT PROJECT, PAK. KALAU KOSONG, TETAP JALAN PAKAI SIMPANAN HP -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, updateDoc, doc, arrayUnion, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = { apiKey: "ISI_APIKEY", authDomain: "ISI", projectId: "ISI", storageBucket: "ISI", messagingSenderId: "ISI", appId: "ISI" };
+let db=null; let pakaiFirebase=false;
+try{ if(firebaseConfig.apiKey!=="ISI_APIKEY"){ const app=initializeApp(firebaseConfig); db=getFirestore(app); pakaiFirebase=true; } }catch(e){ pakaiFirebase=false; }
+function getLocal(){ try{ let d=JSON.parse(localStorage.getItem('kayakah_fb')); return d&&d.length?d:[{nama:"SDN Kayakah",kat:"Beranda",isi:"Selamat datang di SDN Kayakah! Sekolah Ceria, Anak Hebat, Guru Hebat.",suka:12,komen:[{nama:"Orang Tua",isi:"Semangat SDN Kayakah!"}]}]}catch(e){ return [] } }
+function simpanLocal(d){ localStorage.setItem('kayakah_fb',JSON.stringify(d)); }
+function gambar(data){
+  let f=document.getElementById('feed'); f.innerHTML="";
+  data.forEach((p,idx)=>{
+    let div=document.createElement('div'); div.className='card';
+    let h=p.nama?p.nama[0].toUpperCase():"S";
+    div.innerHTML='<div class="row"><div class="ava">'+h+'</div><div><b>'+p.nama+'</b><div class="small">'+p.kat+'</div></div></div><p style="white-space:pre-wrap">'+p.isi+'</p><div class="small">❤️ '+(p.suka||0)+' Suka • 💬 '+(p.komen?p.komen.length:0)+' Komentar</div><div class="aksi"><button data-suka="'+idx+'">👍 Suka</button><button data-fokus="'+idx+'">💬 Komentar</button></div><div>'+(p.komen||[]).map(c=>'<div class="komen"><b>'+c.nama+'</b><br>'+c.isi+'</div>').join('')+'</div><input id="c'+idx+'" placeholder="Tulis komentar..."><button class="btn" data-komen="'+idx+'">Kirim Komentar</button>';
+    f.appendChild(div);
+    div.querySelector('[data-suka]').onclick=()=>suka(p,idx);
+    div.querySelector('[data-fokus]').onclick=()=>document.getElementById('c'+idx).focus();
+    div.querySelector('[data-komen]').onclick=()=>komen(p,idx);
+  });
+  window._data=data;
+}
+async function kirim(){
+  let n=document.getElementById('nama').value||"Hamba Allah";
+  let k=document.getElementById('kat').value;
+  let i=document.getElementById('isi').value; if(!i){ alert("Tulis dulu"); return; }
+  if(pakaiFirebase){ await addDoc(collection(db,"postingan"),{nama:n,kat:k,isi:i,suka:0,komen:[],waktu:Date.now()}); }
+  else{ let d=getLocal(); d.unshift({nama:n,kat:k,isi:i,suka:0,komen:[]}); simpanLocal(d); gambar(d); }
+  document.getElementById('isi').value="";
+}
+async function suka(p,idx){
+  if(pakaiFirebase&&p.id){ await updateDoc(doc(db,"postingan",p.id),{suka:increment(1)}); }
+  else{ let d=getLocal(); d[idx].suka++; simpanLocal(d); gambar(d); }
+}
+async function komen(p,idx){
+  let v=document.getElementById('c'+idx).value; if(!v) return;
+  if(pakaiFirebase&&p.id){ await updateDoc(doc(db,"postingan",p.id),{komen:arrayUnion({nama:"Pengunjung",isi:v})}); }
+  else{ let d=getLocal(); d[idx].komen.push({nama:"Pengunjung",isi:v}); simpanLocal(d); gambar(d); }
+}
+window.kirim=kirim;
+if(pakaiFirebase){
+  const q=query(collection(db,"postingan"),orderBy("waktu","desc"));
+  onSnapshot(q,(snap)=>{ let d=[]; snap.forEach(s=>{ let x=s.data(); x.id=s.id; d.push(x); }); if(!d.length){ d=getLocal(); } gambar(d); });
+} else { gambar(getLocal()); }
 </script></body></html>
