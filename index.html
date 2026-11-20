@@ -19,9 +19,6 @@ header{background:linear-gradient(180deg,#0E7C7B,#FF8A00,#FFD93D);color:#fff;pad
 header h1{margin:4px 0;font-size:48px;color:white;text-shadow:3px 3px 0 #1E3A5F,6px 6px 0 #0E7C7B}
 header p{margin:6px 0 0;font-weight:bold;background:#fff;color:#0E7C7B;display:inline-block;padding:8px 16px;border-radius:20px}
 .pembuat-kecil{font-size:12px;color:#fff;background:rgba(0,0,0,.25);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
-/* ==== LOGO 1 FOTO NEMPEL - KADA BULAT, KADA ADA PUTIH ==== */
-.logo-row{display:block;text-align:center;margin:6px 0 4px}
-.logo-row img{width:100%;max-width:580px;height:auto;object-fit:contain;background:transparent;border:none;border-radius:0;padding:0;box-shadow:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
 .awan{font-size:38px;animation:jalan 6s ease-in-out infinite}
 .bintang-terbang{font-size:28px;animation:jalan 3s ease-in-out infinite}
 @keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
@@ -94,7 +91,7 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 #tabelPIN td{border-bottom:1px solid #eee;color:#333}
 #tabelPIN td:first-child{width:auto;color:#333}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
-@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}.logo-row img{max-width:100%}}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
 </style>
 </head>
 <body>
@@ -120,9 +117,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <header id="beranda">
 <div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
 <div class="bintang-terbang">⭐ ✨ 🌟 ✨ ⭐ 🌟 ✨ ⭐</div>
-<div class="logo-row">
-<img src="header-logo.png" alt="Logo SDN Kayakah - Tut Wuri, Agung, Bangkit">
-</div>
+<!-- TANPA LOGO -->
 <div class="kartun-besar">👧🏫👦 📚 🎨</div>
 <h1>🌈 SDN KAYAKAH 🌈</h1>
 <p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br>
@@ -251,7 +246,7 @@ function loadPIN(){
   let defJab = {"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah & Guru PJOK","Samsul Bahri, S.Pd.":"Guru Kelas 6","Syahruni, S.Pd.SD":"Guru Kelas 5","Norsalim, S.Pd.":"Guru Kelas 4","Pathul Jannah, S.Pd.I":"Guru PAI dan Guru Kelas 3","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas 2","Radinah, S.Pd.":"Guru Kelas 1","Syahida Norpah, S.Pd.":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd.":"Pembimbing Tahsin & Tahfiz","M. Husain":"Operator Sekolah"};
   try{ let s=localStorage.getItem("pin_kayakah"); let j=localStorage.getItem("jabatan_kayakah"); let f=localStorage.getItem("foto_guru_kayakah"); daftarPIN=s?JSON.parse(s):def; jabatanAdmin=j?JSON.parse(j):defJab; fotoGuru=f?JSON.parse(f):{}; }catch(e){ daftarPIN=def; jabatanAdmin=defJab; fotoGuru={}; }
   URUTAN_GURU.forEach(n=>{ if(!daftarPIN[n]) daftarPIN[n]=def[n]; if(!jabatanAdmin[n]) jabatanAdmin[n]=defJab[n]; });
-  if(!daftarPIN[NAMA_KEPSEK]) daftarPIN[NAMA_KEPSEK]="197601";
+  daftarPIN[NAMA_KEPSEK]="197601";
 }
 async function simpanGuruKeFirebase(){
   try{
@@ -272,7 +267,10 @@ async function loadGuruDariFirebase(){
       if(d.jabatan) jabatanAdmin=d.jabatan;
       if(d.foto) fotoGuru=d.foto;
       if(d.urutan && d.urutan.length>0) URUTAN_GURU=d.urutan;
-      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
+      // RESET DARURAT - PIN KEPSEK BALIK JADI 197601
+      daftarPIN[NAMA_KEPSEK]="197601";
+      await simpanGuruKeFirebase();
+      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ PIN Kepsek sudah di-reset jadi 197601 - Silakan Login";
       try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
       return true;
     }
