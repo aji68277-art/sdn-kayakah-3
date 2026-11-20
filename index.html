@@ -364,25 +364,40 @@ function tambahKegiatan(){ if(!wajibAdmin()) return; let judul=document.getEleme
 function hapusKegiatan(i){ if(!wajibAdmin()) return; if(!confirm("Hapus foto ini?")) return; dataKegiatan.splice(i,1); localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan)); tampilKegiatan(); }
 function hapusSemuaKegiatan(){ if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA?")) return; dataKegiatan=[]; localStorage.removeItem("kegiatan_kayakah"); loadKegiatan(); }
 let dataPengumuman=[];
+function getPengumumanBawaan(){
+  return [
+    {judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA",bawaan:true},
+    {judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA",bawaan:true},
+    {judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA",bawaan:true},
+    {judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA",bawaan:true},
+    {judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA",bawaan:true}
+  ];
+}
+function getPengumumanDihapus(){
+  try{ return JSON.parse(localStorage.getItem("pengumuman_dihapus_kayakah")||"[]"); }catch(e){ return []; }
+}
 async function loadPengumuman(){
+  let bawaan = getPengumumanBawaan();
+  let dihapus = getPengumumanDihapus();
+  let dariFirebase=[];
   try{
     let r = window._fb.collection(window._fb.db,"pengumuman");
     let s = await window._fb.getDocs(r);
-    dataPengumuman = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;});
-    dataPengumuman.sort((a,b)=>(b.waktu||0)-(a.waktu||0));
-    if(dataPengumuman.length===0) throw new Error("kosong");
-  }catch(e){
-    try{ dataPengumuman = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dataPengumuman=[]; }
-    if(dataPengumuman.length===0){
-      dataPengumuman=[
-        {judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA"},
-        {judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA"},
-        {judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA"},
-        {judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA"},
-        {judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA"}
-      ];
-    }
-  }
+    dariFirebase = s.docs.map(d=>{let x=d.data(); x._id=d.id; return x;});
+    dariFirebase.sort((a,b)=>(b.waktu||0)-(a.waktu||0));
+  }catch(e){ dariFirebase=[]; }
+  let dariHP=[];
+  try{ dariHP = JSON.parse(localStorage.getItem("pengumuman_kayakah")||"[]"); }catch(err){ dariHP=[]; }
+  let gabung=[...dariFirebase, ...dariHP, ...bawaan];
+  let sudahAda={};
+  dataPengumuman=[];
+  gabung.forEach(p=>{
+    let kunci=(p.judul||"")+"|"+(p.isi||"");
+    if(dihapus.indexOf(kunci)!==-1) return;
+    if(sudahAda[kunci]) return;
+    sudahAda[kunci]=true;
+    dataPengumuman.push(p);
+  });
   renderPengumuman();
 }
 function renderPengumuman(){
@@ -413,7 +428,10 @@ async function tambahPengumuman(){
     await window._fb.addDoc(r,data);
   }catch(e){}
   dataPengumuman.unshift(data);
-  try{ localStorage.setItem("pengumuman_kayakah", JSON.stringify(dataPengumuman)); }catch(e){}
+  try{
+    let simpan = dataPengumuman.filter(p=>!p.bawaan);
+    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
+  }catch(e){}
   document.getElementById("judulPengumuman").value="";
   document.getElementById("isiPengumuman").value="";
   document.getElementById("pesanPengumuman").innerHTML="✅ Pengumuman berhasil disimpan!";
@@ -430,8 +448,14 @@ async function hapusPengumuman(i){
       await window._fb.deleteDoc(r);
     }
   }catch(e){}
+  let kunci=(p.judul||"")+"|"+(p.isi||"");
+  let dihapus=getPengumumanDihapus();
+  if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
   dataPengumuman.splice(i,1);
-  try{ localStorage.setItem("pengumuman_kayakah", JSON.stringify(dataPengumuman)); }catch(e){}
+  try{
+    let simpan = dataPengumuman.filter(p=>!p.bawaan);
+    localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan));
+  }catch(e){}
   renderPengumuman();
 }
 window.addEventListener("load",function(){ loadPIN(); loadPengumuman(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); renderGaleriGuru(); loadKegiatan(); });
