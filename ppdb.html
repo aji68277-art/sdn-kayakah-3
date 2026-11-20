@@ -18,27 +18,10 @@ window.dispatchEvent(new Event('firebase-ready'));
 body{margin:0;background:#FFFDF5;font-family:'Nunito',Arial,sans-serif;color:#1F2937}
 h1,h2,h3{font-family:'Baloo 2',Arial,sans-serif}
 .topbar{background:#1E3A8A;color:white;padding:10px;text-align:center;font-weight:800;font-size:13px}
-/* HEADER MERIAH - TANPA GAMBAR */
-.header-meriah{
-  text-align:center;
-  padding:22px 14px 20px;
-  background:linear-gradient(135deg,#FF5252 0%,#FF9800 20%,#FFEB3B 40%,#4CAF50 60%,#2196F3 80%,#9C27B0 100%);
-  color:white;
-  position:relative;
-  overflow:hidden;
-}
+.header-meriah{text-align:center;padding:22px 14px 20px;background:linear-gradient(135deg,#FF5252 0%,#FF9800 20%,#FFEB3B 40%,#4CAF50 60%,#2196F3 80%,#9C27B0 100%);color:white;position:relative;overflow:hidden}
 .header-meriah .hiasan{font-size:28px;letter-spacing:6px}
-.header-meriah h1{
-  margin:6px 0 4px;
-  font-size:36px;line-height:1.1;
-  color:#FFEB3B;
-  text-shadow:3px 3px 0 #1E3A8A, -1px -1px 0 #1E3A8A, 1px -1px 0 #1E3A8A, -1px 1px 0 #1E3A8A;
-}
-.header-meriah p{
-  margin:0;
-  background:white;color:#1E3A8A;display:inline-block;
-  padding:6px 18px;border-radius:20px;font-weight:800;font-size:15px;
-}
+.header-meriah h1{margin:6px 0 4px;font-size:36px;line-height:1.1;color:#FFEB3B;text-shadow:3px 3px 0 #1E3A8A, -1px -1px 0 #1E3A8A, 1px -1px 0 #1E3A8A, -1px 1px 0 #1E3A8A}
+.header-meriah p{margin:0;background:white;color:#1E3A8A;display:inline-block;padding:6px 18px;border-radius:20px;font-weight:800;font-size:15px}
 .header-btn{background:#FF6D00;color:white;border:none;padding:15px 26px;border-radius:30px;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 5px 0 #BF360C;margin-top:14px}
 .header-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #BF360C}
 .badges{display:flex;gap:10px;padding:14px;justify-content:center;flex-wrap:wrap}
@@ -149,11 +132,12 @@ footer{text-align:center;padding:20px;color:#888;font-size:13px}
 </div>
 
 <div id="admin" class="card" style="display:none">
-<h2>🔐 Admin Kepsek - Hanya Pak Wahyu</h2>
+<h2>🔐 Admin Kepsek - Hanya Pak Wahyu - PIN 6 Digit</h2>
 <div id="loginBox">
-<input type="password" id="pass" placeholder="Password Admin">
+<label style="font-weight:800">Masukkan PIN 6 Angka Kepsek:</label>
+<input type="password" id="pass" placeholder="PIN 6 angka - Contoh: 197601" inputmode="numeric" maxlength="6">
 <button class="btn" onclick="login()">Masuk Admin</button>
-<p style="font-size:12px;color:#888">Password contoh: kayakah123</p>
+<p style="font-size:12px;color:#888">PIN sama seperti di Beranda - PIN Kepsek Wahyu Aji</p>
 </div>
 <div id="adminBox" style="display:none">
 <h3>📢 Tulis Pengumuman</h3>
@@ -235,13 +219,14 @@ function cekData(){
   hasil.innerHTML=html;
 }
 function login(){
-  if(document.getElementById('pass').value==='kayakah123'){
+  var pin = document.getElementById('pass').value.trim();
+  if(pin==='197601'){
     document.getElementById('loginBox').style.display='none';
     document.getElementById('adminBox').style.display='block';
     document.getElementById('editPengumuman').value=getPengumuman();
     document.getElementById('editBerkas').value=getBerkas();
     tampilkanAdmin();
-  } else { alert('Password salah!'); }
+  } else { alert('PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!'); }
 }
 function keluar(){ document.getElementById('loginBox').style.display='block'; document.getElementById('adminBox').style.display='none'; document.getElementById('pass').value=''; }
 function tampilkanAdmin(){
