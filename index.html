@@ -1,3 +1,11 @@
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({apiKey:"AIzaSyCSMvh7xlAKMQbWf-YbNjMVyTAnHOUMkM0",authDomain:"sdn-kayakah-3.firebaseapp.com",projectId:"sdn-kayakah-3",storageBucket:"sdn-kayakah-3.firebasestorage.app",messagingSenderId:"615927561449",appId:"1:615927561449:web:3570adc875d4a7987b4478"});
+const db=firebase.firestore();
+window._fb={db:db,collection:function(a,b){return a.collection(b)},doc:function(a,b,c){return a.collection(b).doc(c)},getDocs:async function(r){let s=await r.get();return{docs:s.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})}},addDoc:async function(r,d){let x=await r.add(d);return{id:x.id}},updateDoc:async function(r,d){return await r.update(d)},deleteDoc:async function(r){return await r.delete()}};
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SDN Kayakah</title>
