@@ -195,8 +195,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
 <h3 style="text-align:center;color:#7C2D12;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
 <p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
-<p id="statusGaleri" style="text-align:center;font-size:13px;color:#666">Memuat foto guru...</p>
-<div class="lock-box" id="lockGuru">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto. Untuk ganti foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
+<p id="statusGaleri" style="text-align:center;font-size:13px;color:#666;display:none">Memuat foto guru...</p>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
 <div class="galeri" id="listGaleriGuru"></div>
 <div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#2E9E5B;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU</button></div>
@@ -216,8 +215,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
 <h3 style="text-align:center;color:#1B5E20;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
 <p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱</p>
-<p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666">Memuat foto kegiatan...</p>
-<div class="lock-box" id="lockKegiatan">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto kegiatan. Untuk tambah / hapus foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
+<p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666;display:none">Memuat foto kegiatan...</p>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin Aktif - Pian Bisa Tambah & Hapus Foto Kegiatan!</div>
 <div style="text-align:center;margin-bottom:12px">
 <button onclick="filterKegiatan('SEMUA')" style="background:#2E9E5B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🌈 Semua</button>
@@ -377,7 +375,6 @@ function updateTampilanAdmin(){
     if(adminLogin===NAMA_KEPSEK) document.body.classList.add("kepsek"); else document.body.classList.remove("kepsek");
     document.getElementById("adminStatus").innerHTML=adminLogin===NAMA_KEPSEK?"👑 Login Sebagai KEPALA SEKOLAH: <b>"+adminLogin+"</b>":"✅ Login Sebagai Admin: <b>"+adminLogin+"</b>";
     document.getElementById("btnLoginTop").style.display="none"; document.getElementById("btnLogoutTop").style.display="inline-block";
-    document.getElementById("lockGuru").style.display="none"; document.getElementById("lockKegiatan").style.display="none";
     document.getElementById("namaAdminDiForm").innerHTML=adminLogin;
     let elPin=document.getElementById("namaPinSendiri"); if(elPin) elPin.innerHTML=adminLogin;
     let elLogo=document.getElementById("namaLogoAdmin"); if(elLogo) elLogo.innerHTML=adminLogin;
@@ -386,7 +383,6 @@ function updateTampilanAdmin(){
     document.body.classList.remove("admin"); document.body.classList.remove("kepsek");
     document.getElementById("adminStatus").innerHTML="👀 Mode Pengunjung - Hanya Melihat Galeri";
     document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none";
-    document.getElementById("lockGuru").style.display="block"; document.getElementById("lockKegiatan").style.display="block";
   }
   renderGaleriGuru(); tampilKegiatan(); renderPengumuman();
 }
