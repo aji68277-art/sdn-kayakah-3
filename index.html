@@ -15,7 +15,7 @@ window.dispatchEvent(new Event('firebase-ready'));
 <style>
 *{box-sizing:border-box}
 body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#EAF6F6;color:#2D3436}
-header{background:linear-gradient(180deg,#0A2A4A 0%,#123B5C 55%,#1B5E7A 100%);color:#fff;padding:18px 14px 22px;text-align:center;position:relative}
+header{background:linear-gradient(180deg,#0A2A4A 0%,#123B5C 55%,#1B5E7A 100%);color:#fff;padding:18px 14px 44px;text-align:center;position:relative}
 header h1{margin:4px 0;font-size:48px;color:#FFE9A8;text-shadow:3px 3px 0 #0A2A4A,6px 6px 0 rgba(0,0,0,.35)}
 header p{margin:6px 0 0;font-weight:bold;background:#FFE9A8;color:#0A2A4A;display:inline-block;padding:8px 16px;border-radius:20px}
 .pembuat-kecil{font-size:12px;color:#fff;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
@@ -25,6 +25,7 @@ header p{margin:6px 0 0;font-weight:bold;background:#FFE9A8;color:#0A2A4A;displa
 @keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
 .kartun-besar{font-size:72px;line-height:1;margin:10px 0;letter-spacing:8px;animation:lompat 1.2s ease-in-out infinite}
 @keyframes lompat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.login-melayang{position:absolute;bottom:8px;right:10px;z-index:5}
 .pengumuman{background:#FFD93D;padding:12px 10px;border-bottom:4px solid #FF8A00;font-weight:bold;font-size:17px;color:#7C2D12;overflow:hidden;white-space:nowrap}
 .pengumuman span{background:#0E7C7B;color:white;padding:5px 12px;border-radius:20px;margin-right:10px}
 nav{background:#fff;padding:12px;text-align:center;box-shadow:0 3px 8px #ddd;position:sticky;top:0;z-index:10}
@@ -78,8 +79,7 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .tambah-box{background:#fff;border:3px dashed #2E9E5B;border-radius:16px;padding:18px;text-align:center}
 .tambah-box input{width:100%;margin:6px 0;padding:9px;border:1px solid #ccc;border-radius:10px}.tambah-box select{width:100%;padding:9px;border:1px solid #ccc;border-radius:10px;margin:6px 0}
 .btn-tambah{background:#2E9E5B;color:white;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px;width:100%}
-.admin-bar{background:#1E3A5F;color:white;padding:12px;text-align:center;position:sticky;top:0;z-index:20;font-size:14px}.admin-bar b{color:#FFD93D}
-.btn-login{background:#FFD93D;color:#1E3A5F;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}.btn-logout{background:#E11D63;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:8px}
+.btn-login{background:#FFD93D;color:#1E3A5F;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:12px;box-shadow:0 2px 0 rgba(0,0,0,.3)}.btn-logout{background:#E11D63;color:white;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:12px;box-shadow:0 2px 0 rgba(0,0,0,.3)}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:99;justify-content:center;align-items:center}
 .modal-box{background:white;width:92%;max-width:400px;padding:22px;border-radius:20px;text-align:center;max-height:90vh;overflow:auto}
 .modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #FF8A00;border-radius:12px;font-size:15px}
@@ -98,15 +98,10 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hapus-item img{width:70px;height:55px;object-fit:cover;border-radius:8px}
 .hapus-item input{width:22px;height:22px}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
-@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}.login-melayang{bottom:6px;right:8px}}
 </style>
 </head>
 <body>
-<div class="admin-bar">
-<span id="adminStatus">👀 Mode Pengunjung - Hanya Melihat Galeri</span>
-<button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Admin Guru</button>
-<button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button>
-</div>
 <div class="modal" id="modalLogin">
 <div class="modal-box">
 <div style="font-size:60px">👩‍🏫👨‍🏫🏫</div>
@@ -142,6 +137,10 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <p>⭐ NPSN 30302788 | Berdiri Tahun 1976 ⭐</p><br>
 <span class="pembuat-kecil">Wahyu Aji, S.Pd.Jas</span>
 <div style="font-size:30px;margin-top:8px">🏫 📚 🎨 ⚽ 🎤 🥁 💻 🌱 🎉</div>
+<div class="login-melayang">
+<button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Admin Guru</button>
+<button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button>
+</div>
 </header>
 <div class="pengumuman"><span>📢 PENGUMUMAN</span><marquee id="marqueePengumuman" behavior="scroll" scrollamount="6">🎉 Selamat Datang di SDN Kayakah! &nbsp;&nbsp; 💬 Ada Kritik & Saran? Isi di Kotak Saran Di Bawah Ya! &nbsp;&nbsp; 📚 Senin: Upacara Bendera Jam 07.30 WITA &nbsp;&nbsp; 🕌 Jumat: Yasinan & Infaq &nbsp;&nbsp; 🥁 Sabtu: Pramuka Jam 15.00 WITA &nbsp;&nbsp;</marquee></div>
 <nav>
@@ -392,7 +391,6 @@ function updateTampilanAdmin(){
   if(adminLogin){
     document.body.classList.add("admin");
     if(adminLogin===NAMA_KEPSEK) document.body.classList.add("kepsek"); else document.body.classList.remove("kepsek");
-    document.getElementById("adminStatus").innerHTML=adminLogin===NAMA_KEPSEK?"👑 Login Sebagai KEPALA SEKOLAH: <b>"+adminLogin+"</b>":"✅ Login Sebagai Admin: <b>"+adminLogin+"</b>";
     document.getElementById("btnLoginTop").style.display="none"; document.getElementById("btnLogoutTop").style.display="inline-block";
     document.getElementById("namaAdminDiForm").innerHTML=adminLogin;
     let elPin=document.getElementById("namaPinSendiri"); if(elPin) elPin.innerHTML=adminLogin;
@@ -400,12 +398,11 @@ function updateTampilanAdmin(){
     if(adminLogin===NAMA_KEPSEK) tampilTabelPIN();
   } else {
     document.body.classList.remove("admin"); document.body.classList.remove("kepsek");
-    document.getElementById("adminStatus").innerHTML="👀 Mode Pengunjung - Hanya Melihat Galeri";
     document.getElementById("btnLoginTop").style.display="inline-block"; document.getElementById("btnLogoutTop").style.display="none";
   }
   renderGaleriGuru(); tampilKegiatan(); renderPengumuman();
 }
-function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Kepsek + Admin / Guru yang bisa! Klik 🔐 Login Admin Guru di atas!"); bukaLogin(); return false; } return true; }
+function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Kepsek + Admin / Guru yang bisa! Klik 🔐 Login Admin Guru di atas Pengumuman!"); bukaLogin(); return false; } return true; }
 function wajibKepsek(){ if(adminLogin!==NAMA_KEPSEK){ alert("🔒 Hanya Kepala Sekolah!"); return false; } return true; }
 function gantiPINsendiri(){
   if(!wajibAdmin()) return;
