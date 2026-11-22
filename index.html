@@ -94,6 +94,9 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 #tabelPIN table{border:1px solid #ddd;background:#fff}
 #tabelPIN td{border-bottom:1px solid #eee;color:#333}
 #tabelPIN td:first-child{width:auto;color:#333}
+.hapus-item{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid #eee;border-radius:12px;padding:8px;margin:6px 0;text-align:left}
+.hapus-item img{width:70px;height:55px;object-fit:cover;border-radius:8px}
+.hapus-item input{width:22px;height:22px}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
 @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
 </style>
@@ -116,6 +119,17 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <p id="loginError" style="color:#D32F2F;font-weight:bold;min-height:20px"></p>
 <button style="background:#2E9E5B;color:white" onclick="cekLogin()">✅ MASUK SEBAGAI ADMIN</button>
 <button style="background:#BDBDBD" onclick="tutupLogin()">⬅️ Kembali ke Beranda</button>
+</div>
+</div>
+<div class="modal" id="modalHapusKategori">
+<div class="modal-box" style="max-width:460px;text-align:left">
+<div style="text-align:center;font-size:44px">🗑️</div>
+<h2 id="judulHapusKategori" style="margin:4px 0;text-align:center;color:#C62828">Hapus Foto</h2>
+<p id="ketHapusKategori" style="font-size:13px;color:#666;text-align:center;margin:4px 0">Centang √ foto yang mau dihapus.</p>
+<div id="listHapusKategori"></div>
+<p id="pesanHapusKategori" style="font-weight:bold;color:#2E7D32;text-align:center"></p>
+<button style="background:#E11D63;color:white" onclick="hapusTerpilihKategori()">❌ HAPUS YANG DICENTANG</button>
+<button style="background:#BDBDBD" onclick="tutupHapusKategori()">⬅️ Batal / Kembali</button>
 </div>
 </div>
 <header id="beranda">
@@ -226,6 +240,12 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button onclick="filterKegiatan('Lainnya')" style="background:#FF8A00;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎨 Lainnya</button>
 <button onclick="filterKegiatan('Umum')" style="background:#0E7C7B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📸 Umum</button>
 </div>
+<div class="hanya-admin" id="barAksiKategori" style="display:none;background:#fff;border:3px dashed #2E9E5B;border-radius:16px;padding:14px;text-align:center;margin-bottom:12px">
+<b id="labelAksiKategori" style="color:#1B5E20">Kategori: Upacara</b><br>
+<span style="font-size:13px;color:#666">Pian lagi di kategori ini. Pilih mau tambah atau hapus.</span><br><br>
+<button onclick="tambahFotoKategori()" style="background:#2E9E5B;color:white;border:none;padding:11px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📸 TAMBAH FOTO <span id="labelTambahKat">UPACARA</span></button>
+<button onclick="bukaHapusKategori()" style="background:#E11D63;color:white;border:none;padding:11px 16px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🗑️ HAPUS FOTO <span id="labelHapusKat">UPACARA</span></button>
+</div>
 <div class="kegiatan-grid" id="listKegiatan"></div>
 <div class="tambah-box hanya-admin" style="margin-top:14px">
 <h3 style="margin:0;color:#1B5E20">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
@@ -237,7 +257,6 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN</button>
 <p id="pesanKegiatan" style="font-weight:bold;color:#2E7D32"></p>
 </div>
-<div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#E11D63;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
 <div class="card peng-card"><div class="banner-kartun">📢🎉📚</div><h3>📢 Pengumuman Sekolah</h3><ul id="listPengumuman"><li>Memuat pengumuman...</li></ul>
@@ -463,8 +482,63 @@ async function loadKegiatan(){
   }
   tampilKegiatan();
 }
-function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":k.kat==="Umum"?"📸":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; }
-function filterKegiatan(kat){ filterAktif=kat; tampilKegiatan(); }
+function updateBarAksiKategori(){
+  let bar=document.getElementById("barAksiKategori"); if(!bar) return;
+  if(!adminLogin || filterAktif==="SEMUA"){ bar.style.display="none"; return; }
+  bar.style.display="block";
+  let lbl=document.getElementById("labelAksiKategori"); if(lbl) lbl.innerHTML="Kategori: "+filterAktif;
+  let t=document.getElementById("labelTambahKat"); if(t) t.innerHTML=filterAktif.toUpperCase();
+  let h=document.getElementById("labelHapusKat"); if(h) h.innerHTML=filterAktif.toUpperCase();
+}
+function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":k.kat==="Umum"?"📸":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; updateBarAksiKategori(); }
+function filterKegiatan(kat){ filterAktif=kat; tutupHapusKategoriSilent(); tampilKegiatan(); }
+function tambahFotoKategori(){
+  if(!wajibAdmin()) return;
+  if(filterAktif==="SEMUA"){ alert("Pilih dulu kategorinya, Pak. Contoh klik Upacara."); return; }
+  let sel=document.getElementById("kategoriKegiatan"); if(sel) sel.value=filterAktif;
+  document.getElementById("judulKegiatan").focus();
+  document.getElementById("judulKegiatan").scrollIntoView({behavior:"smooth"});
+  document.getElementById("pesanKegiatan").innerHTML="✅ Pian lagi tambah foto kategori: "+filterAktif+" - Kategorinya sudah otomatis terpilih!";
+}
+function bukaHapusKategori(){
+  if(!wajibAdmin()) return;
+  if(filterAktif==="SEMUA"){ alert("Pilih dulu kategorinya, Pak. Contoh klik Upacara, baru klik Hapus Foto Upacara."); return; }
+  let list=dataKegiatan.map((k,idx)=>({k:k,idx:idx})).filter(x=>x.k.kat===filterAktif);
+  document.getElementById("judulHapusKategori").innerHTML="🗑️ Hapus Foto "+filterAktif;
+  document.getElementById("ketHapusKategori").innerHTML="Ada "+list.length+" foto "+filterAktif+". Centang √ yang mau dihapus.";
+  document.getElementById("pesanHapusKategori").innerHTML="";
+  let wadah=document.getElementById("listHapusKategori");
+  if(list.length===0){ wadah.innerHTML="<p style='text-align:center'>Belum ada foto di kategori ini.</p>"; }
+  else{
+    let h="";
+    list.forEach(item=>{
+      let k=item.k; let foto = k.foto ? `<img src="${k.foto}">` : `<div style="width:70px;height:55px;background:#eee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px">${k.emoji||"📸"}</div>`;
+      h+=`<label class="hapus-item"><input type="checkbox" class="cek-hapus" data-idx="${item.idx}">${foto}<span style="flex:1"><b>${k.judul}</b><br><span style="font-size:12px;color:#777">${k.ket||""}</span></span></label>`;
+    });
+    wadah.innerHTML=h;
+  }
+  document.getElementById("modalHapusKategori").style.display="flex";
+}
+function tutupHapusKategori(){ document.getElementById("modalHapusKategori").style.display="none"; }
+function tutupHapusKategoriSilent(){ let m=document.getElementById("modalHapusKategori"); if(m) m.style.display="none"; }
+async function hapusTerpilihKategori(){
+  if(!wajibAdmin()) return;
+  let ceks=document.querySelectorAll(".cek-hapus:checked");
+  if(ceks.length===0){ alert("Centang dulu, Pak. Foto mana yang mau dihapus?"); return; }
+  let idxs=[]; let namas=[];
+  ceks.forEach(c=>{ let i=parseInt(c.getAttribute("data-idx")); idxs.push(i); namas.push(dataKegiatan[i].judul); });
+  if(!confirm("Pian yakin hapus "+idxs.length+" foto "+filterAktif+" ini?\n\n- "+namas.join("\n- ")+"\n\nYang kada dicentang kada kehapus, Pak.")) return;
+  idxs.sort((a,b)=>b-a);
+  for(let i of idxs){
+    let k=dataKegiatan[i];
+    try{ if(k._id){ let r=window._fb.doc(window._fb.db,"kegiatan_kayakah",k._id); await window._fb.deleteDoc(r); } }catch(e){}
+    dataKegiatan.splice(i,1);
+  }
+  try{localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan.filter(x=>!x.bawaan)));}catch(e){}
+  document.getElementById("pesanHapusKategori").innerHTML="✅ Berhasil hapus "+idxs.length+" foto!";
+  tampilKegiatan();
+  setTimeout(function(){ tutupHapusKategori(); },800);
+}
 async function tambahKegiatan(){
   if(!wajibAdmin()) return;
   let judul=document.getElementById("judulKegiatan").value.trim(); let kat=document.getElementById("kategoriKegiatan").value; let ket=document.getElementById("ketKegiatan").value.trim(); let fileInput=document.getElementById("fileKegiatan");
@@ -496,15 +570,6 @@ async function hapusKegiatan(i){
   dataKegiatan.splice(i,1);
   try{localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan.filter(x=>!x.bawaan)));}catch(e){}
   tampilKegiatan();
-}
-async function hapusSemuaKegiatan(){
-  if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA foto kegiatan? Foto bawaan akan muncul lagi.")) return;
-  try{
-    let r=window._fb.collection(window._fb.db,"kegiatan_kayakah");
-    let s=await window._fb.getDocs(r);
-    for(let d of s.docs){ try{ let rr=window._fb.doc(window._fb.db,"kegiatan_kayakah",d.id); await window._fb.deleteDoc(rr); }catch(e){} }
-  }catch(e){}
-  dataKegiatan=[]; localStorage.removeItem("kegiatan_kayakah"); await loadKegiatan();
 }
 let dataPengumuman=[];
 function getPengumumanBawaan(){ return [{judul:"Senin: Upacara Bendera",isi:"Jam 07.30 WITA",bawaan:true},{judul:"Jumat: Yasinan, Infaq, Tahsin",isi:"Jam 07.30 WITA",bawaan:true},{judul:"Sabtu: Pramuka Kelas 4,5,6",isi:"Jam 15.00 WITA",bawaan:true},{judul:"Selasa, Rabu, Kamis: Ekstra Komputer",isi:"Jam 13.00 WITA",bawaan:true},{judul:"Minggu: Habsy / Hadrah",isi:"Jam 08.30 WITA",bawaan:true}]; }
