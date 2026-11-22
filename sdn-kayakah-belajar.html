@@ -21,9 +21,9 @@ window.dispatchEvent(new Event('firebase-ready'));
   header p{margin:10px 0 0;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
   .nama-kepsek{font-size:11px;color:white;opacity:.95;margin-top:4px;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
   .motto{background:white;color:#EA580C;display:inline-block;padding:8px 18px;border-radius:30px;margin-top:12px;font-weight:bold;box-shadow:0 3px 0 #FFD700}
-  .menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px;background:linear-gradient(90deg,#FFE0E0,#FFF3C4,#D1FAE5,#DBEAFE,#EDE9FE,#FCE7F3)}
-  .menu button{border:3px solid white;padding:10px 14px;border-radius:25px;font-weight:bold;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.15);font-size:13px;color:white}
-  .menu button:nth-child(1){background:#7C3AED}.menu button:nth-child(2){background:#FF4757}.menu button:nth-child(3){background:#FF6B35}.menu button:nth-child(4){background:#FFA502}.menu button:nth-child(5){background:#2ED573}.menu button:nth-child(6){background:#222}.menu button:nth-child(7){background:#1E90FF}.menu button:nth-child(8){background:#FF00AA}.menu button:nth-child(9){background:#00CEC9}.menu button:nth-child(10){background:#FF6348}.menu button:nth-child(11){background:#F59E0B}.menu button:nth-child(12){background:#DC2626}.menu button:nth-child(13){background:#0891B2}
+  .menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px;background:linear-gradient(90deg,#FFE0E0,#FFF3C4,#D1FAE5,#DBEAFE,#EDE9FE,#FCE7F3);position:relative;z-index:10}
+  .menu button{border:3px solid white;padding:10px 14px;border-radius:25px;font-weight:bold;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.15);font-size:13px;color:white;pointer-events:auto}
+  .menu button:nth-child(1){background:#7C3AED}.menu button:nth-child(2){background:#FF4757}.menu button:nth-child(3){background:#FF6B35}.menu button:nth-child(4){background:#FFA502}.menu button:nth-child(5){background:#2ED573}.menu button:nth-child(6){background:#222}.menu button:nth-child(7){background:#1E90FF}.menu button:nth-child(8){background:#FF6348}.menu button:nth-child(9){background:#00CEC9}.menu button:nth-child(10){background:#FF6348}.menu button:nth-child(11){background:#F59E0B}.menu button:nth-child(12){background:#DC2626}.menu button:nth-child(13){background:#0891B2}
   .menu button.active{background:#222!important}
   .card{background:white;margin:14px;padding:18px;border-radius:22px;box-shadow:0 4px 0 #FFD700,0 8px 20px rgba(0,0,0,.1);border:3px solid #FFE066}
   .card h2{color:#7C3AED;margin-top:0}
@@ -50,17 +50,16 @@ window.dispatchEvent(new Event('firebase-ready'));
   .jejak{border-left:6px solid #FF4757;background:#FFF3C4;padding:12px;margin:0 0 10px 10px;border-radius:0 16px 16px 0}
   .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:bold;color:white;background:#FF4757}
   .kategori-mapel{background:#7C3AED;color:white;padding:8px 12px;border-radius:12px;margin:14px 0 8px;font-weight:bold;font-size:14px}
-  #laciPIN{position:fixed;right:0;top:0;bottom:0;width:330px;max-width:92%;background:white;z-index:999;box-shadow:-5px 0 20px rgba(0,0,0,.3);transform:translateX(100%);transition:.3s;overflow:auto;padding:16px;border-left:6px solid #FFD700}
-  #laciPIN.buka{transform:translateX(0)}
+  #laciPIN{position:fixed;right:0;top:0;bottom:0;width:330px;max-width:92%;background:white;z-index:999;box-shadow:-5px 0 20px rgba(0,0,0,.3);transform:translateX(100%);transition:.3s;overflow:auto;padding:16px;border-left:6px solid #FFD700;pointer-events:none}
+  #laciPIN.buka{transform:translateX(0);pointer-events:auto}
   .panel-kepsek{background:#FEF3C7;border:3px solid #D97706;border-radius:16px;padding:12px;margin:10px 0;display:none}
   .panel-kepsek h3{margin:0 0 6px;color:#92400E}
   .panel-kepsek p{font-size:12px;color:#666;margin:4px 0}
+  .btn-kembali{position:fixed;top:10px;left:10px;z-index:50;background:#ff5722;color:white;padding:8px 12px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,0.3)}
 </style>
 </head>
 <body>
-<div style="position:fixed; top:10px; left:10px; z-index:9999;">
-<a href="index.html" style="display:inline-block; background:#ff5722; color:white; padding:12px 18px; border-radius:25px; text-decoration:none; font-weight:bold; font-size:16px; box-shadow:0 3px 8px rgba(0,0,0,0.3);">🏠 Kembali ke Beranda</a>
-</div>
+<a href="index.html" class="btn-kembali">🏠 Kembali</a>
 <header><h1>🏫 SDN Kayakah 🌈</h1><p>Amuntai Selatan - Hulu Sungai Utara</p><div class="nama-kepsek">Wahyu Aji, S.Pd.Jas</div><div class="motto">🌈 Belajar Asyik, 💚 Berakhlak, 💙 Berprestasi</div><div style="font-size:22px;margin-top:8px">⭐ 🎈 📚 🎨 ⚽ 🍎 🎈 ⭐</div></header>
 <div id="barStatus" style="background:#D1FAE5;text-align:center;padding:10px;font-weight:bold;color:#059669">👀 Mode Pengunjung - Cuma Bisa Melihat & Membaca - Untuk Guru / Kepsek / Admin, Klik Tombol 🔒 PIN Guru Di Menu</div>
 <div class="menu">
@@ -325,7 +324,10 @@ function renderListPINGuru(){
 function simpanSiswaGuruKeFirebase(){
   try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA)); localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){}
   if(!window._fb) return;
-  try{ window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA,[STRIPPED] window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA,[STRIPPED] }catch(e){}
+  try{
+    window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA, waktu:Date.now()});
+    window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA, pin:PIN_DATA, waktu:Date.now()});
+  }catch(e){}
 }
 function muatSiswaGuruDariFirebase(){
   try{ var s=localStorage.getItem('SISWA_KAYAKAH'); if(s){var d=JSON.parse(s); for(var k in d) DATA[k]=d[k];} var g=localStorage.getItem('GURU_KAYAKAH_BELAJAR'); if(g){var gg=JSON.parse(g); if(gg.length>0) GURU_DATA=gg;} }catch(e){}
