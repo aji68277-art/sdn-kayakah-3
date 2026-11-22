@@ -124,11 +124,135 @@ var GURU_DATA=[{nama:"Wahyu Aji, S.Pd.Jas",jabatan:"Kepala Sekolah + PJOK + Pemb
 function buatMapel(wali){return [{kat:"📚 MATA PELAJARAN WAJIB",list:[{nama:"Pendidikan Agama Islam (PAI)",guru:"Pathul Jannah, S.Pd.I",icon:"📖"},{nama:"Pendidikan Pancasila",guru:wali,icon:"🇮🇩"},{nama:"Bahasa Indonesia",guru:wali,icon:"📝"},{nama:"Matematika",guru:wali,icon:"🔢"},{nama:"IPAS",guru:wali,icon:"🌍"},{nama:"Bahasa Inggris",guru:wali,icon:"🇬🇧"},{nama:"PJOK",guru:"Wahyu Aji, S.Pd.Jas",icon:"⚽"},{nama:"Seni Budaya",guru:wali,icon:"🎨"}]},{kat:"🕌 KEUNGGULAN SDN KAYAKAH",list:[{nama:"Tahsin",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"🕌",tipe:"tahsin"},{nama:"Tahfiz",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"📖",tipe:"tahfiz"},{nama:"Pramuka",guru:"Wahyu Aji, S.Pd.Jas & M. Husain",icon:"🏕️",tipe:"pramuka"}]},{kat:"🏡 MUATAN LOKAL & LAINNYA",list:[{nama:"Bahasa Banjar (Muatan Lokal)",guru:wali,icon:"🏠"},{nama:"Informatika",guru:wali,icon:"💻"},{nama:"Bimbingan & Konseling",guru:wali,icon:"❤️"}]}];}
 var MAPEL_DATA={"Kelas 1":buatMapel("Radinah, S.Pd"),"Kelas 2":buatMapel("Siti Nuriyah, S.Pd.SD"),"Kelas 3":buatMapel("Pathul Jannah, S.Pd.I"),"Kelas 4":buatMapel("Norsalim, S.Pd"),"Kelas 5":buatMapel("Syahruni, S.Pd.SD"),"Kelas 6":buatMapel("Samsul Bahri, S.Pd")};
 var MATERI_DATA={}; var SEMUA_MAPEL=["Pendidikan Agama Islam (PAI)","Pendidikan Pancasila","Bahasa Indonesia","Matematika","IPAS","Bahasa Inggris","PJOK","Seni Budaya","Tahsin","Tahfiz","Pramuka","Bahasa Banjar (Muatan Lokal)","Informatika","Bimbingan & Konseling"];
-["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].forEach(function(k){ SEMUA_MAPEL.forEach(function(mp){ var key=k+"|"+mp; MATERI_DATA[key]=[{judul:"Materi 1: Pengantar "+mp+" - "+k,isi:"Ini Materi 1 "+mp+" untuk "+k+". Guru / Admin silakan tambah materi baru.",video:"",latihan:"Latihan 1: Guru isi disini."},{judul:"Materi 2: Lanjutan "+mp+" - "+k,isi:"Ini Materi 2 "+mp+" untuk "+k+".",video:"",latihan:"Latihan 2: Guru isi disini."}]; }); });
-MATERI_DATA["Kelas 1|Matematika"]=[{judul:"Materi 1: Mengenal Angka 1-10",isi:"1 Satu, 2 Dua, 3 Tiga, 4 Empat, 5 Lima, 6 Enam, 7 Tujuh, 8 Delapan, 9 Sembilan, 10 Sepuluh.",video:"https://www.youtube.com/results?search_query=belajar+angka+1-10+anak+SD",latihan:"Sebutkan angka setelah 4! | 2 + 3 = ?"},{judul:"Materi 2: Penjumlahan",isi:"1 apel + 1 apel = 2 apel.",video:"",latihan:"1 + 2 = ?"}];
-MATERI_DATA["Kelas 1|Tahsin"]=[{judul:"Materi 1: Huruf Hijaiyah Alif - Ya",isi:"Anak mengenal huruf Hijaiyah Alif sampai Ya.",video:"https://www.youtube.com/results?search_query=belajar+huruf+hijaiyah+anak",latihan:"Sebutkan Alif, Ba, Ta."},{judul:"Materi 2: Makhraj Huruf",isi:"Ha dari tenggorokan, Ba dari bibir.",video:"",latihan:"Tirukan Ha, Kha, Ba."}];
-MATERI_DATA["Kelas 1|Tahfiz"]=[{judul:"Hafalan 1: Al-Fatihah",isi:"Anak menghafal Al-Fatihah ayat 1-7.",video:"https://www.youtube.com/results?search_query=hafalan+surat+al-fatihah+anak",latihan:"Setoran: Baca Al-Fatihah."},{judul:"Hafalan 2: An-Nas",isi:"Anak menghafal An-Nas ayat 1-6.",video:"",latihan:"Setoran: Baca An-Nas."}];
-MATERI_DATA["Kelas 1|Pramuka"]=[{judul:"Materi 1: Pramuka Siaga",isi:"Praja Muda Karana. Pembina: Wahyu Aji & M. Husain.",video:"https://www.youtube.com/results?search_query=pramuka+siaga+anak+SD",latihan:"Praktek Salam Pramuka."},{judul:"Materi 2: Baris-Berbaris",isi:"Sikap sempurna, hormat, berbaris rapi.",video:"",latihan:"Baris rapi!"}];
+// ===== MATERI PER KELAS - SUDAH BEDA TIAP KELAS - KURIKULUM MERDEKA =====
+var TOPIK={
+"Pendidikan Agama Islam (PAI)":[
+[{j:"Materi 1: Rukun Islam & Syahadat",i:"Rukun Islam ada 5: Syahadat, Sholat, Puasa, Zakat, Haji. Syahadat artinya bersaksi bahwa tiada Tuhan selain Allah dan Nabi Muhammad utusan Allah.",l:"Sebutkan 5 Rukun Islam! | Ucapkan 2 kalimat Syahadat."},{j:"Materi 2: Doa Sebelum & Sesudah Belajar",i:"Sebelum belajar baca: Allahumma inni as-aluka ilman nafia. Artinya: Ya Allah, berilah aku ilmu yang bermanfaat. Sesudah belajar baca Hamdalah.",l:"Hafalkan doa sebelum belajar! | Kapan kita baca Hamdalah?"}],
+[{j:"Materi 1: Rukun Iman",i:"Rukun Iman ada 6: Iman kepada Allah, Malaikat, Kitab, Rasul, Hari Akhir, Qada dan Qadar. Kita harus percaya semua itu.",l:"Sebutkan 6 Rukun Iman! | Siapa nama 10 malaikat?"},{j:"Materi 2: Tata Cara Wudhu",i:"Wudhu: niat, cuci tangan, kumur, hidung, muka, tangan sampai siku, usap kepala, telinga, kaki sampai mata kaki. Wudhu membuat kita bersih sebelum sholat.",l:"Praktek wudhu yang benar! | Urutkan rukun wudhu!"}],
+[{j:"Materi 1: Sholat 5 Waktu",i:"Sholat wajib: Subuh 2, Dzuhur 4, Ashar 4, Maghrib 3, Isya 4 rakaat. Sholat dimulai takbiratul ihram, diakhiri salam.",l:"Sebutkan jumlah rakaat sholat 5 waktu! | Praktek sholat Subuh!"}],
+[{j:"Materi 1: Puasa Ramadhan",i:"Puasa wajib di bulan Ramadhan dari Subuh sampai Maghrib. Kita menahan lapar, haus, dan marah. Puasa melatih sabar dan peduli.",l:"Apa yang membatalkan puasa? | Sebutkan 3 manfaat puasa!"}],
+[{j:"Materi 1: Zakat & Sedekah",i:"Zakat fitrah dibayar sebelum Idul Fitri. Zakat membersihkan harta. Sedekah bisa kapan saja, tidak harus uang, senyum juga sedekah.",l:"Kapan zakat fitrah dibayar? | Beri 3 contoh sedekah!"}],
+[{j:"Materi 1: Iman kepada Hari Akhir",i:"Hari akhir adalah hari kiamat. Setelah itu ada surga dan neraka. Orang beriman harus banyak berbuat baik agar masuk surga.",l:"Apa itu hari kiamat? | Sebutkan 3 amal agar masuk surga!"}]
+],
+"Pendidikan Pancasila":[
+[{j:"Materi 1: Lambang Garuda Pancasila",i:"Garuda Pancasila lambang negara Indonesia. Di dada Garuda ada perisai dengan 5 sila. Bunyi sila 1: Ketuhanan Yang Maha Esa.",l:"Sebutkan 5 sila Pancasila! | Gambar perisai Garuda!"}],
+[{j:"Materi 1: Aturan di Rumah & Sekolah",i:"Aturan di rumah: hormat orang tua, tidur tepat waktu. Aturan di sekolah: datang tepat waktu, pakai seragam, buang sampah pada tempatnya.",l:"Sebutkan 3 aturan di sekolah! | Apa akibat melanggar aturan?"}],
+[{j:"Materi 1: Hak & Kewajiban Anak",i:"Hak anak: dapat belajar, bermain, disayang. Kewajiban anak: belajar rajin, hormat guru, jaga kebersihan.",l:"Sebutkan 3 hak dan 3 kewajiban!"}],
+[{j:"Materi 1: Keragaman Suku & Budaya",i:"Indonesia punya banyak suku: Jawa, Banjar, Dayak, Bugis, dan lainnya. Kita harus saling menghormati, tidak boleh mengejek.",l:"Sebutkan 5 suku di Indonesia! | Apa itu Bhinneka Tunggal Ika?"}],
+[{j:"Materi 1: Musyawarah & Gotong Royong",i:"Musyawarah: berunding untuk mufakat. Gotong royong: kerja bersama. Contoh: membersihkan kelas bersama.",l:"Berikan contoh musyawarah di kelas!"}],
+[{j:"Materi 1: NKRI & Persatuan",i:"NKRI: Negara Kesatuan Republik Indonesia. Kita harus cinta tanah air, jaga persatuan, tidak bertengkar karena beda suku/agama.",l:"Apa kepanjangan NKRI? | Sebutkan 3 cara menjaga persatuan!"}]
+],
+"Bahasa Indonesia":[
+[{j:"Materi 1: Membaca Suku Kata",i:"Suku kata: ba, bi, bu, be, bo. Contoh: ba-ju, bu-ku, bo-la. Membaca dengan mengeja lalu lancar.",l:"Baca: ba-ju, bu-ku, me-ja! | Rangkai: b + u = ?"}],
+[{j:"Materi 1: Kalimat Sederhana",i:"Kalimat punya subjek dan predikat. Contoh: Ibu memasak. Ayah membaca koran. Huruf pertama kapital, diakhiri titik.",l:"Buat 3 kalimat tentang sekolah!"}],
+[{j:"Materi 1: Cerita Fabel",i:"Fabel: cerita hewan yang bisa bicara. Contoh: Kancil dan Buaya. Pesan moral: jangan sombong, harus cerdik dan jujur.",l:"Ceritakan kembali dongeng Kancil! | Apa pesan moralnya?"}],
+[{j:"Materi 1: Teks Deskripsi",i:"Teks deskripsi menggambarkan benda/tempat. Contoh: Sekolahku besar, bersih, ada taman bunga. Gunakan kata sifat: besar, indah, rapi.",l:"Deskripsikan kelasmu dalam 5 kalimat!"}],
+[{j:"Materi 1: Surat Pribadi",i:"Surat pribadi: ada tanggal, salam pembuka, isi, salam penutup, nama. Contoh: surat untuk teman / guru.",l:"Tulis surat untuk temanmu!"}],
+[{j:"Materi 1: Pidato & Laporan",i:"Pidato: berbicara di depan banyak orang. Harus percaya diri, suara jelas, lihat penonton. Laporan: menceritakan hasil pengamatan.",l:"Buat pidato 1 menit tentang kebersihan!"}]
+],
+"Matematika":[
+[{j:"Materi 1: Mengenal Angka 1-10",i:"1 Satu, 2 Dua, 3 Tiga, 4 Empat, 5 Lima, 6 Enam, 7 Tujuh, 8 Delapan, 9 Sembilan, 10 Sepuluh.",l:"Sebutkan angka setelah 4! | 2 + 3 = ?"}],
+[{j:"Materi 1: Penjumlahan & Pengurangan 1-100",i:"Penjumlahan: 25 + 14 = 39. Pengurangan: 50 - 12 = 38. Gunakan jari atau garis bilangan.",l:"Hitung: 34 + 21 = ? | 60 - 15 = ?"}],
+[{j:"Materi 1: Perkalian & Pembagian",i:"Perkalian adalah penjumlahan berulang. 3 x 4 = 12. Pembagian: 12 : 3 = 4.",l:"Hitung: 5 x 6 = ? | 20 : 4 = ?"}],
+[{j:"Materi 1: Pecahan Sederhana",i:"Pecahan: 1/2 artinya setengah, 1/4 artinya seperempat. 1/2 pizza = setengah pizza.",l:"Gambar 1/2 dan 1/4! | Mana lebih besar 1/2 atau 1/4?"}],
+[{j:"Materi 1: KPK & FPB",i:"KPK: kelipatan persekutuan terkecil. FPB: faktor persekutuan terbesar. Contoh KPK 4 dan 6 = 12, FPB 12 dan 18 = 6.",l:"Cari KPK 6 dan 8! | Cari FPB 15 dan 20!"}],
+[{j:"Materi 1: Bangun Ruang & Volume",i:"Kubus: volume = sisi x sisi x sisi. Balok: p x l x t. Contoh kubus sisi 5 cm, volume 125 cm3.",l:"Hitung volume kubus sisi 4 cm!"}]
+],
+"IPAS":[
+[{j:"Materi 1: Anggota Tubuh & Panca Indra",i:"Panca indra: mata melihat, telinga mendengar, hidung mencium, lidah mengecap, kulit meraba. Jaga kebersihan tubuh.",l:"Sebutkan 5 panca indra dan fungsinya!"}],
+[{j:"Materi 1: Hewan & Tumbuhan di Sekitar",i:"Hewan: kucing, ayam, sapi. Tumbuhan: padi, pisang, mangga. Hewan butuh makan, tumbuhan butuh air dan matahari.",l:"Sebutkan 5 hewan dan makanannya!"}],
+[{j:"Materi 1: Lingkungan & Cuaca",i:"Cuaca: cerah, hujan, berawan. Musim di Indonesia: hujan dan kemarau. Jaga lingkungan: buang sampah pada tempatnya.",l:"Apa beda cuaca dan iklim?"}],
+[{j:"Materi 1: Gaya & Energi",i:"Gaya: dorongan dan tarikan. Energi: panas, cahaya, gerak. Contoh: kipas bergerak karena listrik.",l:"Sebutkan 5 contoh gaya!"}],
+[{j:"Materi 1: Ekosistem & Rantai Makanan",i:"Rantai makanan: padi - tikus - ular - elang. Jika satu punah, yang lain terganggu. Jaga alam!",l:"Buat rantai makanan di sawah!"}],
+[{j:"Materi 1: Bumi & Tata Surya",i:"Bumi mengelilingi Matahari. Planet: Merkurius, Venus, Bumi, Mars, Jupiter, Saturnus, Uranus, Neptunus.",l:"Sebutkan 8 planet! | Kenapa terjadi siang-malam?"}]
+],
+"Bahasa Inggris":[
+[{j:"Materi 1: Greetings & Numbers 1-10",i:"Hello = Halo, Good morning = Selamat pagi. Numbers: one 1, two 2, three 3, four 4, five 5.",l:"Ucapkan: Hello, my name is ...! | Hitung 1-10 dalam Inggris!"}],
+[{j:"Materi 1: My Family",i:"Father = Ayah, Mother = Ibu, Brother = Saudara laki-laki, Sister = Saudara perempuan. This is my father.",l:"Perkenalkan keluargamu dalam Inggris!"}],
+[{j:"Materi 1: Colors & Animals",i:"Colors: red merah, blue biru, green hijau. Animals: cat kucing, dog anjing, bird burung.",l:"Sebutkan 5 warna dan 5 hewan dalam Inggris!"}],
+[{j:"Materi 1: Daily Activities",i:"I wake up at 5. I go to school. I study. I play. I sleep.",l:"Ceritakan kegiatanmu sehari-hari dalam Inggris!"}],
+[{j:"Materi 1: My School",i:"This is my school. My classroom is big. I have a bag, a book, a pencil.",l:"Sebutkan benda di kelas dalam Inggris!"}],
+[{j:"Materi 1: Simple Conversation",i:"What is your name? My name is ... How are you? I am fine, thank you.",l:"Praktek percakapan dengan teman!"}]
+],
+"PJOK":[
+[{j:"Materi 1: Gerak Dasar & Senam",i:"Gerak dasar: jalan, lari, lompat, lempar. Senam pagi membuat badan sehat dan semangat.",l:"Praktek jalan, lari, lompat!"}],
+[{j:"Materi 1: Permainan Bola Kecil",i:"Bola kasti: melempar dan menangkap bola. Harus kerjasama dan sportif.",l:"Praktek lempar tangkap bola!"}],
+[{j:"Materi 1: Kebugaran & Pola Hidup Sehat",i:"Makan sayur, minum air, tidur cukup, cuci tangan. Olahraga 30 menit setiap hari.",l:"Sebutkan 5 pola hidup sehat!"}],
+[{j:"Materi 1: Atletik - Lari & Lompat",i:"Lari jarak pendek: start jongkok, lari cepat. Lompat jauh: awalan, tolakan, mendarat.",l:"Praktek lari 20 meter!"}],
+[{j:"Materi 1: Sepak Bola Dasar",i:"Menendang, menggiring, mengoper. Bermain harus jujur, tidak curang.",l:"Praktek menggiring bola!"}],
+[{j:"Materi 1: Permainan & Sportivitas",i:"Menang tidak sombong, kalah tidak marah. Hormat lawan, hormat wasit.",l:"Apa itu sportivitas? Beri contoh!"}]
+],
+"Seni Budaya":[
+[{j:"Materi 1: Menggambar & Mewarnai",i:"Menggambar: garis, bentuk, warna. Warna primer: merah, kuning, biru. Gambar keluargaku.",l:"Gambar keluargamu dan warnai!"}],
+[{j:"Materi 1: Lagu Daerah",i:"Lagu daerah Kalimantan Selatan: Ampar-Ampar Pisang. Nyanyikan dengan riang.",l:"Nyanyikan Ampar-Ampar Pisang!"}],
+[{j:"Materi 1: Tari Daerah",i:"Tari daerah: Tari Radap Rahayu dari Banjar. Gerakan lembut, pakai selendang.",l:"Praktek gerakan dasar tari!"}],
+[{j:"Materi 1: Kerajinan Tangan",i:"Kerajinan dari barang bekas: botol jadi pot bunga. Jaga lingkungan dengan daur ulang.",l:"Buat pot bunga dari botol bekas!"}],
+[{j:"Materi 1: Musik & Alat Musik",i:"Alat musik: gitar, drum, suling, rebana. Bunyi tinggi-rendah, keras-lembut.",l:"Sebutkan 5 alat musik!"}],
+[{j:"Materi 1: Pementasan Seni",i:"Pementasan: drama, tari, musik. Harus percaya diri, latihan, kerjasama.",l:"Buat drama kecil bersama teman!"}]
+],
+"Tahsin":[
+[{j:"Materi 1: Huruf Hijaiyah Alif - Ya",i:"Anak mengenal huruf Hijaiyah Alif sampai Ya. Alif, Ba, Ta, Tsa, Jim, Ha, Kha.",l:"Sebutkan Alif, Ba, Ta!"}],
+[{j:"Materi 1: Makhraj Huruf",i:"Makhraj: tempat keluar huruf. Ha dari tenggorokan, Ba dari bibir, Qaf dari pangkal lidah.",l:"Praktek Ha, Kha, Ba!"}],
+[{j:"Materi 1: Harakat Fathah, Kasrah, Dammah",i:"Fathah bunyi a, Kasrah bunyi i, Dammah bunyi u. Contoh: Ba + Fathah = Ba.",l:"Baca: Ba Bi Bu!"}],
+[{j:"Materi 1: Hukum Nun Sukun & Tanwin",i:"Idzhar, Idgham, Iqlab, Ikhfa. Contoh Idzhar: Min - Ha.",l:"Sebutkan 4 hukum Nun Sukun!"}],
+[{j:"Materi 1: Mad Thabii & Mad Wajib",i:"Mad Thabii dibaca 2 harakat. Contoh: Qaa-la. Mad Wajib 4-5 harakat.",l:"Baca contoh Mad Thabii!"}],
+[{j:"Materi 1: Tajwid Lengkap & Tartil",i:"Tartil: baca pelan, jelas, benar tajwidnya. Latihan surah pendek dengan tartil.",l:"Baca Al-Fatihah dengan tartil!"}]
+],
+"Tahfiz":[
+[{j:"Materi 1: Hafalan Al-Fatihah",i:"Al-Fatihah ayat 1-7. Ummul Kitab, wajib dibaca dalam sholat.",l:"Setoran: Baca Al-Fatihah!"}],
+[{j:"Materi 1: Hafalan An-Nas & Al-Falaq",i:"An-Nas 6 ayat, Al-Falaq 5 ayat. Surah pelindung dari godaan setan.",l:"Setoran: Baca An-Nas dan Al-Falaq!"}],
+[{j:"Materi 1: Hafalan Al-Ikhlas & Al-Kautsar",i:"Al-Ikhlas 4 ayat tentang keesaan Allah. Al-Kautsar 3 ayat tentang nikmat.",l:"Setoran: Baca Al-Ikhlas!"}],
+[{j:"Materi 1: Hafalan Ad-Dhuha",i:"Ad-Dhuha 11 ayat. Allah tidak meninggalkan Nabi Muhammad.",l:"Setoran: Baca Ad-Dhuha!"}],
+[{j:"Materi 1: Hafalan Al-Insyirah & At-Tin",i:"Al-Insyirah 8 ayat, At-Tin 8 ayat. Bersama kesulitan ada kemudahan.",l:"Setoran: Baca Al-Insyirah!"}],
+[{j:"Materi 1: Hafalan Juz 30 Pilihan",i:"Target Kelas 6: hafal 10 surah pendek Juz 30 dengan lancar dan tartil.",l:"Setoran: Baca 3 surah pilihanmu!"}]
+],
+"Pramuka":[
+[{j:"Materi 1: Pramuka Siaga",i:"Praja Muda Karana. Pembina: Wahyu Aji & M. Husain. Siaga: rajin, hormat orang tua.",l:"Praktek Salam Pramuka!"}],
+[{j:"Materi 1: Dasa Darma & Tri Satya",i:"Dasa Darma 10 janji Pramuka. Tri Satya: setia kepada Tuhan, bangsa, dan sesama.",l:"Hafalkan Dasa Darma!"}],
+[{j:"Materi 1: Baris-Berbaris",i:"Sikap sempurna, hormat, berbaris rapi. Siap, grak! Hadap kanan, grak!",l:"Praktek baris-berbaris!"}],
+[{j:"Materi 1: Tali Temali & Simpul",i:"Simpul mati, simpul hidup, simpul pangkal. Tali berguna untuk kemah dan tolong menolong.",l:"Praktek simpul mati!"}],
+[{j:"Materi 1: P3K & Pertolongan Pertama",i:"P3K: obati luka kecil, balut, bawa ke UKS. Jangan panik, tolong teman.",l:"Praktek balut luka!"}],
+[{j:"Materi 1: Perkemahan & Jelajah",i:"Kemah: dirikan tenda, masak, api unggun, jaga kebersihan. Jelajah alam: kenali tanda jejak.",l:"Sebutkan perlengkapan kemah!"}]
+],
+"Bahasa Banjar (Muatan Lokal)":[
+[{j:"Materi 1: Sapaan Bahasa Banjar",i:"Selamat pagi = Salamat pagi. Apa kabar = Apa habar? Terima kasih = Tarima kasih. Ulun = saya, Pian = kamu.",l:"Ucapkan sapaan dalam Banjar!"}],
+[{j:"Materi 1: Angka & Warna Banjar",i:"Angka: asa 1, dua 2, talu 3. Warna: habang merah, hirang hitam, putih putih.",l:"Sebutkan angka 1-10 Banjar!"}],
+[{j:"Materi 1: Keluarga dalam Banjar",i:"Abah = Ayah, Mama = Ibu, Kai = Kakek, Nini = Nenek, Kaka = Kakak.",l:"Sebutkan keluargamu dalam Banjar!"}],
+[{j:"Materi 1: Makanan Khas Banjar",i:"Soto Banjar, Ketupat Kandangan, Ampar-Ampar Pisang. Makanan Banjar enak dan terkenal.",l:"Sebutkan 5 makanan Banjar!"}],
+[{j:"Materi 1: Pantun Banjar",i:"Pantun: 4 baris, bersajak. Contoh: Iwak haruan di dalam rawa, ...",l:"Buat pantun Banjar!"}],
+[{j:"Materi 1: Cerita Rakyat Banjar",i:"Legenda: Putri Junjung Buih, Datu Sanggul. Cerita rakyat mengajarkan kebaikan.",l:"Ceritakan legenda Banjar!"}]
+],
+"Informatika":[
+[{j:"Materi 1: Mengenal Komputer",i:"Komputer: monitor, keyboard, mouse, CPU. Komputer untuk belajar, menggambar, mengetik.",l:"Sebutkan bagian komputer!"}],
+[{j:"Materi 1: Mengetik & Mouse",i:"Mouse: klik, klik kanan, geser. Keyboard: huruf, angka, spasi, enter.",l:"Praktek mengetik namamu!"}],
+[{j:"Materi 1: Internet Sehat",i:"Internet untuk belajar. Jangan buka yang tidak baik. Jangan chat dengan orang tak dikenal.",l:"Sebutkan 3 aturan internet sehat!"}],
+[{j:"Materi 1: Membuat Dokumen",i:"Membuat dokumen di Word: ketik, simpan, cetak. Buat cerita pendek.",l:"Buat dokumen tentang sekolahku!"}],
+[{j:"Materi 1: Presentasi Sederhana",i:"Presentasi: slide, gambar, tulisan besar. Bicara jelas, tidak malu.",l:"Buat 3 slide tentang hobiku!"}],
+[{j:"Materi 1: Keamanan Digital",i:"Jangan sebarkan password, foto pribadi. Laporkan jika ada yang mengganggu di internet.",l:"Apa yang tidak boleh dibagikan di internet?"}]
+],
+"Bimbingan & Konseling":[
+[{j:"Materi 1: Kenali Diri & Perasaan",i:"Perasaan: senang, sedih, marah, takut. Kalau marah, tarik napas, cerita ke guru/orang tua.",l:"Ceritakan perasaanmu hari ini!"}],
+[{j:"Materi 1: Berteman yang Baik",i:"Teman baik: tidak mengejek, mau berbagi, menolong. Kalau bertengkar, minta maaf.",l:"Sebutkan 5 ciri teman baik!"}],
+[{j:"Materi 1: Percaya Diri",i:"Percaya diri: berani jawab, berani tampil, tidak takut salah. Salah itu biasa, belajar dari salah.",l:"Berani maju ke depan kelas!"}],
+[{j:"Materi 1: Disiplin & Tanggung Jawab",i:"Disiplin: datang tepat waktu, kerjakan PR, jaga barang sendiri. Tanggung jawab: berani akui kesalahan.",l:"Sebutkan 3 contoh disiplin!"}],
+[{j:"Materi 1: Menghadapi Bullying",i:"Bullying: mengejek, memukul, mengucilkan. Itu tidak boleh. Laporkan ke guru, jangan balas.",l:"Apa yang dilakukan jika dibully?"}],
+[{j:"Materi 1: Cita-cita & Masa Depan",i:"Cita-cita: dokter, guru, polisi, petani. Untuk capai cita-cita harus rajin belajar dan berdoa.",l:"Tulis cita-citamu dan caranya!"}]
+]
+};
+function isiMateriDariTopik(){
+  ["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].forEach(function(k,idxKelas){
+    SEMUA_MAPEL.forEach(function(mp){
+      var key=k+"|"+mp;
+      var daftar = TOPIK[mp] ? TOPIK[mp][idxKelas] : null;
+      if(daftar){
+        MATERI_DATA[key]=daftar.map(function(d){ return {judul:d.j, isi:d.i, video:"", latihan:d.l}; });
+      } else {
+        MATERI_DATA[key]=[{judul:"Materi 1: "+mp+" - "+k,isi:"Materi "+mp+" untuk "+k+". Guru silakan tambah materi baru.",video:"",latihan:"Latihan 1: Guru isi disini."},{judul:"Materi 2: Lanjutan "+mp+" - "+k,isi:"Lanjutan "+mp+" untuk "+k+".",video:"",latihan:"Latihan 2: Guru isi disini."}];
+      }
+    });
+  });
+}
+isiMateriDariTopik();
 var PIN_DEFAULT={kepsek:"197601", admin:"123456", guru:{"Radinah, S.Pd":"123456","Siti Nuriyah, S.Pd.SD":"123456","Pathul Jannah, S.Pd.I":"123456","Norsalim, S.Pd":"123456","Syahruni, S.Pd.SD":"123456","Samsul Bahri, S.Pd":"123456","Syahida Norpah, S.Pd":"123456","Jannah, S.Pd":"123456","M. Husain":"123456"}};
 var PIN_DATA=JSON.parse(JSON.stringify(PIN_DEFAULT));
 function simpanPIN(){try{localStorage.setItem('PIN_KAYAKAH',JSON.stringify(PIN_DATA));}catch(e){}}
@@ -199,7 +323,6 @@ function renderListPINGuru(){
   for(var g in PIN_DATA.guru){ var d=document.createElement('div'); d.style.cssText='background:#FFFBEB;border:2px solid #FFA502;padding:10px;border-radius:12px;margin-bottom:8px'; d.innerHTML='<b>'+g+'</b><br>PIN Saat Ini: <b style="color:#DC2626;font-size:18px;letter-spacing:2px">'+PIN_DATA.guru[g]+'</b>'; div.appendChild(d); }
   var info=document.createElement('div'); info.style.cssText='background:#DBEAFE;padding:10px;border-radius:12px;font-size:12px'; info.innerHTML='<b>PIN Kepsek Saat Ini:</b> '+PIN_DATA.kepsek+'<br><b>PIN Admin Saat Ini:</b> '+PIN_DATA.admin; div.appendChild(info);
 }
-// === BARU: SIMPAN MURID & GURU KE FIREBASE + HP ===
 function simpanSiswaGuruKeFirebase(){
   try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA)); localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){}
   if(!window._fb) return;
@@ -258,7 +381,7 @@ function tampil(id,btn){document.querySelectorAll('.card').forEach(c=>c.style.di
 function tampilNamaSiswa(idKelas,btn){var num=idKelas.replace('kelas',''); document.getElementById('boxNamaKelas'+num).style.display='block'; document.getElementById('boxMapelKelas'+num).style.display='none'; if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');}}
 function tampilMapel(idKelas,btn){var num=idKelas.replace('kelas',''); document.getElementById('boxNamaKelas'+num).style.display='none'; document.getElementById('boxMapelKelas'+num).style.display='block'; if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');} renderMapel();}
 function renderKelas(){for(var i=1;i<=6;i++){var namaKelas='Kelas '+i; var listEl=document.getElementById('listKelas'+i); if(!listEl) continue; listEl.innerHTML=''; DATA[namaKelas].forEach(function(nama,idx){var d=document.createElement('div'); d.className='anak-kelas'; var btnHapus=(loginSaatIni && loginSaatIni.peran==='kepsek')?' <button class="btn-hapus" onclick="hapusSiswa(\''+namaKelas+'\','+idx+')">🗑️ Hapus</button>':''; d.innerHTML='🧒 '+(idx+1)+'. '+nama+' <span style="color:#888;font-weight:normal">- '+namaKelas+'</span>'+btnHapus; listEl.appendChild(d);});}}
-function renderMapel(){for(var i=1;i<=6;i++){var namaKelas='Kelas '+i; var listEl=document.getElementById('listMapelKelas'+i); if(!listEl) continue; listEl.innerHTML=''; MAPEL_DATA[namaKelas].forEach(function(grup){var h=document.createElement('div'); h.className='kategori-mapel'; h.innerText=grup.kat; listEl.appendChild(h); grup.list.forEach(function(m){var d=document.createElement('div'); d.className='mapel-kelas'+(m.tipe?' '+m.tipe:''); d.innerHTML=m.icon+' '+m.nama+' <span style="background:#22C55E;color:white;padding:3px 8px;border-radius:12px;font-size:11px;float:right">👆 KLIK UNTUK BUKA</span><small>👩‍🏫 Guru / Pembimbing: '+m.guru+' | 👆 Klik untuk lihat Materi + Video + Latihan</small>'; d.onclick=function(){tampilDetailMapel(namaKelas,m.nama);}; listEl.appendChild(d);});});}}
+function renderMapel(){for(let i=1;i<=6;i++){let namaKelas='Kelas '+i; let listEl=document.getElementById('listMapelKelas'+i); if(!listEl) continue; listEl.innerHTML=''; MAPEL_DATA[namaKelas].forEach(function(grup){let h=document.createElement('div'); h.className='kategori-mapel'; h.innerText=grup.kat; listEl.appendChild(h); grup.list.forEach(function(m){let d=document.createElement('div'); d.className='mapel-kelas'+(m.tipe?' '+m.tipe:''); d.innerHTML=m.icon+' '+m.nama+' <span style="background:#22C55E;color:white;padding:3px 8px;border-radius:12px;font-size:11px;float:right">👆 KLIK UNTUK BUKA</span><small>👩‍🏫 Guru / Pembimbing: '+m.guru+' | 👆 Klik untuk lihat Materi + Video + Latihan</small>'; d.onclick=function(){tampilDetailMapel(namaKelas,m.nama);}; listEl.appendChild(d);});});}}
 function tampilDetailMapel(kelas,mapel){
   var key=kelas+"|"+mapel; var list=MATERI_DATA[key]||[]; var edit=bisaEdit(kelas,mapel);
   var html='<h2 style="margin-top:0;color:#7C3AED">📚 '+mapel+' - '+kelas+' ✅ TERBUKA</h2>';
