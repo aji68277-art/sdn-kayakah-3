@@ -15,15 +15,20 @@ window.dispatchEvent(new Event('firebase-ready'));
 <style>
 *{box-sizing:border-box}
 body{font-family:'Comic Sans MS',Arial,sans-serif;margin:0;background:#EAF6F6;color:#2D3436}
-header{background:radial-gradient(ellipse 190px 60px at 8% 18%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 230px 70px at 92% 22%,rgba(255,255,255,.85) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 170px 55px at 22% 85%,rgba(255,255,255,.8) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 210px 60px at 78% 88%,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 150px 48px at 45% 10%,rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 180px 55px at 62% 18%,rgba(255,255,255,.65) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 160px 50px at 5% 65%,rgba(255,255,255,.65) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 180px 55px at 95% 68%,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 200px 55px at 50% 92%,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 70%),linear-gradient(180deg,#4A9AD8 0%,#2F7AC0 48%,#1F5EA0 100%);color:#fff;padding:18px 14px 44px;text-align:center;position:relative;overflow:hidden}
-header h1{margin:4px 0;font-size:48px;color:#FFE9A8;text-shadow:3px 3px 0 #0A2A4A,6px 6px 0 rgba(0,0,0,.35)}
-header p{margin:6px 0 0;font-weight:bold;background:#FFE9A8;color:#0A2A4A;display:inline-block;padding:8px 16px;border-radius:20px}
-.pembuat-kecil{font-size:12px;color:#fff;background:rgba(255,255,255,.22);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
-.logo-3{position:absolute;top:var(--logo-top,8px);left:var(--logo-left,8px);width:var(--logo-lebar,110px);height:var(--logo-tinggi,auto);background:white;padding:4px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.25);object-fit:contain}
-.awan{font-size:38px;animation:jalan 6s ease-in-out infinite}
-.bintang-terbang{font-size:28px;animation:jalan 3s ease-in-out infinite}
+header{background:radial-gradient(ellipse 240px 130px at 0% 0%,rgba(46,158,91,.28) 0%,rgba(46,158,91,0) 70%),radial-gradient(ellipse 240px 130px at 100% 0%,rgba(46,158,91,.28) 0%,rgba(46,158,91,0) 70%),radial-gradient(ellipse 260px 140px at 0% 100%,rgba(46,158,91,.22) 0%,rgba(46,158,91,0) 70%),radial-gradient(ellipse 260px 140px at 100% 100%,rgba(46,158,91,.22) 0%,rgba(46,158,91,0) 70%),radial-gradient(ellipse 160px 55px at 22% 28%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 170px 55px at 78% 30%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 70%),linear-gradient(180deg,#FFF9E3 0%,#FFF3C7 48%,#FFEDB5 100%);color:#1B5E20;padding:18px 14px 44px;text-align:center;position:relative;overflow:hidden;border-bottom:6px solid #2E9E5B}
+header h1{margin:4px 0;font-size:48px;color:#1B5E20;text-shadow:3px 3px 0 #FFE9A8,6px 6px 0 rgba(0,0,0,.12)}
+header p{margin:6px 0 0;font-weight:bold;background:#FFE9A8;color:#1B5E20;display:inline-block;padding:8px 16px;border-radius:20px;border:2px solid #2E9E5B}
+.pembuat-kecil{font-size:12px;color:#fff;background:#2E9E5B;padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
+.daun-pojok{position:absolute;font-size:64px;line-height:1;opacity:.95;pointer-events:none;z-index:0}
+.daun-kiri-atas{top:2px;left:2px;transform:rotate(-8deg)}
+.daun-kanan-atas{top:2px;right:2px;transform:rotate(8deg) scaleX(-1)}
+.daun-kiri-bawah{bottom:2px;left:2px;transform:rotate(8deg) scaleY(-1)}
+.daun-kanan-bawah{bottom:2px;right:2px;transform:rotate(-8deg) scale(-1)}
+.logo-3{position:absolute;top:var(--logo-top,8px);left:var(--logo-left,8px);width:var(--logo-lebar,110px);height:var(--logo-tinggi,auto);background:white;padding:4px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.25);object-fit:contain;z-index:3}
+.awan{font-size:38px;animation:jalan 6s ease-in-out infinite;position:relative;z-index:1}
+.bintang-terbang{font-size:28px;animation:jalan 3s ease-in-out infinite;position:relative;z-index:1}
 @keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
-.kartun-besar{font-size:72px;line-height:1;margin:10px 0;letter-spacing:8px;animation:lompat 1.2s ease-in-out infinite}
+.kartun-besar{font-size:72px;line-height:1;margin:10px 0;letter-spacing:8px;animation:lompat 1.2s ease-in-out infinite;position:relative;z-index:1}
 @keyframes lompat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .login-melayang{position:absolute;bottom:8px;right:10px;z-index:5}
 .pengumuman{background:#FFD93D;padding:12px 10px;border-bottom:4px solid #FF8A00;font-weight:bold;font-size:17px;color:#7C2D12;overflow:hidden;white-space:nowrap}
@@ -98,7 +103,7 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hapus-item img{width:70px;height:55px;object-fit:cover;border-radius:8px}
 .hapus-item input{width:22px;height:22px}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
-@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}.login-melayang{bottom:6px;right:8px}}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}.login-melayang{bottom:6px;right:8px}.daun-pojok{font-size:44px}}
 </style>
 </head>
 <body>
@@ -128,6 +133,10 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 </div>
 </div>
 <header id="beranda">
+<div class="daun-pojok daun-kiri-atas">🌿🍃🌱</div>
+<div class="daun-pojok daun-kanan-atas">🌿🍃🌱</div>
+<div class="daun-pojok daun-kiri-bawah">🍃🌿🌱</div>
+<div class="daun-pojok daun-kanan-bawah">🍃🌿🌱</div>
 <img id="logoSekolah" src="logo-3.png" class="logo-3" alt="Logo Sekolah">
 <div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
 <div class="bintang-terbang">⭐ ✨ 🌟 ✨ ⭐ 🌟 ✨ ⭐</div>
@@ -136,7 +145,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <p>Desa Kayakah - Amuntai Selatan - Hulu Sungai Utara</p><br>
 <p>⭐ NPSN 30302788 | Berdiri Tahun 1976 ⭐</p><br>
 <span class="pembuat-kecil">Wahyu Aji, S.Pd.Jas</span>
-<div style="font-size:30px;margin-top:8px">🏫 📚 🎨 ⚽ 🎤 🥁 💻 🌱 🎉</div>
+<div style="font-size:30px;margin-top:8px;position:relative;z-index:1">🏫 📚 🎨 ⚽ 🎤 🥁 💻 🌱 🎉</div>
 <div class="login-melayang">
 <button class="btn-login" id="btnLoginTop" onclick="bukaLogin()">🔐 Login Admin Guru</button>
 <button class="btn-logout" id="btnLogoutTop" onclick="logoutAdmin()" style="display:none">🚪 Keluar</button>
