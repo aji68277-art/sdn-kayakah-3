@@ -200,13 +200,14 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button onclick="filterKegiatan('Habsy')" style="background:#7C3AED;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎤 Habsy</button>
 <button onclick="filterKegiatan('Olahraga')" style="background:#2563EB;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">⚽ Olahraga</button>
 <button onclick="filterKegiatan('Lainnya')" style="background:#FF8A00;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">🎨 Lainnya</button>
+<button onclick="filterKegiatan('Umum')" style="background:#0E7C7B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px">📸 Umum</button>
 </div>
 <div class="kegiatan-grid" id="listKegiatan"></div>
 <div class="tambah-box hanya-admin" style="margin-top:14px">
 <h3 style="margin:0;color:#1B5E20">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
 <p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiForm">-</b></p>
 <input type="text" id="judulKegiatan" placeholder="📝 Judul Kegiatan - Contoh: Upacara Bendera Senin">
-<select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option></select>
+<select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option><option value="Umum">📸 Umum - Rapat / Tamu / Lomba / Kegiatan Umum Lainnya</option></select>
 <input type="text" id="ketKegiatan" placeholder="✏️ Keterangan - Contoh: Bersama Pak Wahyu & Bu Syahruni">
 <input type="file" id="fileKegiatan" accept="image/*">
 <button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN KE FIREBASE</button>
@@ -236,7 +237,6 @@ let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
 let PIN_MASTER_KEPSEK = "197601";
 let URUTAN_GURU = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
-// KUNCI 10 GURU - JANGAN DITAMBAH DARI FIREBASE LAGI
 let DAFTAR_10 = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
 let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
@@ -268,7 +268,6 @@ async function loadGuruDariFirebase(){
       if(d.daftarPIN) daftarPIN=d.daftarPIN;
       if(d.jabatan) jabatanAdmin=d.jabatan;
       if(d.foto) fotoGuru=d.foto;
-      // JANGAN PAKAI URUTAN DARI FIREBASE LAGI - PAKAI DAFTAR 10 YANG DIKUNCI
       URUTAN_GURU=[...DAFTAR_10];
       let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
       try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
@@ -281,7 +280,6 @@ function simpanPIN(){
   try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
   simpanGuruKeFirebase();
 }
-// HANYA 10 GURU - YANG DOBEL DIBUANG
 function urutanNama(){ 
   let out=[];
   DAFTAR_10.forEach(n=>{ if(daftarPIN[n]) out.push(n); });
@@ -393,7 +391,7 @@ async function loadKegiatan(){
   }
   tampilKegiatan();
 }
-function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; }
+function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":k.kat==="Umum"?"📸":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; }
 function filterKegiatan(kat){ filterAktif=kat; tampilKegiatan(); }
 async function tambahKegiatan(){
   if(!wajibAdmin()) return;
@@ -403,7 +401,7 @@ async function tambahKegiatan(){
   if(fileInput.files[0].size>800000){alert("Fotonya kebesaran, Pak! Pilih di bawah 800KB.");return;}
   let reader=new FileReader();
   reader.onload=async function(e){
-    let emoji=kat==="Upacara"?"📚🇮🇩":kat==="Pramuka"?"🥁🏕️":kat==="Habsy"?"🎤🥁":kat==="Olahraga"?"⚽🏃":"🎨🌈";
+    let emoji=kat==="Upacara"?"📚🇮🇩":kat==="Pramuka"?"🥁🏕️":kat==="Habsy"?"🎤🥁":kat==="Olahraga"?"⚽🏃":kat==="Umum"?"📸🎉":"🎨🌈";
     let dataBaru={judul:judul,kat:kat,ket:ket,foto:e.target.result,emoji:emoji,oleh:adminLogin,waktu:Date.now()};
     try{
       let r=window._fb.collection(window._fb.db,"kegiatan_kayakah");
