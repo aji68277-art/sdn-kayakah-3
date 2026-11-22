@@ -236,6 +236,8 @@ let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
 let PIN_MASTER_KEPSEK = "197601";
 let URUTAN_GURU = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
+// KUNCI 10 GURU - JANGAN DITAMBAH DARI FIREBASE LAGI
+let DAFTAR_10 = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD","Norsalim, S.Pd.","Pathul Jannah, S.Pd.I","Hj. Siti Nuriyah, S.Pd.SD","Radinah, S.Pd.","Syahida Norpah, S.Pd.","Jannah, S.Pd.","M. Husain"];
 let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
 let warnaGuru = ["#FFEBEE","#FFF7E6","#E0F2F1","#E8F5E9","#EDE9FE","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
@@ -266,7 +268,8 @@ async function loadGuruDariFirebase(){
       if(d.daftarPIN) daftarPIN=d.daftarPIN;
       if(d.jabatan) jabatanAdmin=d.jabatan;
       if(d.foto) fotoGuru=d.foto;
-      if(d.urutan && d.urutan.length>0) URUTAN_GURU=d.urutan;
+      // JANGAN PAKAI URUTAN DARI FIREBASE LAGI - PAKAI DAFTAR 10 YANG DIKUNCI
+      URUTAN_GURU=[...DAFTAR_10];
       let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
       try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
       return true;
@@ -278,7 +281,18 @@ function simpanPIN(){
   try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
   simpanGuruKeFirebase();
 }
-function urutanNama(){ let out=[]; URUTAN_GURU.forEach(n=>{ if(daftarPIN[n]) out.push(n); }); Object.keys(daftarPIN).forEach(n=>{ if(out.indexOf(n)===-1) out.push(n); }); return out; }
+// HANYA 10 GURU - YANG DOBEL DIBUANG
+function urutanNama(){ 
+  let out=[];
+  DAFTAR_10.forEach(n=>{ if(daftarPIN[n]) out.push(n); });
+  return out;
+}
+function bersihkanGuruDobel(){
+  let baruPIN={}, baruJab={}, baruFoto={};
+  DAFTAR_10.forEach(n=>{ if(daftarPIN[n]) baruPIN[n]=daftarPIN[n]; if(jabatanAdmin[n]) baruJab[n]=jabatanAdmin[n]; if(fotoGuru[n]) baruFoto[n]=fotoGuru[n]; });
+  daftarPIN=baruPIN; jabatanAdmin=baruJab; fotoGuru=baruFoto; URUTAN_GURU=[...DAFTAR_10];
+  simpanPIN();
+}
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; urutanNama().forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; kembaliBeranda(); }
@@ -458,7 +472,7 @@ async function hapusPengumuman(i){
   let kunci=(p.judul||"")+"|"+(p.isi||""); let dihapus=getPengumumanDihapus(); if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
   dataPengumuman.splice(i,1); try{ let simpan = dataPengumuman.filter(p=>!p.bawaan); localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan)); }catch(e){} renderPengumuman();
 }
-window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); await loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
+window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); await loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); bersihkanGuruDobel(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
 </script>
 </body>
 </html>
