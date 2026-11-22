@@ -102,7 +102,6 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hapus-item{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid #eee;border-radius:12px;padding:8px;margin:6px 0;text-align:left}
 .hapus-item img{width:70px;height:55px;object-fit:cover;border-radius:8px}
 .hapus-item input{width:22px;height:22px}
-/* FOTO BESAR - SEMUA GALERI */
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);z-index:999;justify-content:center;align-items:center;flex-direction:column;padding:14px}
 .lightbox img{max-width:94%;max-height:74vh;object-fit:contain;border-radius:14px;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .lightbox b{color:#fff;font-size:18px;margin-top:12px;text-align:center}
@@ -139,7 +138,6 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button style="background:#BDBDBD" onclick="tutupHapusKategori()">⬅️ Batal / Kembali</button>
 </div>
 </div>
-<!-- MODAL FOTO BESAR - SEMUA GALERI -->
 <div class="lightbox" id="lightboxFoto" onclick="tutupFotoBesar()">
 <img id="imgBesar" src="" onclick="event.stopPropagation()">
 <b id="judulBesar"></b>
@@ -311,7 +309,6 @@ let logoData = null; let logoUkuran = {lebar:110,tinggi:0,top:8,left:8};
 let listTampilKegiatan = [];
 function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
 function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
-// FOTO BESAR - SEMUA GALERI
 function bukaFotoBesar(src,judul,ket){
   if(!src) return;
   document.getElementById("imgBesar").src=src;
@@ -331,7 +328,9 @@ function bukaFotoGuru(idx){
   bukaFotoBesar(src, nama, jabatanAdmin[nama]||"Guru / Staf");
 }
 function bukaFotoKegiatan(idx){
-  let k=listTampilKegiatan[idx]; if(!k || !k.foto) return;
+  let item=listTampilKegiatan[idx]; if(!item) return;
+  let k=item.k || item;
+  if(!k || !k.foto) return;
   bukaFotoBesar(k.foto, k.judul||"", (k.kat||"")+" • "+(k.ket||""));
 }
 function terapkanLogo(){
