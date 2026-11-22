@@ -157,7 +157,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 </div>
 <div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
 <h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA GURU & PIN 👑</h3>
-<p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini! Galeri Guru & Galeri Kegiatan sekarang tersimpan di Firebase - muncul di semua HP.</p>
+<p style="text-align:center;font-size:13px">Hanya Pak Wahyu Aji yang bisa lihat panel ini! Galeri Guru & Galeri Kegiatan sekarang tersimpan aman - muncul di semua HP.</p>
 <div style="background:#fff;padding:12px;border-radius:12px">
 <b>➕ Tambah Guru / Staf Baru - Langsung Jadi Kartu Galeri!</b><br>
 <input type="text" id="namaBaru" placeholder="Nama Lengkap - Contoh: Budi Santoso, S.Pd.">
@@ -195,11 +195,11 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
 <h3 style="text-align:center;color:#7C2D12;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
 <p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
-<p id="statusGaleri" style="text-align:center;font-size:13px;color:#666">Memuat foto guru dari Firebase...</p>
+<p id="statusGaleri" style="text-align:center;font-size:13px;color:#666">Memuat foto guru...</p>
 <div class="lock-box" id="lockGuru">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto. Untuk ganti foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
 <div class="galeri" id="listGaleriGuru"></div>
-<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#2E9E5B;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU KE FIREBASE</button></div>
+<div class="hanya-admin" style="text-align:center;margin-top:14px"><button onclick="simpanGaleri()" style="background:#2E9E5B;color:white;border:none;padding:12px 22px;border-radius:20px;font-weight:bold;cursor:pointer">💾 SIMPAN SEMUA FOTO GURU</button></div>
 <p id="pesanGaleri" style="text-align:center;font-weight:bold;color:#2E7D32"></p>
 <div class="hanya-admin" style="background:#FFF7E6;border:3px dashed #FF8A00;border-radius:16px;padding:16px;margin-top:16px;text-align:center">
 <h3 style="margin:0;color:#7C2D12">🔐 Ganti PIN Saya Sendiri</h3>
@@ -216,7 +216,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
 <h3 style="text-align:center;color:#1B5E20;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
 <p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱</p>
-<p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666">Memuat foto kegiatan dari Firebase...</p>
+<p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666">Memuat foto kegiatan...</p>
 <div class="lock-box" id="lockKegiatan">🔒 <b>Mode Pengunjung:</b> Pian hanya bisa melihat foto kegiatan. Untuk tambah / hapus foto, Pian <b>klik</b> <b>🔐 Login Admin Guru</b> di atas.</div>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin Aktif - Pian Bisa Tambah & Hapus Foto Kegiatan!</div>
 <div style="text-align:center;margin-bottom:12px">
@@ -236,7 +236,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option><option value="Umum">📸 Umum - Rapat / Tamu / Lomba / Kegiatan Umum Lainnya</option></select>
 <input type="text" id="ketKegiatan" placeholder="✏️ Keterangan - Contoh: Bersama Pak Wahyu & Bu Syahruni">
 <input type="file" id="fileKegiatan" accept="image/*">
-<button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN KE FIREBASE</button>
+<button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN</button>
 <p id="pesanKegiatan" style="font-weight:bold;color:#2E7D32"></p>
 </div>
 <div class="hanya-admin" style="text-align:center;margin-top:10px"><button onclick="hapusSemuaKegiatan()" style="background:#E11D63;color:white;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer">🗑️ Hapus Semua Foto Kegiatan</button></div>
@@ -330,7 +330,7 @@ async function simpanGuruKeFirebase(){
     let data={daftarPIN:daftarPIN,jabatan:jabatanAdmin,foto:fotoGuru,urutan:URUTAN_GURU,waktu:Date.now()};
     let r=window._fb.doc(window._fb.db,"guru_kayakah","daftar");
     await window._fb.setDoc(r,data);
-    let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Galeri Guru tersimpan di Firebase - muncul di semua HP";
+    let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Galeri Guru tersimpan - muncul di semua HP";
     try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
   }catch(e){ console.log("Gagal simpan guru",e); }
 }
@@ -344,7 +344,7 @@ async function loadGuruDariFirebase(){
       if(d.jabatan) jabatanAdmin=d.jabatan;
       if(d.foto) fotoGuru=d.foto;
       URUTAN_GURU=[...DAFTAR_10];
-      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru dari Firebase - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
+      let el=document.getElementById("statusGaleri"); if(el) el.innerHTML="✅ Foto guru - "+Object.keys(fotoGuru).length+" foto sudah tersimpan";
       try{localStorage.setItem("pin_kayakah",JSON.stringify(daftarPIN)); localStorage.setItem("jabatan_kayakah",JSON.stringify(jabatanAdmin)); localStorage.setItem("foto_guru_kayakah",JSON.stringify(fotoGuru));}catch(e){}
       return true;
     }
@@ -403,7 +403,7 @@ function gantiPINsendiri(){
   if(baru!==baru2){ document.getElementById("pesanPinSendiri").innerHTML="❌ PIN Baru tidak sama! Ulangi lagi!"; return; }
   daftarPIN[adminLogin]=baru; simpanPIN();
   document.getElementById("pinLamaSaya").value=""; document.getElementById("pinBaruSaya").value=""; document.getElementById("pinBaruSaya2").value="";
-  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Tersimpan di Firebase! Tapi PIN Master 197601 tetap bisa dipakai.";
+  document.getElementById("pesanPinSendiri").innerHTML="✅ PIN Anda berhasil diganti jadi 6 angka! Tersimpan aman! Tapi PIN Master 197601 tetap bisa dipakai.";
   alert("PIN Anda berhasil diganti! PIN baru: "+baru+" - PIN Master 197601 tetap bisa dipakai!");
 }
 function renderGaleriGuru(){
@@ -427,10 +427,10 @@ function gantiFotoBaru(input,nama){
   let file=input.files[0]; if(!file) return;
   if(file.size>800000){ alert("Fotonya kebesaran, Pak! Pilih foto di bawah 800KB."); input.value=""; return; }
   let reader=new FileReader();
-  reader.onload=function(e){ fotoGuru[nama]=e.target.result; simpanPIN(); renderGaleriGuru(); document.getElementById("pesanGaleri").innerHTML="✅ Foto "+nama+" berhasil diganti! Tersimpan di Firebase!"; };
+  reader.onload=function(e){ fotoGuru[nama]=e.target.result; simpanPIN(); renderGaleriGuru(); document.getElementById("pesanGaleri").innerHTML="✅ Foto "+nama+" berhasil diganti! Tersimpan aman!"; };
   reader.readAsDataURL(file);
 }
-function simpanGaleri(){ if(!wajibAdmin()) return; simpanPIN(); alert("Foto Berhasil Disimpan di Firebase! Muncul di semua HP!"); }
+function simpanGaleri(){ if(!wajibAdmin()) return; simpanPIN(); alert("Foto Berhasil Disimpan! Muncul di semua HP!"); }
 function tampilTabelPIN(){
   let wadah=document.getElementById("tabelPIN"); if(!wadah) return;
   let html=`<table><tr><td><b>Nama</b></td><td><b>Jabatan</b></td><td><b>PIN (6 angka)</b></td><td><b>Aksi</b></td></tr>`;
@@ -440,10 +440,10 @@ function tampilTabelPIN(){
   });
   html+=`</table><p style="font-size:12px;color:#666;text-align:center">📌 PIN Master Kepsek 197601 selalu bisa dipakai, walaupun PIN di tabel diganti.</p>`; wadah.innerHTML=html;
 }
-function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru+" - Tersimpan di Firebase!"); }
-function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus dari Firebase!"); }
-function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin+" - Tersimpan di Firebase!"); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ if(fileInput.files[0].size>800000){alert("Fotonya kebesaran! Pilih di bawah 800KB.");return;} let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
-function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456! Tersimpan di Firebase!"); }
+function simpanSatuPIN(nama,idAman){ if(!wajibKepsek()) return; let baru=document.getElementById(idAman).value.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 123456");return;} daftarPIN[nama]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN "+nama+" jadi: "+baru+" - Tersimpan aman!"); }
+function hapusSatuAdmin(nama){ if(!wajibKepsek()) return; if(nama===NAMA_KEPSEK){alert("Kepsek tidak bisa dihapus!");return;} if(!confirm("Hapus guru "+nama+"?")) return; delete daftarPIN[nama]; delete jabatanAdmin[nama]; delete fotoGuru[nama]; let i=URUTAN_GURU.indexOf(nama); if(i>-1) URUTAN_GURU.splice(i,1); simpanPIN(); tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("Guru "+nama+" sudah dihapus!"); }
+function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElementById("namaBaru").value.trim(); let pin=document.getElementById("pinBaru").value.trim(); let jab=document.getElementById("jabatanBaru").value.trim()||"Guru / Staf"; let fileInput=document.getElementById("fotoBaru"); if(!nama||!pin){alert("Isi Nama & PIN dulu!");return;} if(!cekPIN6(pin)){alert("PIN harus 6 angka! Contoh: 567890");return;} if(daftarPIN[nama]){alert("Nama sudah ada!");return;} function selesai(fotoData){ daftarPIN[nama]=pin; jabatanAdmin[nama]=jab; if(fotoData) fotoGuru[nama]=fotoData; if(!kartunGuru[nama]) kartunGuru[nama]="👩‍🏫"; URUTAN_GURU.push(nama); simpanPIN(); document.getElementById("namaBaru").value=""; document.getElementById("pinBaru").value=""; document.getElementById("jabatanBaru").value=""; fileInput.value=""; tampilTabelPIN(); isiDropdownLogin(); renderGaleriGuru(); alert("BERHASIL! Nama: "+nama+" PIN: "+pin+" - Tersimpan aman!"); document.getElementById("galeri").scrollIntoView({behavior:"smooth"}); } if(fileInput.files[0]){ if(fileInput.files[0].size>800000){alert("Fotonya kebesaran! Pilih di bawah 800KB.");return;} let r=new FileReader(); r.onload=function(e){selesai(e.target.result);}; r.readAsDataURL(fileInput.files[0]); } else selesai(null); }
+function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456! Tersimpan aman!"); }
 function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru+" - Tapi PIN Master 197601 tetap bisa dipakai!"); }
 let filterAktif="SEMUA"; let dataKegiatan=[];
 function getKegiatanBawaan(){ return [{judul:"Upacara Bendera Senin",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin",bawaan:true},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin",bawaan:true},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin",bawaan:true},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin",bawaan:true},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin",bawaan:true},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin",bawaan:true}]; }
@@ -457,13 +457,13 @@ async function loadKegiatan(){
   }catch(e){ dariFirebase=[]; }
   if(dariFirebase.length>0){
     dataKegiatan=dariFirebase;
-    let el=document.getElementById("statusKegiatan"); if(el) el.innerHTML="✅ Foto kegiatan dari Firebase - "+dataKegiatan.length+" foto";
+    let el=document.getElementById("statusKegiatan"); if(el) el.innerHTML="✅ Foto kegiatan - "+dataKegiatan.length+" foto";
   } else {
     let dariHP=[]; try{ dariHP=JSON.parse(localStorage.getItem("kegiatan_kayakah")||"[]"); }catch(e){ dariHP=[]; }
     let bawaan=getKegiatanBawaan();
     let sudah={}; dataKegiatan=[];
     [...dariHP, ...bawaan].forEach(k=>{ let kunci=k.judul+"|"+k.kat; if(sudah[kunci]) return; sudah[kunci]=true; dataKegiatan.push(k); });
-    let el=document.getElementById("statusKegiatan"); if(el) el.innerHTML="ℹ️ Foto kegiatan bawaan - tambah foto baru, otomatis masuk Firebase";
+    let el=document.getElementById("statusKegiatan"); if(el) el.innerHTML="ℹ️ Foto kegiatan bawaan - tambah foto baru, otomatis tersimpan aman";
   }
   tampilKegiatan();
 }
@@ -483,11 +483,11 @@ async function tambahKegiatan(){
       let r=window._fb.collection(window._fb.db,"kegiatan_kayakah");
       let hasil=await window._fb.addDoc(r,dataBaru);
       dataBaru._id=hasil.id;
-    }catch(err){ alert("Gagal simpan ke Firebase. Cek internet, Pak."); return; }
+    }catch(err){ alert("Gagal simpan. Cek internet, Pak."); return; }
     dataKegiatan.unshift(dataBaru);
     try{localStorage.setItem("kegiatan_kayakah",JSON.stringify(dataKegiatan.filter(k=>!k.bawaan)));}catch(err){}
     document.getElementById("judulKegiatan").value=""; document.getElementById("ketKegiatan").value=""; fileInput.value="";
-    document.getElementById("pesanKegiatan").innerHTML="✅ Foto Berhasil Ditambah ke Firebase! Muncul di semua HP!";
+    document.getElementById("pesanKegiatan").innerHTML="✅ Foto Berhasil Ditambah! Muncul di semua HP!";
     filterAktif="SEMUA"; tampilKegiatan();
     document.getElementById("kegiatan").scrollIntoView({behavior:"smooth"});
   };
@@ -502,7 +502,7 @@ async function hapusKegiatan(i){
   tampilKegiatan();
 }
 async function hapusSemuaKegiatan(){
-  if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA foto kegiatan di Firebase? Foto bawaan akan muncul lagi.")) return;
+  if(!wajibAdmin()) return; if(!confirm("Hapus SEMUA foto kegiatan? Foto bawaan akan muncul lagi.")) return;
   try{
     let r=window._fb.collection(window._fb.db,"kegiatan_kayakah");
     let s=await window._fb.getDocs(r);
