@@ -250,8 +250,8 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="tambah-box hanya-admin" style="margin-top:14px">
 <h3 style="margin:0;color:#1B5E20">➕ TAMBAH FOTO KEGIATAN BARU - KHUSUS ADMIN</h3>
 <p style="font-size:13px;color:#666">Login sebagai: <b id="namaAdminDiForm">-</b></p>
-<input type="text" id="judulKegiatan" placeholder="📝 Judul Kegiatan - Contoh: Upacara Bendera Senin">
-<select id="kategoriKegiatan"><option value="Upacara">📚 Upacara / Senin</option><option value="Pramuka">🥁 Pramuka / Sabtu</option><option value="Habsy">🎤 Habsy / Hadrah / Minggu</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya - Market Day / Kebun / Komputer / Yasinan</option><option value="Umum">📸 Umum - Rapat / Tamu / Lomba / Kegiatan Umum Lainnya</option></select>
+<input type="text" id="judulKegiatan" placeholder="📝 Judul Kegiatan - Contoh: Upacara Bendera">
+<select id="kategoriKegiatan"><option value="Upacara">📚 Upacara</option><option value="Pramuka">🥁 Pramuka</option><option value="Habsy">🎤 Habsy / Hadrah</option><option value="Olahraga">⚽ Olahraga / Senam / PJOK</option><option value="Lainnya">🎨 Lainnya</option><option value="Umum">📸 Umum</option></select>
 <input type="text" id="ketKegiatan" placeholder="✏️ Keterangan - Contoh: Bersama Pak Wahyu & Bu Syahruni">
 <input type="file" id="fileKegiatan" accept="image/*">
 <button class="btn-tambah" onclick="tambahKegiatan()">📸 SIMPAN FOTO KEGIATAN</button>
@@ -461,7 +461,7 @@ function tambahAdminBaru(){ if(!wajibKepsek()) return; let nama=document.getElem
 function resetSemuaPIN(){ if(!wajibKepsek()) return; if(!confirm("Reset semua PIN jadi 123456?")) return; Object.keys(daftarPIN).forEach(n=>{ if(n!==NAMA_KEPSEK) daftarPIN[n]="123456"; }); simpanPIN(); tampilTabelPIN(); alert("Semua PIN jadi 123456! Tersimpan aman!"); }
 function gantiPINkepsek(){ if(!wajibKepsek()) return; let baru=prompt("PIN BARU Kepsek (6 angka):",daftarPIN[NAMA_KEPSEK]); if(!baru) return; baru=baru.trim(); if(!cekPIN6(baru)){alert("PIN harus 6 angka! Contoh: 197601");return;} daftarPIN[NAMA_KEPSEK]=baru; simpanPIN(); tampilTabelPIN(); alert("PIN Kepsek jadi: "+baru+" - Tapi PIN Master 197601 tetap bisa dipakai!"); }
 let filterAktif="SEMUA"; let dataKegiatan=[];
-function getKegiatanBawaan(){ return [{judul:"Upacara Bendera Senin",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin",bawaan:true},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin",bawaan:true},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin",bawaan:true},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin",bawaan:true},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin",bawaan:true},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin",bawaan:true}]; }
+function getKegiatanBawaan(){ return [{judul:"Upacara Bendera",kat:"Upacara",ket:"Bersama Pak Wahyu & Semua Guru",emoji:"📚🇮🇩",oleh:"Admin",bawaan:true},{judul:"Pramuka Sabtu Sore",kat:"Pramuka",ket:"Kelas 4, 5, 6 - Latihan Baris Berbaris",emoji:"🥁🏕️",oleh:"Admin",bawaan:true},{judul:"Habsy / Hadrah Minggu",kat:"Habsy",ket:"Tim Habsy SDN Kayakah",emoji:"🎤🥁",oleh:"Admin",bawaan:true},{judul:"Senam Sehat Pagi",kat:"Olahraga",ket:"Senam Bersama Guru & Siswa",emoji:"⚽🏃",oleh:"Admin",bawaan:true},{judul:"Market Day",kat:"Lainnya",ket:"Anak-anak Belajar Jualan",emoji:"🛍️🍰",oleh:"Admin",bawaan:true},{judul:"Kebun Sekolah",kat:"Lainnya",ket:"Menanam Bersama Bu Guru",emoji:"🌱🥬",oleh:"Admin",bawaan:true}]; }
 async function loadKegiatan(){
   let dariFirebase=[];
   try{
