@@ -19,7 +19,7 @@ header{background:linear-gradient(180deg,#0E7C7B,#FF8A00,#FFD93D);color:#fff;pad
 header h1{margin:4px 0;font-size:48px;color:white;text-shadow:3px 3px 0 #1E3A5F,6px 6px 0 #0E7C7B}
 header p{margin:6px 0 0;font-weight:bold;background:#fff;color:#0E7C7B;display:inline-block;padding:8px 16px;border-radius:20px}
 .pembuat-kecil{font-size:12px;color:#fff;background:rgba(0,0,0,.25);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:8px;font-weight:bold}
-.logo-3{position:absolute;top:8px;left:8px;width:135px;background:white;padding:4px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.logo-3{position:absolute;top:var(--logo-top,8px);left:var(--logo-left,8px);width:var(--logo-lebar,110px);height:var(--logo-tinggi,auto);background:white;padding:4px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.25);object-fit:contain}
 .awan{font-size:38px;animation:jalan 6s ease-in-out infinite}
 .bintang-terbang{font-size:28px;animation:jalan 3s ease-in-out infinite}
 @keyframes jalan{0%,100%{transform:translateX(-15px)}50%{transform:translateX(15px)}}
@@ -88,11 +88,14 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hanya-admin{display:none}body.admin .hanya-admin{display:block}
 .kepsek-panel{background:linear-gradient(135deg,#FEF3C7,#FFF7E6);border:4px solid #E11D63!important}.kepsek-panel input{padding:8px;border:1px solid #ccc;border-radius:8px;width:100%}
 .hanya-kepsek{display:none}body.kepsek .hanya-kepsek{display:block}
+.logo-panel{background:#fff;border:3px dashed #0E7C7B;border-radius:16px;padding:16px;margin-top:12px;text-align:left}
+.logo-panel input[type=range]{width:100%}
+.logo-panel input[type=file]{width:100%;padding:8px;border:1px solid #ccc;border-radius:8px;margin:6px 0}
 #tabelPIN table{border:1px solid #ddd;background:#fff}
 #tabelPIN td{border-bottom:1px solid #eee;color:#333}
 #tabelPIN td:first-child{width:auto;color:#333}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
-@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}.logo-3{width:105px}}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:32px}.kartun-kotak{width:110px}}
 </style>
 </head>
 <body>
@@ -116,7 +119,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 </div>
 </div>
 <header id="beranda">
-<img src="logo-3.png" class="logo-3" alt="Logo Tut Wuri, HSU, HSU Bangkit">
+<img id="logoSekolah" src="logo-3.png" class="logo-3" alt="Logo Sekolah">
 <div class="awan">☁️ 🌈 ☁️ 🎈 ☁️ 🌈 ☁️</div>
 <div class="bintang-terbang">⭐ ✨ 🌟 ✨ ⭐ 🌟 ✨ ⭐</div>
 <div class="kartun-besar">👧🏫👦 📚 🎨</div>
@@ -131,21 +134,26 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <a href="ppdb.html">🎓 PPDB</a><a href="#">🏠 Beranda</a><a href="#profil">📚 Profil</a><a href="#guru">👩‍🏫 Guru</a><a href="#galeri">📸 Galeri Guru</a><a href="#kegiatan">🎉 Galeri Kegiatan</a><a href="game.html">🎮 Kuis Seru</a><a href="asmaul-husna.html">🕌 Asmaul Husna</a><a href="agama-islam.html" style="background:#b91c1c;color:white">🕌 Agama Islam</a><a href="sdn-kayakah-belajar.html" style="background:#8e44ad; color:white; padding:10px 18px; border-radius:20px; text-decoration:none; font-weight:bold;">📚 Kayakah Belajar</a><a href="saran.html" style="background:#FF4081;color:white">💬 Kritik & Saran</a><a href="bukutamu.html" style="background:#00BCD4;color:white">📖 Buku Tamu</a><a href="#kontak" style="background:#FFD93D;color:#333;">📞 Kontak</a><a href="mitra-sdn-kayakah.html" style="background:#FF8A00;">🤝 Mitra</a>
 </nav>
 <div class="wrap">
-<div class="hero">
-<div class="hero-banner"><div>👧📚👦🎨⚽🕌🌱🎉</div><div style="font-size:18px;color:white;font-weight:bold;margin-top:6px">SEKOLAH CERIA • ANAK HEBAT • GURU HEBAT</div></div>
-<h2>🎉 Selamat Datang di Website SDN Kayakah 🎉</h2>
-<p style="padding:0 16px">Tempat Anak Hebat Belajar, Bermain & Berprestasi! 🌟</p>
-<div class="kartun-row">
-<div class="kartun-kotak"><div>📚😊</div><b>📚 Rajin Belajar</b></div>
-<div class="kartun-kotak"><div>🎨🌈</div><b>🎨 Kreatif</b></div>
-<div class="kartun-kotak"><div>⚽💪</div><b>⚽ Sehat & Kuat</b></div>
-<div class="kartun-kotak"><div>🕌❤️</div><b>🕌 Berakhlak Mulia</b></div>
-</div>
-<div class="visi"><b>🌟 Visi Kami:</b><br>"Terwujudnya Insan Pembelajar yang Berbudi Luhur, Mandiri, dan Sehat"</div>
-<a class="btn" href="game.html">🎮 MAIN KUIS, YUK!</a><br><br>
-<a class="btn2" href="#galeri">📸 Galeri Guru</a>
-<a class="btn2" href="#kegiatan">🎉 Galeri Kegiatan</a>
-<a class="btn2" href="saran.html">💬 Kritik & Saran</a>
+<div class="card logo-panel hanya-admin" id="panelLogo">
+<h3 style="margin:0;color:#0E7C7B">🖼️ ATUR LOGO KIRI ATAS - KEPSEK + ADMIN / GURU</h3>
+<p style="font-size:13px;color:#666;margin:6px 0">Login sebagai: <b id="namaLogoAdmin">-</b><br>Pengunjung hanya bisa LIHAT logo di atas. Tidak bisa ubah. Yang bisa ubah hanya yang sudah login.</p>
+<img id="previewLogo" src="logo-3.png" style="width:140px;background:#eee;padding:4px;border-radius:10px;border:1px solid #ddd;display:block;margin:8px 0">
+<label><b>📤 Upload / Ganti Logo Baru:</b></label>
+<input type="file" id="inputLogoBaru" accept="image/*" onchange="uploadLogoBaru(this)">
+<label><b>↔️ Lebar (Panjang ke samping): <span id="labelLebar">110</span> px</b></label>
+<input type="range" id="sliderLebar" min="60" max="300" value="110" oninput="aturLogo()">
+<label><b>↕️ Tinggi (Panjang ke bawah): <span id="labelTinggi">Auto</span></b></label>
+<input type="range" id="sliderTinggi" min="30" max="200" value="0" oninput="aturLogo()">
+<p style="font-size:12px;color:#666;margin:2px 0">Kalau Tinggi = 0, artinya Auto (ikut lebar). Kalau Pian geser, tinggi jadi tetap.</p>
+<label><b>⬆️ Jarak dari Atas: <span id="labelTop">8</span> px</b></label>
+<input type="range" id="sliderTop" min="0" max="60" value="8" oninput="aturLogo()">
+<label><b>⬅️ Jarak dari Kiri: <span id="labelLeft">8</span> px</b></label>
+<input type="range" id="sliderLeft" min="0" max="80" value="8" oninput="aturLogo()">
+<button onclick="simpanLogo()" style="background:#0E7C7B;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:8px">💾 SIMPAN LOGO & UKURAN INI - MUNCUL DI SEMUA HP</button>
+<button onclick="resetLogo()" style="background:#FF8A00;color:white;border:none;padding:10px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">🔄 Kembali ke Kecil (110 x Auto)</button>
+<button onclick="hapusLogo()" style="background:#E11D63;color:white;border:none;padding:10px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:6px">🗑️ Hapus Logo (Sembunyikan)</button>
+<p id="pesanLogo" style="font-weight:bold;color:#2E7D32;text-align:center"></p>
+<div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
 </div>
 <div class="card kepsek-panel hanya-kepsek" id="panelKepsek">
 <h3 style="text-align:center;color:#C62828">👑 PANEL KHUSUS KEPALA SEKOLAH - KELOLA GURU & PIN 👑</h3>
@@ -166,6 +174,22 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button onclick="gantiPINkepsek()" style="background:#C62828;color:white;border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🔐 Ganti PIN Kepala Sekolah</button>
 </div>
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div>
+</div>
+<div class="hero">
+<div class="hero-banner"><div>👧📚👦🎨⚽🕌🌱🎉</div><div style="font-size:18px;color:white;font-weight:bold;margin-top:6px">SEKOLAH CERIA • ANAK HEBAT • GURU HEBAT</div></div>
+<h2>🎉 Selamat Datang di Website SDN Kayakah 🎉</h2>
+<p style="padding:0 16px">Tempat Anak Hebat Belajar, Bermain & Berprestasi! 🌟</p>
+<div class="kartun-row">
+<div class="kartun-kotak"><div>📚😊</div><b>📚 Rajin Belajar</b></div>
+<div class="kartun-kotak"><div>🎨🌈</div><b>🎨 Kreatif</b></div>
+<div class="kartun-kotak"><div>⚽💪</div><b>⚽ Sehat & Kuat</b></div>
+<div class="kartun-kotak"><div>🕌❤️</div><b>🕌 Berakhlak Mulia</b></div>
+</div>
+<div class="visi"><b>🌟 Visi Kami:</b><br>"Terwujudnya Insan Pembelajar yang Berbudi Luhur, Mandiri, dan Sehat"</div>
+<a class="btn" href="game.html">🎮 MAIN KUIS, YUK!</a><br><br>
+<a class="btn2" href="#galeri">📸 Galeri Guru</a>
+<a class="btn2" href="#kegiatan">🎉 Galeri Kegiatan</a>
+<a class="btn2" href="saran.html">💬 Kritik & Saran</a>
 </div>
 <div class="card galeri-wrap" id="galeri">
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
@@ -243,8 +267,57 @@ let DAFTAR_10 = ["Wahyu Aji, S.Pd.Jas","Samsul Bahri, S.Pd.","Syahruni, S.Pd.SD"
 let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
 let warnaGuru = ["#FFEBEE","#FFF7E6","#E0F2F1","#E8F5E9","#EDE9FE","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
+let logoData = null; let logoUkuran = {lebar:110,tinggi:0,top:8,left:8};
 function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
 function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
+function terapkanLogo(){
+  let img=document.getElementById("logoSekolah"); if(!img) return;
+  if(logoData){ img.src=logoData; img.style.display="block"; } else { img.src="logo-3.png"; img.style.display="block"; }
+  let tinggi = logoUkuran.tinggi===0 ? "auto" : logoUkuran.tinggi+"px";
+  document.documentElement.style.setProperty("--logo-lebar", logoUkuran.lebar+"px");
+  document.documentElement.style.setProperty("--logo-tinggi", tinggi);
+  document.documentElement.style.setProperty("--logo-top", logoUkuran.top+"px");
+  document.documentElement.style.setProperty("--logo-left", logoUkuran.left+"px");
+  let prev=document.getElementById("previewLogo"); if(prev && logoData) prev.src=logoData;
+  let sL=document.getElementById("sliderLebar"); if(sL) sL.value=logoUkuran.lebar;
+  let sT=document.getElementById("sliderTinggi"); if(sT) sT.value=logoUkuran.tinggi;
+  let sTop=document.getElementById("sliderTop"); if(sTop) sTop.value=logoUkuran.top;
+  let sLeft=document.getElementById("sliderLeft"); if(sLeft) sLeft.value=logoUkuran.left;
+  let lL=document.getElementById("labelLebar"); if(lL) lL.innerHTML=logoUkuran.lebar;
+  let lT=document.getElementById("labelTinggi"); if(lT) lT.innerHTML=logoUkuran.tinggi===0?"Auto":logoUkuran.tinggi+" px";
+  let lTop=document.getElementById("labelTop"); if(lTop) lTop.innerHTML=logoUkuran.top;
+  let lLeft=document.getElementById("labelLeft"); if(lLeft) lLeft.innerHTML=logoUkuran.left;
+}
+function aturLogo(){
+  if(!wajibAdmin()) return;
+  logoUkuran.lebar=parseInt(document.getElementById("sliderLebar").value);
+  logoUkuran.tinggi=parseInt(document.getElementById("sliderTinggi").value);
+  logoUkuran.top=parseInt(document.getElementById("sliderTop").value);
+  logoUkuran.left=parseInt(document.getElementById("sliderLeft").value);
+  terapkanLogo();
+}
+async function simpanLogo(){
+  if(!wajibAdmin()) return;
+  try{ localStorage.setItem("logo_kayakah", logoData||""); localStorage.setItem("logo_ukuran_kayakah", JSON.stringify(logoUkuran)); }catch(e){}
+  try{ let r=window._fb.doc(window._fb.db,"pengaturan","logo"); await window._fb.setDoc(r,{foto:logoData||"",ukuran:logoUkuran,waktu:Date.now()}); }catch(e){}
+  document.getElementById("pesanLogo").innerHTML="✅ Logo tersimpan! Pengunjung bisa lihat, tapi tidak bisa ubah!";
+  alert("Logo tersimpan! Ukuran: Lebar "+logoUkuran.lebar+"px, Tinggi "+(logoUkuran.tinggi===0?"Auto":logoUkuran.tinggi+"px"));
+}
+async function loadLogo(){
+  try{ let s=localStorage.getItem("logo_kayakah"); if(s) logoData=s; let u=localStorage.getItem("logo_ukuran_kayakah"); if(u) logoUkuran=JSON.parse(u); }catch(e){}
+  try{ let r=window._fb.doc(window._fb.db,"pengaturan","logo"); let snap=await r.get(); if(snap.exists){ let d=snap.data(); if(d.foto) logoData=d.foto; if(d.ukuran) logoUkuran=d.ukuran; } }catch(e){}
+  terapkanLogo();
+}
+function uploadLogoBaru(input){
+  if(!wajibAdmin()){input.value="";return;}
+  let file=input.files[0]; if(!file) return;
+  if(file.size>800000){ alert("Fotonya kebesaran! Pilih di bawah 800KB."); input.value=""; return; }
+  let reader=new FileReader();
+  reader.onload=function(e){ logoData=e.target.result; terapkanLogo(); document.getElementById("pesanLogo").innerHTML="✅ Logo baru dipilih! Geser ukurannya, lalu klik SIMPAN!"; };
+  reader.readAsDataURL(file);
+}
+function resetLogo(){ if(!wajibAdmin()) return; logoUkuran={lebar:110,tinggi:0,top:8,left:8}; terapkanLogo(); document.getElementById("pesanLogo").innerHTML="✅ Kembali ke kecil: 110px. Klik SIMPAN kalau sudah pas!"; }
+function hapusLogo(){ if(!wajibAdmin()) return; if(!confirm("Sembunyikan logo?")) return; logoData=""; let img=document.getElementById("logoSekolah"); if(img) img.style.display="none"; try{localStorage.removeItem("logo_kayakah");}catch(e){} try{ let r=window._fb.doc(window._fb.db,"pengaturan","logo"); window._fb.setDoc(r,{foto:"",ukuran:logoUkuran,waktu:Date.now()}); }catch(e){} document.getElementById("pesanLogo").innerHTML="✅ Logo disembunyikan!"; }
 function loadPIN(){
   let def = {"Wahyu Aji, S.Pd.Jas":"197601","Samsul Bahri, S.Pd.":"123456","Syahruni, S.Pd.SD":"123456","Norsalim, S.Pd.":"123456","Pathul Jannah, S.Pd.I":"123456","Hj. Siti Nuriyah, S.Pd.SD":"123456","Radinah, S.Pd.":"123456","Syahida Norpah, S.Pd.":"123456","Jannah, S.Pd.":"123456","M. Husain":"123456"};
   let defJab = {"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah & Guru PJOK","Samsul Bahri, S.Pd.":"Guru Kelas 6","Syahruni, S.Pd.SD":"Guru Kelas 5","Norsalim, S.Pd.":"Guru Kelas 4","Pathul Jannah, S.Pd.I":"Guru PAI dan Guru Kelas 3","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas 2","Radinah, S.Pd.":"Guru Kelas 1","Syahida Norpah, S.Pd.":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd.":"Pembimbing Tahsin & Tahfiz","M. Husain":"Operator Sekolah"};
@@ -296,7 +369,7 @@ function bersihkanGuruDobel(){
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; urutanNama().forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama+" - "+(jabatanAdmin[nama]||"Guru"); sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; kembaliBeranda(); }
-function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); let bolehMasuk = (daftarPIN[nama] && pin===daftarPIN[nama]) || (nama===NAMA_KEPSEK && pin===PIN_MASTER_KEPSEK); if(bolehMasuk){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; alert("Selamat Datang, "+nama+"! ✅"); document.getElementById("panelKepsek").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
+function cekLogin(){ let nama=document.getElementById("loginNama").value; let pin=document.getElementById("loginPIN").value.trim(); let bolehMasuk = (daftarPIN[nama] && pin===daftarPIN[nama]) || (nama===NAMA_KEPSEK && pin===PIN_MASTER_KEPSEK); if(bolehMasuk){ adminLogin=nama; try{localStorage.setItem("admin_kayakah",nama);}catch(e){} updateTampilanAdmin(); document.getElementById("modalLogin").style.display="none"; alert("Selamat Datang, "+nama+"! ✅"); document.getElementById("panelLogo").scrollIntoView({behavior:"smooth"}); } else { document.getElementById("loginError").innerHTML="❌ PIN Salah! PIN harus 6 angka. Hubungi Kepala Sekolah!"; } }
 function logoutAdmin(){ adminLogin=null; localStorage.removeItem("admin_kayakah"); updateTampilanAdmin(); alert("Pian Sudah Keluar Dari Mode Admin 🔒"); }
 function updateTampilanAdmin(){
   if(adminLogin){
@@ -307,6 +380,7 @@ function updateTampilanAdmin(){
     document.getElementById("lockGuru").style.display="none"; document.getElementById("lockKegiatan").style.display="none";
     document.getElementById("namaAdminDiForm").innerHTML=adminLogin;
     let elPin=document.getElementById("namaPinSendiri"); if(elPin) elPin.innerHTML=adminLogin;
+    let elLogo=document.getElementById("namaLogoAdmin"); if(elLogo) elLogo.innerHTML=adminLogin;
     if(adminLogin===NAMA_KEPSEK) tampilTabelPIN();
   } else {
     document.body.classList.remove("admin"); document.body.classList.remove("kepsek");
@@ -316,7 +390,7 @@ function updateTampilanAdmin(){
   }
   renderGaleriGuru(); tampilKegiatan(); renderPengumuman();
 }
-function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Admin yang bisa! Klik 🔐 Login Admin Guru di atas!"); bukaLogin(); return false; } return true; }
+function wajibAdmin(){ if(!adminLogin){ alert("🔒 Hanya Kepsek + Admin / Guru yang bisa! Klik 🔐 Login Admin Guru di atas!"); bukaLogin(); return false; } return true; }
 function wajibKepsek(){ if(adminLogin!==NAMA_KEPSEK){ alert("🔒 Hanya Kepala Sekolah!"); return false; } return true; }
 function gantiPINsendiri(){
   if(!wajibAdmin()) return;
@@ -472,7 +546,7 @@ async function hapusPengumuman(i){
   let kunci=(p.judul||"")+"|"+(p.isi||""); let dihapus=getPengumumanDihapus(); if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
   dataPengumuman.splice(i,1); try{ let simpan = dataPengumuman.filter(p=>!p.bawaan); localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan)); }catch(e){} renderPengumuman();
 }
-window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); await loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); bersihkanGuruDobel(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
+window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); await loadLogo(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); await loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); bersihkanGuruDobel(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
 </script>
 </body>
 </html>
