@@ -88,6 +88,14 @@ body.admin .hanya-admin{display:block}
 .modal-box{background:white;width:92%;max-width:400px;padding:22px;border-radius:24px;text-align:center;max-height:90vh;overflow:auto}
 .modal-box select,.modal-box input{width:100%;padding:12px;margin:8px 0;border:2px solid #5B9BD5;border-radius:12px;font-size:15px;font-family:'Baloo 2',sans-serif}
 .modal-box button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:15px;margin-top:6px;font-family:'Baloo 2',sans-serif}
+/* FOTO BESAR - MITRA */
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);z-index:999;justify-content:center;align-items:center;flex-direction:column;padding:14px}
+.lightbox img{max-width:94%;max-height:74vh;object-fit:contain;border-radius:14px;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.lightbox b{color:#fff;font-size:18px;margin-top:12px;text-align:center}
+.lightbox span{color:#FFD93D;font-size:14px;text-align:center;margin-top:4px}
+.btn-tutup-foto{background:#FF5252;color:#fff;border:none;padding:11px 22px;border-radius:25px;font-weight:800;cursor:pointer;font-size:15px;margin-top:14px;font-family:'Baloo 2',sans-serif}
+.hint-foto{color:#fff;font-size:12px;margin-top:8px;opacity:.8}
+.btn-lihat-besar{background:#2196F3;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:800;cursor:pointer;font-size:12px;margin:6px 12px 4px;font-family:'Baloo 2',sans-serif}
 @media(max-width:600px){.mitra-folder,.kegiatan-grid{grid-template-columns:1fr 1fr}.judul-langit h1{font-size:24px}.langit{height:200px}}
 </style>
 </head>
@@ -136,10 +144,37 @@ body.admin .hanya-admin{display:block}
 <p style="text-align:center;font-size:12px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)">Ini file Mitra saja, untuk dicek dulu sebelum digabung ke web besar lewat GitHub.</p>
 </div>
 <div class="modal" id="modalLogin"><div class="modal-box"><div style="font-size:60px">👩‍🏫👨‍🏫🏫</div><h2>🔐 Login Kepsek / Staf</h2><p style="font-size:13px;color:#666">Hanya Kepala Sekolah, Guru & Staf</p><label><b>Pilih Nama Anda:</b></label><select id="loginNama"></select><label><b>Masukkan PIN:</b></label><input type="password" id="loginPIN" placeholder="Masukkan PIN Anda" inputmode="numeric" maxlength="6"><p id="loginError" style="color:#D32F2F;font-weight:800"></p><button style="background:#5B9BD5;color:white" onclick="cekLogin()">✅ MASUK</button><button style="background:#BDBDBD" onclick="tutupLogin()">❌ Batal</button><p style="font-size:12px;color:#888">PIN hanya diketahui Kepala Sekolah, Guru & Staf. Pengunjung hanya bisa melihat.</p></div></div>
+<!-- MODAL FOTO BESAR - MITRA -->
+<div class="lightbox" id="lightboxFoto" onclick="tutupFotoBesar()">
+<img id="imgBesar" src="" onclick="event.stopPropagation()">
+<b id="judulBesar"></b>
+<span id="ketBesar"></span>
+<button class="btn-tutup-foto" onclick="tutupFotoBesar()">❌ TUTUP / KEMBALI</button>
+<div class="hint-foto">Klik di luar foto untuk kembali ke folder Mitra</div>
+</div>
 <script>
 let adminLogin=null; let NAMA_KEPSEK="Wahyu Aji, S.Pd.Jas";
 let daftarPIN={"Wahyu Aji, S.Pd.Jas":"197601","Samsul Bahri, S.Pd":"123456","Syahruni, S.Pd.SD":"123456","Norsalim, S.Pd":"123456","Hj. Siti Nuriyah, S.Pd.SD":"123456","Radinah, S.Pd":"123456","Pathuljannah, S.Pd.I":"123456","M. Husain":"123456","Syahida Norpah, S.Pd":"123456","Jannah, S.Pd":"123456"};
 let jabatanAdmin={"Wahyu Aji, S.Pd.Jas":"Plt. Kepala Sekolah / Guru PJOK","Samsul Bahri, S.Pd":"Guru Kelas","Syahruni, S.Pd.SD":"Guru Kelas","Norsalim, S.Pd":"Guru Kelas","Hj. Siti Nuriyah, S.Pd.SD":"Guru Kelas","Radinah, S.Pd":"Guru Kelas","Pathuljannah, S.Pd.I":"Guru PAI","M. Husain":"Operator Sekolah","Syahida Norpah, S.Pd":"Pembimbing Tahsin & Tahfiz","Jannah, S.Pd":"Pembimbing Tahsin & Tahfiz"};
+let listTampilMitra=[];
+function bukaFotoBesar(src,judul,ket){
+  if(!src) return;
+  document.getElementById("imgBesar").src=src;
+  document.getElementById("judulBesar").innerHTML=judul||"";
+  document.getElementById("ketBesar").innerHTML=ket||"";
+  document.getElementById("lightboxFoto").style.display="flex";
+  document.body.style.overflow="hidden";
+}
+function tutupFotoBesar(){
+  document.getElementById("lightboxFoto").style.display="none";
+  document.getElementById("imgBesar").src="";
+  document.body.style.overflow="";
+}
+function bukaFotoMitra(idx){
+  let k=listTampilMitra[idx]; if(!k || !k.foto) return;
+  let kapan=k.kapan?formatTanggal(k.kapan):(k.tanggal||"-");
+  bukaFotoBesar(k.foto, k.acara||k.kegiatan||"Mitra", "📅 "+kapan+" • 📍 "+(k.tempat||k.lokasi||"-")+" • 📸 "+(k.dibagikan||k.oleh||"Admin"));
+}
 function isiDropdownLogin(){ let sel=document.getElementById("loginNama"); sel.innerHTML=""; Object.keys(daftarPIN).forEach(nama=>{ let opt=document.createElement("option"); opt.value=nama; opt.textContent=(nama===NAMA_KEPSEK?"👑 ":"👩‍🏫 ")+nama; sel.appendChild(opt); }); }
 function bukaLogin(){ isiDropdownLogin(); document.getElementById("modalLogin").style.display="flex"; document.getElementById("loginError").innerHTML=""; }
 function tutupLogin(){ document.getElementById("modalLogin").style.display="none"; }
@@ -177,15 +212,17 @@ if(mitraFolderAktif===null){
 } else {
   if(jalan) jalan.innerHTML=`<button class="btn-kembali" onclick="kembaliKeFolderMitra()">⬅️ Kembali ke Mitra Sekolah</button> &nbsp; 📂 ${mitraFolderAktif}`;
   let list=dataMitra.filter(x=>x.mitra===mitraFolderAktif);
+  listTampilMitra=list;
   let html=`<div class="kegiatan-grid">`;
   list.forEach((k,i)=>{
-    let gambar=k.foto?`<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">`:`<div class="k-kartun">🤝</div>`;
+    let gambar=k.foto?`<img src="${k.foto}" onclick="bukaFotoMitra(${i})" title="Klik untuk lihat besar">`:`<div class="k-kartun">🤝</div>`;
     let acara=k.acara||k.kegiatan||"-";
     let kapan=k.kapan?formatTanggal(k.kapan):(k.tanggal||"-");
     let tempat=k.tempat||k.lokasi||"-";
     let dibagikan=k.dibagikan||k.oleh||"Admin";
+    let tombolBesar=k.foto?`<button class="btn-lihat-besar" onclick="bukaFotoMitra(${i})">🔍 Lihat Besar</button>`:"";
     let tombolHapus=adminLogin?`<button class="k-del" onclick="hapusMitra('${k.id||i}')">🗑️ Hapus Foto Ini</button>`:"";
-    html+=`<div class="k-card">${gambar}<div class="k-info"><div>🎉 <b>Acara :</b> ${acara}</div><div>📅 <b>Kapan :</b> ${kapan}</div><div>📍 <b>Tempat :</b> ${tempat}</div><div>📸 <b>Dibagikan oleh :</b> ${dibagikan}</div></div>${tombolHapus}</div>`;
+    html+=`<div class="k-card">${gambar}<div class="k-info"><div>🎉 <b>Acara :</b> ${acara}</div><div>📅 <b>Kapan :</b> ${kapan}</div><div>📍 <b>Tempat :</b> ${tempat}</div><div>📸 <b>Dibagikan oleh :</b> ${dibagikan}</div></div>${tombolBesar}${tombolHapus}</div>`;
   });
   html+=`</div>`;
   if(list.length===0) html=`<div style="text-align:center;padding:20px;background:#fff;border-radius:12px;font-weight:700">Belum ada foto di folder ${mitraFolderAktif}. Kepsek / Staf bisa tambah di bawah! 👇</div>`;
