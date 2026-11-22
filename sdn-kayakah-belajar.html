@@ -124,7 +124,6 @@ var GURU_DATA=[{nama:"Wahyu Aji, S.Pd.Jas",jabatan:"Kepala Sekolah + PJOK + Pemb
 function buatMapel(wali){return [{kat:"📚 MATA PELAJARAN WAJIB",list:[{nama:"Pendidikan Agama Islam (PAI)",guru:"Pathul Jannah, S.Pd.I",icon:"📖"},{nama:"Pendidikan Pancasila",guru:wali,icon:"🇮🇩"},{nama:"Bahasa Indonesia",guru:wali,icon:"📝"},{nama:"Matematika",guru:wali,icon:"🔢"},{nama:"IPAS",guru:wali,icon:"🌍"},{nama:"Bahasa Inggris",guru:wali,icon:"🇬🇧"},{nama:"PJOK",guru:"Wahyu Aji, S.Pd.Jas",icon:"⚽"},{nama:"Seni Budaya",guru:wali,icon:"🎨"}]},{kat:"🕌 KEUNGGULAN SDN KAYAKAH",list:[{nama:"Tahsin",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"🕌",tipe:"tahsin"},{nama:"Tahfiz",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"📖",tipe:"tahfiz"},{nama:"Pramuka",guru:"Wahyu Aji, S.Pd.Jas & M. Husain",icon:"🏕️",tipe:"pramuka"}]},{kat:"🏡 MUATAN LOKAL & LAINNYA",list:[{nama:"Bahasa Banjar (Muatan Lokal)",guru:wali,icon:"🏠"},{nama:"Informatika",guru:wali,icon:"💻"},{nama:"Bimbingan & Konseling",guru:wali,icon:"❤️"}]}];}
 var MAPEL_DATA={"Kelas 1":buatMapel("Radinah, S.Pd"),"Kelas 2":buatMapel("Siti Nuriyah, S.Pd.SD"),"Kelas 3":buatMapel("Pathul Jannah, S.Pd.I"),"Kelas 4":buatMapel("Norsalim, S.Pd"),"Kelas 5":buatMapel("Syahruni, S.Pd.SD"),"Kelas 6":buatMapel("Samsul Bahri, S.Pd")};
 var MATERI_DATA={}; var SEMUA_MAPEL=["Pendidikan Agama Islam (PAI)","Pendidikan Pancasila","Bahasa Indonesia","Matematika","IPAS","Bahasa Inggris","PJOK","Seni Budaya","Tahsin","Tahfiz","Pramuka","Bahasa Banjar (Muatan Lokal)","Informatika","Bimbingan & Konseling"];
-// ===== MATERI PER KELAS - SUDAH BEDA TIAP KELAS - KURIKULUM MERDEKA =====
 var TOPIK={
 "Pendidikan Agama Islam (PAI)":[
 [{j:"Materi 1: Rukun Islam & Syahadat",i:"Rukun Islam ada 5: Syahadat, Sholat, Puasa, Zakat, Haji. Syahadat artinya bersaksi bahwa tiada Tuhan selain Allah dan Nabi Muhammad utusan Allah.",l:"Sebutkan 5 Rukun Islam! | Ucapkan 2 kalimat Syahadat."},{j:"Materi 2: Doa Sebelum & Sesudah Belajar",i:"Sebelum belajar baca: Allahumma inni as-aluka ilman nafia. Artinya: Ya Allah, berilah aku ilmu yang bermanfaat. Sesudah belajar baca Hamdalah.",l:"Hafalkan doa sebelum belajar! | Kapan kita baca Hamdalah?"}],
@@ -326,7 +325,7 @@ function renderListPINGuru(){
 function simpanSiswaGuruKeFirebase(){
   try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA)); localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){}
   if(!window._fb) return;
-  try{ window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA,waktu:Date.now()}); window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA,pin:PIN_DATA,waktu:Date.now()}); }catch(e){}
+  try{ window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA,[STRIPPED] window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA,[STRIPPED] }catch(e){}
 }
 function muatSiswaGuruDariFirebase(){
   try{ var s=localStorage.getItem('SISWA_KAYAKAH'); if(s){var d=JSON.parse(s); for(var k in d) DATA[k]=d[k];} var g=localStorage.getItem('GURU_KAYAKAH_BELAJAR'); if(g){var gg=JSON.parse(g); if(gg.length>0) GURU_DATA=gg;} }catch(e){}
@@ -385,9 +384,8 @@ function renderMapel(){for(let i=1;i<=6;i++){let namaKelas='Kelas '+i; let listE
 function tampilDetailMapel(kelas,mapel){
   var key=kelas+"|"+mapel; var list=MATERI_DATA[key]||[]; var edit=bisaEdit(kelas,mapel);
   var html='<h2 style="margin-top:0;color:#7C3AED">📚 '+mapel+' - '+kelas+' ✅ TERBUKA</h2>';
-  if(!loginSaatIni) html+='<p style="background:#FEF3C7;padding:10px;border-radius:12px;font-weight:bold;color:#92400E">👀 Mode Pengunjung - Cuma Bisa Melihat & Membaca. Untuk tambah / hapus, klik tombol 🔒 PIN Guru di Menu, masukkan PIN 6 angka.</p>';
-  else if(edit) html+='<p style="background:#D1FAE5;padding:10px;border-radius:12px;font-weight:bold;color:#059669">✅ Mode '+loginSaatIni.peran.toUpperCase()+' - '+loginSaatIni.nama+' - Pian bisa Tambah & Hapus Materi disini.</p>';
-  else html+='<p style="background:#FEE2E2;padding:10px;border-radius:12px;font-weight:bold;color:#991B1B">🔒 Mode GURU - '+loginSaatIni.nama+' - Pian cuma bisa lihat mapel ini.</p>';
+  if(loginSaatIni && edit) html+='<p style="background:#D1FAE5;padding:10px;border-radius:12px;font-weight:bold;color:#059669">✅ Mode '+loginSaatIni.peran.toUpperCase()+' - '+loginSaatIni.nama+' - Pian bisa Tambah & Hapus Materi disini.</p>';
+  else if(loginSaatIni && !edit) html+='<p style="background:#FEE2E2;padding:10px;border-radius:12px;font-weight:bold;color:#991B1B">🔒 Mode GURU - '+loginSaatIni.nama+' - Pian cuma bisa lihat mapel ini.</p>';
   list.forEach(function(m,idx){
     html+='<div style="background:#FFFBEB;border:3px solid #FFA502;padding:12px;border-radius:16px;margin:10px 0"><h4 style="margin:0;color:#7C3AED">'+m.judul+'</h4>';
     html+='<p><b>📖 Materi:</b><br>'+m.isi+'</p>';
