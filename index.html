@@ -71,6 +71,7 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .g-card.kepsek{grid-column:1 / -1;max-width:320px;margin:auto;width:100%;border-color:#0E7C7B}
 .g-card .foto-kartun{height:170px;display:flex;align-items:center;justify-content:center;font-size:90px}
 .g-card.kepsek .foto-kartun{height:200px;font-size:110px}
+.g-card img{cursor:pointer}
 .g-card b{display:block;margin:10px 8px 2px;font-size:16px;color:#1E3A5F}.g-card span{font-size:13px;color:#666;display:block;padding:0 8px}
 .g-btn{margin-top:8px;background:#0E7C7B;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}
 .kegiatan-wrap{background:linear-gradient(135deg,#E8F5E9,#E0F2F1,#FFF7E6);border:4px solid #2E9E5B!important}
@@ -101,6 +102,13 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hapus-item{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid #eee;border-radius:12px;padding:8px;margin:6px 0;text-align:left}
 .hapus-item img{width:70px;height:55px;object-fit:cover;border-radius:8px}
 .hapus-item input{width:22px;height:22px}
+/* FOTO BESAR - SEMUA GALERI */
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);z-index:999;justify-content:center;align-items:center;flex-direction:column;padding:14px}
+.lightbox img{max-width:94%;max-height:74vh;object-fit:contain;border-radius:14px;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.lightbox b{color:#fff;font-size:18px;margin-top:12px;text-align:center}
+.lightbox span{color:#FFD93D;font-size:14px;text-align:center;margin-top:4px}
+.btn-tutup-foto{background:#E11D63;color:#fff;border:none;padding:11px 22px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:15px;margin-top:14px}
+.hint-foto{color:#fff;font-size:12px;margin-top:8px;opacity:.8}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
 @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:30px}.kartun-kotak{width:110px}.login-melayang{bottom:6px;right:8px}.daun-kiri,.daun-kanan{width:52px;font-size:24px}.daun-atas,.daun-bawah{font-size:22px}}
 </style>
@@ -130,6 +138,14 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <button style="background:#E11D63;color:white" onclick="hapusTerpilihKategori()">❌ HAPUS YANG DICENTANG</button>
 <button style="background:#BDBDBD" onclick="tutupHapusKategori()">⬅️ Batal / Kembali</button>
 </div>
+</div>
+<!-- MODAL FOTO BESAR - SEMUA GALERI -->
+<div class="lightbox" id="lightboxFoto" onclick="tutupFotoBesar()">
+<img id="imgBesar" src="" onclick="event.stopPropagation()">
+<b id="judulBesar"></b>
+<span id="ketBesar"></span>
+<button class="btn-tutup-foto" onclick="tutupFotoBesar()">❌ TUTUP / KEMBALI</button>
+<div class="hint-foto">Klik di luar foto untuk kembali ke galeri</div>
 </div>
 <header id="beranda">
 <div class="daun-atas">🌿🍃🌱🍂🌿🍃🌱🍂🌿🍃🌱🍂🌿🍃🌱🍂🌿🍃🌱🍂</div>
@@ -215,7 +231,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="card galeri-wrap" id="galeri">
 <div class="banner-kartun">👩‍🏫👨‍🏫🏫📸🌈</div>
 <h3 style="text-align:center;color:#7C2D12;font-size:26px">📸 Galeri Kepala Sekolah, Guru & Staf 📸</h3>
-<p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫</p>
+<p style="text-align:center">Kenalan yuk dengan Bapak / Ibu Guru hebat kami! <span id="jumlahGuru"></span> 🧑‍🏫👩‍🏫<br><b>👆 Klik fotonya, Pak. Nanti jadi besar!</b></p>
 <p id="statusGaleri" style="text-align:center;font-size:13px;color:#666;display:none">Memuat foto guru...</p>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Anda Login Sebagai Admin - Pian Bisa Ganti Foto Sekarang!</div>
 <div class="galeri" id="listGaleriGuru"></div>
@@ -235,7 +251,7 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div class="card kegiatan-wrap" id="kegiatan">
 <div class="banner-kartun">🥁🎤⚽🌱🎨🎉</div>
 <h3 style="text-align:center;color:#1B5E20;font-size:26px">🎉📸 Galeri Kegiatan SDN Kayakah 📸🎉</h3>
-<p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱</p>
+<p style="text-align:center">Foto Upacara, Pramuka, Habsy, Market Day, Senam, Kebun Sekolah, dan semua kegiatan seru! 🥁🎤⚽🌱<br><b>👆 Klik fotonya, Pak. Nanti jadi besar!</b></p>
 <p id="statusKegiatan" style="text-align:center;font-size:13px;color:#666;display:none">Memuat foto kegiatan...</p>
 <div class="hanya-admin" style="background:#C8E6C9;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-bottom:12px">✅ Mode Admin Aktif - Pian Bisa Tambah & Hapus Foto Kegiatan!</div>
 <div style="text-align:center;margin-bottom:12px">
@@ -292,8 +308,32 @@ let daftarPIN = {}; let jabatanAdmin = {}; let fotoGuru = {};
 let kartunGuru = {"Wahyu Aji, S.Pd.Jas":"👨‍🏫","Samsul Bahri, S.Pd.":"👨‍🏫","Syahruni, S.Pd.SD":"👩‍🏫","Norsalim, S.Pd.":"👨‍🏫","Pathul Jannah, S.Pd.I":"👩‍🏫","Hj. Siti Nuriyah, S.Pd.SD":"👩‍🏫","Radinah, S.Pd.":"👩‍🏫","Syahida Norpah, S.Pd.":"📖","Jannah, S.Pd.":"📖","M. Husain":"🧑‍💻"};
 let warnaGuru = ["#FFEBEE","#FFF7E6","#E0F2F1","#E8F5E9","#EDE9FE","#FFFDE7","#E0F7FA","#FCE4EC","#FFF8E1","#EDE7F6"];
 let logoData = null; let logoUkuran = {lebar:110,tinggi:0,top:8,left:8};
+let listTampilKegiatan = [];
 function kembaliBeranda(){ window.scrollTo({top:0,behavior:"smooth"}); document.getElementById("beranda").scrollIntoView({behavior:"smooth"}); }
 function cekPIN6(pin){ return /^[0-9]{6}$/.test(pin||""); }
+// FOTO BESAR - SEMUA GALERI
+function bukaFotoBesar(src,judul,ket){
+  if(!src) return;
+  document.getElementById("imgBesar").src=src;
+  document.getElementById("judulBesar").innerHTML=judul||"";
+  document.getElementById("ketBesar").innerHTML=ket||"";
+  document.getElementById("lightboxFoto").style.display="flex";
+  document.body.style.overflow="hidden";
+}
+function tutupFotoBesar(){
+  document.getElementById("lightboxFoto").style.display="none";
+  document.getElementById("imgBesar").src="";
+  document.body.style.overflow="";
+}
+function bukaFotoGuru(idx){
+  let names=urutanNama(); let nama=names[idx]; if(!nama) return;
+  let src=fotoGuru[nama]; if(!src) return;
+  bukaFotoBesar(src, nama, jabatanAdmin[nama]||"Guru / Staf");
+}
+function bukaFotoKegiatan(idx){
+  let k=listTampilKegiatan[idx]; if(!k || !k.foto) return;
+  bukaFotoBesar(k.foto, k.judul||"", (k.kat||"")+" • "+(k.ket||""));
+}
 function terapkanLogo(){
   let img=document.getElementById("logoSekolah"); if(!img) return;
   if(logoData){ img.src=logoData; img.style.display="block"; } else { img.src="logo-3.png"; img.style.display="block"; }
@@ -433,11 +473,12 @@ function renderGaleriGuru(){
   let html="";
   names.forEach((nama,idx)=>{
     let isKepsek=nama===NAMA_KEPSEK; let warna=warnaGuru[idx%warnaGuru.length]; let emoji=kartunGuru[nama]||"👩‍🏫"; let jab=jabatanAdmin[nama]||"Guru / Staf";
-    let fotoHtml = fotoGuru[nama] ? `<img src="${fotoGuru[nama]}" style="width:100%;height:170px;object-fit:cover;display:block">` : `<div class="foto-kartun" style="background:${warna}">${emoji}</div>`;
-    if(isKepsek && fotoGuru[nama]) fotoHtml=`<img src="${fotoGuru[nama]}" style="width:100%;height:200px;object-fit:cover;display:block">`;
+    let fotoHtml = fotoGuru[nama] ? `<img src="${fotoGuru[nama]}" onclick="bukaFotoGuru(${idx})" title="Klik untuk lihat besar" style="width:100%;height:170px;object-fit:cover;display:block;cursor:pointer">` : `<div class="foto-kartun" style="background:${warna}">${emoji}</div>`;
+    if(isKepsek && fotoGuru[nama]) fotoHtml=`<img src="${fotoGuru[nama]}" onclick="bukaFotoGuru(${idx})" title="Klik untuk lihat besar" style="width:100%;height:200px;object-fit:cover;display:block;cursor:pointer">`;
     let tombol = adminLogin ? `<br><input type="file" id="input-${idx}" accept="image/*" style="display:none" onchange="gantiFotoBaru(this,'${nama.replace(/'/g,"")}')"><button class="g-btn" onclick="document.getElementById('input-${idx}').click()">📸 Ganti Foto Asli</button>` : ``;
     let tombolHapus = (adminLogin===NAMA_KEPSEK && !isKepsek) ? `<br><button onclick="hapusSatuAdmin('${nama.replace(/'/g,"")}')" style="background:#E11D63;color:white;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:4px">🗑️ Hapus Guru Ini</button>` : ``;
-    html+=`<div class="g-card ${isKepsek?"kepsek":""}">${fotoHtml}<b>${isKepsek?"👑 ":""}${nama}</b><span>${jab}</span>${tombol}${tombolHapus}</div>`;
+    let tombolBesar = fotoGuru[nama] ? `<br><button onclick="bukaFotoGuru(${idx})" style="background:#2563EB;color:white;border:none;padding:7px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:6px">🔍 Lihat Besar</button>` : ``;
+    html+=`<div class="g-card ${isKepsek?"kepsek":""}">${fotoHtml}<b>${isKepsek?"👑 ":""}${nama}</b><span>${jab}</span>${tombolBesar}${tombol}${tombolHapus}</div>`;
   });
   wadah.innerHTML=html;
   let profil=document.getElementById("listGuruProfil"); if(profil){ let hp=""; names.forEach(nama=>{ hp+=`<div>${nama===NAMA_KEPSEK?"👨‍🏫 ":"👩‍🏫 "}<b>${nama}</b><br>${jabatanAdmin[nama]||""}</div>`; }); profil.innerHTML=hp; }
@@ -495,7 +536,22 @@ function updateBarAksiKategori(){
   let t=document.getElementById("labelTambahKat"); if(t) t.innerHTML=filterAktif.toUpperCase();
   let h=document.getElementById("labelHapusKat"); if(h) h.innerHTML=filterAktif.toUpperCase();
 }
-function tampilKegiatan(){ let wadah=document.getElementById("listKegiatan"); if(!wadah) return; let html=""; dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":k.kat==="Umum"?"📸":"🎨"); let gambar = k.foto ? `<img src="${k.foto}" onclick="window.open('${k.foto}','_blank')">` : `<div class="k-kartun">${emoji}</div>`; let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:""; html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolHapus}</div>`; }); if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`; wadah.innerHTML=html; updateBarAksiKategori(); }
+function tampilKegiatan(){
+  let wadah=document.getElementById("listKegiatan"); if(!wadah) return;
+  listTampilKegiatan=[];
+  dataKegiatan.forEach((k,i)=>{ if(filterAktif!=="SEMUA" && k.kat!==filterAktif) return; listTampilKegiatan.push({k:k, idxAsli:i}); });
+  let html="";
+  listTampilKegiatan.forEach((item, idxTampil)=>{
+    let k=item.k; let i=item.idxAsli;
+    let emoji=k.emoji||(k.kat==="Upacara"?"📚":k.kat==="Pramuka"?"🥁":k.kat==="Habsy"?"🎤":k.kat==="Olahraga"?"⚽":k.kat==="Umum"?"📸":"🎨");
+    let gambar = k.foto ? `<img src="${k.foto}" onclick="bukaFotoKegiatan(${idxTampil})" title="Klik untuk lihat besar">` : `<div class="k-kartun">${emoji}</div>`;
+    let tombolHapus=adminLogin?`<br><button class="k-del" onclick="hapusKegiatan(${i})">🗑️ Hapus Foto Ini</button>`:"";
+    let tombolBesar=k.foto?`<br><button onclick="bukaFotoKegiatan(${idxTampil})" style="background:#2563EB;color:white;border:none;padding:7px 14px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:12px;margin-top:6px">🔍 Lihat Besar</button>`:"";
+    html+=`<div class="k-card">${gambar}<b>${k.judul}</b><span>${k.kat} • ${k.ket||""}<br>👤 Oleh: ${k.oleh||"Admin"}</span>${tombolBesar}${tombolHapus}</div>`;
+  });
+  if(html==="") html=`<div style="grid-column:1/-1;text-align:center;padding:20px;background:#fff;border-radius:12px">Belum ada foto. Admin bisa tambah! 👇</div>`;
+  wadah.innerHTML=html; updateBarAksiKategori();
+}
 function filterKegiatan(kat){ filterAktif=kat; tutupHapusKategoriSilent(); tampilKegiatan(); }
 function tambahFotoKategori(){
   if(!wajibAdmin()) return;
