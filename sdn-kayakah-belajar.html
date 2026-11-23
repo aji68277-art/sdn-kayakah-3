@@ -57,6 +57,8 @@ window.dispatchEvent(new Event('firebase-ready'));
   .panel-kepsek p{font-size:12px;color:#666;margin:4px 0}
   .btn-kembali{position:fixed;top:10px;left:10px;z-index:50;background:#ff5722;color:white;padding:8px 12px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,0.3)}
   .btn-pin-kecil{border:2px solid white;background:#666;color:white;padding:7px 12px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:12px;margin:3px;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+  .btn-sem{border:3px solid white;padding:12px 16px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:14px;margin:3px;color:white}
+  .btn-sem.ganjil{background:#F59E0B}.btn-sem.genap{background:#059669}.btn-sem.aktif{background:#222!important;outline:3px solid #FFD700}
 </style>
 </head>
 <body>
@@ -78,12 +80,12 @@ window.dispatchEvent(new Event('firebase-ready'));
 <div id="guru" class="card" style="display:none"><h2>👩‍🏫 Guru Hebat - <span id="totalGuruJudul">10</span> Orang 🌈</h2>
 <div class="panel-kepsek" id="panelTambahGuru"><h3>👑 TAMBAH ADMIN / GURU BARU - KHUSUS KEPALA SEKOLAH</h3><p>Admin / Guru baru langsung bisa login pakai PIN-nya. Tersimpan di Firebase.</p><input id="namaGuruBaru" placeholder="Nama Lengkap - Contoh: Budi Santoso, S.Pd."><input id="jabatanGuruBaru" placeholder="Jabatan - Contoh: Guru Kelas 1 / Admin"><input id="kelasGuruBaru" placeholder="Kelas - Contoh: Kelas 1 / Admin / Tahsin & Tahfiz"><input id="mapelGuruBaru" placeholder="Mapel - Contoh: Semua Mapel Kelas 1"><input id="pinGuruBaru" placeholder="PIN Baru 6 angka - Contoh: 567890" inputmode="numeric" maxlength="6"><button class="btn" onclick="tambahGuruKepsek()" style="background:#7C3AED">➕ TAMBAH GURU / ADMIN BARU + BUATKAN PIN</button><p id="pesanGuru" style="font-weight:bold;color:#059669"></p><button class="btn" onclick="resetSemuaPINGuru()" style="background:#FF9800">🔄 Reset Semua PIN Guru Jadi 123456 (Kepsek Tetap 197601)</button></div>
 <div id="listGuru"></div></div>
-<div id="kelas1" class="card" style="display:none"><h2>📚 Kelas 1</h2><p><b>Wali Kelas:</b> Radinah, S.Pd | <b>Jumlah:</b> <span id="jmlKelas1">10</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 1:</b><button class="aktif" onclick="tampilNamaSiswa('kelas1',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas1',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas1"><h3>👦 Nama Siswa - Kelas 1</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas1')"><div id="listKelas1"></div></div><div id="boxMapelKelas1" style="display:none"><h3>📚 Mata Pelajaran - Kelas 1 - 14 Mapel</h3><div id="listMapelKelas1"></div></div></div>
-<div id="kelas2" class="card" style="display:none"><h2>📚 Kelas 2</h2><p><b>Wali Kelas:</b> Siti Nuriyah, S.Pd.SD | <b>Jumlah:</b> <span id="jmlKelas2">8</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 2:</b><button class="aktif" onclick="tampilNamaSiswa('kelas2',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas2',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas2"><h3>👦 Nama Siswa - Kelas 2</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas2')"><div id="listKelas2"></div></div><div id="boxMapelKelas2" style="display:none"><h3>📚 Mata Pelajaran - Kelas 2 - 14 Mapel</h3><div id="listMapelKelas2"></div></div></div>
-<div id="kelas3" class="card" style="display:none"><h2>📚 Kelas 3</h2><p><b>Wali Kelas:</b> Pathul Jannah, S.Pd.I | <b>Jumlah:</b> <span id="jmlKelas3">11</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 3:</b><button class="aktif" onclick="tampilNamaSiswa('kelas3',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas3',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas3"><h3>👦 Nama Siswa - Kelas 3</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas3')"><div id="listKelas3"></div></div><div id="boxMapelKelas3" style="display:none"><h3>📚 Mata Pelajaran - Kelas 3 - 14 Mapel</h3><div id="listMapelKelas3"></div></div></div>
-<div id="kelas4" class="card" style="display:none"><h2>📚 Kelas 4</h2><p><b>Wali Kelas:</b> Norsalim, S.Pd | <b>Jumlah:</b> <span id="jmlKelas4">10</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 4:</b><button class="aktif" onclick="tampilNamaSiswa('kelas4',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas4',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas4"><h3>👦 Nama Siswa - Kelas 4</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas4')"><div id="listKelas4"></div></div><div id="boxMapelKelas4" style="display:none"><h3>📚 Mata Pelajaran - Kelas 4 - 14 Mapel</h3><div id="listMapelKelas4"></div></div></div>
-<div id="kelas5" class="card" style="display:none"><h2>📚 Kelas 5</h2><p><b>Wali Kelas:</b> Syahruni, S.Pd.SD | <b>Jumlah:</b> <span id="jmlKelas5">12</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 5:</b><button class="aktif" onclick="tampilNamaSiswa('kelas5',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas5',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas5"><h3>👦 Nama Siswa - Kelas 5</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas5')"><div id="listKelas5"></div></div><div id="boxMapelKelas5" style="display:none"><h3>📚 Mata Pelajaran - Kelas 5 - 14 Mapel</h3><div id="listMapelKelas5"></div></div></div>
-<div id="kelas6" class="card" style="display:none"><h2>📚 Kelas 6</h2><p><b>Wali Kelas:</b> Samsul Bahri, S.Pd | <b>Jumlah:</b> <span id="jmlKelas6">9</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 6:</b><button class="aktif" onclick="tampilNamaSiswa('kelas6',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas6',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas6"><h3>👦 Nama Siswa - Kelas 6</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas6')"><div id="listKelas6"></div></div><div id="boxMapelKelas6" style="display:none"><h3>📚 Mata Pelajaran - Kelas 6 - 14 Mapel</h3><div id="listMapelKelas6"></div></div></div>
+<div id="kelas1" class="card" style="display:none"><h2>📚 Kelas 1</h2><p><b>Wali Kelas:</b> Radinah, S.Pd | <b>Jumlah:</b> <span id="jmlKelas1">10</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 1:</b><button class="aktif" onclick="tampilNamaSiswa('kelas1',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas1',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas1"><h3>👦 Nama Siswa - Kelas 1</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas1')"><div id="listKelas1"></div></div><div id="boxMapelKelas1" style="display:none"><h3>📚 Mata Pelajaran - Kelas 1 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas1"></div></div></div>
+<div id="kelas2" class="card" style="display:none"><h2>📚 Kelas 2</h2><p><b>Wali Kelas:</b> Siti Nuriyah, S.Pd.SD | <b>Jumlah:</b> <span id="jmlKelas2">8</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 2:</b><button class="aktif" onclick="tampilNamaSiswa('kelas2',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas2',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas2"><h3>👦 Nama Siswa - Kelas 2</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas2')"><div id="listKelas2"></div></div><div id="boxMapelKelas2" style="display:none"><h3>📚 Mata Pelajaran - Kelas 2 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas2"></div></div></div>
+<div id="kelas3" class="card" style="display:none"><h2>📚 Kelas 3</h2><p><b>Wali Kelas:</b> Pathul Jannah, S.Pd.I | <b>Jumlah:</b> <span id="jmlKelas3">11</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 3:</b><button class="aktif" onclick="tampilNamaSiswa('kelas3',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas3',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas3"><h3>👦 Nama Siswa - Kelas 3</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas3')"><div id="listKelas3"></div></div><div id="boxMapelKelas3" style="display:none"><h3>📚 Mata Pelajaran - Kelas 3 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas3"></div></div></div>
+<div id="kelas4" class="card" style="display:none"><h2>📚 Kelas 4</h2><p><b>Wali Kelas:</b> Norsalim, S.Pd | <b>Jumlah:</b> <span id="jmlKelas4">10</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 4:</b><button class="aktif" onclick="tampilNamaSiswa('kelas4',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas4',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas4"><h3>👦 Nama Siswa - Kelas 4</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas4')"><div id="listKelas4"></div></div><div id="boxMapelKelas4" style="display:none"><h3>📚 Mata Pelajaran - Kelas 4 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas4"></div></div></div>
+<div id="kelas5" class="card" style="display:none"><h2>📚 Kelas 5</h2><p><b>Wali Kelas:</b> Syahruni, S.Pd.SD | <b>Jumlah:</b> <span id="jmlKelas5">12</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 5:</b><button class="aktif" onclick="tampilNamaSiswa('kelas5',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas5',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas5"><h3>👦 Nama Siswa - Kelas 5</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas5')"><div id="listKelas5"></div></div><div id="boxMapelKelas5" style="display:none"><h3>📚 Mata Pelajaran - Kelas 5 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas5"></div></div></div>
+<div id="kelas6" class="card" style="display:none"><h2>📚 Kelas 6</h2><p><b>Wali Kelas:</b> Samsul Bahri, S.Pd | <b>Jumlah:</b> <span id="jmlKelas6">9</span> Siswa</p><div class="menu-dalam-kelas"><b>Menu di dalam Kelas 6:</b><button class="aktif" onclick="tampilNamaSiswa('kelas6',this)">👦 Nama Siswa</button><button onclick="tampilMapel('kelas6',this)">📚 Mata Pelajaran</button></div><div id="boxNamaKelas6"><h3>👦 Nama Siswa - Kelas 6</h3><input placeholder="🔍 Cari..." onkeyup="cariDiKelas(this,'listKelas6')"><div id="listKelas6"></div></div><div id="boxMapelKelas6" style="display:none"><h3>📚 Mata Pelajaran - Kelas 6 - 14 Mapel - Ganjil & Genap</h3><div id="listMapelKelas6"></div></div></div>
 <footer>🌈 © 2026 SDN Kayakah - Amuntai Selatan - Belajar Asyik, Berakhlak, Berprestasi 🌈<br>🕌 Tahsin & Tahfiz - Pembimbing: Syahida Norpah, S.Pd & Jannah, S.Pd | 🏕️ Pramuka - Pembina: Wahyu Aji & M. Husain</footer>
 <div id="laciPIN">
   <h2 style="color:#7C3AED;margin:0">🔒 Laci PIN - Di Menu</h2>
@@ -123,131 +125,72 @@ var DATA={"Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Lati
 var GURU_DATA=[{nama:"Wahyu Aji, S.Pd.Jas",jabatan:"Kepala Sekolah + PJOK + Pembina Pramuka",kelas:"Kepala Sekolah",mapel:"PJOK & Pramuka"},{nama:"Radinah, S.Pd",jabatan:"Guru Kelas 1",kelas:"Kelas 1",mapel:"Semua Mapel Kelas 1"},{nama:"Siti Nuriyah, S.Pd.SD",jabatan:"Guru Kelas 2",kelas:"Kelas 2",mapel:"Semua Mapel Kelas 2"},{nama:"Pathul Jannah, S.Pd.I",jabatan:"Guru PAI + Wali Kelas 3",kelas:"Kelas 3",mapel:"PAI"},{nama:"Norsalim, S.Pd",jabatan:"Guru Kelas 4",kelas:"Kelas 4",mapel:"Semua Mapel Kelas 4"},{nama:"Syahruni, S.Pd.SD",jabatan:"Guru Kelas 5",kelas:"Kelas 5",mapel:"Semua Mapel Kelas 5"},{nama:"Samsul Bahri, S.Pd",jabatan:"Guru Kelas 6",kelas:"Kelas 6",mapel:"Semua Mapel Kelas 6"},{nama:"Syahida Norpah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"Jannah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"M. Husain",jabatan:"Operator Sekolah + Pembina Pramuka",kelas:"Operator + Pramuka",mapel:"Operator + Pramuka"}];
 function buatMapel(wali){return [{kat:"📚 MATA PELAJARAN WAJIB",list:[{nama:"Pendidikan Agama Islam (PAI)",guru:"Pathul Jannah, S.Pd.I",icon:"📖"},{nama:"Pendidikan Pancasila",guru:wali,icon:"🇮🇩"},{nama:"Bahasa Indonesia",guru:wali,icon:"📝"},{nama:"Matematika",guru:wali,icon:"🔢"},{nama:"IPAS",guru:wali,icon:"🌍"},{nama:"Bahasa Inggris",guru:wali,icon:"🇬🇧"},{nama:"PJOK",guru:"Wahyu Aji, S.Pd.Jas",icon:"⚽"},{nama:"Seni Budaya",guru:wali,icon:"🎨"}]},{kat:"🕌 KEUNGGULAN SDN KAYAKAH",list:[{nama:"Tahsin",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"🕌",tipe:"tahsin"},{nama:"Tahfiz",guru:"Syahida Norpah, S.Pd & Jannah, S.Pd",icon:"📖",tipe:"tahfiz"},{nama:"Pramuka",guru:"Wahyu Aji, S.Pd.Jas & M. Husain",icon:"🏕️",tipe:"pramuka"}]},{kat:"🏡 MUATAN LOKAL & LAINNYA",list:[{nama:"Bahasa Banjar (Muatan Lokal)",guru:wali,icon:"🏠"},{nama:"Informatika",guru:wali,icon:"💻"},{nama:"Bimbingan & Konseling",guru:wali,icon:"❤️"}]}];}
 var MAPEL_DATA={"Kelas 1":buatMapel("Radinah, S.Pd"),"Kelas 2":buatMapel("Siti Nuriyah, S.Pd.SD"),"Kelas 3":buatMapel("Pathul Jannah, S.Pd.I"),"Kelas 4":buatMapel("Norsalim, S.Pd"),"Kelas 5":buatMapel("Syahruni, S.Pd.SD"),"Kelas 6":buatMapel("Samsul Bahri, S.Pd")};
-var MATERI_DATA={}; var SEMUA_MAPEL=["Pendidikan Agama Islam (PAI)","Pendidikan Pancasila","Bahasa Indonesia","Matematika","IPAS","Bahasa Inggris","PJOK","Seni Budaya","Tahsin","Tahfiz","Pramuka","Bahasa Banjar (Muatan Lokal)","Informatika","Bimbingan & Konseling"];
-var TOPIK={
-"Pendidikan Agama Islam (PAI)":[
-[{j:"Materi 1: Rukun Islam & Syahadat",i:"Rukun Islam ada 5: Syahadat, Sholat, Puasa, Zakat, Haji. Syahadat artinya bersaksi bahwa tiada Tuhan selain Allah dan Nabi Muhammad utusan Allah.",l:"Sebutkan 5 Rukun Islam! | Ucapkan 2 kalimat Syahadat."},{j:"Materi 2: Doa Sebelum & Sesudah Belajar",i:"Sebelum belajar baca: Allahumma inni as-aluka ilman nafia. Artinya: Ya Allah, berilah aku ilmu yang bermanfaat. Sesudah belajar baca Hamdalah.",l:"Hafalkan doa sebelum belajar! | Kapan kita baca Hamdalah?"}],
-[{j:"Materi 1: Rukun Iman",i:"Rukun Iman ada 6: Iman kepada Allah, Malaikat, Kitab, Rasul, Hari Akhir, Qada dan Qadar. Kita harus percaya semua itu.",l:"Sebutkan 6 Rukun Iman! | Siapa nama 10 malaikat?"},{j:"Materi 2: Tata Cara Wudhu",i:"Wudhu: niat, cuci tangan, kumur, hidung, muka, tangan sampai siku, usap kepala, telinga, kaki sampai mata kaki. Wudhu membuat kita bersih sebelum sholat.",l:"Praktek wudhu yang benar! | Urutkan rukun wudhu!"}],
-[{j:"Materi 1: Sholat 5 Waktu",i:"Sholat wajib: Subuh 2, Dzuhur 4, Ashar 4, Maghrib 3, Isya 4 rakaat. Sholat dimulai takbiratul ihram, diakhiri salam.",l:"Sebutkan jumlah rakaat sholat 5 waktu! | Praktek sholat Subuh!"}],
-[{j:"Materi 1: Puasa Ramadhan",i:"Puasa wajib di bulan Ramadhan dari Subuh sampai Maghrib. Kita menahan lapar, haus, dan marah. Puasa melatih sabar dan peduli.",l:"Apa yang membatalkan puasa? | Sebutkan 3 manfaat puasa!"}],
-[{j:"Materi 1: Zakat & Sedekah",i:"Zakat fitrah dibayar sebelum Idul Fitri. Zakat membersihkan harta. Sedekah bisa kapan saja, tidak harus uang, senyum juga sedekah.",l:"Kapan zakat fitrah dibayar? | Beri 3 contoh sedekah!"}],
-[{j:"Materi 1: Iman kepada Hari Akhir",i:"Hari akhir adalah hari kiamat. Setelah itu ada surga dan neraka. Orang beriman harus banyak berbuat baik agar masuk surga.",l:"Apa itu hari kiamat? | Sebutkan 3 amal agar masuk surga!"}]
-],
-"Pendidikan Pancasila":[
-[{j:"Materi 1: Lambang Garuda Pancasila",i:"Garuda Pancasila lambang negara Indonesia. Di dada Garuda ada perisai dengan 5 sila. Bunyi sila 1: Ketuhanan Yang Maha Esa.",l:"Sebutkan 5 sila Pancasila! | Gambar perisai Garuda!"}],
-[{j:"Materi 1: Aturan di Rumah & Sekolah",i:"Aturan di rumah: hormat orang tua, tidur tepat waktu. Aturan di sekolah: datang tepat waktu, pakai seragam, buang sampah pada tempatnya.",l:"Sebutkan 3 aturan di sekolah! | Apa akibat melanggar aturan?"}],
-[{j:"Materi 1: Hak & Kewajiban Anak",i:"Hak anak: dapat belajar, bermain, disayang. Kewajiban anak: belajar rajin, hormat guru, jaga kebersihan.",l:"Sebutkan 3 hak dan 3 kewajiban!"}],
-[{j:"Materi 1: Keragaman Suku & Budaya",i:"Indonesia punya banyak suku: Jawa, Banjar, Dayak, Bugis, dan lainnya. Kita harus saling menghormati, tidak boleh mengejek.",l:"Sebutkan 5 suku di Indonesia! | Apa itu Bhinneka Tunggal Ika?"}],
-[{j:"Materi 1: Musyawarah & Gotong Royong",i:"Musyawarah: berunding untuk mufakat. Gotong royong: kerja bersama. Contoh: membersihkan kelas bersama.",l:"Berikan contoh musyawarah di kelas!"}],
-[{j:"Materi 1: NKRI & Persatuan",i:"NKRI: Negara Kesatuan Republik Indonesia. Kita harus cinta tanah air, jaga persatuan, tidak bertengkar karena beda suku/agama.",l:"Apa kepanjangan NKRI? | Sebutkan 3 cara menjaga persatuan!"}]
-],
-"Bahasa Indonesia":[
-[{j:"Materi 1: Membaca Suku Kata",i:"Suku kata: ba, bi, bu, be, bo. Contoh: ba-ju, bu-ku, bo-la. Membaca dengan mengeja lalu lancar.",l:"Baca: ba-ju, bu-ku, me-ja! | Rangkai: b + u = ?"}],
-[{j:"Materi 1: Kalimat Sederhana",i:"Kalimat punya subjek dan predikat. Contoh: Ibu memasak. Ayah membaca koran. Huruf pertama kapital, diakhiri titik.",l:"Buat 3 kalimat tentang sekolah!"}],
-[{j:"Materi 1: Cerita Fabel",i:"Fabel: cerita hewan yang bisa bicara. Contoh: Kancil dan Buaya. Pesan moral: jangan sombong, harus cerdik dan jujur.",l:"Ceritakan kembali dongeng Kancil! | Apa pesan moralnya?"}],
-[{j:"Materi 1: Teks Deskripsi",i:"Teks deskripsi menggambarkan benda/tempat. Contoh: Sekolahku besar, bersih, ada taman bunga. Gunakan kata sifat: besar, indah, rapi.",l:"Deskripsikan kelasmu dalam 5 kalimat!"}],
-[{j:"Materi 1: Surat Pribadi",i:"Surat pribadi: ada tanggal, salam pembuka, isi, salam penutup, nama. Contoh: surat untuk teman / guru.",l:"Tulis surat untuk temanmu!"}],
-[{j:"Materi 1: Pidato & Laporan",i:"Pidato: berbicara di depan banyak orang. Harus percaya diri, suara jelas, lihat penonton. Laporan: menceritakan hasil pengamatan.",l:"Buat pidato 1 menit tentang kebersihan!"}]
-],
-"Matematika":[
-[{j:"Materi 1: Mengenal Angka 1-10",i:"1 Satu, 2 Dua, 3 Tiga, 4 Empat, 5 Lima, 6 Enam, 7 Tujuh, 8 Delapan, 9 Sembilan, 10 Sepuluh.",l:"Sebutkan angka setelah 4! | 2 + 3 = ?"}],
-[{j:"Materi 1: Penjumlahan & Pengurangan 1-100",i:"Penjumlahan: 25 + 14 = 39. Pengurangan: 50 - 12 = 38. Gunakan jari atau garis bilangan.",l:"Hitung: 34 + 21 = ? | 60 - 15 = ?"}],
-[{j:"Materi 1: Perkalian & Pembagian",i:"Perkalian adalah penjumlahan berulang. 3 x 4 = 12. Pembagian: 12 : 3 = 4.",l:"Hitung: 5 x 6 = ? | 20 : 4 = ?"}],
-[{j:"Materi 1: Pecahan Sederhana",i:"Pecahan: 1/2 artinya setengah, 1/4 artinya seperempat. 1/2 pizza = setengah pizza.",l:"Gambar 1/2 dan 1/4! | Mana lebih besar 1/2 atau 1/4?"}],
-[{j:"Materi 1: KPK & FPB",i:"KPK: kelipatan persekutuan terkecil. FPB: faktor persekutuan terbesar. Contoh KPK 4 dan 6 = 12, FPB 12 dan 18 = 6.",l:"Cari KPK 6 dan 8! | Cari FPB 15 dan 20!"}],
-[{j:"Materi 1: Bangun Ruang & Volume",i:"Kubus: volume = sisi x sisi x sisi. Balok: p x l x t. Contoh kubus sisi 5 cm, volume 125 cm3.",l:"Hitung volume kubus sisi 4 cm!"}]
-],
-"IPAS":[
-[{j:"Materi 1: Anggota Tubuh & Panca Indra",i:"Panca indra: mata melihat, telinga mendengar, hidung mencium, lidah mengecap, kulit meraba. Jaga kebersihan tubuh.",l:"Sebutkan 5 panca indra dan fungsinya!"}],
-[{j:"Materi 1: Hewan & Tumbuhan di Sekitar",i:"Hewan: kucing, ayam, sapi. Tumbuhan: padi, pisang, mangga. Hewan butuh makan, tumbuhan butuh air dan matahari.",l:"Sebutkan 5 hewan dan makanannya!"}],
-[{j:"Materi 1: Lingkungan & Cuaca",i:"Cuaca: cerah, hujan, berawan. Musim di Indonesia: hujan dan kemarau. Jaga lingkungan: buang sampah pada tempatnya.",l:"Apa beda cuaca dan iklim?"}],
-[{j:"Materi 1: Gaya & Energi",i:"Gaya: dorongan dan tarikan. Energi: panas, cahaya, gerak. Contoh: kipas bergerak karena listrik.",l:"Sebutkan 5 contoh gaya!"}],
-[{j:"Materi 1: Ekosistem & Rantai Makanan",i:"Rantai makanan: padi - tikus - ular - elang. Jika satu punah, yang lain terganggu. Jaga alam!",l:"Buat rantai makanan di sawah!"}],
-[{j:"Materi 1: Bumi & Tata Surya",i:"Bumi mengelilingi Matahari. Planet: Merkurius, Venus, Bumi, Mars, Jupiter, Saturnus, Uranus, Neptunus.",l:"Sebutkan 8 planet! | Kenapa terjadi siang-malam?"}]
-],
-"Bahasa Inggris":[
-[{j:"Materi 1: Greetings & Numbers 1-10",i:"Hello = Halo, Good morning = Selamat pagi. Numbers: one 1, two 2, three 3, four 4, five 5.",l:"Ucapkan: Hello, my name is ...! | Hitung 1-10 dalam Inggris!"}],
-[{j:"Materi 1: My Family",i:"Father = Ayah, Mother = Ibu, Brother = Saudara laki-laki, Sister = Saudara perempuan. This is my father.",l:"Perkenalkan keluargamu dalam Inggris!"}],
-[{j:"Materi 1: Colors & Animals",i:"Colors: red merah, blue biru, green hijau. Animals: cat kucing, dog anjing, bird burung.",l:"Sebutkan 5 warna dan 5 hewan dalam Inggris!"}],
-[{j:"Materi 1: Daily Activities",i:"I wake up at 5. I go to school. I study. I play. I sleep.",l:"Ceritakan kegiatanmu sehari-hari dalam Inggris!"}],
-[{j:"Materi 1: My School",i:"This is my school. My classroom is big. I have a bag, a book, a pencil.",l:"Sebutkan benda di kelas dalam Inggris!"}],
-[{j:"Materi 1: Simple Conversation",i:"What is your name? My name is ... How are you? I am fine, thank you.",l:"Praktek percakapan dengan teman!"}]
-],
-"PJOK":[
-[{j:"Materi 1: Gerak Dasar & Senam",i:"Gerak dasar: jalan, lari, lompat, lempar. Senam pagi membuat badan sehat dan semangat.",l:"Praktek jalan, lari, lompat!"}],
-[{j:"Materi 1: Permainan Bola Kecil",i:"Bola kasti: melempar dan menangkap bola. Harus kerjasama dan sportif.",l:"Praktek lempar tangkap bola!"}],
-[{j:"Materi 1: Kebugaran & Pola Hidup Sehat",i:"Makan sayur, minum air, tidur cukup, cuci tangan. Olahraga 30 menit setiap hari.",l:"Sebutkan 5 pola hidup sehat!"}],
-[{j:"Materi 1: Atletik - Lari & Lompat",i:"Lari jarak pendek: start jongkok, lari cepat. Lompat jauh: awalan, tolakan, mendarat.",l:"Praktek lari 20 meter!"}],
-[{j:"Materi 1: Sepak Bola Dasar",i:"Menendang, menggiring, mengoper. Bermain harus jujur, tidak curang.",l:"Praktek menggiring bola!"}],
-[{j:"Materi 1: Permainan & Sportivitas",i:"Menang tidak sombong, kalah tidak marah. Hormat lawan, hormat wasit.",l:"Apa itu sportivitas? Beri contoh!"}]
-],
-"Seni Budaya":[
-[{j:"Materi 1: Menggambar & Mewarnai",i:"Menggambar: garis, bentuk, warna. Warna primer: merah, kuning, biru. Gambar keluargaku.",l:"Gambar keluargamu dan warnai!"}],
-[{j:"Materi 1: Lagu Daerah",i:"Lagu daerah Kalimantan Selatan: Ampar-Ampar Pisang. Nyanyikan dengan riang.",l:"Nyanyikan Ampar-Ampar Pisang!"}],
-[{j:"Materi 1: Tari Daerah",i:"Tari daerah: Tari Radap Rahayu dari Banjar. Gerakan lembut, pakai selendang.",l:"Praktek gerakan dasar tari!"}],
-[{j:"Materi 1: Kerajinan Tangan",i:"Kerajinan dari barang bekas: botol jadi pot bunga. Jaga lingkungan dengan daur ulang.",l:"Buat pot bunga dari botol bekas!"}],
-[{j:"Materi 1: Musik & Alat Musik",i:"Alat musik: gitar, drum, suling, rebana. Bunyi tinggi-rendah, keras-lembut.",l:"Sebutkan 5 alat musik!"}],
-[{j:"Materi 1: Pementasan Seni",i:"Pementasan: drama, tari, musik. Harus percaya diri, latihan, kerjasama.",l:"Buat drama kecil bersama teman!"}]
-],
-"Tahsin":[
-[{j:"Materi 1: Huruf Hijaiyah Alif - Ya",i:"Anak mengenal huruf Hijaiyah Alif sampai Ya. Alif, Ba, Ta, Tsa, Jim, Ha, Kha.",l:"Sebutkan Alif, Ba, Ta!"}],
-[{j:"Materi 1: Makhraj Huruf",i:"Makhraj: tempat keluar huruf. Ha dari tenggorokan, Ba dari bibir, Qaf dari pangkal lidah.",l:"Praktek Ha, Kha, Ba!"}],
-[{j:"Materi 1: Harakat Fathah, Kasrah, Dammah",i:"Fathah bunyi a, Kasrah bunyi i, Dammah bunyi u. Contoh: Ba + Fathah = Ba.",l:"Baca: Ba Bi Bu!"}],
-[{j:"Materi 1: Hukum Nun Sukun & Tanwin",i:"Idzhar, Idgham, Iqlab, Ikhfa. Contoh Idzhar: Min - Ha.",l:"Sebutkan 4 hukum Nun Sukun!"}],
-[{j:"Materi 1: Mad Thabii & Mad Wajib",i:"Mad Thabii dibaca 2 harakat. Contoh: Qaa-la. Mad Wajib 4-5 harakat.",l:"Baca contoh Mad Thabii!"}],
-[{j:"Materi 1: Tajwid Lengkap & Tartil",i:"Tartil: baca pelan, jelas, benar tajwidnya. Latihan surah pendek dengan tartil.",l:"Baca Al-Fatihah dengan tartil!"}]
-],
-"Tahfiz":[
-[{j:"Materi 1: Hafalan Al-Fatihah",i:"Al-Fatihah ayat 1-7. Ummul Kitab, wajib dibaca dalam sholat.",l:"Setoran: Baca Al-Fatihah!"}],
-[{j:"Materi 1: Hafalan An-Nas & Al-Falaq",i:"An-Nas 6 ayat, Al-Falaq 5 ayat. Surah pelindung dari godaan setan.",l:"Setoran: Baca An-Nas dan Al-Falaq!"}],
-[{j:"Materi 1: Hafalan Al-Ikhlas & Al-Kautsar",i:"Al-Ikhlas 4 ayat tentang keesaan Allah. Al-Kautsar 3 ayat tentang nikmat.",l:"Setoran: Baca Al-Ikhlas!"}],
-[{j:"Materi 1: Hafalan Ad-Dhuha",i:"Ad-Dhuha 11 ayat. Allah tidak meninggalkan Nabi Muhammad.",l:"Setoran: Baca Ad-Dhuha!"}],
-[{j:"Materi 1: Hafalan Al-Insyirah & At-Tin",i:"Al-Insyirah 8 ayat, At-Tin 8 ayat. Bersama kesulitan ada kemudahan.",l:"Setoran: Baca Al-Insyirah!"}],
-[{j:"Materi 1: Hafalan Juz 30 Pilihan",i:"Target Kelas 6: hafal 10 surah pendek Juz 30 dengan lancar dan tartil.",l:"Setoran: Baca 3 surah pilihanmu!"}]
-],
-"Pramuka":[
-[{j:"Materi 1: Pramuka Siaga",i:"Praja Muda Karana. Pembina: Wahyu Aji & M. Husain. Siaga: rajin, hormat orang tua.",l:"Praktek Salam Pramuka!"}],
-[{j:"Materi 1: Dasa Darma & Tri Satya",i:"Dasa Darma 10 janji Pramuka. Tri Satya: setia kepada Tuhan, bangsa, dan sesama.",l:"Hafalkan Dasa Darma!"}],
-[{j:"Materi 1: Baris-Berbaris",i:"Sikap sempurna, hormat, berbaris rapi. Siap, grak! Hadap kanan, grak!",l:"Praktek baris-berbaris!"}],
-[{j:"Materi 1: Tali Temali & Simpul",i:"Simpul mati, simpul hidup, simpul pangkal. Tali berguna untuk kemah dan tolong menolong.",l:"Praktek simpul mati!"}],
-[{j:"Materi 1: P3K & Pertolongan Pertama",i:"P3K: obati luka kecil, balut, bawa ke UKS. Jangan panik, tolong teman.",l:"Praktek balut luka!"}],
-[{j:"Materi 1: Perkemahan & Jelajah",i:"Kemah: dirikan tenda, masak, api unggun, jaga kebersihan. Jelajah alam: kenali tanda jejak.",l:"Sebutkan perlengkapan kemah!"}]
-],
-"Bahasa Banjar (Muatan Lokal)":[
-[{j:"Materi 1: Sapaan Bahasa Banjar",i:"Selamat pagi = Salamat pagi. Apa kabar = Apa habar? Terima kasih = Tarima kasih. Ulun = saya, Pian = kamu.",l:"Ucapkan sapaan dalam Banjar!"}],
-[{j:"Materi 1: Angka & Warna Banjar",i:"Angka: asa 1, dua 2, talu 3. Warna: habang merah, hirang hitam, putih putih.",l:"Sebutkan angka 1-10 Banjar!"}],
-[{j:"Materi 1: Keluarga dalam Banjar",i:"Abah = Ayah, Mama = Ibu, Kai = Kakek, Nini = Nenek, Kaka = Kakak.",l:"Sebutkan keluargamu dalam Banjar!"}],
-[{j:"Materi 1: Makanan Khas Banjar",i:"Soto Banjar, Ketupat Kandangan, Ampar-Ampar Pisang. Makanan Banjar enak dan terkenal.",l:"Sebutkan 5 makanan Banjar!"}],
-[{j:"Materi 1: Pantun Banjar",i:"Pantun: 4 baris, bersajak. Contoh: Iwak haruan di dalam rawa, ...",l:"Buat pantun Banjar!"}],
-[{j:"Materi 1: Cerita Rakyat Banjar",i:"Legenda: Putri Junjung Buih, Datu Sanggul. Cerita rakyat mengajarkan kebaikan.",l:"Ceritakan legenda Banjar!"}]
-],
-"Informatika":[
-[{j:"Materi 1: Mengenal Komputer",i:"Komputer: monitor, keyboard, mouse, CPU. Komputer untuk belajar, menggambar, mengetik.",l:"Sebutkan bagian komputer!"}],
-[{j:"Materi 1: Mengetik & Mouse",i:"Mouse: klik, klik kanan, geser. Keyboard: huruf, angka, spasi, enter.",l:"Praktek mengetik namamu!"}],
-[{j:"Materi 1: Internet Sehat",i:"Internet untuk belajar. Jangan buka yang tidak baik. Jangan chat dengan orang tak dikenal.",l:"Sebutkan 3 aturan internet sehat!"}],
-[{j:"Materi 1: Membuat Dokumen",i:"Membuat dokumen di Word: ketik, simpan, cetak. Buat cerita pendek.",l:"Buat dokumen tentang sekolahku!"}],
-[{j:"Materi 1: Presentasi Sederhana",i:"Presentasi: slide, gambar, tulisan besar. Bicara jelas, tidak malu.",l:"Buat 3 slide tentang hobiku!"}],
-[{j:"Materi 1: Keamanan Digital",i:"Jangan sebarkan password, foto pribadi. Laporkan jika ada yang mengganggu di internet.",l:"Apa yang tidak boleh dibagikan di internet?"}]
-],
-"Bimbingan & Konseling":[
-[{j:"Materi 1: Kenali Diri & Perasaan",i:"Perasaan: senang, sedih, marah, takut. Kalau marah, tarik napas, cerita ke guru/orang tua.",l:"Ceritakan perasaanmu hari ini!"}],
-[{j:"Materi 1: Berteman yang Baik",i:"Teman baik: tidak mengejek, mau berbagi, menolong. Kalau bertengkar, minta maaf.",l:"Sebutkan 5 ciri teman baik!"}],
-[{j:"Materi 1: Percaya Diri",i:"Percaya diri: berani jawab, berani tampil, tidak takut salah. Salah itu biasa, belajar dari salah.",l:"Berani maju ke depan kelas!"}],
-[{j:"Materi 1: Disiplin & Tanggung Jawab",i:"Disiplin: datang tepat waktu, kerjakan PR, jaga barang sendiri. Tanggung jawab: berani akui kesalahan.",l:"Sebutkan 3 contoh disiplin!"}],
-[{j:"Materi 1: Menghadapi Bullying",i:"Bullying: mengejek, memukul, mengucilkan. Itu tidak boleh. Laporkan ke guru, jangan balas.",l:"Apa yang dilakukan jika dibully?"}],
-[{j:"Materi 1: Cita-cita & Masa Depan",i:"Cita-cita: dokter, guru, polisi, petani. Untuk capai cita-cita harus rajin belajar dan berdoa.",l:"Tulis cita-citamu dan caranya!"}]
-]
+var SEMUA_MAPEL=["Pendidikan Agama Islam (PAI)","Pendidikan Pancasila","Bahasa Indonesia","Matematika","IPAS","Bahasa Inggris","PJOK","Seni Budaya","Tahsin","Tahfiz","Pramuka","Bahasa Banjar (Muatan Lokal)","Informatika","Bimbingan & Konseling"];
+var SEMESTER_AKTIF="Ganjil";
+var MATERI_DATA={};
+// ===== KURIKULUM MERDEKA - JUDUL 16 MATERI PER SEMESTER =====
+// Setiap mapel punya 16 judul Ganjil + 16 judul Genap. Isi dibuat otomatis sesuai kelas, guru tinggal perbaiki dari HP.
+var JUDUL={
+"Pendidikan Agama Islam (PAI)":{
+Ganjil:["Aku Cinta Allah - Mengenal Allah Sang Pencipta","Rukun Islam - 5 Rukun Islam","Syahadat - 2 Kalimat Syahadat","Nabi Muhammad - Nabi Kita","Doa Sebelum & Sesudah Belajar","Doa Sebelum & Sesudah Makan","Huruf Hijaiyah Awal","Huruf Hijaiyah Lanjutan","Harakat Fathah - Bunyi A","Harakat Kasrah & Dammah - Bunyi I & U","Rukun Iman - 6 Rukun Iman","Aku Sayang Orang Tua & Guru","Jujur & Sopan - Akhlak Terpuji","Bersih Itu Sehat - Thaharah Sederhana","Surah Al-Fatihah Ayat 1-4","Surah Al-Fatihah Ayat 5-7 & Adab Berdoa"],
+Genap:["Rukun Iman Lanjutan - Malaikat Allah","Kitab-Kitab Allah","Rasul-Rasul Allah","Hari Akhir - Hari Kiamat","Qada & Qadar - Takdir Allah","Wudhu - Tata Cara Wudhu","Sholat - Gerakan Sholat","Sholat 5 Waktu - Jumlah Rakaat","Puasa Ramadhan - Latihan Puasa","Zakat & Sedekah - Berbagi","Surah An-Nas - Hafalan","Surah Al-Falaq - Hafalan","Surah Al-Ikhlas - Hafalan","Surah Al-Kautsar - Hafalan","Akhlak di Sekolah - Tolong Menolong","Ujian Praktik & Refleksi Semester Genap"]},
+"Pendidikan Pancasila":{
+Ganjil:["Aku Anak Indonesia - Garuda Pancasila","Sila 1 - Ketuhanan Yang Maha Esa","Sila 2 - Kemanusiaan yang Adil dan Beradab","Sila 3 - Persatuan Indonesia","Sila 4 - Musyawarah","Sila 5 - Keadilan Sosial","Aturan di Rumahku","Aturan di Sekolahku","Hak Ku Sebagai Anak","Kewajiban Ku Sebagai Anak","Aku Bangga Jadi Anak Banjar & Indonesia","Temanku Beragam - Saling Menghargai","Gotong Royong di Kelas","Hidup Rukun di Rumah & Sekolah","Bendera Merah Putih & Lagu Indonesia Raya","Aku Anak Disiplin"],
+Genap:["Lambang Negara Lebih Dalam","Simbol Sila Pancasila","Hak & Kewajiban di Kelas","Musyawarah Memilih Ketua Kelas","Gotong Royong Membersihkan Sekolah","Sopan Santun - Bahasa yang Baik","Menghargai Perbedaan Agama","Menghargai Perbedaan Suku","Cinta Lingkungan - Buang Sampah","Disiplin Waktu - Datang Tepat Waktu","Kerjasama - Kerja Kelompok","Tanggung Jawab - Piket Kelas","Bhinneka Tunggal Ika - Berbeda Tetap Satu","Pahlawan Indonesia - Ki Hajar Dewantara","NKRI - Negara Kesatuan Republik Indonesia","Refleksi Pancasila - Aku Anak Hebat"]},
+"Bahasa Indonesia":{
+Ganjil:["Salam & Perkenalan - Nama Ku","Huruf Vokal A I U E O","Huruf Konsonan Awal","Suku Kata Ba Bi Bu Be Bo","Suku Kata Ma Mi Mu & Pa Pi Pu","Membaca Kata 2 Suku Kata","Membaca Kata 3 Suku Kata","Menulis Huruf & Kata Sederhana","Kalimat Sederhana","Mendengarkan Cerita - Kancil","Benda di Sekitar Ku","Anggota Keluarga Ku","Warna & Bentuk","Lagu Anak & Puisi Sederhana","Tanda Baca - Titik & Huruf Kapital","Aku Bisa Bercerita"],
+Genap:["Membaca Kalimat Sederhana","Menulis Kalimat Sederhana","Cerita Fabel - Hewan yang Bicara","Teks Deskripsi - Sekolahku","Kata Sifat - Besar, Kecil, Indah","Kata Kerja - Makan, Minum, Belajar","Surat Pribadi untuk Teman","Percakapan - Bertanya & Menjawab","Dongeng Nusantara","Puisi Anak - Alamku","Membaca Nyaring","Menulis Cerita Pengalaman","Tanda Tanya & Tanda Seru","Pidato Kecil - Kebersihan","Membaca Pemahaman","Ujian Cerita & Membaca"]},
+"Matematika":{
+Ganjil:["Mengenal Angka 1-5","Mengenal Angka 6-10","Banyak & Sedikit","Urutan Bilangan 1-10","Bilangan Setelah & Sebelum","Penjumlahan dengan Benda Sampai 10","Penjumlahan dengan Garis Bilangan","Pengurangan dengan Benda Sampai 10","Soal Cerita Penjumlahan & Pengurangan","Bangun Datar - Lingkaran, Segitiga, Segi Empat","Panjang - Panjang & Pendek","Berat - Berat & Ringan","Waktu - Pagi, Siang, Malam","Uang - Mengenal Uang","Pola - Mengulang Pola Sederhana","Latihan Gabungan Ganjil"],
+Genap:["Bilangan 11-20","Bilangan 21-100 - Puluhan","Nilai Tempat - Puluhan & Satuan","Penjumlahan Sampai 100 Tanpa Menyimpan","Pengurangan Sampai 100","Perkalian sebagai Penjumlahan Berulang","Pembagian sebagai Pengurangan Berulang","Pecahan Sederhana - Setengah & Seperempat","Pengukuran Panjang - Cm & Meter","Bangun Ruang - Kubus & Balok","Data - Diagram Gambar","Waktu - Jam Tepat","Uang - Belanja & Kembalian","Soal Cerita Gabungan","KPK & FPB Pengantar","Latihan Gabungan Genap"]},
+"IPAS":{
+Ganjil:["Anggota Tubuh & Panca Indra","Hewan & Tumbuhan di Sekitar","Lingkungan & Cuaca","Gaya & Energi","Ekosistem & Rantai Makanan","Bumi & Tata Surya","Bagian Tumbuhan - Akar, Batang, Daun","Hewan - Makanan & Tempat Hidup","Air - Sumber Kehidupan","Tanah & Batu","Benda - Padat, Cair, Gas","Perubahan Wujud Benda","Cahaya & Bunyi","Matahari - Sumber Energi","Menjaga Lingkungan","Pengamatan Sederhana"],
+Genap:["Tumbuhan - Fotosintesis Sederhana","Hewan - Daur Hidup","Manusia - Pertumbuhan","Makanan Sehat - 4 Sehat 5 Sempurna","Gaya - Dorong & Tarik","Energi Listrik - Lampu & Kipas","Magnet - Menarik Besi","Bumi - Siang & Malam","Bulan & Bintang","Cuaca & Musim","Bencana Alam - Banjir & Gempa","Daur Air","Lingkungan Bersih - Sampah","Sawah & Kebun di Amuntai","Teknologi Sederhana","Proyek IPAS - Kebun Mini"]},
+"Bahasa Inggris":{
+Ganjil:["Greetings & Numbers 1-10","My Family","Colors & Animals","Daily Activities","My School","Simple Conversation","Alphabet A-Z","Numbers 11-20","My Body - Head, Eyes, Hands","Fruits - Apple, Banana, Mango","My Home - House & Room","Animals - Cat, Dog, Bird","Weather - Sunny, Rainy","I Like - I Like Mango","Days - Monday to Sunday","My Favorite Things"],
+Genap:["My Classroom - Table, Chair, Book","My Friends","Food & Drink - Rice, Water, Milk","Action Verbs - Run, Jump, Sing","Opposites - Big, Small, Hot, Cold","My Hobbies - Singing, Drawing","Transportation - Bus, Bike, Boat","Months - January to December","Seasons - Rainy & Dry","Simple Sentences - This is ...","Asking - What is This?","My Pets","My Village - Amuntai","Shopping - How Much?","Song & Story in English","English Show - Perkenalan"]},
+"PJOK":{
+Ganjil:["Gerak Dasar & Senam Pagi","Permainan Bola Kecil - Lempar Tangkap","Kebugaran & Pola Hidup Sehat","Atletik - Lari & Lompat","Sepak Bola Dasar","Permainan & Sportivitas","Gerak Jalan - Jalan & Lari","Gerak Lompat - Lompat Jauh","Gerak Lempar - Lempar Bola","Keseimbangan - Berdiri Satu Kaki","Senam Lantai Sederhana","Permainan Tradisional - Engklek","Kebersihan Diri - Cuci Tangan","Makanan Sehat untuk Atlet Cilik","Bermain Aman - Tidak Mendorong","Senam Bersama & Lomba Kecil"],
+Genap:["Atletik Lanjutan - Lari Estafet","Bola Voli Mini - Passing","Bola Basket Mini - Dribbling","Bulu Tangkis - Pukul Kok","Kasti - Memukul & Berlari","Rounders - Permainan Regu","Senam Irama - Gerak & Musik","Renang - Pengenalan Air","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up Sederhana","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas"]},
+"Seni Budaya":{
+Ganjil:["Menggambar & Mewarnai","Lagu Daerah - Ampar-Ampar Pisang","Tari Daerah - Radap Rahayu","Kerajinan Tangan - Daur Ulang","Musik & Alat Musik","Pementasan Seni","Warna - Primer & Campuran","Menggambar Keluargaku","Menggambar Pemandangan","Lagu Anak - Balonku","Tari Kreasi Anak","Anyaman Kertas","Kolase - Tempel Biji","Menyanyi Bersama","Drama Kecil","Pameran Karya Kelas"],
+Genap:["Seni Rupa - Bentuk & Garis","Melukis - Cat Air","Patung - Tanah Liat & Plastisin","Musik - Ritme & Ketukan","Alat Musik Tradisional - Gamelan & Rebana","Tari Nusantara - Tari Saman","Lagu Wajib - Garuda Pancasila","Kerajinan - Origami","Batik - Motif Sederhana","Teater - Dongeng","Fotografi - Foto Teman","Seni Digital - Menggambar di HP","Pentas Seni - Kelas","Apresiasi Karya Teman","Budaya Banjar - Sasirangan","Pentas Akhir Tahun"]},
+"Tahsin":{
+Ganjil:["Huruf Hijaiyah Alif - Ya","Makhraj Huruf - Tempat Keluar Huruf","Harakat Fathah, Kasrah, Dammah","Hukum Nun Sukun & Tanwin - Pengantar","Mad Thabii - Panjang 2 Harakat","Tajwid Lengkap & Tartil","Huruf Hijaiyah Sambung","Tanwin - Fathatain, Kasratain, Dammatain","Huruf Bertasydid","Hukum Mim Sukun","Qalqalah - Huruf Pantul","Mad Wajib & Mad Jaiz","Hukum Alif Lam","Surah Pendek dengan Tartil","Latihan Tartil Al-Fatihah","Setoran Tahsin Ganjil"],
+Genap:["Tartil Surah An-Nas","Tartil Surah Al-Falaq","Tartil Surah Al-Ikhlas","Tartil Surah Al-Kautsar","Tartil Surah Al-Asr","Tartil Surah Al-Fil","Tartil Surah Quraisy","Tartil Surah Al-Maun","Tartil Surah Al-Kafirun","Hukum Idgham & Iqlab","Hukum Ikhfa","Mad Lazim","Waqaf - Berhenti yang Benar","Adab Membaca Al-Qur'an","Tartil Juz 30 Pilihan","Ujian Tahsin - Tartil & Tajwid"]},
+"Tahfiz":{
+Ganjil:["Hafalan Al-Fatihah","Hafalan An-Nas & Al-Falaq","Hafalan Al-Ikhlas & Al-Kautsar","Hafalan Ad-Dhuha","Hafalan Al-Insyirah & At-Tin","Hafalan Juz 30 Pilihan","Hafalan Al-Asr","Hafalan Al-Fil","Hafalan Quraisy","Hafalan Al-Maun","Hafalan Al-Kafirun","Hafalan An-Nasr","Hafalan Al-Lahab","Hafalan Al-Qadr","Metode Hafalan - Talaqqi & Murajaah","Setoran Tahfiz Ganjil"],
+Genap:["Hafalan Al-Bayyinah Pilihan","Hafalan Az-Zalzalah","Hafalan Al-Adiyat","Hafalan Al-Qariah","Hafalan At-Takatsur","Hafalan Al-Humazah","Hafalan Al-Fajr Pilihan","Hafalan Al-Balad Pilihan","Hafalan Asy-Syams Pilihan","Hafalan Al-Lail Pilihan","Hafalan Al-Alaq Pilihan","Murajaah - Mengulang Hafalan Lama","Hafalan Doa Harian","Hafalan Hadis Pendek","Tasmi - Setoran di Depan Teman","Wisuda Tahfiz - Hafalan Juz 30"]},
+"Pramuka":{
+Ganjil:["Pramuka Siaga - Pengenalan","Dasa Darma & Tri Satya","Baris-Berbaris Dasar","Tali Temali & Simpul","P3K & Pertolongan Pertama","Perkemahan & Jelajah","Salam Pramuka & Tepuk Pramuka","Lagu Pramuka","Sandhi & Semaphore Pengantar","Kompas - Arah Mata Angin","Tanda Jejak","Pionering - Tongkat & Tali","Kemah - Mendirikan Tenda","Api Unggun","Kebersihan Kemah","Pelantikan Siaga"],
+Genap:["Pramuka Penggalang - Pengenalan","Dasa Darma Lebih Dalam","Baris-Berbaris Lanjutan","Simpul & Ikatan Lanjutan","P3K Lanjutan - Balut & Tandu","Jelajah Alam - Amuntai","Morse - Kode","Semaphore - Latihan","Peta & Kompas","Menaksir - Jarak & Tinggi","Memasak - Kompor & Api","Hiking - Jalan Jauh","Upacara Api Unggun","Bakti Masyarakat - Bersih Desa","Keterampilan - Menjahit & Memasak","Perkemahan Akhir Tahun"]},
+"Bahasa Banjar (Muatan Lokal)":{
+Ganjil:["Sapaan Bahasa Banjar","Angka & Warna Banjar","Keluarga dalam Banjar","Makanan Khas Banjar","Pantun Banjar","Cerita Rakyat Banjar","Benda di Rumah - Banjar","Hewan - Banjar","Tumbuhan - Banjar","Perkenalan - Banjar","Sopan Santun - Banjar","Lagu Banjar - Ampar-Ampar Pisang","Tari Banjar - Radap Rahayu","Rumah Banjar - Rumah Bubungan Tinggi","Pasar Terapung - Banjarmasin","Ujian Banjar Ganjil"],
+Genap:["Percakapan Sehari-hari Banjar","Cerita Lucu Banjar","Peribahasa Banjar","Makanan - Soto Banjar & Ketupat Kandangan","Pakaian Adat Banjar","Alat Musik Banjar - Panting","Tari Banjar Lanjutan","Legenda - Putri Junjung Buih","Legenda - Datu Sanggul","Kerajinan Banjar - Sasirangan","Sungai & Perahu - Banjar","Gotong Royong - Banjar","Hormat Orang Tua - Banjar","Pantun Balas - Banjar","Drama Banjar","Festival Budaya Banjar"]},
+"Informatika":{
+Ganjil:["Mengenal Komputer","Mengetik & Mouse","Internet Sehat","Membuat Dokumen","Presentasi Sederhana","Keamanan Digital","Bagian Komputer - Monitor, Keyboard, Mouse","Mengetik Nama & Kalimat","Menggambar di Komputer - Paint","Menyimpan File","Bermain Edukasi - Game Belajar","Video Belajar - YouTube Anak","Etika - Tidak Menyontek di Internet","Password - Rahasia","Foto - Mengambil Foto","Proyek - Dokumen Sekolahku"],
+Genap:["Internet - Mencari Informasi","Email & Chat yang Sopan","Membuat Cerita Digital","Membuat Slide - Hobiku","Keamanan - Tidak Sebar Foto Pribadi","Hoaks - Berita Bohong","Komputer - Hardware & Software","Mengetik Cepat","Membuat Poster - Canva Anak","Video - Merekam Cerita","Robot - Pengenalan Coding","Scratch Junior - Coding Anak","Presentasi - Sekolahku","Karya Digital - Kelas","Etika Digital - Komentar Baik","Pameran Digital"]},
+"Bimbingan & Konseling":{
+Ganjil:["Kenali Diri & Perasaan","Berteman yang Baik","Percaya Diri","Disiplin & Tanggung Jawab","Menghadapi Bullying","Cita-cita & Masa Depan","Perasaan - Senang, Sedih, Marah","Cara Mengungkapkan Perasaan","Teman - Berbagi & Menolong","Minta Maaf & Memaafkan","Berani Bertanya","Berani Tampil","Kebersihan Diri","Sopan Santun - Kata Tolong, Maaf, Terima Kasih","Mandiri - Pakai Baju Sendiri","Refleksi Diri Ganjil"],
+Genap:["Mengelola Marah - Tarik Napas","Mengatasi Takut - Berani Coba","Empati - Merasakan Teman","Kerjasama - Kerja Kelompok","Jujur - Tidak Menyontek","Tanggung Jawab - PR & Piket","Menghadapi Ejekan","Berani Bilang Tidak - Hal Buruk","Cita-cita - Dokter, Guru, Polisi","Belajar - Cara Belajar Efektif","Menghargai Diri - Aku Hebat","Menghargai Orang Lain","Keluarga - Sayang Orang Tua","Sekolah - Aku Cinta Sekolah","Persiapan Naik Kelas","Refleksi Diri Genap"]}
 };
+function buatIsi(mapel,kelas,sem,judul,idx){
+  var k=parseInt(kelas.replace("Kelas ",""));
+  var level=k<=2?"Kelas rendah - belajar sambil bermain, gambar, lagu, dan praktek. Guru bimbing dengan sabar.":k<=4?"Kelas tengah - sudah bisa membaca, menulis, dan diskusi kelompok. Latihan dengan contoh nyata di Amuntai.":"Kelas tinggi - sudah bisa berpikir kritis, presentasi, dan proyek kelompok. Latihan dengan soal HOTS sederhana.";
+  return "Materi "+(idx+1)+" - "+judul+" - "+mapel+" - "+kelas+" - Semester "+sem+" - Kurikulum Merdeka. "+level+" Tujuan: Anak memahami "+judul.toLowerCase()+" dan bisa mempraktekkannya di rumah dan di sekolah. Cara belajar: Guru menjelaskan dengan contoh nyata, anak mendengarkan, bertanya, mencoba, dan bercerita kembali. Contoh di SDN Kayakah: Guru memberi contoh dari kehidupan sehari-hari di Amuntai Selatan, anak meniru, lalu praktek bersama teman. Penilaian: Guru melihat keaktifan, keberanian menjawab, dan hasil kerja anak.";
+}
+function buatLatihan(mapel,kelas,sem,judul,idx){
+  return "Latihan "+(idx+1)+": 1) Sebutkan / ceritakan kembali tentang "+judul+"! 2) Beri 3 contoh "+judul+" dalam kehidupan sehari-hari! 3) Praktek bersama teman: "+judul+"! 4) Tulis / gambar 1 hal yang kamu pelajari hari ini! Guru bisa ganti latihan ini sesuai buku yang dipakai di Kayakah.";
+}
 function isiMateriDariTopik(){
-  ["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].forEach(function(k,idxKelas){
+  ["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].forEach(function(k){
     SEMUA_MAPEL.forEach(function(mp){
-      var key=k+"|"+mp;
-      var daftar = TOPIK[mp] ? TOPIK[mp][idxKelas] : null;
-      if(daftar){
-        MATERI_DATA[key]=daftar.map(function(d){ return {judul:d.j, isi:d.i, video:"", latihan:d.l}; });
-      } else {
-        MATERI_DATA[key]=[{judul:"Materi 1: "+mp+" - "+k,isi:"Materi "+mp+" untuk "+k+". Guru silakan tambah materi baru.",video:"",latihan:"Latihan 1: Guru isi disini."},{judul:"Materi 2: Lanjutan "+mp+" - "+k,isi:"Lanjutan "+mp+" untuk "+k+".",video:"",latihan:"Latihan 2: Guru isi disini."}];
-      }
+      ["Ganjil","Genap"].forEach(function(sem){
+        var key=k+"|"+mp+"|"+sem;
+        var daftar=JUDUL[mp]?JUDUL[mp][sem]:null;
+        if(daftar){ MATERI_DATA[key]=daftar.map(function(jud,idx){ return {judul:"Materi "+(idx+1)+": "+jud, isi:buatIsi(mp,k,sem,jud,idx), video:"", latihan:buatLatihan(mp,k,sem,jud,idx)}; }); }
+        else { MATERI_DATA[key]=[{judul:"Materi 1: "+mp+" - "+k,isi:"Materi "+mp+" untuk "+k+". Guru silakan tambah materi baru.",video:"",latihan:"Latihan 1: Guru isi disini."}]; }
+      });
     });
   });
 }
@@ -257,38 +200,20 @@ var PIN_DATA=JSON.parse(JSON.stringify(PIN_DEFAULT));
 function simpanPIN(){try{localStorage.setItem('PIN_KAYAKAH',JSON.stringify(PIN_DATA));}catch(e){}}
 try{var sp=localStorage.getItem('PIN_KAYAKAH'); if(sp){var pp=JSON.parse(sp); if(pp.kepsek) PIN_DATA.kepsek=pp.kepsek; if(pp.admin) PIN_DATA.admin=pp.admin; if(pp.guru) for(var k in pp.guru) PIN_DATA.guru[k]=pp.guru[k];}}catch(e){}
 var materiSudahDimuat=false;
-function idDokumen(kelas,mapel){ return (kelas+"_"+mapel).replace(/[^a-zA-Z0-9]/g,'_'); }
-function simpanMateriKeFirebase(kelas,mapel){
+function idDokumen(kelas,mapel,sem){ return (kelas+"_"+mapel+"_"+sem).replace(/[^a-zA-Z0-9]/g,'_'); }
+function simpanMateriKeFirebase(kelas,mapel,sem){
   if(!window._fb) return;
-  try{
-    var key=kelas+"|"+mapel;
-    var docId=idDokumen(kelas,mapel);
-    window._fb.db.collection('materi_belajar').doc(docId).set({kelas:kelas,mapel:mapel,list:MATERI_DATA[key],waktu:Date.now()});
-  }catch(e){}
+  try{ var key=kelas+"|"+mapel+"|"+sem; var docId=idDokumen(kelas,mapel,sem); window._fb.db.collection('materi_belajar').doc(docId).set({kelas:kelas,mapel:mapel,semester:sem,list:MATERI_DATA[key],waktu:Date.now()}); }catch(e){}
 }
-function simpanMateri(kelas,mapel){
-  try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}
-  if(kelas && mapel) simpanMateriKeFirebase(kelas,mapel);
+function simpanMateri(kelas,mapel,sem){
+  try{localStorage.setItem('MATERI_KAYAKAH_FINAL_V2',JSON.stringify(MATERI_DATA));}catch(e){}
+  if(kelas && mapel) simpanMateriKeFirebase(kelas,mapel,sem||SEMESTER_AKTIF);
 }
 function muatMateriDariFirebase(){
   if(!window._fb){ setTimeout(muatMateriDariFirebase,500); return; }
-  try{
-    window._fb.db.collection('materi_belajar').onSnapshot(function(snap){
-      var adaBaru=false;
-      snap.forEach(function(d){
-        var v=d.data(); if(!v || !v.kelas || !v.mapel) return;
-        var key=v.kelas+"|"+v.mapel;
-        MATERI_DATA[key]=v.list||[];
-        adaBaru=true;
-      });
-      if(adaBaru){
-        try{localStorage.setItem('MATERI_KAYAKAH_FINAL',JSON.stringify(MATERI_DATA));}catch(e){}
-      }
-      materiSudahDimuat=true;
-    }, function(err){});
-  }catch(e){}
+  try{ window._fb.db.collection('materi_belajar').onSnapshot(function(snap){ var adaBaru=false; snap.forEach(function(d){ var v=d.data(); if(!v || !v.kelas || !v.mapel) return; var sem=v.semester||"Ganjil"; var key=v.kelas+"|"+v.mapel+"|"+sem; MATERI_DATA[key]=v.list||[]; adaBaru=true; }); if(adaBaru){ try{localStorage.setItem('MATERI_KAYAKAH_FINAL_V2',JSON.stringify(MATERI_DATA));}catch(e){} } materiSudahDimuat=true; }, function(err){}); }catch(e){}
 }
-try{var s5=localStorage.getItem('MATERI_KAYAKAH_FINAL'); if(s5){var md=JSON.parse(s5); for(var mk in md) MATERI_DATA[mk]=md[mk];}}catch(e){}
+try{var s5=localStorage.getItem('MATERI_KAYAKAH_FINAL_V2'); if(s5){var md=JSON.parse(s5); for(var mk in md) MATERI_DATA[mk]=md[mk];}}catch(e){}
 var loginSaatIni=null;
 function toggleLaci(){document.getElementById('laciPIN').classList.toggle('buka');}
 function cekPIN(){
@@ -322,54 +247,24 @@ function renderListPINGuru(){
 function simpanSiswaGuruKeFirebase(){
   try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA)); localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){}
   if(!window._fb) return;
-  try{
-    window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA, waktu:Date.now()});
-    window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA, pin:PIN_DATA, waktu:Date.now()});
-  }catch(e){}
+  try{ window._fb.db.collection('data_belajar').doc('siswa').set({data:DATA, waktu:Date.now()}); window._fb.db.collection('data_belajar').doc('guru').set({data:GURU_DATA, pin:PIN_DATA, waktu:Date.now()}); }catch(e){}
 }
 function muatSiswaGuruDariFirebase(){
   try{ var s=localStorage.getItem('SISWA_KAYAKAH'); if(s){var d=JSON.parse(s); for(var k in d) DATA[k]=d[k];} var g=localStorage.getItem('GURU_KAYAKAH_BELAJAR'); if(g){var gg=JSON.parse(g); if(gg.length>0) GURU_DATA=gg;} }catch(e){}
   if(!window._fb) return;
-  try{
-    window._fb.db.collection('data_belajar').doc('siswa').onSnapshot(function(doc){ if(doc.exists){ var v=doc.data(); if(v.data){ DATA=v.data; try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA));}catch(e){} updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); } } });
-    window._fb.db.collection('data_belajar').doc('guru').onSnapshot(function(doc){ if(doc.exists){ var v=doc.data(); if(v.data && v.data.length>0){ GURU_DATA=v.data; if(v.pin){ PIN_DATA=v.pin; simpanPIN(); } try{localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){} updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); if(loginSaatIni && loginSaatIni.peran==='kepsek') renderListPINGuru(); } } });
-  }catch(e){}
+  try{ window._fb.db.collection('data_belajar').doc('siswa').onSnapshot(function(doc){ if(doc.exists){ var v=doc.data(); if(v.data){ DATA=v.data; try{localStorage.setItem('SISWA_KAYAKAH',JSON.stringify(DATA));}catch(e){} updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); } } }); window._fb.db.collection('data_belajar').doc('guru').onSnapshot(function(doc){ if(doc.exists){ var v=doc.data(); if(v.data && v.data.length>0){ GURU_DATA=v.data; if(v.pin){ PIN_DATA=v.pin; simpanPIN(); } try{localStorage.setItem('GURU_KAYAKAH_BELAJAR',JSON.stringify(GURU_DATA));}catch(e){} updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); if(loginSaatIni && loginSaatIni.peran==='kepsek') renderListPINGuru(); } } }); }catch(e){}
 }
 function wajibKepsek(){ if(!loginSaatIni || loginSaatIni.peran!=='kepsek'){ alert('🔒 Hanya Kepala Sekolah yang bisa tambah / hapus murid & guru!'); return false; } return true; }
 function tambahSiswaKepsek(){
-  if(!wajibKepsek()) return;
-  var nama=document.getElementById('namaSiswaBaru').value.trim(); var kelas=document.getElementById('kelasSiswaBaru').value;
-  if(!nama) return alert('Isi Nama Murid dulu, Pak!');
-  if(!DATA[kelas]) DATA[kelas]=[];
-  var sudah=DATA[kelas].indexOf(nama)!==-1; if(sudah) return alert('Nama sudah ada di '+kelas+'!');
-  DATA[kelas].push(nama); simpanSiswaGuruKeFirebase(); updateJumlah(); renderSiswa(); renderKelas(); document.getElementById('namaSiswaBaru').value=''; document.getElementById('pesanSiswa').innerHTML='✅ Murid '+nama+' berhasil ditambah ke '+kelas+'! Tersimpan di Firebase!';
-  alert('BERHASIL! Murid: '+nama+' - '+kelas+' - Tersimpan di Firebase!');
+  if(!wajibKepsek()) return; var nama=document.getElementById('namaSiswaBaru').value.trim(); var kelas=document.getElementById('kelasSiswaBaru').value; if(!nama) return alert('Isi Nama Murid dulu, Pak!'); if(!DATA[kelas]) DATA[kelas]=[]; var sudah=DATA[kelas].indexOf(nama)!==-1; if(sudah) return alert('Nama sudah ada di '+kelas+'!'); DATA[kelas].push(nama); simpanSiswaGuruKeFirebase(); updateJumlah(); renderSiswa(); renderKelas(); document.getElementById('namaSiswaBaru').value=''; document.getElementById('pesanSiswa').innerHTML='✅ Murid '+nama+' berhasil ditambah ke '+kelas+'! Tersimpan di Firebase!'; alert('BERHASIL! Murid: '+nama+' - '+kelas+' - Tersimpan di Firebase!');
 }
-function hapusSiswa(kelas,idx){
-  if(!wajibKepsek()) return; var nama=DATA[kelas][idx]; if(!confirm('Hapus murid '+nama+' dari '+kelas+'?')) return;
-  DATA[kelas].splice(idx,1); simpanSiswaGuruKeFirebase(); updateJumlah(); renderSiswa(); renderKelas(); alert('Murid '+nama+' sudah dihapus dari '+kelas+'!');
-}
+function hapusSiswa(kelas,idx){ if(!wajibKepsek()) return; var nama=DATA[kelas][idx]; if(!confirm('Hapus murid '+nama+' dari '+kelas+'?')) return; DATA[kelas].splice(idx,1); simpanSiswaGuruKeFirebase(); updateJumlah(); renderSiswa(); renderKelas(); alert('Murid '+nama+' sudah dihapus dari '+kelas+'!'); }
 function hapusSiswaDariKelas(kelas,nama){ var idx=DATA[kelas].indexOf(nama); if(idx===-1) return; hapusSiswa(kelas,idx); }
 function tambahGuruKepsek(){
-  if(!wajibKepsek()) return;
-  var nama=document.getElementById('namaGuruBaru').value.trim(); var jab=document.getElementById('jabatanGuruBaru').value.trim()||'Guru'; var kelas=document.getElementById('kelasGuruBaru').value.trim()||'Guru'; var mapel=document.getElementById('mapelGuruBaru').value.trim()||'Semua Mapel'; var pin=document.getElementById('pinGuruBaru').value.trim();
-  if(!nama||!pin) return alert('Isi Nama & PIN dulu, Pak!');
-  if(!cek6(pin)) return alert('PIN harus 6 angka! Contoh: 567890');
-  var ada=GURU_DATA.some(function(g){return g.nama===nama;}); if(ada) return alert('Nama guru sudah ada!');
-  if(PIN_DATA.guru[nama]) return alert('Nama sudah ada di PIN!');
-  GURU_DATA.push({nama:nama,jabatan:jab,kelas:kelas,mapel:mapel}); PIN_DATA.guru[nama]=pin; simpanPIN(); simpanSiswaGuruKeFirebase(); updateJumlah(); renderGuru(); renderListPINGuru();
-  document.getElementById('namaGuruBaru').value=''; document.getElementById('jabatanGuruBaru').value=''; document.getElementById('kelasGuruBaru').value=''; document.getElementById('mapelGuruBaru').value=''; document.getElementById('pinGuruBaru').value=''; document.getElementById('pesanGuru').innerHTML='✅ Guru/Admin '+nama+' berhasil ditambah! PIN: '+pin;
-  alert('BERHASIL! Guru/Admin: '+nama+' PIN: '+pin+' - Tersimpan di Firebase!');
+  if(!wajibKepsek()) return; var nama=document.getElementById('namaGuruBaru').value.trim(); var jab=document.getElementById('jabatanGuruBaru').value.trim()||'Guru'; var kelas=document.getElementById('kelasGuruBaru').value.trim()||'Guru'; var mapel=document.getElementById('mapelGuruBaru').value.trim()||'Semua Mapel'; var pin=document.getElementById('pinGuruBaru').value.trim(); if(!nama||!pin) return alert('Isi Nama & PIN dulu, Pak!'); if(!cek6(pin)) return alert('PIN harus 6 angka! Contoh: 567890'); var ada=GURU_DATA.some(function(g){return g.nama===nama;}); if(ada) return alert('Nama guru sudah ada!'); if(PIN_DATA.guru[nama]) return alert('Nama sudah ada di PIN!'); GURU_DATA.push({nama:nama,jabatan:jab,kelas:kelas,mapel:mapel}); PIN_DATA.guru[nama]=pin; simpanPIN(); simpanSiswaGuruKeFirebase(); updateJumlah(); renderGuru(); renderListPINGuru(); document.getElementById('namaGuruBaru').value=''; document.getElementById('jabatanGuruBaru').value=''; document.getElementById('kelasGuruBaru').value=''; document.getElementById('mapelGuruBaru').value=''; document.getElementById('pinGuruBaru').value=''; document.getElementById('pesanGuru').innerHTML='✅ Guru/Admin '+nama+' berhasil ditambah! PIN: '+pin; alert('BERHASIL! Guru/Admin: '+nama+' PIN: '+pin+' - Tersimpan di Firebase!');
 }
-function hapusGuru(idx){
-  if(!wajibKepsek()) return; var g=GURU_DATA[idx]; if(!g) return; if(g.nama==='Wahyu Aji, S.Pd.Jas') return alert('Kepala Sekolah tidak bisa dihapus!');
-  if(!confirm('Hapus guru/admin '+g.nama+'? PIN-nya juga akan hilang.')) return;
-  delete PIN_DATA.guru[g.nama]; GURU_DATA.splice(idx,1); simpanPIN(); simpanSiswaGuruKeFirebase(); updateJumlah(); renderGuru(); renderListPINGuru(); alert('Guru/Admin '+g.nama+' sudah dihapus!');
-}
-function resetSemuaPINGuru(){
-  if(!wajibKepsek()) return; if(!confirm('Reset semua PIN guru jadi 123456? PIN Kepsek tetap 197601.')) return;
-  for(var k in PIN_DATA.guru) PIN_DATA.guru[k]='123456'; simpanPIN(); simpanSiswaGuruKeFirebase(); renderListPINGuru(); alert('Semua PIN guru jadi 123456! Tersimpan di Firebase!');
-}
+function hapusGuru(idx){ if(!wajibKepsek()) return; var g=GURU_DATA[idx]; if(!g) return; if(g.nama==='Wahyu Aji, S.Pd.Jas') return alert('Kepala Sekolah tidak bisa dihapus!'); if(!confirm('Hapus guru/admin '+g.nama+'? PIN-nya juga akan hilang.')) return; delete PIN_DATA.guru[g.nama]; GURU_DATA.splice(idx,1); simpanPIN(); simpanSiswaGuruKeFirebase(); updateJumlah(); renderGuru(); renderListPINGuru(); alert('Guru/Admin '+g.nama+' sudah dihapus!'); }
+function resetSemuaPINGuru(){ if(!wajibKepsek()) return; if(!confirm('Reset semua PIN guru jadi 123456? PIN Kepsek tetap 197601.')) return; for(var k in PIN_DATA.guru) PIN_DATA.guru[k]='123456'; simpanPIN(); simpanSiswaGuruKeFirebase(); renderListPINGuru(); alert('Semua PIN guru jadi 123456! Tersimpan di Firebase!'); }
 function bisaEdit(kelas,mapel){
   if(!loginSaatIni) return false; if(loginSaatIni.peran==='kepsek' || loginSaatIni.peran==='admin') return true;
   if(loginSaatIni.peran==='guru'){ var g=loginSaatIni.nama; if(g==='Radinah, S.Pd' && kelas==='Kelas 1') return true; if(g==='Siti Nuriyah, S.Pd.SD' && kelas==='Kelas 2') return true; if(g==='Pathul Jannah, S.Pd.I' && kelas==='Kelas 3') return true; if(g==='Norsalim, S.Pd' && kelas==='Kelas 4') return true; if(g==='Syahruni, S.Pd.SD' && kelas==='Kelas 5') return true; if(g==='Samsul Bahri, S.Pd' && kelas==='Kelas 6') return true; if((g==='Syahida Norpah, S.Pd' || g==='Jannah, S.Pd') && (mapel==='Tahsin' || mapel==='Tahfiz')) return true; if(g==='Pathul Jannah, S.Pd.I' && mapel==='Pendidikan Agama Islam (PAI)') return true; return false; } return false;
@@ -380,29 +275,35 @@ function tampil(id,btn){document.querySelectorAll('.card').forEach(c=>c.style.di
 function tampilNamaSiswa(idKelas,btn){var num=idKelas.replace('kelas',''); document.getElementById('boxNamaKelas'+num).style.display='block'; document.getElementById('boxMapelKelas'+num).style.display='none'; if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');}}
 function tampilMapel(idKelas,btn){var num=idKelas.replace('kelas',''); document.getElementById('boxNamaKelas'+num).style.display='none'; document.getElementById('boxMapelKelas'+num).style.display='block'; if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');} renderMapel();}
 function renderKelas(){for(var i=1;i<=6;i++){var namaKelas='Kelas '+i; var listEl=document.getElementById('listKelas'+i); if(!listEl) continue; listEl.innerHTML=''; DATA[namaKelas].forEach(function(nama,idx){var d=document.createElement('div'); d.className='anak-kelas'; var btnHapus=(loginSaatIni && loginSaatIni.peran==='kepsek')?' <button class="btn-hapus" onclick="hapusSiswa(\''+namaKelas+'\','+idx+')">🗑️ Hapus</button>':''; d.innerHTML='🧒 '+(idx+1)+'. '+nama+' <span style="color:#888;font-weight:normal">- '+namaKelas+'</span>'+btnHapus; listEl.appendChild(d);});}}
-function renderMapel(){for(let i=1;i<=6;i++){let namaKelas='Kelas '+i; let listEl=document.getElementById('listMapelKelas'+i); if(!listEl) continue; listEl.innerHTML=''; MAPEL_DATA[namaKelas].forEach(function(grup){let h=document.createElement('div'); h.className='kategori-mapel'; h.innerText=grup.kat; listEl.appendChild(h); grup.list.forEach(function(m){let d=document.createElement('div'); d.className='mapel-kelas'+(m.tipe?' '+m.tipe:''); d.innerHTML=m.icon+' '+m.nama+' <span style="background:#22C55E;color:white;padding:3px 8px;border-radius:12px;font-size:11px;float:right">👆 KLIK UNTUK BUKA</span><small>👩‍🏫 Guru / Pembimbing: '+m.guru+' | 👆 Klik untuk lihat Materi + Video + Latihan</small>'; d.onclick=function(){tampilDetailMapel(namaKelas,m.nama);}; listEl.appendChild(d);});});}}
+function renderMapel(){for(let i=1;i<=6;i++){let namaKelas='Kelas '+i; let listEl=document.getElementById('listMapelKelas'+i); if(!listEl) continue; listEl.innerHTML=''; MAPEL_DATA[namaKelas].forEach(function(grup){let h=document.createElement('div'); h.className='kategori-mapel'; h.innerText=grup.kat; listEl.appendChild(h); grup.list.forEach(function(m){let d=document.createElement('div'); d.className='mapel-kelas'+(m.tipe?' '+m.tipe:''); d.innerHTML=m.icon+' '+m.nama+' <span style="background:#22C55E;color:white;padding:3px 8px;border-radius:12px;font-size:11px;float:right">👆 KLIK UNTUK BUKA</span><small>👩‍🏫 Guru / Pembimbing: '+m.guru+' | 👆 Klik untuk lihat Materi Ganjil & Genap + Video + Latihan</small>'; d.onclick=function(){tampilDetailMapel(namaKelas,m.nama);}; listEl.appendChild(d);});});}}
+function gantiSemester(sem,kelas,mapel){ SEMESTER_AKTIF=sem; tampilDetailMapel(kelas,mapel); }
 function tampilDetailMapel(kelas,mapel){
-  var key=kelas+"|"+mapel; var list=MATERI_DATA[key]||[]; var edit=bisaEdit(kelas,mapel);
+  var key=kelas+"|"+mapel+"|"+SEMESTER_AKTIF; var list=MATERI_DATA[key]||[]; var edit=bisaEdit(kelas,mapel);
   var html='<h2 style="margin-top:0;color:#7C3AED">📚 '+mapel+' - '+kelas+' ✅ TERBUKA</h2>';
-  if(loginSaatIni && edit) html+='<p style="background:#D1FAE5;padding:10px;border-radius:12px;font-weight:bold;color:#059669">✅ Mode '+loginSaatIni.peran.toUpperCase()+' - '+loginSaatIni.nama+' - Pian bisa Tambah & Hapus Materi disini.</p>';
+  html+='<div style="background:#EDE9FE;border:3px solid #7C3AED;padding:12px;border-radius:16px;text-align:center;margin-bottom:10px"><b style="color:#7C3AED">📅 PILIH SEMESTER:</b><br>';
+  html+='<button class="btn-sem ganjil '+(SEMESTER_AKTIF==="Ganjil"?"aktif":"")+'" onclick="gantiSemester(\'Ganjil\',\''+kelas+'\',\''+mapel.replace(/\'/g,"")+'\')">🍂 Semester Ganjil - 16 Materi</button>';
+  html+='<button class="btn-sem genap '+(SEMESTER_AKTIF==="Genap"?"aktif":"")+'" onclick="gantiSemester(\'Genap\',\''+kelas+'\',\''+mapel.replace(/\'/g,"")+'\')">🌸 Semester Genap - 16 Materi</button>';
+  html+='<div style="font-size:12px;color:#666;margin-top:6px">Sekarang: <b>Semester '+SEMESTER_AKTIF+'</b> - Guru bisa ganti semester kapan saja.</div></div>';
+  if(loginSaatIni && edit) html+='<p style="background:#D1FAE5;padding:10px;border-radius:12px;font-weight:bold;color:#059669">✅ Mode '+loginSaatIni.peran.toUpperCase()+' - '+loginSaatIni.nama+' - Pian bisa Tambah & Hapus Materi disini. Materi yang Pian tambah hanya untuk Semester '+SEMESTER_AKTIF+' ini.</p>';
   else if(loginSaatIni && !edit) html+='<p style="background:#FEE2E2;padding:10px;border-radius:12px;font-weight:bold;color:#991B1B">🔒 Mode GURU - '+loginSaatIni.nama+' - Pian cuma bisa lihat mapel ini.</p>';
+  else html+='<p style="background:#FFF3C4;padding:10px;border-radius:12px;font-weight:bold;color:#92400E">👀 Mode Pengunjung - Cuma bisa lihat. Guru login PIN untuk tambah materi.</p>';
   list.forEach(function(m,idx){
     html+='<div style="background:#FFFBEB;border:3px solid #FFA502;padding:12px;border-radius:16px;margin:10px 0"><h4 style="margin:0;color:#7C3AED">'+m.judul+'</h4>';
     html+='<p><b>📖 Materi:</b><br>'+m.isi+'</p>';
-    if(m.video) html+='<p><b>🎥 Video:</b><br><a href="'+m.video+'" target="_blank" style="color:#1E90FF;font-weight:bold">▶️ Klik untuk Tonton Video</a></p>'; else html+='<p><b>🎥 Video:</b> Belum ada video.</p>';
+    if(m.video) html+='<p><b>🎥 Video:</b><br><a href="'+m.video+'" target="_blank" style="color:#1E90FF;font-weight:bold">▶️ Klik untuk Tonton Video</a></p>'; else html+='<p><b>🎥 Video:</b> Belum ada video. Guru bisa tambah link YouTube.</p>';
     html+='<p><b>📝 Latihan / Setoran:</b><br>'+(m.latihan||'-')+'</p>';
     if(edit) html+='<button onclick="hapusMateriPopup(\''+kelas+'\',\''+mapel.replace(/\'/g,'')+'\','+idx+')" style="background:#FF4757;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:bold;cursor:pointer">🗑️ Hapus Materi Ini</button>';
     html+='</div>';
   });
-  if(edit) html+='<div style="background:#ECFDF5;border:3px solid #059669;padding:14px;border-radius:16px;margin-top:10px"><h4 style="margin:0;color:#059669">➕ Tambah Materi Baru - Khusus Guru / Kepsek / Admin</h4><input id="popupJudul" placeholder="Judul Materi"><textarea id="popupIsi" placeholder="Isi Materi..."></textarea><input id="popupVideo" placeholder="Link Video YouTube (boleh kosong)"><input id="popupLatihan" placeholder="Latihan / Setoran"><button onclick="tambahMateriPopup(\''+kelas+'\',\''+mapel.replace(/\'/g,'')+'\')" style="background:#059669;color:white;border:none;padding:12px;border-radius:20px;width:100%;font-weight:bold;margin-top:8px;cursor:pointer">💾 Simpan Materi Baru</button></div>';
+  if(edit) html+='<div style="background:#ECFDF5;border:3px solid #059669;padding:14px;border-radius:16px;margin-top:10px"><h4 style="margin:0;color:#059669">➕ Tambah Materi Baru - Semester '+SEMESTER_AKTIF+' - Khusus Guru / Kepsek / Admin</h4><input id="popupJudul" placeholder="Judul Materi"><textarea id="popupIsi" placeholder="Isi Materi..."></textarea><input id="popupVideo" placeholder="Link Video YouTube (boleh kosong)"><input id="popupLatihan" placeholder="Latihan / Setoran"><button onclick="tambahMateriPopup(\''+kelas+'\',\''+mapel.replace(/\'/g,'')+'\')" style="background:#059669;color:white;border:none;padding:12px;border-radius:20px;width:100%;font-weight:bold;margin-top:8px;cursor:pointer">💾 Simpan Materi Baru - Semester '+SEMESTER_AKTIF+'</button></div>';
   document.getElementById('isiPopupMapel').innerHTML=html; document.getElementById('popupMapel').style.display='block'; document.getElementById('popupMapel').scrollTop=0;
 }
 function tambahMateriPopup(kelas,mapel){
   if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa tambah di mapel ini. Cuma Guru kelasnya / Kepsek / Admin yang bisa.');
   var judul=document.getElementById('popupJudul').value.trim(); var isi=document.getElementById('popupIsi').value.trim(); var video=document.getElementById('popupVideo').value.trim(); var latihan=document.getElementById('popupLatihan').value.trim();
-  if(!judul||!isi) return alert('Isi Judul dan Isi dulu!'); var key=kelas+"|"+mapel; if(!MATERI_DATA[key]) MATERI_DATA[key]=[]; MATERI_DATA[key].push({judul:judul,isi:isi,video:video,latihan:latihan}); simpanMateri(kelas,mapel); alert('Berhasil! Materi baru sudah muncul di semua HP! 🎉'); tampilDetailMapel(kelas,mapel);
+  if(!judul||!isi) return alert('Isi Judul dan Isi dulu!'); var key=kelas+"|"+mapel+"|"+SEMESTER_AKTIF; if(!MATERI_DATA[key]) MATERI_DATA[key]=[]; MATERI_DATA[key].push({judul:judul,isi:isi,video:video,latihan:latihan}); simpanMateri(kelas,mapel,SEMESTER_AKTIF); alert('Berhasil! Materi baru sudah muncul di semua HP! 🎉 Semester '+SEMESTER_AKTIF); tampilDetailMapel(kelas,mapel);
 }
-function hapusMateriPopup(kelas,mapel,idx){ if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa hapus di mapel ini.'); if(!confirm('Hapus materi ini? Yang tidak perlu saja yang dihapus ya.')) return; var key=kelas+"|"+mapel; MATERI_DATA[key].splice(idx,1); simpanMateri(kelas,mapel); tampilDetailMapel(kelas,mapel); }
+function hapusMateriPopup(kelas,mapel,idx){ if(!bisaEdit(kelas,mapel)) return alert('Maaf, Pian tidak bisa hapus di mapel ini.'); if(!confirm('Hapus materi ini? Yang tidak perlu saja yang dihapus ya.')) return; var key=kelas+"|"+mapel+"|"+SEMESTER_AKTIF; MATERI_DATA[key].splice(idx,1); simpanMateri(kelas,mapel,SEMESTER_AKTIF); tampilDetailMapel(kelas,mapel); }
 function cariDiKelas(input,listId){var q=input.value.toLowerCase(); document.querySelectorAll('#'+listId+' .anak-kelas').forEach(function(el){el.style.display=el.innerText.toLowerCase().includes(q)?'block':'none';});}
 function renderSiswa(){var div=document.getElementById('listSiswa'); div.innerHTML=''; Object.keys(DATA).forEach(k=>{DATA[k].forEach((n,idx)=>{var d=document.createElement('div'); d.className='siswa'; var btnHapus=(loginSaatIni && loginSaatIni.peran==='kepsek')?' <button class="btn-hapus" onclick="hapusSiswa(\''+k+'\','+idx+')">🗑️ Hapus Murid Ini</button>':''; d.innerHTML='<b>🧒 '+n+'</b><br>Kelas: '+k+btnHapus; div.appendChild(d);});});}
 function renderGuru(){var div=document.getElementById('listGuru'); div.innerHTML=''; GURU_DATA.forEach(function(g,idx){var d=document.createElement('div'); d.className='guru'; var pinTampil=(loginSaatIni && loginSaatIni.peran==='kepsek' && PIN_DATA.guru[g.nama])?' <br>🔑 PIN: <b style="color:#DC2626">'+PIN_DATA.guru[g.nama]+'</b>':''; var btnHapus=(loginSaatIni && loginSaatIni.peran==='kepsek' && g.nama!=='Wahyu Aji, S.Pd.Jas')?' <br><button class="btn-hapus" onclick="hapusGuru('+idx+')">🗑️ Hapus Guru / Admin Ini</button>':''; d.innerHTML='<b>👩‍🏫 '+g.nama+'</b><br>Jabatan: '+g.jabatan+' | Kelas: <b>'+g.kelas+'</b><br>Mapel: '+g.mapel+pinTampil+btnHapus; div.appendChild(d);});}
