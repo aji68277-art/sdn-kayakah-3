@@ -56,17 +56,15 @@ input{padding:12px;font-size:16px;border-radius:15px;border:3px solid #f59e0b;wi
 #soalLogikaBox{background:linear-gradient(90deg,#fef3c7,#e0e7ff,#fbcfe8);border:3px solid #f59e0b;border-radius:16px;padding:10px;margin:8px 0}
 #soalLogika{font-size:19px;font-weight:900;color:#4a044e;line-height:1.4}
 .tombolLogika{width:90%;padding:12px;margin:4px;font-size:16px;border:3px solid #facc15;border-radius:14px;cursor:pointer;font-weight:900;background:white;text-align:left}
-/* ===== KHUSUS 500 - NAMA BEDA BIAR KADA TABRAKAN ===== */
 .arena500{display:flex;gap:8px;margin-top:12px}.kolom500{flex:1;display:flex;flex-direction:column;gap:7px}.judulKolom500{font-weight:900;padding:8px;border-radius:14px;color:white;font-size:13px}.kataBtn500{padding:11px 6px;border-radius:14px;font-weight:900;cursor:pointer;font-size:14px;border:3px solid white;box-shadow:0 4px 0 rgba(0,0,0,.2);background:#fefce8;color:#4a044e}.kataBtn500.pilih500{background:#facc15!important;outline:3px solid #111;transform:scale(1.06)}.kataBtn500.salah500{background:#fecaca!important}.kataBtn500.betul500{opacity:0;transform:scale(.5);transition:.3s}.centang500{font-size:60px;display:none}
 select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th{background:#7c3aed;color:white;padding:8px}td{padding:7px;border-bottom:2px solid #fde68a;font-weight:700}
 @media(max-width:600px){.menu{grid-template-columns:repeat(3,1fr)}#arenaDuel,#arenaMat,.kotakJawabTT,.kotakBalap{flex-direction:column}h1{font-size:19px}}
 </style></head><body><a href="index.html" style="display:block;background:#ff5252;color:white;padding:12px;border-radius:20px;text-decoration:none;font-weight:bold;margin:10px;text-align:center;">⬅️ KEMBALI KE BERANDA</a>
-<h1>🌈✨ DUNIA GAME PELANGI ✨🌈</h1><br><span class="sub">🎮 SDN Kayakah - Amuntai | Yang 500 Jadi Beranda | Game Lama Tetap Ada! 🎮</span>
+<h1>🌈✨ DUNIA GAME PELANGI ✨🌈</h1><br><span class="sub">🎮 SDN Kayakah - Amuntai 🎮</span>
 
 <div class="menu">
 <button style="background:linear-gradient(135deg,#22c55e,#06b6d4)" onclick="tampil('kamus500',this)" class="aktif">🏠<br>1. Kamus 500 + Suara</button>
-<button style="background:linear-gradient(135deg,#f59e0b,#f97316)" onclick="tampil('menu',this)">📖<br>Menu Lama</button>
 <button style="background:linear-gradient(135deg,#ec4899,#f472b6)" onclick="tampil('huruf',this)">🌈<br>2. Puzzle Huruf</button>
 <button style="background:linear-gradient(135deg,#ef4444,#f87171)" onclick="tampil('duelHuruf',this)">⚔️<br>3. Duel Huruf</button>
 <button style="background:linear-gradient(135deg,#2563eb,#60a5fa)" onclick="tampil('satu',this)">⏱️<br>4. 1 Orang</button>
@@ -79,7 +77,6 @@ table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th{back
 <button style="background:linear-gradient(135deg,#7c3aed,#ec4899,#f97316)" onclick="tampil('logika',this)">🧠<br>11. Logika 4,5,6</button>
 </div>
 
-<!-- ===== HALAMAN 500 - JADI BERANDA - BARU ===== -->
 <div id="kamus500" class="halaman aktif">
 <h2>🏠🎮 Kamus Banjar Amuntai 500 + Suara 🎮🏠</h2>
 <div id="centangBox500" class="centang500">✅</div>
@@ -107,17 +104,6 @@ table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th{back
 <p style="font-size:12px;color:#888">Mau main game lama? Klik menu di atas, Pak. Game lama tetap ada semua.</p>
 </div>
 
-<!-- ===== GAME LAMA - TIDAK DIUBAH - DIMULAI DARI SINI ===== -->
-<div id="menu" class="halaman">
-<h2>👋🎉 Selamat Datang di Dunia Pelangi! 🎉👋</h2>
-<p style="font-size:17px">Hai anak hebat! 🌟<br>Pilih game favoritmu di atas.<br>Tinggal <b>KLIK</b> saja, game langsung muncul.</p>
-<div style="font-size:35px">🌈 ⚔️ ⏱️ 🎲 🐵 🍎 🔤 🏎️ 🧠</div>
-<div class="kotakPelangi">✨ 2.Huruf | 3.Duel Huruf | 4.1 Orang | 5.Duel MTK | 6.Individu | 7.Monyet | 8.Buah | 9.Kata | 10.Balap Berdua | 11.Logika ✨</div><br>
-<button class="aksi" onclick="tampil('logika',document.querySelectorAll('.menu button')[11])">🧠 Main Logika!</button>
-<button class="aksi" onclick="tampil('tarik',document.querySelectorAll('.menu button')[7])">🐵 Main Monyet!</button>
-<button class="aksi" onclick="tampil('balap',document.querySelectorAll('.menu button')[10])">🏎️ Main Balap!</button>
-</div>
-
 <div id="huruf" class="halaman"><h2>2. 🌈 Puzzle Huruf A-Z 🎨</h2><p>Klik 1 kotak, lalu klik kotak lain untuk tukar. 🔄</p><div id="ph"></div><p id="pesanPH" class="kotakPelangi">Langkah: 0</p><button class="aksi" onclick="acakPH()">🔀 Acak Lagi</button><button class="hijau" onclick="cekPH()">✅ Cek</button></div>
 <div id="duelHuruf" class="halaman"><h2>3. ⚔️ Duel Huruf - 2 Orang 🥊</h2><p id="waktuDuel" class="kotakPelangi">Waktu: 0 detik</p><div id="arenaDuel"><div class="kotakDuel p1"><b style="color:#ef4444">🔴 PEMAIN 1</b><div id="infoD1">Benar: 0/26</div><div class="gridDuel" id="gridD1"></div></div><div class="kotakDuel p2"><b style="color:#2563eb">🔵 PEMAIN 2</b><div id="infoD2">Benar: 0/26</div><div class="gridDuel" id="gridD2"></div></div></div><p id="pesanDuel">Siap?</p><button class="aksi" onclick="mulaiDuel()">▶ MULAI DUEL</button></div>
 <div id="satu" class="halaman"><h2>4. ⏱️ 1 Orang - Lomba Waktu 🏃‍♂️💨</h2><p id="waktuSatu" class="kotakPelangi">Waktu: 0 | Skor: 0 | Soal: 1/10</p><p id="soalSatu" style="font-size:38px;font-weight:900;color:#7c3aed">Tekan MULAI!</p><div id="pilSatu"></div><p id="pesanSatu"></p><button class="biru" onclick="mulaiSatu()">▶ MULAI</button></div>
@@ -131,7 +117,6 @@ table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th{back
 
 <script>
 function tampil(id,btn){document.querySelectorAll('.halaman').forEach(e=>e.classList.remove('aktif'));document.getElementById(id).classList.add('aktif');if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('aktif'));btn.classList.add('aktif');}window.scrollTo(0,0);}
-/* ===== LOGIKA 500 - SEMUA PAKAI 500 BIAR KADA TABRAKAN DENGAN GAME LAMA ===== */
 let suaraOn500=true;
 function bicara500(teks){if(!suaraOn500) return;try{window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(teks);u.lang='id-ID';u.rate=0.9;u.pitch=1.1;window.speechSynthesis.speak(u);}catch(e){}}
 function toggleSuara500(){suaraOn500=!suaraOn500;document.getElementById('btnSuara500').innerText=suaraOn500?'🔊 SUARA: ON':'🔇 SUARA: OFF';if(suaraOn500) bicara500('Suara dihidupkan. Selamat belajar, Pian.');}
@@ -199,8 +184,6 @@ DATA500.forEach(x=>{html+='<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</t
 html+='</table><p style="font-size:12px;color:#888">Total: '+DATA500.length+' kata Amuntai.</p>';el.innerHTML=html;
 }
 resetGame500();
-
-/* ===== GAME LAMA - KODE ASLI PIAN - TIDAK DIUBAH SAMA SEKALI - MULAI ===== */
 let hurufPH="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),warnaPH=["#ef4444","#f97316","#f59e0b","#eab308","#84cc16","#22c55e","#10b981","#06b6d4","#0ea5e9","#3b82f6","#6366f1","#8b5cf6","#a855f7","#d946ef","#ec4899","#f43f5e","#ef4444","#f97316","#f59e0b","#84cc16","#22c55e","#06b6d4","#3b82f6","#8b5cf6","#ec4899","#f43f5e"],emojiPH=["🍎","🍌","🐱","🐶","🐘","🐸","🍇","🏠","🍦","🧃","🪁","🦁","🌙","🥜","🍊","🐧","👑","🌹","⭐","🐢","☂️","🎻","🐳","🎄","🧶","🦓"],langkahPH=0,dipilihPH=-1;
 function gambarPH(){let k=document.getElementById('ph');k.innerHTML='';hurufPH.forEach((h,i)=>{let d=document.createElement('div');d.className='ubin'+(i===dipilihPH?' pilih':'')+(h==="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]?' benar':'');d.style.background='linear-gradient(135deg,'+warnaPH[i]+',#f97316)';d.innerHTML=h+'<div class="kecil">'+emojiPH["ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(h)]+'</div>';d.onclick=()=>{if(dipilihPH===-1){dipilihPH=i;gambarPH();}else{if(dipilihPH!==i){[hurufPH[dipilihPH],hurufPH[i]]=[hurufPH[i],hurufPH[dipilihPH]];langkahPH++;}dipilihPH=-1;gambarPH();}};k.appendChild(d);});let b=0;hurufPH.forEach((h,i)=>{if(h==="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i])b++;});document.getElementById('pesanPH').innerText='Langkah: '+langkahPH+' | Benar: '+b+'/26'+(b===26?' - 🎉 HEBAT!':'');}
 function acakPH(){for(let j=0;j<50;j++){let a=Math.floor(Math.random()*26),b=Math.floor(Math.random()*26);[hurufPH[a],hurufPH[b]]=[hurufPH[b],hurufPH[a]];}langkahPH=0;dipilihPH=-1;gambarPH();}
