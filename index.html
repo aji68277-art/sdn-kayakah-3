@@ -110,16 +110,6 @@ td:first-child{font-weight:bold;width:35%;color:#0E7C7B}
 .hint-foto{color:#fff;font-size:12px;margin-top:8px;opacity:.8}
 footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:6px solid #FFD93D}
 @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.guru{grid-template-columns:1fr}.galeri,.kegiatan-grid{grid-template-columns:1fr 1fr}header h1{font-size:30px}.kartun-kotak{width:110px}.login-melayang{bottom:6px;right:8px}.daun-kiri,.daun-kanan{width:52px;font-size:24px}.daun-atas,.daun-bawah{font-size:22px}}
-
-/* TAMBAHAN P3 */
-.p3-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.p3-kotak{background:#FFF7E6;border:3px solid #FFD93D;border-radius:18px;padding:16px;text-align:center;cursor:pointer}
-.p3-kotak div{font-size:48px}.p3-kotak b{font-size:15px;color:#0F2E1A;display:block;margin-top:6px}.p3-kotak span{font-size:12px;color:#666}
-.p3-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;padding:16px}
-.p3-popup.buka{display:flex}
-.p3-isi{background:#fff;max-width:430px;width:100%;border-radius:20px;padding:22px;text-align:left;border:4px solid #FFD93D;max-height:85vh;overflow:auto}
-.p3-isi h3{text-align:center;color:#0E7C7B}.p3-isi ul{line-height:1.7;font-size:14px}
-.p3-tutup{background:#E11D63;color:#fff;border:none;padding:10px 22px;border-radius:20px;font-weight:bold;cursor:pointer;width:100%;margin-top:10px}
 </style>
 </head>
 <body>
@@ -225,10 +215,10 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <h2>🎉 Selamat Datang di Website SDN Kayakah 🎉</h2>
 <p style="padding:0 16px">Tempat Anak Hebat Belajar, Bermain & Berprestasi! 🌟</p>
 <div class="kartun-row">
-<div class="kartun-kotak"><div>📚😊</div><b>📚 Rajin Belajar</b></div>
-<div class="kartun-kotak"><div>🎨🌈</div><b>🎨 Kreatif</b></div>
-<div class="kartun-kotak"><div>⚽💪</div><b>⚽ Sehat & Kuat</b></div>
-<div class="kartun-kotak"><div>🕌❤️</div><b>🕌 Berakhlak Mulia</b></div>
+<div class="kartun-kotak" onclick="bukaDimensi('rajin')" style="cursor:pointer"><div>📚😊</div><b>📚 Rajin Belajar</b><br><span style="font-size:11px;color:#0E7C7B">👆 Klik di sini!</span></div>
+<div class="kartun-kotak" onclick="bukaDimensi('kreatif')" style="cursor:pointer"><div>🎨🌈</div><b>🎨 Kreatif</b><br><span style="font-size:11px;color:#0E7C7B">👆 Klik di sini!</span></div>
+<div class="kartun-kotak" onclick="bukaDimensi('sehat')" style="cursor:pointer"><div>⚽💪</div><b>⚽ Sehat & Kuat</b><br><span style="font-size:11px;color:#0E7C7B">👆 Klik di sini!</span></div>
+<div class="kartun-kotak" onclick="bukaDimensi('akhlak')" style="cursor:pointer"><div>🕌❤️</div><b>🕌 Berakhlak Mulia</b><br><span style="font-size:11px;color:#0E7C7B">👆 Klik di sini!</span></div>
 </div>
 <div class="visi"><b>🌟 Visi Kami:</b><br>"Terwujudnya Insan Pembelajar yang Berbudi Luhur, Mandiri, dan Sehat"</div>
 <a class="btn" href="game.html">🎮 MAIN KUIS, YUK!</a><br><br>
@@ -301,15 +291,12 @@ footer{background:#1E3A5F;color:white;text-align:center;padding:18px;border-top:
 <div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 <div class="stats"><div class="c1"><b>60</b>😊 Siswa Hebat</div><div class="c2"><b>6</b>📚 Kelas Ceria</div><div class="c3"><b>10</b>👩‍🏫 Guru & Staf</div><div class="c4"><b>1976</b>🏫 Berdiri</div></div>
 <div class="card" id="profil"><div class="banner-kartun">🏫🌈📚</div><h3>📚 Profil Sekolah Kita</h3><table><tr><td>🏫 Nama Sekolah</td><td>SD Negeri Kayakah</td></tr><tr><td>📍 Alamat</td><td>Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara, Kalimantan Selatan 71452</td></tr><tr><td>🆔 NPSN / NSS</td><td>30302788 / 101150702012</td></tr><tr><td>🎂 Tahun Berdiri</td><td>1976</td></tr><tr><td>👧👦 Jumlah Siswa</td><td>60 Siswa (30 Laki-laki, 30 Perempuan)</td></tr><tr><td>📖 Rombel</td><td>6 Rombel - Kelas I s.d VI</td></tr></table><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
-
-<!-- TAMBAHAN 4 KOTAK P3 -->
-<div class="card" id="p3"><div class="banner-kartun">🌟🇮🇩✨</div><h3>🌟 Profil Pelajar Pancasila - Klik Kotaknya!</h3><p style="text-align:center;font-size:14px">Klik salah satu kotak, nanti muncul popup poin-poinnya.</p><div class="p3-wrap"><div class="p3-kotak" onclick="bukaP3(0)"><div>🕌</div><b>Beriman & Bertakwa</b><span>👆 Klik untuk lihat</span></div><div class="p3-kotak" onclick="bukaP3(1)"><div>🤝</div><b>Gotong Royong</b><span>👆 Klik untuk lihat</span></div><div class="p3-kotak" onclick="bukaP3(2)"><div>💪</div><b>Mandiri</b><span>👆 Klik untuk lihat</span></div><div class="p3-kotak" onclick="bukaP3(3)"><div>🎨</div><b>Kreatif</b><span>👆 Klik untuk lihat</span></div></div></div>
-<div class="p3-popup" id="popupP3" onclick="tutupP3()"><div class="p3-isi" onclick="event.stopPropagation()"><div id="p3Emoji" style="font-size:60px;text-align:center">🕌</div><h3 id="p3Judul">Judul</h3><div id="p3Isi"></div><button class="p3-tutup" onclick="tutupP3()">❌ Tutup</button></div></div>
 <div class="card" id="guru"><div class="banner-kartun">👩‍🏫👨‍🏫❤️</div><h3>👩‍🏫 Guru & Staf Hebat Kami</h3><div class="guru" id="listGuruProfil"></div><p style="margin-top:12px">📖 Pembimbing Tahsin & Tahfiz: <b>Syahida Norpah, S.Pd.</b> dan <b>Jannah, S.Pd.</b><br>🤝 Ketua Komite: <b>H. M. Husni</b></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 <div class="card" id="ekstra"><div class="banner-kartun">🥁🎤💻🌱⚽🛍️</div><h3>🎨 Kegiatan Seru di Sekolah!</h3><div class="ekstra"><span>🥁 Pramuka - Sabtu</span><span>🎤 Habsy / Hadrah - Minggu</span><span>💻 Komputer - Selasa, Rabu, Kamis</span><span>📖 Tahsin & Tahfiz</span><span>🌱 Kebun Sekolah</span><span>⚽ Senam Sehat</span><span>🛍️ Market Day</span></div><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 <div class="card" id="kontak"><div class="banner-kartun">📞🏫💬</div><h3>📞 Yuk, Hubungi Kami!</h3><p><b>📍 Alamat:</b> Jl. Pertahanan Divisi IV No. 029 RT.004, Desa Kayakah, Kec. Amuntai Selatan, Kab. Hulu Sungai Utara 71452</p><p><b>👨‍🏫 Plt. Kepala Sekolah:</b> Wahyu Aji, S.Pd.Jas</p><p><b>🤝 Ketua Komite:</b> H. M. Husni</p><p><b>💬 Kritik & Saran:</b> <a href="saran.html">Klik di sini - saran.html</a></p><p><b>🎮 Kuis Siswa:</b> <a href="game.html">Klik di sini - game.html</a></p><div style="text-align:center"><button class="btn-kembali" onclick="kembaliBeranda()">⬅️ Kembali ke Beranda</button></div></div>
 </div>
 <footer><div style="font-size:36px">🏫 🌈 📚 🎨 ⚽ 🎤 🥁 💻 🌱</div>© 2026 SDN Kayakah - Amuntai Selatan 🌈<br>Belajar Ceria, Berkarakter, Berprestasi!</footer>
+<div class="modal" id="modalDimensi"><div class="modal-box" style="max-width:520px;text-align:left"><div id="isiDimensi"></div><button style="background:#BDBDBD" onclick="tutupDimensi()">⬅️ Kembali</button></div></div>
 <script>
 let adminLogin = null;
 let NAMA_KEPSEK = "Wahyu Aji, S.Pd.Jas";
@@ -681,12 +668,18 @@ async function hapusPengumuman(i){
   let kunci=(p.judul||"")+"|"+(p.isi||""); let dihapus=getPengumumanDihapus(); if(dihapus.indexOf(kunci)===-1){ dihapus.push(kunci); try{ localStorage.setItem("pengumuman_dihapus_kayakah", JSON.stringify(dihapus)); }catch(e){} }
   dataPengumuman.splice(i,1); try{ let simpan = dataPengumuman.filter(p=>!p.bawaan); localStorage.setItem("pengumuman_kayakah", JSON.stringify(simpan)); }catch(e){} renderPengumuman();
 }
+function bukaDimensi(kunci){
+  let isi={
+    rajin:'<div style="text-align:center;font-size:44px">📚😊</div><h2 style="text-align:center;color:#0E7C7B;margin:6px 0">📚 RAJIN BELAJAR</h2><p style="text-align:center;font-size:13px;color:#666">Dimensi Profil Lulusan SDN Kayakah</p><div style="background:#E0F2F1;padding:12px;border-radius:12px"><b>🧠 Penalaran Kritis</b><br>Anak bisa berpikir, bertanya, dan memecahkan masalah.<br><br><b>💪 Kemandirian</b><br>Belajar sendiri, tanggung jawab dengan tugasnya.<br><br><b>💬 Komunikasi</b><br>Berani menyampaikan pendapat dan bertanya.</div><p style="font-size:14px;line-height:1.6;margin-top:10px"><b>Di SDN Kayakah:</b><br>✅ Rajin baca, rajin PR<br>✅ Berani bertanya, tidak takut salah<br>✅ Rajin ikut Kuis Seru & Kayakah Belajar</p>',
+    kreatif:'<div style="text-align:center;font-size:44px">🎨🌈</div><h2 style="text-align:center;color:#FF8A00;margin:6px 0">🎨 KREATIF</h2><p style="text-align:center;font-size:13px;color:#666">Dimensi Profil Lulusan SDN Kayakah</p><div style="background:#FFF7E6;padding:12px;border-radius:12px"><b>🎨 Kreativitas</b><br>Bisa membuat karya baru, menggambar, bercerita, bernyanyi.<br><br><b>🧠 Penalaran Kritis</b><br>Bisa cari cara lain kalau cara pertama gagal.<br><br><b>💬 Komunikasi</b><br>Bisa ceritakan hasil karyanya ke teman.</div><p style="font-size:14px;line-height:1.6;margin-top:10px"><b>Di SDN Kayakah:</b><br>✅ Membuat karya dari barang bekas<br>✅ Menggambar, Market Day, Habsy<br>✅ Berani tampil di depan kelas</p>',
+    sehat:'<div style="text-align:center;font-size:44px">⚽💪</div><h2 style="text-align:center;color:#2563EB;margin:6px 0">⚽ SEHAT & KUAT</h2><p style="text-align:center;font-size:13px;color:#666">Dimensi Profil Lulusan SDN Kayakah</p><div style="background:#E8F5E9;padding:12px;border-radius:12px"><b>❤️ Kesehatan</b><br>Tubuh sehat, makan bergizi, rajin olahraga, jaga kebersihan.<br><br><b>💪 Kemandirian</b><br>Bisa jaga diri sendiri, pakai seragam sendiri.<br><br><b>🤝 Kolaborasi</b><br>Bisa kerja sama tim saat olahraga dan Pramuka.</div><p style="font-size:14px;line-height:1.6;margin-top:10px"><b>Di SDN Kayakah:</b><br>✅ Senam sehat, PJOK, Pramuka Sabtu<br>✅ Kebun Sekolah, cuci tangan<br>✅ Makan bergizi, tidur cukup</p>',
+    akhlak:'<div style="text-align:center;font-size:44px">🕌❤️</div><h2 style="text-align:center;color:#7C3AED;margin:6px 0">🕌 BERAKHLAK MULIA</h2><p style="text-align:center;font-size:13px;color:#666">Dimensi Profil Lulusan SDN Kayakah</p><div style="background:#EDE9FE;padding:12px;border-radius:12px"><b>🕌 Keimanan & Ketakwaan</b><br>Rajin sholat, Yasinan, sayang Allah.<br><br><b>🇮🇩 Kewarganegaraan</b><br>Cinta Indonesia, hormat bendera, jujur.<br><br><b>🤝 Kolaborasi</b><br>Tolong-menolong, rukun dengan teman.</div><p style="font-size:14px;line-height:1.6;margin-top:10px"><b>Di SDN Kayakah:</b><br>✅ Yasinan Jumat, Infaq, Tahsin<br>✅ Hormat guru, sayang teman, jujur<br>✅ Tidak mengejek teman</p>'
+  };
+  document.getElementById("isiDimensi").innerHTML=isi[kunci]||"";
+  document.getElementById("modalDimensi").style.display="flex";
+}
+function tutupDimensi(){ document.getElementById("modalDimensi").style.display="none"; }
 window.addEventListener("load",async function(){ loadPIN(); renderGaleriGuru(); await loadLogo(); let a=localStorage.getItem("admin_kayakah"); if(a && daftarPIN[a]) adminLogin=a; updateTampilanAdmin(); await loadKegiatan(); loadPengumuman(); await loadGuruDariFirebase(); bersihkanGuruDobel(); renderGaleriGuru(); isiDropdownLogin(); if(adminLogin===NAMA_KEPSEK) tampilTabelPIN(); });
-
-/* TAMBAHAN P3 POPUP */
-var dataP3=[{emoji:"🕌",judul:"Beriman & Bertakwa Kepada Tuhan YME",poin:["Berakhlak mulia, hormat orang tua & guru","Rajin shalat, Yasinan & Infaq Jumat","Jujur, tidak mencontek, berkata baik","Sayang teman, tidak mengejek, tidak berkelahi"]},{emoji:"🤝",judul:"Gotong Royong",poin:["Suka tolong-menolong, piket kelas bersama","Membersihkan kebun & halaman bersama","Rukun dengan teman, kerja kelompok baik","Peduli lingkungan, buang sampah pada tempatnya"]},{emoji:"💪",judul:"Mandiri",poin:["Mengerjakan tugas sendiri, tidak menyontek","Menyiapkan bekal & perlengkapan sendiri","Berani bertanya, berani tampil depan kelas","Datang tepat waktu, seragam lengkap"]},{emoji:"🎨",judul:"Kreatif",poin:["Suka menggambar, membuat karya & kerajinan","Punya ide baru di Market Day & Kebun Sekolah","Berani mencoba hal baru, tidak takut salah","Bisa membuat cerita, lagu, presentasi sederhana"]}];
-function bukaP3(i){var d=dataP3[i];document.getElementById("p3Emoji").innerHTML=d.emoji;document.getElementById("p3Judul").innerHTML=d.judul;document.getElementById("p3Isi").innerHTML="<ul><li>"+d.poin.join("</li><li>")+"</li></ul>";document.getElementById("popupP3").classList.add("buka");}
-function tutupP3(){document.getElementById("popupP3").classList.remove("buka");}
 </script>
 </body>
 </html>
