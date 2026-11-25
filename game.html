@@ -59,7 +59,6 @@ input{padding:12px;font-size:16px;border-radius:15px;border:3px solid #f59e0b;wi
 #soalLogikaBox{background:linear-gradient(90deg,#fef3c7,#e0e7ff,#fbcfe8);border:3px solid #f59e0b;border-radius:16px;padding:10px;margin:8px 0;box-shadow:0 4px 0 #f59e0b}
 #soalLogika{font-size:19px;font-weight:900;color:#4a044e;line-height:1.4}
 .tombolLogika{width:90%;padding:12px;margin:4px;font-size:16px;border:3px solid #facc15;border-radius:14px;cursor:pointer;font-weight:900;background:white;text-align:left;box-shadow:0 4px 0 #f59e0b}.tombolLogika:hover{background:#fef08a;transform:scale(1.03)}
-/* TAMBAHAN KAMUS - TIDAK MERUBAH YANG LAMA */
 .pilihLevel button{border:3px solid white;padding:11px 10px;border-radius:20px;font-weight:900;cursor:pointer;font-size:12px;color:white;margin:4px;box-shadow:0 5px 0 rgba(0,0,0,.2)}
 .pilihLevel button.aktif{outline:4px solid #111;transform:scale(1.08)}
 .info{background:linear-gradient(90deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#8b5cf6,#ec4899);background-size:200% 100%;animation:pel 3s linear infinite;color:white;padding:9px;border-radius:15px;font-weight:900;font-size:13px;border:2px solid white}
@@ -82,12 +81,11 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 </style></head><body>
 <a href="index.html" style="display:block;background:#ff5252;color:white;padding:12px;border-radius:20px;text-decoration:none;font-weight:bold;margin:10px;text-align:center;">⬅️ KEMBALI KE BERANDA</a>
 <h1>🌈✨ DUNIA GAME PELANGI ✨🌈</h1><br><span class="sub">🎮 SDN Kayakah - Amuntai | Klik nama game di atas, langsung main! 🎮</span>
-<!-- TAMBAHAN MUSIK + SEMANGAT BANJAR - TIDAK MERUBAH GAME LAMA -->
 <div style="margin:10px;position:relative;z-index:2">
-<button id="btnMusik" onclick="toggleMusik()" style="background:linear-gradient(45deg,#ec4899,#8b5cf6);color:white;border:3px solid white;padding:10px 16px;border-radius:25px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #be185d">🎵 MUSIK: OFF - Klik untuk Hidupkan</button>
+<button id="btnMusik" onclick="toggleMusikGame()" style="background:linear-gradient(45deg,#ec4899,#8b5cf6);color:white;border:3px solid white;padding:10px 16px;border-radius:25px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #be185d">🎵 MUSIK: ON</button>
 <button onclick="semangatBanjar()" style="background:linear-gradient(45deg,#22c55e,#f59e0b);color:white;border:3px solid white;padding:10px 16px;border-radius:25px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #15803d">🗣️ SEMANGAT BANJAR!</button>
+<p id="namaMusik" style="background:white;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:900;color:#7c3aed;border:3px solid #facc15;margin:6px">🎶 Musik: Menu - Ceria Pelangi</p>
 </div>
-<audio id="musikLatar" loop preload="none"><source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg"></audio>
 
 <div class="menu">
 <button style="background:linear-gradient(135deg,#f59e0b,#f97316)" onclick="tampil('menu',this)" class="aktif">🏠<br>Menu</button>
@@ -107,7 +105,7 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 
 <div id="menu" class="halaman aktif">
 <h2>👋🎉 Selamat Datang di Dunia Pelangi! 🎉👋</h2>
-<p style="font-size:17px">Hai anak hebat! 🌟<br>Pilih game favoritmu di atas.<br>Tinggal <b>KLIK</b> saja, game langsung muncul.<br>Nggak perlu scroll ke bawah!</p>
+<p style="font-size:17px">Hai anak hebat! 🌟<br>Pilih game favoritmu di atas.<br>Tinggal <b>KLIK</b> saja, game langsung muncul.<br>Musiknya langsung ganti sesuai game!</p>
 <div style="font-size:35px">🧩 🌈 ⚔️ ⏱️ 🎲 🐵 🍎 🔤 🏎️ 🧠 📖</div>
 <div class="kotakPelangi">✨ 1.Gambar | 2.Huruf | 3.Duel Huruf | 4.1 Orang | 5.Duel MTK | 6.Individu | 7.Monyet | 8.Buah | 9.Kata | 10.Balap Berdua | 11.Logika | 12.Kamus Banjar 500 ✨</div><br>
 <button class="aksi" onclick="tampil('logika',document.querySelectorAll('.menu button')[11])">🧠 Main Logika!</button>
@@ -116,14 +114,14 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 <button class="aksi" onclick="tampil('kamus',document.querySelectorAll('.menu button')[12])">📖 Main Kamus Banjar!</button>
 </div>
 
-<div id="gambar" class="halaman"><h2>1. 🧩 Puzzle Gambar 12 Kotak 🎨</h2><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" style="width:170px;height:125px;object-fit:cover;border-radius:16px;border:4px solid #f59e0b;box-shadow:0 6px 12px rgba(0,0,0,.25)"><p>Klik kotak dekat kotak kosong untuk geser. 🖱️</p><div id="pg"></div><p id="pesanPG" class="kotakPelangi">Langkah: 0</p><button class="hijau" onclick="acakPG()">🔀 Acak Lagi</button></div>
-<div id="huruf" class="halaman"><h2>2. 🌈 Puzzle Huruf A-Z 🎨</h2><p>Klik 1 kotak, lalu klik kotak lain untuk tukar. 🔄</p><div id="ph"></div><p id="pesanPH" class="kotakPelangi">Langkah: 0</p><button class="aksi" onclick="acakPH()">🔀 Acak Lagi</button><button class="hijau" onclick="cekPH()">✅ Cek</button></div>
-<div id="duelHuruf" class="halaman"><h2>3. ⚔️ Duel Huruf - 2 Orang 🥊</h2><p id="waktuDuel" class="kotakPelangi">Waktu: 0 detik</p><div id="arenaDuel"><div class="kotakDuel p1"><b style="color:#ef4444">🔴 PEMAIN 1</b><div id="infoD1">Benar: 0/26</div><div class="gridDuel" id="gridD1"></div></div><div class="kotakDuel p2"><b style="color:#2563eb">🔵 PEMAIN 2</b><div id="infoD2">Benar: 0/26</div><div class="gridDuel" id="gridD2"></div></div></div><p id="pesanDuel">Siap?</p><button class="aksi" onclick="mulaiDuel()">▶ MULAI DUEL</button></div>
-<div id="satu" class="halaman"><h2>4. ⏱️ 1 Orang - Lomba Waktu 🏃‍♂️💨</h2><p id="waktuSatu" class="kotakPelangi">Waktu: 0 | Skor: 0 | Soal: 1/10</p><p id="soalSatu" style="font-size:38px;font-weight:900;color:#7c3aed;text-shadow:2px 2px 0 #fde68a">Tekan MULAI!</p><div id="pilSatu"></div><p id="pesanSatu"></p><button class="biru" onclick="mulaiSatu()">▶ MULAI</button></div>
-<div id="dua" class="halaman"><h2>5. ⚔️ Duel Matematika - Sampai 5 Poin 🏆</h2><p id="soalDua" style="font-size:30px;font-weight:900;background:#fef3c7;padding:8px;border-radius:14px;border:3px dashed #f59e0b">Tekan MULAI!</p><div id="arenaMat"><div class="pMat m1"><b>🔴 PEMAIN 1</b><div style="font-size:42px;font-weight:900" id="sM1">0</div><div id="pilM1"></div></div><div class="pMat m2"><b>🔵 PEMAIN 2</b><div style="font-size:42px;font-weight:900" id="sM2">0</div><div id="pilM2"></div></div></div><p id="pesanDua">Siap?</p><button class="hijau" onclick="mulaiDua()">▶ MULAI DUEL</button></div>
-<div id="individu" class="halaman"><h2>6. 🎲 Game Individu 🎁</h2><h3>🧠 Memory - Cari Pasangan</h3><p id="infoMem" class="kotakPelangi">Pasangan: 0/6</p><div id="memory"></div><br><button class="aksi" onclick="buatMemory()">🔀 Acak Memory</button><hr><h3>🎨 Tebak Warna</h3><div class="warna-box" id="kotakWarna" style="background:red"></div><input id="jawabWarna" placeholder="merah / kuning..."><br><br><button class="hijau" onclick="cekWarna()">Cek</button><button class="aksi" onclick="warnaBaru()">🌈 Warna Baru</button><p id="hasilWarna"></p><hr><h3>🐾 Tebak Hewan</h3><p id="emojiHewan" style="font-size:65px;animation:melayang 2s infinite">🐱</p><input id="jawabHewan" placeholder="kucing..."><br><br><button class="hijau" onclick="cekHewan()">Cek</button><button class="aksi" onclick="hewanBaru()">🐾 Hewan Baru</button><p id="hasilHewan"></p><p>Skor Hewan: <span id="skorHewan">0</span></p></div>
+<div id="gambar" class="halaman"><h2>1. 🧩 Puzzle Gambar 12 Kotak 🎨</h2><p>🎵 Musik: Santai Puzzle</p><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" style="width:170px;height:125px;object-fit:cover;border-radius:16px;border:4px solid #f59e0b;box-shadow:0 6px 12px rgba(0,0,0,.25)"><p>Klik kotak dekat kotak kosong untuk geser. 🖱️</p><div id="pg"></div><p id="pesanPG" class="kotakPelangi">Langkah: 0</p><button class="hijau" onclick="acakPG()">🔀 Acak Lagi</button></div>
+<div id="huruf" class="halaman"><h2>2. 🌈 Puzzle Huruf A-Z 🎨</h2><p>🎵 Musik: Ceria Huruf</p><p>Klik 1 kotak, lalu klik kotak lain untuk tukar. 🔄</p><div id="ph"></div><p id="pesanPH" class="kotakPelangi">Langkah: 0</p><button class="aksi" onclick="acakPH()">🔀 Acak Lagi</button><button class="hijau" onclick="cekPH()">✅ Cek</button></div>
+<div id="duelHuruf" class="halaman"><h2>3. ⚔️ Duel Huruf - 2 Orang 🥊</h2><p>🎵 Musik: Duel Semangat</p><p id="waktuDuel" class="kotakPelangi">Waktu: 0 detik</p><div id="arenaDuel"><div class="kotakDuel p1"><b style="color:#ef4444">🔴 PEMAIN 1</b><div id="infoD1">Benar: 0/26</div><div class="gridDuel" id="gridD1"></div></div><div class="kotakDuel p2"><b style="color:#2563eb">🔵 PEMAIN 2</b><div id="infoD2">Benar: 0/26</div><div class="gridDuel" id="gridD2"></div></div></div><p id="pesanDuel">Siap?</p><button class="aksi" onclick="mulaiDuel()">▶ MULAI DUEL</button></div>
+<div id="satu" class="halaman"><h2>4. ⏱️ 1 Orang - Lomba Waktu 🏃‍♂️💨</h2><p>🎵 Musik: Kejar Waktu - Cepat!</p><p id="waktuSatu" class="kotakPelangi">Waktu: 0 | Skor: 0 | Soal: 1/10</p><p id="soalSatu" style="font-size:38px;font-weight:900;color:#7c3aed;text-shadow:2px 2px 0 #fde68a">Tekan MULAI!</p><div id="pilSatu"></div><p id="pesanSatu"></p><button class="biru" onclick="mulaiSatu()">▶ MULAI</button></div>
+<div id="dua" class="halaman"><h2>5. ⚔️ Duel Matematika - Sampai 5 Poin 🏆</h2><p>🎵 Musik: Duel MTK - Semangat!</p><p id="soalDua" style="font-size:30px;font-weight:900;background:#fef3c7;padding:8px;border-radius:14px;border:3px dashed #f59e0b">Tekan MULAI!</p><div id="arenaMat"><div class="pMat m1"><b>🔴 PEMAIN 1</b><div style="font-size:42px;font-weight:900" id="sM1">0</div><div id="pilM1"></div></div><div class="pMat m2"><b>🔵 PEMAIN 2</b><div style="font-size:42px;font-weight:900" id="sM2">0</div><div id="pilM2"></div></div></div><p id="pesanDua">Siap?</p><button class="hijau" onclick="mulaiDua()">▶ MULAI DUEL</button></div>
+<div id="individu" class="halaman"><h2>6. 🎲 Game Individu 🎁</h2><p>🎵 Musik: Ceria Anak</p><h3>🧠 Memory - Cari Pasangan</h3><p id="infoMem" class="kotakPelangi">Pasangan: 0/6</p><div id="memory"></div><br><button class="aksi" onclick="buatMemory()">🔀 Acak Memory</button><hr><h3>🎨 Tebak Warna</h3><div class="warna-box" id="kotakWarna" style="background:red"></div><input id="jawabWarna" placeholder="merah / kuning..."><br><br><button class="hijau" onclick="cekWarna()">Cek</button><button class="aksi" onclick="warnaBaru()">🌈 Warna Baru</button><p id="hasilWarna"></p><hr><h3>🐾 Tebak Hewan</h3><p id="emojiHewan" style="font-size:65px;animation:melayang 2s infinite">🐱</p><input id="jawabHewan" placeholder="kucing..."><br><br><button class="hijau" onclick="cekHewan()">Cek</button><button class="aksi" onclick="hewanBaru()">🐾 Hewan Baru</button><p id="hasilHewan"></p><p>Skor Hewan: <span id="skorHewan">0</span></p></div>
 <div id="tarik" class="halaman">
-<h2>7. 🐵🌈 Tarik Tambang Monyet 🐒🌈</h2>
+<h2>7. 🐵🌈 Tarik Tambang Monyet 🐒🌈</h2><p>🎵 Musik: Monyet Lucu - Hutan!</p>
 <p><b>Pilih Soal:</b></p><div class="pilihTT" id="opPilihTT">
 <button style="background:#22c55e" onclick="pilihOpTT('tambah',this)" class="aktif">➕ Tambah</button>
 <button style="background:#ef4444" onclick="pilihOpTT('kurang',this)">➖ Kurang</button>
@@ -146,7 +144,7 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 </div><br><button class="hijau" onclick="mulaiTT()">▶ MULAI TARIK TAMBANG!</button>
 </div>
 <div id="buah" class="halaman">
-<h2>8. 🍎 Tebak Buah 🍌🍇</h2><p>Lihat buahnya, tulis namanya!</p>
+<h2>8. 🍎 Tebak Buah 🍌🍇</h2><p>🎵 Musik: Buah Ceria - Segar!</p><p>Lihat buahnya, tulis namanya!</p>
 <p id="emojiBuah" style="font-size:75px;animation:melayang 2s infinite">🍎</p>
 <input id="jawabBuah" placeholder="apel / pisang..."><br><br>
 <button class="hijau" onclick="cekBuah()">Cek</button>
@@ -154,7 +152,7 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 <p id="hasilBuah"></p><p>Skor Buah: <span id="skorBuah" class="kotakPelangi">0</span></p>
 </div>
 <div id="kata" class="halaman">
-<h2>9. 🔤 Susun Kata 📝</h2><p>Klik huruf-huruf sampai jadi kata yang benar! Lihat gambarnya!</p>
+<h2>9. 🔤 Susun Kata 📝</h2><p>🎵 Musik: Mikir Santai</p><p>Klik huruf-huruf sampai jadi kata yang benar! Lihat gambarnya!</p>
 <p id="emojiKata" style="font-size:65px;animation:melayang 2s infinite">🐱</p><p id="petunjukKata">Hewan yang suka bilang meong</p>
 <div id="kotakHurufKata"></div>
 <p>Jawaban Kamu: <b id="jawabKata" style="font-size:24px;color:#7c3aed"></b></p>
@@ -165,7 +163,7 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 <p>Skor Kata: <span id="skorKata" class="kotakPelangi">0</span></p>
 </div>
 <div id="balap" class="halaman">
-<h2>10. 🏎️🏁 Balap Mobil Berdua! 🏁🚙</h2>
+<h2>10. 🏎️🏁 Balap Mobil Berdua! 🏁🚙</h2><p>🎵 Musik: Balap - Ngebut!</p>
 <p><b>Pilih Mode Balap:</b></p>
 <div class="pilihTT">
 <button style="background:#f97316" onclick="pilihBalapMode('komputer')">🏎️ Kamu VS 🤖 Komputer</button>
@@ -185,7 +183,7 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 <button class="hijau" onclick="mulaiBalap()">▶ MULAI BALAP BERDUA!</button>
 </div>
 <div id="logika" class="halaman">
-<h2>11. 🧠🔍 Teka Teki Logika - Kelas 4,5,6 💡</h2>
+<h2>11. 🧠🔍 Teka Teki Logika - Kelas 4,5,6 💡</h2><p>🎵 Musik: Logika - Tenang Mikir</p>
 <p><b>Pilih Kelas:</b></p>
 <div class="pilihLogika" id="pilihKelasLogika">
 <button style="background:#22c55e" onclick="pilihKelasLogika('4',this)" class="aktif">📗 Kelas 4 - Mudah</button>
@@ -203,11 +201,9 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 <p id="penjelasanLogika" style="background:#dcfce7;padding:8px;border-radius:14px;font-weight:bold;display:none;border:2px dashed #22c55e"></p>
 <button class="hijau" onclick="mulaiLogika()">▶ MULAI TEKA TEKI LOGIKA!</button>
 </div>
-
-<!-- 12. KAMUS BANJAR 500 - ASLI DARI KODE PIAN, TIDAK DIUBAH -->
 <div id="kamus" class="halaman">
 <div id="centangBox" class="centang">✅</div>
-<h2>🏠🎮 Kamus Banjar Amuntai 500 + Suara 🎮🏠</h2>
+<h2>🏠🎮 Kamus Banjar Amuntai 500 + Suara 🎮🏠</h2><p>🎵 Musik: Banjar Amuntai - Santai</p>
 <p style="font-size:13px">🌈 SDN Kayakah - Amuntai | Kata Sehari-hari Amuntai | Banjar - Indonesia - Inggris 🌈</p>
 <h2 style="color:#7c3aed;margin:4px 0">👋 Klik 3 Kolom! Banjar + Indonesia + Inggris!</h2>
 <p style="font-size:13px">🔊 Suara: <button onclick="toggleSuara()" id="btnSuara" style="background:#22c55e;color:white;border:3px solid white;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">🔊 SUARA: ON</button> <button onclick="tesSuara()" style="background:#2563eb;color:white;border:3px solid white;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">▶ TES SUARA</button></p>
@@ -234,14 +230,29 @@ select{padding:10px;border-radius:12px;border:3px solid #f59e0b;font-weight:900}
 </div>
 
 <script>
-// ===== TAMBAHAN MUSIK + SEMANGAT BANJAR - TIDAK MERUBAH GAME LAMA =====
-let musikOn=false;
-function toggleMusik(){let a=document.getElementById('musikLatar');musikOn=!musikOn;if(musikOn){a.volume=0.35;a.play().catch(()=>{});document.getElementById('btnMusik').innerText='🎵 MUSIK: ON - Klik untuk Matikan';semangatBanjar();}else{a.pause();document.getElementById('btnMusik').innerText='🎵 MUSIK: OFF - Klik untuk Hidupkan';}}
+// ===== MUSIK PER GAME - BARU, GAME LAMA TIDAK DIUBAH =====
+let musikGameOn=true, ctxMusik=null, timerMusik=null, nadaKe=0, gameAktif='menu';
+const MUSIK_PER_GAME={
+menu:{nama:'Menu - Ceria Pelangi',tempo:480,lagu:[523,659,784,659,523,659,784,1046]},
+gambar:{nama:'Puzzle - Santai',tempo:650,lagu:[392,440,523,440,392,330,392,440]},
+huruf:{nama:'Huruf - Ceria',tempo:500,lagu:[523,587,659,784,659,587,523,587]},
+duelHuruf:{nama:'Duel Huruf - Semangat',tempo:320,lagu:[523,523,659,659,784,784,659,523]},
+satu:{nama:'1 Orang - Kejar Waktu!',tempo:280,lagu:[784,880,784,880,1046,880,784,659]},
+dua:{nama:'Duel MTK - Semangat',tempo:320,lagu:[659,784,659,784,880,784,659,523]},
+individu:{nama:'Individu - Ceria Anak',tempo:520,lagu:[523,659,659,784,784,659,523,392]},
+tarik:{nama:'Monyet - Lucu Hutan',tempo:420,lagu:[392,392,440,440,523,440,392,330]},
+buah:{nama:'Buah - Segar Ceria',tempo:460,lagu:[659,659,784,784,880,784,659,587]},
+kata:{nama:'Susun Kata - Mikir Santai',tempo:620,lagu:[440,523,587,523,440,392,440,523]},
+balap:{nama:'Balap - Ngebut!',tempo:240,lagu:[523,659,784,1046,784,659,784,1046]},
+logika:{nama:'Logika - Tenang Mikir',tempo:700,lagu:[330,392,440,392,330,262,330,392]},
+kamus:{nama:'Kamus Banjar - Santai Amuntai',tempo:600,lagu:[523,587,659,587,523,440,523,659]}
+};
+function bunyiNada(f){if(!musikGameOn||!ctxMusik)return;let o=ctxMusik.createOscillator(),g=ctxMusik.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0.12,ctxMusik.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctxMusik.currentTime+0.4);o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.4);}
+function mainkanMusikGame(id){gameAktif=id;let m=MUSIK_PER_GAME[id]||MUSIK_PER_GAME.menu;document.getElementById('namaMusik').innerText='🎶 Musik: '+m.nama;if(!musikGameOn)return;if(!ctxMusik){try{ctxMusik=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}if(ctxMusik.state==='suspended')ctxMusik.resume();clearInterval(timerMusik);nadaKe=0;timerMusik=setInterval(()=>{if(!musikGameOn)return;bunyiNada(m.lagu[nadaKe%m.lagu.length]);nadaKe++;},m.tempo);}
+function toggleMusikGame(){musikGameOn=!musikGameOn;document.getElementById('btnMusik').innerText=musikGameOn?'🎵 MUSIK: ON':'🎵 MUSIK: OFF';if(musikGameOn)mainkanMusikGame(gameAktif);else clearInterval(timerMusik);}
 function semangatBanjar(){let p=['Harat banar! Pintar banar Pian! Anak Amuntai memang hebat!','Baimbai saja, Pian pasti kawa! Ayo semangat!','Bujur banar! Mantap! Tarima kasih sudah belajar!','Alhamdulillah! Pian juara! Anak Kayakah memang hebat!','Ayo Pian! Kawa ai! Jangan menyerah!','Habar baik! Pian hebat banar hari ini!'];try{window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(p[Math.floor(Math.random()*p.length)]);u.lang='id-ID';u.rate=0.9;u.pitch=1.1;window.speechSynthesis.speak(u);}catch(e){}}
-// Musik otomatis pelan tiap jawaban benar - dengarkan lewat tombol musik di atas
-document.addEventListener('click',function(e){if(e.target && e.target.innerText && e.target.innerText.includes('BENAR')){setTimeout(semangatBanjar,300);}},true);
 
-function tampil(id,btn){document.querySelectorAll('.halaman').forEach(e=>e.classList.remove('aktif'));document.getElementById(id).classList.add('aktif');if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('aktif'));btn.classList.add('aktif');}window.scrollTo(0,0);}
+function tampil(id,btn){document.querySelectorAll('.halaman').forEach(e=>e.classList.remove('aktif'));document.getElementById(id).classList.add('aktif');if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('aktif'));btn.classList.add('aktif');}window.scrollTo(0,0);mainkanMusikGame(id);}
 let pgArr=[0,1,2,3,4,5,6,7,8,9,10,11],langkahPG=0;
 function gambarPG(){let k=document.getElementById('pg');k.innerHTML='';pgArr.forEach((n,i)=>{let d=document.createElement('div');if(n===11){d.className='pg-ubin pg-kosong';}else{d.className='pg-ubin';d.style.backgroundPosition=(-(n%4)*80)+'px '+(-Math.floor(n/4)*80)+'px';d.onclick=()=>{let kos=pgArr.indexOf(11);let boleh=(i===kos+1&&i%4!==0)||(i===kos-1&&kos%4!==0)||i===kos+4||i===kos-4;if(boleh){[pgArr[i],pgArr[kos]]=[pgArr[kos],pgArr[i]];langkahPG++;gambarPG();}};}k.appendChild(d);});document.getElementById('pesanPG').innerText='Langkah: '+langkahPG+(pgArr.join(',')==='0,1,2,3,4,5,6,7,8,9,10,11'?' - 🎉 HEBAT!':'');}
 function acakPG(){for(let j=0;j<120;j++){let kos=pgArr.indexOf(11);let pil=[];if(kos%4!==0)pil.push(kos-1);if((kos+1)%4!==0)pil.push(kos+1);if(kos-4>=0)pil.push(kos-4);if(kos+4<12)pil.push(kos+4);let p=pil[Math.floor(Math.random()*pil.length)];[pgArr[p],pgArr[kos]]=[pgArr[kos],pgArr[p]];}langkahPG=0;gambarPG();}
@@ -385,7 +396,6 @@ function cekLogika(p,s){
  document.getElementById('penjelasanLogika').innerText='💡 Penjelasan: '+s.jelas;document.getElementById('penjelasanLogika').style.display='block';
  noLogika++;setTimeout(soalLogikaBaru,1800);
 }
-// ===== KAMUS BANJAR 500 - ASLI, TIDAK DIUBAH =====
 let suaraOn=true;
 function bicara(teks){if(!suaraOn) return;try{window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(teks);u.lang='id-ID';u.rate=0.9;u.pitch=1.1;window.speechSynthesis.speak(u);}catch(e){}}
 function toggleSuara(){suaraOn=!suaraOn;document.getElementById('btnSuara').innerText=suaraOn?'🔊 SUARA: ON':'🔇 SUARA: OFF';if(suaraOn) bicara('Suara dihidupkan. Selamat belajar, Pian.');}
