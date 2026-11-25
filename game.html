@@ -340,4 +340,53 @@ function cekLogika(p,s){
  document.getElementById('penjelasanLogika').innerText='💡 Penjelasan: '+s.jelas;document.getElementById('penjelasanLogika').style.display='block';
  noLogika++;setTimeout(soalLogikaBaru,1800);
 }
-</script></body></html>
+</script>
+<!-- === TAMBAHAN MUSIK - DARI META, KADA UBAH GAME LAMA === -->
+<div style="position:fixed;bottom:12px;right:12px;z-index:9999;display:flex;gap:6px">
+  <button id="btnMusikLatar" onclick="toggleMusikLatar()" style="background:#ec4899;color:white;border:3px solid white;padding:10px 14px;border-radius:25px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #be185d">🎵 MUSIK: OFF</button>
+  <button onclick="tesMusikBaru()" style="background:#22c55e;color:white;border:3px solid white;padding:10px 14px;border-radius:25px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #15803d">▶ TES</button>
+</div>
+<script>
+let ctxMusik=null, musikJalan=false, timerMusik=null, idxLagu=0;
+function buatCtx(){ if(!ctxMusik){ try{ ctxMusik=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(ctxMusik && ctxMusik.state==='suspended') ctxMusik.resume(); return ctxMusik; }
+function bunyiNada(freq,dur,jenis,vol,delay){
+  let c=buatCtx(); if(!c) return;
+  let t=c.currentTime+delay;
+  let o=c.createOscillator(), g=c.createGain();
+  o.type=jenis||'sine'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol||0.12,t+0.02); g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+dur+0.05);
+}
+function musikBenar(){ bunyiNada(523,0.15,'sine',0.15,0); bunyiNada(659,0.15,'sine',0.15,0.12); bunyiNada(784,0.25,'sine',0.15,0.24); }
+function musikSalah(){ bunyiNada(220,0.2,'sawtooth',0.07,0); bunyiNada(180,0.3,'sawtooth',0.07,0.18); }
+function musikMenang(){ [523,659,784,1046,784,1046].forEach((f,i)=>bunyiNada(f,0.22,'triangle',0.15,i*0.15)); }
+function tesMusikBaru(){ musikBenar(); setTimeout(musikMenang,600); }
+let laguCeria=[523,659,784,659,880,784,659,523,523,659,784,880,1046,880,784,659];
+function putarLagu(){
+  if(!musikJalan) return;
+  let nada=laguCeria[idxLagu % laguCeria.length];
+  bunyiNada(nada,0.28,'triangle',0.06,0);
+  idxLagu++;
+}
+function toggleMusikLatar(){
+  buatCtx();
+  musikJalan=!musikJalan;
+  document.getElementById('btnMusikLatar').innerText=musikJalan?'🎵 MUSIK: ON':'🎵 MUSIK: OFF';
+  if(musikJalan){ putarLagu(); timerMusik=setInterval(putarLagu,320); }
+  else{ clearInterval(timerMusik); }
+}
+// Otomatis bunyi efek tanpa ubah fungsi lama - baca tulisan di layar
+let observerMusik=new MutationObserver(()=>{
+  let teks=document.body.innerText||'';
+  // Cek pesan terakhir saja supaya kada bunyi terus
+  let pesan=(document.getElementById('pesanGame500')?.innerText||'')+' '+(document.getElementById('pesanTT')?.innerText||'')+' '+(document.getElementById('pesanBalap')?.innerText||'')+' '+(document.getElementById('pesanLogika')?.innerText||'');
+  if(window._terakhirMusik===pesan) return;
+  window._terakhirMusik=pesan;
+  if(pesan.includes('MENANG')||pesan.includes('JUARA')||pesan.includes('HEBAT! Pian JUARA')) musikMenang();
+  else if(pesan.includes('BETUL')||pesan.includes('BENAR')) musikBenar();
+  else if(pesan.includes('Belum tepat')||pesan.includes('Salah!')||pesan.includes('Belum tepat')) musikSalah();
+});
+observerMusik.observe(document.body,{childList:true,subtree:true,characterData:true});
+</script>
+<!-- === AKHIR TAMBAHAN MUSIK === -->
+</body></html>
