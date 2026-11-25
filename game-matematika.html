@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🎮🍎 Tembak Buah Meriam - SDN Kayakah</title>
+<style>
+*{box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483,#e94560,#ff6b6b);background-size:400% 400%;animation:pel 10s ease infinite;margin:0;padding:4px}
+@keyframes pel{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#menuScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;height:100%;position:relative;overflow:auto}
+#menuScreen::before{content:'☀️ 🌈 ☁️ 🦋';position:absolute;top:4px;left:0;right:0;font-size:24px;letter-spacing:14px}
+#menuScreen::after{content:'🎮 🕹️ 🎲 🍎 🍌 🍇';position:absolute;bottom:4px;left:0;right:0;font-size:22px;letter-spacing:10px}
+#menuBox{background:linear-gradient(180deg,#2b2d42,#1a1a2e);border:4px solid #00f5d4;border-radius:24px;padding:10px;max-width:680px;width:100%;box-shadow:0 0 0 4px #ff006e,0 0 0 8px #ffbe0b,0 0 30px rgba(0,245,212,.8);position:relative;z-index:2}
+#menuBox h1{font-size:22px;margin:2px;color:white;text-shadow:3px 3px 0 #ff006e,-1px -1px 0 #00f5d4;background:linear-gradient(90deg,#ff006e,#ffbe0b,#00f5d4,#8338ec,#ff006e);background-size:300% 100%;animation:pel 3s linear infinite;padding:8px;border-radius:18px;border:3px solid white}
+#menuBox h2{font-size:12px;color:#00f5d4;margin:6px 0 3px;text-shadow:1px 1px 0 #000}
+.pilihMenu{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.pilihMenu button{border:3px solid white;padding:6px 10px;border-radius:18px;font-weight:900;cursor:pointer;color:white;font-size:12px;box-shadow:0 4px 0 rgba(0,0,0,.5),inset 0 -3px 0 rgba(0,0,0,.25)}
+.pilihMenu button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.5)}
+.pilihMenu button.aktif{outline:3px solid #00f5d4;transform:scale(1.05);box-shadow:0 0 12px #00f5d4}
+#modePilih{display:flex;gap:10px;justify-content:center}
+.kartuMode{background:white;border:4px solid #ccc;border-radius:18px;padding:8px 6px;width:160px;cursor:pointer;color:#333;box-shadow:0 5px 0 rgba(0,0,0,.4)}
+.kartuMode:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.4)}
+.kartuMode.aktif{border-color:#00f5d4;outline:3px solid #00f5d4;transform:scale(1.04);box-shadow:0 0 16px #00f5d4}
+.kartuMode .gambar{font-size:44px;line-height:1;display:block}
+.kartuMode .judul{font-size:15px;font-weight:900;margin:4px 0 2px}
+.kartuMode .ket{font-size:10px;font-weight:700;color:#666;line-height:1.3}
+.kartuMode.satu .judul{color:#0077b6}
+.kartuMode.dua .judul{color:#d90429}
+#btnMulaiMenu{background:linear-gradient(180deg,#ffbe0b,#fb5607);color:white;border:3px solid white;padding:9px 30px;border-radius:22px;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 5px 0 #7a2e00,inset 0 -3px 0 rgba(0,0,0,.25);margin-top:10px;width:100%;text-shadow:2px 2px 0 rgba(0,0,0,.4)}
+#btnMulaiMenu:active{transform:translateY(3px);box-shadow:0 1px 0 #7a2e00}
+#ketPilihan{background:#fff;color:#8338ec;padding:5px;border-radius:10px;font-weight:900;font-size:11px;margin-top:6px;border:3px dashed #ff006e}
+#gameScreen{display:none;flex-direction:column;padding:3px;max-width:520px;margin:0 auto;height:100vh;height:100dvh;gap:4px;overflow:hidden}
+#barGame{display:flex;gap:4px;align-items:center;flex-shrink:0;height:30px}
+#barGame button,#barGame span{border:2px solid white;border-radius:12px;padding:4px 8px;font-weight:900;font-size:11px;box-shadow:0 2px 0 rgba(0,0,0,.4)}
+#skorGame{background:linear-gradient(180deg,#8338ec,#3a0ca3);color:white;flex:1}
+#lolosGame{background:linear-gradient(180deg,#ff006e,#ff4d6d);color:white}
+#btnKembali{background:linear-gradient(180deg,#ff006e,#c9184a);color:white;cursor:pointer}
+#btnMusikGame{background:linear-gradient(180deg,#00b4d8,#0077b6);color:white;cursor:pointer}
+#arena{position:relative;flex:1 1 auto;min-height:180px;background:linear-gradient(180deg,#48cae4,#90e0ef,#caf0f8,#fef9c3);border-radius:16px;border:3px solid #ffbe0b;overflow:hidden;margin:0}
+#arena::before{content:'☀️ 🌈 ☁️';position:absolute;top:2px;left:6px;font-size:18px;z-index:1}
+#arena::after{content:'🏰 🌳 🦋';position:absolute;top:2px;right:6px;font-size:16px;z-index:1}
+#tanah{position:absolute;bottom:0;left:0;right:0;height:18px;background:linear-gradient(90deg,#7f5539,#b08968,#7f5539);border-top:2px solid #5a3a1a;line-height:18px;font-size:10px;z-index:2;color:white;text-shadow:1px 1px 0 #000}
+.buah{position:absolute;user-select:none;text-align:center;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.3));z-index:3;display:flex;flex-direction:column;align-items:center;line-height:1}
+.buah .icon{font-size:32px}
+.buah .soal{font-size:12px;font-weight:900;color:#111;background:linear-gradient(180deg,#fff,#ffbe0b);padding:2px 6px;border-radius:10px;border:2px solid #ff006e;margin-top:1px;white-space:nowrap}
+.buah.meledak{animation:ledak .35s forwards}
+@keyframes ledak{0%{transform:scale(1)}50%{transform:scale(1.5) rotate(15deg);opacity:.8}100%{transform:scale(2);opacity:0}}
+.efek{position:absolute;font-size:12px;font-weight:900;pointer-events:none;animation:naik 1s forwards;z-index:10;text-shadow:1px 1px 0 white}
+@keyframes naik{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-40px);opacity:0}}
+#meriam{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;pointer-events:none}
+#laras{width:11px;height:15px;background:linear-gradient(90deg,#adb5bd,#343a40,#adb5bd);border-radius:5px 5px 0 0;margin:0 auto;border:2px solid #111;position:relative}
+#laras::after{content:'';position:absolute;top:-3px;left:2px;width:5px;height:4px;background:#111;border-radius:50%}
+#roda{width:46px;height:15px;background:linear-gradient(180deg,#ffbe0b,#fb5607);border-radius:10px;margin:-1px auto 0;border:2px solid #7a2e00}
+#roda::before,#roda::after{content:'⭐';position:absolute;top:-2px;font-size:10px}
+#roda::before{left:3px}#roda::after{right:3px}
+#meriam.nembak #laras{animation:recoil .3s}
+@keyframes recoil{0%{transform:translateY(0)}50%{transform:translateY(4px)}100%{transform:translateY(0)}}
+.peluru{position:absolute;font-size:13px;z-index:6;pointer-events:none;transition:all .4s ease}
+#panelBawah{background:linear-gradient(180deg,#2b2d42,#1a1a2e);border:2px solid #00f5d4;border-radius:16px;padding:3px;overflow:hidden;flex-shrink:0}
+#tampilanJawab{font-size:18px;font-weight:900;color:#00f5d4;background:#000;padding:3px;border:2px solid #ffbe0b;border-radius:10px;min-height:26px;letter-spacing:5px;text-shadow:0 0 8px #00f5d4}
+#tampilanJawab.salah{animation:goyangSalah .4s;background:#ff006e;color:white;text-shadow:none}
+@keyframes goyangSalah{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px}
+#keypad button{font-size:18px;font-weight:900;padding:4px 0;border:2px solid white;border-radius:50%;color:white;cursor:pointer;font-family:'Comic Sans MS',Arial,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.4);box-shadow:0 3px 0 rgba(0,0,0,.5),inset 0 -3px 0 rgba(0,0,0,.25);width:100%;height:32px;line-height:1}
+#keypad button:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.5)}
+#keypad button:nth-child(1){background:radial-gradient(circle at 30% 30%,#ff8fa3,#ff006e)}
+#keypad button:nth-child(2){background:radial-gradient(circle at 30% 30%,#ffd60a,#ffbe0b)}
+#keypad button:nth-child(3){background:radial-gradient(circle at 30% 30%,#80ed99,#06d6a0)}
+#keypad button:nth-child(4){background:radial-gradient(circle at 30% 30%,#90e0ef,#00b4d8)}
+#keypad button:nth-child(5){background:radial-gradient(circle at 30% 30%,#c77dff,#8338ec)}
+#keypad button:nth-child(6){background:radial-gradient(circle at 30% 30%,#ffafcc,#ff4d6d)}
+#keypad button:nth-child(7){background:radial-gradient(circle at 30% 30%,#f9c74f,#f9844a)}
+#keypad button:nth-child(8){background:radial-gradient(circle at 30% 30%,#4cc9f0,#4361ee)}
+#keypad button:nth-child(9){background:radial-gradient(circle at 30% 30%,#b5179e,#7209b7)}
+#keypad button.hapus{background:radial-gradient(circle at 30% 30%,#ff9f1c,#e71d36)!important;font-size:12px;border-radius:16px}
+#keypad button:nth-child(11){background:radial-gradient(circle at 30% 30%,#8ac926,#2a9d8f)}
+#keypad button:nth-child(12){background:radial-gradient(circle at 30% 30%,#adb5bd,#495057)}
+#wrapBawah{display:flex;gap:6px;justify-content:center;align-items:center;flex-shrink:0;height:36px}
+#btnTembak{background:linear-gradient(180deg,#ff006e,#c9184a);color:white;border:2px solid white;border-radius:50px;padding:6px 18px;font-weight:900;font-size:15px;cursor:pointer;min-width:150px;box-shadow:0 3px 0 #7a0a2a;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
+#btnTembak:active{transform:translateY(2px);box-shadow:0 1px 0 #7a0a2a}
+#btnUlang{background:linear-gradient(180deg,#06d6a0,#118ab2);color:white;border:2px solid white;border-radius:50px;padding:6px 12px;font-weight:900;font-size:13px;cursor:pointer;box-shadow:0 3px 0 #073b4c;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
+#btnUlang:active{transform:translateY(2px);box-shadow:0 1px 0 #073b4c}
+#btnUlang.menyala{animation:kedip 0.8s infinite}
+@keyframes kedip{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+#pesanGame{font-size:10px;font-weight:900;color:#fff;min-height:12px;margin:1px;flex-shrink:0;background:rgba(0,0,0,.5);border-radius:8px;padding:2px;border:2px solid #00f5d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ===== MODE 2 ORANG - FINAL, KADA SCROLL ===== */
+#gameScreen2{display:none;flex-direction:column;padding:4px;height:100vh;height:100dvh;gap:4px;overflow:hidden;max-width:1400px;margin:0 auto}
+#barDua{display:flex;gap:6px;align-items:center;flex-shrink:0;height:32px;overflow:hidden}
+#barDua button{border:2px solid white;border-radius:12px;padding:5px 12px;font-weight:900;font-size:12px;box-shadow:0 2px 0 rgba(0,0,0,.4);cursor:pointer;color:white;flex-shrink:0;white-space:nowrap}
+#btnKembali2{background:linear-gradient(180deg,#ff006e,#c9184a)}
+#btnMusik2{background:linear-gradient(180deg,#00b4d8,#0077b6)}
+#btnUlang2{background:linear-gradient(180deg,#06d6a0,#118ab2)}
+#pesanDua{flex:1;background:rgba(0,0,0,.6);border:2px solid #ffbe0b;border-radius:10px;padding:5px 8px;font-weight:900;font-size:12px;height:28px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+#wrapDua{display:flex;gap:8px;flex:1;min-height:0;overflow:hidden}
+.panelPemain{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;background:rgba(0,0,0,.25);border-radius:16px;padding:4px;border:3px solid white;overflow:hidden}
+.panelPemain.p1{border-color:#00b4d8;box-shadow:0 0 10px #00b4d8}
+.panelPemain.p2{border-color:#ff006e;box-shadow:0 0 10px #ff006e}
+.barPemain{display:flex;gap:5px;align-items:center;flex-shrink:0}
+.namaPemain{flex:1;font-weight:900;font-size:13px;padding:4px;border-radius:10px;border:2px solid white;text-shadow:1px 1px 0 #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p1 .namaPemain{background:linear-gradient(180deg,#00b4d8,#0077b6)}
+.p2 .namaPemain{background:linear-gradient(180deg,#ff006e,#c9184a)}
+.skorPemain{font-weight:900;font-size:12px;background:#fff;color:#111;padding:4px 8px;border-radius:10px;border:2px solid #ffbe0b;white-space:nowrap;flex-shrink:0}
+.lolosPemain{font-size:13px;background:#fff;padding:3px 6px;border-radius:10px;border:2px solid #ff006e;white-space:nowrap;flex-shrink:0}
+.arenaDua{position:relative;flex:1;min-height:80px;background:linear-gradient(180deg,#48cae4,#90e0ef,#caf0f8,#fef9c3);border-radius:12px;border:3px solid #ffbe0b;overflow:hidden}
+.arenaDua::before{content:'☀️ 🌈';position:absolute;top:2px;left:6px;font-size:16px;z-index:1}
+.arenaDua::after{content:'🏰 🌳';position:absolute;top:2px;right:6px;font-size:16px;z-index:1}
+.tanahDua{position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(90deg,#7f5539,#b08968,#7f5539);border-top:2px solid #5a3a1a;line-height:16px;font-size:9px;z-index:2;color:white;text-shadow:1px 1px 0 #000}
+.meriamDua{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;pointer-events:none}
+.meriamDua .larasDua{width:11px;height:15px;background:linear-gradient(90deg,#adb5bd,#343a40,#adb5bd);border-radius:5px 5px 0 0;margin:0 auto;border:2px solid #111}
+.meriamDua .rodaDua{width:46px;height:15px;background:linear-gradient(180deg,#ffbe0b,#fb5607);border-radius:10px;margin:-1px auto 0;border:2px solid #7a2e00}
+.meriamDua.nembak .larasDua{animation:recoil .3s}
+.panelBawahDua{background:linear-gradient(180deg,#2b2d42,#1a1a2e);border:2px solid #00f5d4;border-radius:12px;padding:3px;flex-shrink:0}
+.tampilanDua{font-size:18px;font-weight:900;color:#00f5d4;background:#000;padding:2px;border:2px solid #ffbe0b;border-radius:8px;min-height:26px;letter-spacing:6px;text-shadow:0 0 8px #00f5d4}
+.tampilanDua.salah{animation:goyangSalah .4s;background:#ff006e;color:white;text-shadow:none}
+.keypadDua{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px}
+.keypadDua button{font-size:18px;font-weight:900;padding:3px 0;border:2px solid white;border-radius:50%;color:white;cursor:pointer;font-family:'Comic Sans MS',Arial,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.4);box-shadow:0 3px 0 rgba(0,0,0,.5),inset 0 -3px 0 rgba(0,0,0,.25);width:100%;height:34px;line-height:1;touch-action:manipulation}
+.keypadDua button:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.5)}
+.keypadDua button:nth-child(1){background:radial-gradient(circle at 30% 30%,#ff8fa3,#ff006e)}
+.keypadDua button:nth-child(2){background:radial-gradient(circle at 30% 30%,#ffd60a,#ffbe0b)}
+.keypadDua button:nth-child(3){background:radial-gradient(circle at 30% 30%,#80ed99,#06d6a0)}
+.keypadDua button:nth-child(4){background:radial-gradient(circle at 30% 30%,#90e0ef,#00b4d8)}
+.keypadDua button:nth-child(5){background:radial-gradient(circle at 30% 30%,#c77dff,#8338ec)}
+.keypadDua button:nth-child(6){background:radial-gradient(circle at 30% 30%,#ffafcc,#ff4d6d)}
+.keypadDua button:nth-child(7){background:radial-gradient(circle at 30% 30%,#f9c74f,#f9844a)}
+.keypadDua button:nth-child(8){background:radial-gradient(circle at 30% 30%,#4cc9f0,#4361ee)}
+.keypadDua button:nth-child(9){background:radial-gradient(circle at 30% 30%,#b5179e,#7209b7)}
+.keypadDua button.hapus{background:radial-gradient(circle at 30% 30%,#ff9f1c,#e71d36)!important;font-size:12px;border-radius:14px}
+.keypadDua button:nth-child(11){background:radial-gradient(circle at 30% 30%,#8ac926,#2a9d8f)}
+.keypadDua button:nth-child(12){background:radial-gradient(circle at 30% 30%,#adb5bd,#495057)}
+.wrapBawahDua{display:flex;gap:6px;justify-content:center;flex-shrink:0}
+.btnTembakDua{flex:1;background:linear-gradient(180deg,#ff006e,#c9184a);color:white;border:2px solid white;border-radius:50px;padding:6px;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 3px 0 #7a0a2a;text-shadow:1px 1px 0 rgba(0,0,0,.3);touch-action:manipulation}
+.btnTembakDua:active{transform:translateY(2px);box-shadow:0 1px 0 #7a0a2a}
+</style></head><body>
+
+<div id="menuScreen">
+<div id="menuBox">
+<h1>🎮🍎 TEMBAK BUAH MERIAM! 🏆</h1>
+<p style="font-weight:900;color:#ffbe0b;margin:2px">🕹️ SDN Kayakah 🎮</p>
+<p style="font-weight:900;color:#fff;font-size:11px;margin:1px 0 2px;text-shadow:1px 1px 0 #000">👨‍🏫 Oleh: Wahyu Aji, S.Pd.Jas</p>
+<h2>1️⃣ Pilih Kecepatan</h2>
+<div class="pilihMenu" id="katPilih">
+<button style="background:linear-gradient(180deg,#06d6a0,#118ab2)" onclick="pilihKategori('mudah',this)" class="aktif">🐢 MUDAH</button>
+<button style="background:linear-gradient(180deg,#ffbe0b,#fb5607)" onclick="pilihKategori('sedang',this)">🐇 SEDANG</button>
+<button style="background:linear-gradient(180deg,#ff006e,#c9184a)" onclick="pilihKategori('sulit',this)">🚀 SULIT</button>
+</div>
+<h2>2️⃣ Pilih Operasi Hitung</h2>
+<div class="pilihMenu" id="opPilih">
+<button style="background:linear-gradient(180deg,#06d6a0,#118ab2)" onclick="pilihOperasi('tambah',this)">➕ Tambah</button>
+<button style="background:linear-gradient(180deg,#ff006e,#c9184a)" onclick="pilihOperasi('kurang',this)">➖ Kurang</button>
+<button style="background:linear-gradient(180deg,#4cc9f0,#4361ee)" onclick="pilihOperasi('kali',this)">✖️ Kali</button>
+<button style="background:linear-gradient(180deg,#8338ec,#7209b7)" onclick="pilihOperasi('bagi',this)">➗ Bagi</button>
+<button style="background:linear-gradient(180deg,#ffbe0b,#fb5607)" onclick="pilihOperasi('campur',this)" class="aktif">🎲 Campur</button>
+</div>
+<h2>3️⃣ Pilih Jenis Angka</h2>
+<div class="pilihMenu" id="skalaPilih">
+<button style="background:linear-gradient(180deg,#00b4d8,#0077b6)" onclick="pilihSkala('kecil',this)">🔢 Satuan Kecil</button>
+<button style="background:linear-gradient(180deg,#8338ec,#7209b7)" onclick="pilihSkala('puluhan',this)">🔟 Puluhan</button>
+<button style="background:linear-gradient(180deg,#ff006e,#ff4d6d)" onclick="pilihSkala('campur',this)" class="aktif">🎲 Campur Kecil + Puluhan</button>
+</div>
+<h2>4️⃣ Pilih Pemain</h2>
+<div id="modePilih">
+<div class="kartuMode satu aktif" onclick="pilihMode('satu',this)">
+<span class="gambar">🧒</span>
+<div class="judul">👤 1 ORANG</div>
+<div class="ket">Main sendiri<br>Layar penuh</div>
+</div>
+<div class="kartuMode dua" onclick="pilihMode('dua',this)">
+<span class="gambar">👦👧</span>
+<div class="judul">👥 2 ORANG</div>
+<div class="ket">Bertanding!<br>Layar terbagi 2<br>Siapa habis 5 🍎 kalah!</div>
+</div>
+</div>
+<div id="ketPilihan">🎲 Campur Kecil + Puluhan! Hasil selalu bulat, kada ada koma!</div>
+<button id="btnMulaiMenu" onclick="keGame()">▶ START GAME! 🎮</button>
+<a href="index.html" style="display:block;margin-top:6px;color:#ffbe0b;font-weight:900;text-decoration:none;font-size:12px">⬅️ Kembali ke Beranda</a>
+</div>
+</div>
+
+<!-- MODE 1 ORANG -->
+<div id="gameScreen">
+<div id="barGame">
+<button id="btnKembali" onclick="keMenu()">⬅️ MENU</button>
+<span id="skorGame">Skor: 0</span>
+<span id="lolosGame">🍎🍎🍎🍎🍎</span>
+<button id="btnMusikGame" onclick="toggleMusik()">🎵 ON</button>
+</div>
+<div id="arena">
+<div id="meriam"><div id="laras"></div><div id="roda"></div></div>
+<div id="tanah">🌿 🧺 🌿 🍎 🍌 🍇 🌿 🧺 🌿</div>
+</div>
+<div id="panelBawah">
+<div id="tampilanJawab">......</div>
+<div id="keypad">
+<button onclick="tekanAngka('1')">1</button>
+<button onclick="tekanAngka('2')">2</button>
+<button onclick="tekanAngka('3')">3</button>
+<button onclick="tekanAngka('4')">4</button>
+<button onclick="tekanAngka('5')">5</button>
+<button onclick="tekanAngka('6')">6</button>
+<button onclick="tekanAngka('7')">7</button>
+<button onclick="tekanAngka('8')">8</button>
+<button onclick="tekanAngka('9')">9</button>
+<button class="hapus" onclick="hapusAngka()">Hapus</button>
+<button onclick="tekanAngka('0')">0</button>
+<button onclick="tekanAngka('.')">.</button>
+</div>
+</div>
+<div id="wrapBawah"><button id="btnTembak" onclick="tembak()">💥 TEMBAK!</button><button id="btnUlang" onclick="ulangGame()">🔁 ULANG</button></div>
+<div id="pesanGame">🎮 Ketik jawaban dulu, lalu pencet TEMBAK! 🍎</div>
+</div>
+
+<!-- MODE 2 ORANG - FINAL KADA SCROLL -->
+<div id="gameScreen2">
+<div id="barDua">
+<button id="btnKembali2" onclick="keMenu()">⬅️ MENU</button>
+<div id="pesanDua">🏆 Bertanding! Siapa habis 5 🍎, kalah!</div>
+<button id="btnMusik2" onclick="toggleMusik()">🎵 ON</button>
+<button id="btnUlang2" onclick="ulangGameDua()">🔁 ULANG</button>
+</div>
+<div id="wrapDua">
+<div class="panelPemain p1">
+<div class="barPemain"><div class="namaPemain">🔵 PEMAIN 1</div><div class="skorPemain" id="skor1">Skor: 0</div><div class="lolosPemain" id="lolos1">🍎🍎🍎🍎🍎</div></div>
+<div class="arenaDua" id="arena1"><div class="meriamDua" id="meriam1"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="panelBawahDua"><div class="tampilanDua" id="jawab1">......</div><div class="keypadDua">
+<button onclick="tekanAngka2(0,'1')">1</button><button onclick="tekanAngka2(0,'2')">2</button><button onclick="tekanAngka2(0,'3')">3</button>
+<button onclick="tekanAngka2(0,'4')">4</button><button onclick="tekanAngka2(0,'5')">5</button><button onclick="tekanAngka2(0,'6')">6</button>
+<button onclick="tekanAngka2(0,'7')">7</button><button onclick="tekanAngka2(0,'8')">8</button><button onclick="tekanAngka2(0,'9')">9</button>
+<button class="hapus" onclick="hapusAngka2(0)">Hapus</button><button onclick="tekanAngka2(0,'0')">0</button><button onclick="tekanAngka2(0,'.')">.</button>
+</div></div>
+<div class="wrapBawahDua"><button class="btnTembakDua" onclick="tembak2(0)">💥 TEMBAK!</button></div>
+</div>
+<div class="panelPemain p2">
+<div class="barPemain"><div class="namaPemain">🔴 PEMAIN 2</div><div class="skorPemain" id="skor2">Skor: 0</div><div class="lolosPemain" id="lolos2">🍎🍎🍎🍎🍎</div></div>
+<div class="arenaDua" id="arena2"><div class="meriamDua" id="meriam2"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="panelBawahDua"><div class="tampilanDua" id="jawab2">......</div><div class="keypadDua">
+<button onclick="tekanAngka2(1,'1')">1</button><button onclick="tekanAngka2(1,'2')">2</button><button onclick="tekanAngka2(1,'3')">3</button>
+<button onclick="tekanAngka2(1,'4')">4</button><button onclick="tekanAngka2(1,'5')">5</button><button onclick="tekanAngka2(1,'6')">6</button>
+<button onclick="tekanAngka2(1,'7')">7</button><button onclick="tekanAngka2(1,'8')">8</button><button onclick="tekanAngka2(1,'9')">9</button>
+<button class="hapus" onclick="hapusAngka2(1)">Hapus</button><button onclick="tekanAngka2(1,'0')">0</button><button onclick="tekanAngka2(1,'.')">.</button>
+</div></div>
+<div class="wrapBawahDua"><button class="btnTembakDua" onclick="tembak2(1)">💥 TEMBAK!</button></div>
+</div>
+</div>
+</div>
+
+<script>
+let kategori='mudah', operasi='campur', skala='campur', mode='satu', skor=0, nyawa=5, benarCount=0, lolos=0, main=false, timerSpawn=null, timerJatuh=null, buahList=[], jawabanKetik='', level=1;
+let daftarBuah=['🍎','🍌','🍇','🍊','🍓','🥭','🍉','🍍','🥥','🍒','🍑','🥝'];
+let namaLevel={1:'Pemula',2:'Jago',3:'Master',4:'Legenda',5:'Raja Buah 👑'};
+let batasLevel={1:30,2:70,3:120,4:180,5:9999};
+let dataKategori={mudah:{nyawa:5,kec:0.35},sedang:{nyawa:5,kec:0.6},sulit:{nyawa:5,kec:0.95}};
+let namaSkala={kecil:'🔢 Satuan Kecil - Soal kecil, hasil bisa puluhan! Hasil bulat, kada ada koma!',puluhan:'🔟 Puluhan - Soal puluhan! Hasil bulat, kada ada koma!',campur:'🎲 Campur Kecil + Puluhan! Hasil selalu bulat, kada ada koma!'};
+function updateKet(){document.getElementById('ketPilihan').innerText=namaSkala[skala];}
+function pilihKategori(k,el){bunyiKlik();kategori=k;document.querySelectorAll('#katPilih button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');updateKet();}
+function pilihOperasi(o,el){bunyiKlik();operasi=o;document.querySelectorAll('#opPilih button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');updateKet();}
+function pilihSkala(s,el){bunyiKlik();skala=s;document.querySelectorAll('#skalaPilih button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');updateKet();}
+function pilihMode(m,el){bunyiKlik();mode=m;document.querySelectorAll('.kartuMode').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');}
+function keGame(){
+document.getElementById('menuScreen').style.display='none';
+if(mode==='dua'){document.getElementById('gameScreen').style.display='none';document.getElementById('gameScreen2').style.display='flex';mulaiGameDua();}
+else{document.getElementById('gameScreen2').style.display='none';document.getElementById('gameScreen').style.display='flex';mulaiGame();}
+window.scrollTo(0,0);
+}
+function keMenu(){
+main=false;mainDua=false;clearInterval(timerSpawn);clearInterval(timerJatuh);clearInterval(timerSpawnDua);clearInterval(timerJatuhDua);
+buahList.forEach(b=>b.el.remove());buahList=[];
+pemain.forEach(p=>{p.buah.forEach(b=>b.el.remove());p.buah=[];});
+document.getElementById('gameScreen').style.display='none';document.getElementById('gameScreen2').style.display='none';document.getElementById('menuScreen').style.display='flex';window.scrollTo(0,0);
+}
+function ulangGame(){bunyiKlik();document.getElementById('btnUlang').classList.remove('menyala');mulaiGame();}
+let ctxMusik=null, musikOn=true, timerMusik=null, nadaKe=0;
+let lagu=[523,659,784,659,880,784,659,523,523,659,784,880,1046,880,784,659];
+function mulaiMusik(){if(!musikOn) return;try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();clearInterval(timerMusik);timerMusik=setInterval(()=>{if(!musikOn) return;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='triangle';o.frequency.value=lagu[nadaKe%lagu.length];g.gain.value=0.06;o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.22);nadaKe++;},260);}catch(e){}}
+function toggleMusik(){musikOn=!musikOn;document.getElementById('btnMusikGame').innerText=musikOn?'🎵 ON':'🔇 OFF';document.getElementById('btnMusik2').innerText=musikOn?'🎵 ON':'🔇 OFF';if(musikOn) mulaiMusik(); else clearInterval(timerMusik);}
+function bunyiBum(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();let t=ctxMusik.currentTime;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sine';o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(30,t+0.45);g.gain.setValueAtTime(0.5,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.5);o.connect(g);g.connect(ctxMusik.destination);o.start(t);o.stop(t+0.5);let len=ctxMusik.sampleRate*0.3;let buf=ctxMusik.createBuffer(1,len,ctxMusik.sampleRate);let d=buf.getChannelData(0);for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*(1-i/len);let src=ctxMusik.createBufferSource();src.buffer=buf;let g2=ctxMusik.createGain();g2.gain.value=0.3;src.connect(g2);g2.connect(ctxMusik.destination);src.start();}catch(e){}}
+function bunyiSalah(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();let t=ctxMusik.currentTime;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sawtooth';o.frequency.setValueAtTime(140,t);o.frequency.setValueAtTime(140,t+0.5);g.gain.setValueAtTime(0.18,t);g.gain.setValueAtTime(0.18,t+0.5);g.gain.exponentialRampToValueAtTime(0.001,t+0.55);o.connect(g);g.connect(ctxMusik.destination);o.start(t);o.stop(t+0.55);}catch(e){}}
+function bunyiKlik(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sine';o.frequency.value=800;g.gain.value=0.05;o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.07);}catch(e){}}
+function bunyiLolos(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sawtooth';o.frequency.value=120;g.gain.value=0.08;o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.3);}catch(e){}}
+function hitungSoal(teks){let p=teks.split(' ');let a=parseFloat(p[0]),b=parseFloat(p[2]),o=p[1];if(o==='+')return a+b;if(o==='-')return a-b;if(o==='x')return a*b;if(o===':')return a/b;return 0;}
+function updateInfo(){document.getElementById('skorGame').innerText='Skor: '+skor+' | Lv '+level;let s='';for(let i=1;i<=5;i++) s+=i<=lolos?'💔':'🍎';document.getElementById('lolosGame').innerText=s;}
+function updateLevel(){let batas=batasLevel[level];if(skor>=batas && level<5){level++;document.getElementById('pesanGame').innerText='🎉 Naik Level '+level+'!';updateLevel();restartSpawn();}}
+function updateJawab(){document.getElementById('tampilanJawab').innerText=jawabanKetik===''?'......':jawabanKetik;}
+function tekanAngka(n){bunyiKlik();if(!main) return;if(jawabanKetik.length>=3) return;jawabanKetik+=n;updateJawab();}
+function hapusAngka(){bunyiKlik();jawabanKetik=jawabanKetik.slice(0,-1);updateJawab();}
+function efek(x,y,teks){let arena=document.getElementById('arena');let e=document.createElement('div');e.className='efek';e.innerText=teks;e.style.left=x+'px';e.style.top=y+'px';e.style.color=teks.includes('BENAR')?'#16a34a':'#ef4444';arena.appendChild(e);setTimeout(()=>e.remove(),1000);}
+function animasiPeluru(tx,ty,cb){let arena=document.getElementById('arena');let m=document.getElementById('meriam');m.classList.add('nembak');setTimeout(()=>m.classList.remove('nembak'),300);let p=document.createElement('div');p.className='peluru';p.innerText='💣';p.style.left='48%';p.style.top='88%';arena.appendChild(p);setTimeout(()=>{p.style.left=tx+'px';p.style.top=ty+'px';},20);setTimeout(()=>{p.remove();if(cb) cb();},400);}
+function tembakOtomatis(data){let x=data.x,y=data.y;let benar=hitungSoal(data.teks);animasiPeluru(x+15,y+10,()=>{bunyiBum();skor+=10;benarCount++;data.el.classList.add('meledak');efek(x,y,'💥 BUUUM! +10');document.getElementById('pesanGame').innerText='💥 BUUUM! '+data.teks+' = '+benar+'!';let el=data.el;setTimeout(()=>el.remove(),350);buahList=buahList.filter(b=>b!==data);jawabanKetik='';updateJawab();updateInfo();updateLevel();});}
+function tembak(){
+if(!main) return;
+if(jawabanKetik===''||jawabanKetik==='.'){bunyiSalah();document.getElementById('pesanGame').innerText='📢 Ketik dulu angkanya!';let tj=document.getElementById('tampilanJawab');tj.classList.remove('salah');void tj.offsetWidth;tj.classList.add('salah');return;}
+let jawabUser=parseFloat(jawabanKetik);
+let cocok=buahList.find(b=>hitungSoal(b.teks)===jawabUser);
+if(cocok){tembakOtomatis(cocok);return;}
+bunyiSalah();document.getElementById('pesanGame').innerText='📢 Angka '+jawabUser+' kada ada!';
+let tj=document.getElementById('tampilanJawab');tj.classList.remove('salah');void tj.offsetWidth;tj.classList.add('salah');
+jawabanKetik='';updateJawab();
+}
+function buahLolos(data){lolos++;bunyiLolos();updateInfo();efek(data.x, document.getElementById('arena').clientHeight-80, '💔 LOLOS! '+lolos+'/5');document.getElementById('pesanGame').innerText='💔 Lolos '+lolos+'/5!';if(lolos>=5) gameOver();}
+function buatSoalKecil(op){
+let a,b,teks='';
+if(op==='tambah'){a=1+Math.floor(Math.random()*9);b=1+Math.floor(Math.random()*9);teks=a+' + '+b;}
+if(op==='kurang'){a=2+Math.floor(Math.random()*8);b=1+Math.floor(Math.random()*a);if(b>a)b=a;teks=a+' - '+b;}
+if(op==='kali'){a=1+Math.floor(Math.random()*9);b=1+Math.floor(Math.random()*9);teks=a+' x '+b;}
+if(op==='bagi'){b=1+Math.floor(Math.random()*9);let hasil=1+Math.floor(Math.random()*9);a=b*hasil;teks=a+' : '+b;}
+return teks;
+}
+function buatSoalPuluhan(op){
+let a,b,teks='';
+let maxHasil=[0,40,60,80,99,99][level];
+if(op==='tambah'){a=10+Math.floor(Math.random()*40);b=10+Math.floor(Math.random()*40);teks=a+' + '+b;}
+if(op==='kurang'){a=20+Math.floor(Math.random()*70);b=10+Math.floor(Math.random()*(a-10));if(b>=a)b=a-1;teks=a+' - '+b;}
+if(op==='kali'){a=11+Math.floor(Math.random()*9);b=2+Math.floor(Math.random()*8);teks=a+' x '+b;}
+if(op==='bagi'){b=2+Math.floor(Math.random()*8);let hasil=10+Math.floor(Math.random()*(Math.min(30,maxHasil)-10+1));a=b*hasil;teks=a+' : '+b;}
+return teks;
+}
+function buatBuahBaru(){
+let op=operasi; if(op==='campur') op=['tambah','kurang','kali','bagi'][Math.floor(Math.random()*4)];
+let modeSkala=skala; if(modeSkala==='campur') modeSkala=Math.random()<0.5?'kecil':'puluhan';
+if(modeSkala==='kecil') return buatSoalKecil(op);
+return buatSoalPuluhan(op);
+}
+function spawnBuah(){if(!main) return;let arena=document.getElementById('arena');let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.15;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};arena.appendChild(d);buahList.push(data);}
+function restartSpawn(){clearInterval(timerSpawn);timerSpawn=setInterval(spawnBuah,1900);}
+function mulaiGame(){mulaiMusik();skor=0;nyawa=5;benarCount=0;lolos=0;level=1;main=true;jawabanKetik='';buahList.forEach(b=>b.el.remove());buahList=[];document.getElementById('pesanGame').innerText='Ketik jawaban, lalu pencet Tembak!';updateJawab();updateInfo();clearInterval(timerSpawn);clearInterval(timerJatuh);restartSpawn();timerJatuh=setInterval(()=>{if(!main) return;buahList.forEach((b,idx)=>{b.y+=b.kecepatan;b.el.style.top=b.y+'px';let batasBawah=document.getElementById('arena').clientHeight-85;if(b.y>batasBawah){b.el.remove();buahList.splice(idx,1);buahLolos(b);}});},20);}
+function gameOver(){main=false;clearInterval(timerSpawn);clearInterval(timerJatuh);buahList.forEach(b=>b.el.remove());buahList=[];document.getElementById('pesanGame').innerText='🏁 GAME OVER! Skor '+skor+' | Lv '+level;document.getElementById('btnUlang').classList.add('menyala');updateInfo();}
+/* ===== LOGIKA 2 ORANG - PESAN PENDEK BIAR KADA SCROLL ===== */
+let mainDua=false, timerSpawnDua=null, timerJatuhDua=null;
+let pemain=[
+{nama:'PEMAIN 1',skor:0,lolos:0,jawaban:'',buah:[],arena:null,meriam:null,skorEl:null,lolosEl:null,jawabEl:null},
+{nama:'PEMAIN 2',skor:0,lolos:0,jawaban:'',buah:[],arena:null,meriam:null,skorEl:null,lolosEl:null,jawabEl:null}
+];
+function initPemain(){
+pemain[0].arena=document.getElementById('arena1');pemain[0].meriam=document.getElementById('meriam1');pemain[0].skorEl=document.getElementById('skor1');pemain[0].lolosEl=document.getElementById('lolos1');pemain[0].jawabEl=document.getElementById('jawab1');
+pemain[1].arena=document.getElementById('arena2');pemain[1].meriam=document.getElementById('meriam2');pemain[1].skorEl=document.getElementById('skor2');pemain[1].lolosEl=document.getElementById('lolos2');pemain[1].jawabEl=document.getElementById('jawab2');
+}
+function updateInfoDua(p){
+p.skorEl.innerText='Skor: '+p.skor;
+let s='';for(let i=1;i<=5;i++) s+=i<=p.lolos?'💔':'🍎';p.lolosEl.innerText=s;
+p.jawabEl.innerText=p.jawaban===''?'......':p.jawaban;
+}
+function tekanAngka2(idx,n){bunyiKlik();if(!mainDua) return;let p=pemain[idx];if(p.jawaban.length>=3) return;p.jawaban+=n;updateInfoDua(p);}
+function hapusAngka2(idx){bunyiKlik();let p=pemain[idx];p.jawaban=p.jawaban.slice(0,-1);updateInfoDua(p);}
+function efekDua(p,x,y,teks){let e=document.createElement('div');e.className='efek';e.innerText=teks;e.style.left=x+'px';e.style.top=y+'px';e.style.color='#16a34a';p.arena.appendChild(e);setTimeout(()=>e.remove(),1000);}
+function spawnBuahDua(){
+if(!mainDua) return;
+pemain.forEach(p=>{
+let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=p.arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.15;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};p.arena.appendChild(d);p.buah.push(data);
+});
+}
+function tembak2(idx){
+if(!mainDua) return;let p=pemain[idx];
+if(p.jawaban===''||p.jawaban==='.'){bunyiSalah();document.getElementById('pesanDua').innerText='📢 '+p.nama+'! Ketik dulu!';let tj=p.jawabEl;tj.classList.remove('salah');void tj.offsetWidth;tj.classList.add('salah');return;}
+let jawabUser=parseFloat(p.jawaban);
+let cocok=p.buah.find(b=>hitungSoal(b.teks)===jawabUser);
+if(!cocok){bunyiSalah();document.getElementById('pesanDua').innerText='📢 '+p.nama+'! '+jawabUser+' kada ada!';let tj=p.jawabEl;tj.classList.remove('salah');void tj.offsetWidth;tj.classList.add('salah');p.jawaban='';updateInfoDua(p);return;}
+let x=cocok.x,y=cocok.y,benar=hitungSoal(cocok.teks);
+p.meriam.classList.add('nembak');setTimeout(()=>p.meriam.classList.remove('nembak'),300);
+let pel=document.createElement('div');pel.className='peluru';pel.innerText='💣';pel.style.left='48%';pel.style.top='88%';p.arena.appendChild(pel);
+setTimeout(()=>{pel.style.left=x+'px';pel.style.top=y+'px';},20);
+setTimeout(()=>{
+pel.remove();bunyiBum();p.skor+=10;cocok.el.classList.add('meledak');efekDua(p,x,y,'💥 +10');
+document.getElementById('pesanDua').innerText='💥 '+p.nama+'! '+cocok.teks+' = '+benar;
+let el=cocok.el;setTimeout(()=>el.remove(),350);p.buah=p.buah.filter(b=>b!==cocok);p.jawaban='';updateInfoDua(p);
+},400);
+}
+function buahLolosDua(p,data){
+p.lolos++;bunyiLolos();updateInfoDua(p);
+document.getElementById('pesanDua').innerText='💔 '+p.nama+' lolos! '+p.lolos+'/5!';
+if(p.lolos>=5){
+let menang=p===pemain[0]?pemain[1]:pemain[0];
+gameOverDua(menang,p);
+}
+}
+function gameOverDua(menang,kalah){
+mainDua=false;clearInterval(timerSpawnDua);clearInterval(timerJatuhDua);
+pemain.forEach(pp=>{pp.buah.forEach(b=>b.el.remove());pp.buah=[];});
+document.getElementById('pesanDua').innerText='🏆 '+menang.nama+' MENANG! '+menang.skor+' vs '+kalah.skor;
+}
+function mulaiGameDua(){
+initPemain();mulaiMusik();mainDua=true;
+pemain.forEach(p=>{p.skor=0;p.lolos=0;p.jawaban='';p.buah.forEach(b=>b.el.remove());p.buah=[];updateInfoDua(p);});
+document.getElementById('pesanDua').innerText='🏆 Bertanding! Siapa habis 5 🍎, kalah!';
+clearInterval(timerSpawnDua);clearInterval(timerJatuhDua);
+timerSpawnDua=setInterval(spawnBuahDua,1900);
+timerJatuhDua=setInterval(()=>{
+if(!mainDua) return;
+pemain.forEach(p=>{
+p.buah.forEach((b,idx)=>{
+b.y+=b.kecepatan;b.el.style.top=b.y+'px';
+let batas=p.arena.clientHeight-85;
+if(b.y>batas){b.el.remove();p.buah.splice(idx,1);buahLolosDua(p,b);}
+});
+});
+},20);
+}
+function ulangGameDua(){bunyiKlik();mulaiGameDua();}
+updateJawab();updateInfo();updateKet();
+</script></body></html>
