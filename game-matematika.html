@@ -6,7 +6,7 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483,#e94560,#ff6b6b);background-size:400% 400%;animation:pel 10s ease infinite;margin:0;padding:4px}
 @keyframes pel{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-/* ===== BARU: HIASAN DI LUAR POP-UP - SAMPING BIRU JADI ADA ISI ===== */
+/* HIASAN LUAR - SUDAH BERSIH, KADA ADA BUDI/BIMO/SARI/BALON */
 .hiasanLuar{position:fixed;top:0;bottom:0;width:calc((100vw - 540px)/2);z-index:1;pointer-events:none;display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:20px 6px}
 .hiasanLuar.kiri{left:0}
 .hiasanLuar.kanan{right:0}
@@ -15,9 +15,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 .hiasanLuar .item:nth-child(3){animation-delay:1s}
 .hiasanLuar .emoji{font-size:64px;line-height:1;display:block}
 .hiasanLuar .teks{font-size:12px;font-weight:900;background:white;color:#333;border:2px solid #333;border-radius:12px;padding:3px 8px;display:inline-block;margin-top:4px;box-shadow:0 3px 0 #333}
-.hiasanLuar .balonLuar{font-size:44px;animation:balonNaik 2.5s ease-in-out infinite}
 @keyframes lompatAnak{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes balonNaik{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
 @media(max-width:900px){.hiasanLuar{display:none}}
 #menuScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;height:100%;position:relative;overflow:auto;z-index:2}
 #menuScreen::before{content:'☀️ 🌈 ☁️ 🦋';position:absolute;top:4px;left:0;right:0;font-size:24px;letter-spacing:14px}
@@ -72,17 +70,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #tampilanJawab{font-size:18px;font-weight:900;color:#00f5d4;background:#000;padding:3px;border:2px solid #ffbe0b;border-radius:10px;min-height:26px;letter-spacing:5px;text-shadow:0 0 8px #00f5d4}
 #tampilanJawab.salah{animation:goyangSalah .4s;background:#ff006e;color:white;text-shadow:none}
 @keyframes goyangSalah{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.karakterTaman{position:absolute;bottom:18px;z-index:4;pointer-events:none;text-align:center;line-height:1}
-.karakterTaman.kiri{left:2px}
-.karakterTaman.kanan{right:2px}
-.karakterTaman .anak{font-size:38px;display:block;animation:lompatAnak 1.6s ease-in-out infinite;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2))}
-.karakterTaman.kanan .anak{animation-delay:.5s}
-.karakterTaman .beruang{font-size:30px;display:block;margin-top:1px}
-.karakterTaman .balon{font-size:26px;display:block;animation:balonNaik 2.2s ease-in-out infinite}
-.karakterTaman .nama{font-size:8px;font-weight:900;background:white;color:#333;border:1.5px solid #333;border-radius:8px;padding:1px 4px;display:inline-block;margin-top:1px}
-/* PELANGI TENGAH DIHILANGKAN - TINGGAL YANG MEPET ATAS SAJA */
-.balonAtas{position:absolute;top:22px;font-size:16px;z-index:1;pointer-events:none;animation:balonNaik 2.5s ease-in-out infinite}
-.balonAtas.b1{left:28%} .balonAtas.b2{right:28%;animation-delay:.7s}
 #keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px}
 #keypad button{font-size:20px;font-weight:900;padding:0;border:3px solid #333;border-radius:12px;color:#333;cursor:pointer;font-family:'Comic Sans MS',Arial,sans-serif;text-shadow:0 1px 0 white;box-shadow:0 5px 0 #333,0 6px 8px rgba(0,0,0,.35);width:100%;height:42px;line-height:1;background:linear-gradient(180deg,#ffffff 0%,#e0e0e0 100%);transition:all .07s}
 #keypad button:active{transform:translateY(4px);box-shadow:0 1px 0 #333,0 2px 3px rgba(0,0,0,.3)}
@@ -154,19 +141,15 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 .btnTembakDua:active{transform:translateY(2px);box-shadow:0 1px 0 #7a0a2a}
 </style></head><body>
 
-<!-- HIASAN LUAR - DI LUAR POP-UP, SAMPING BIRU -->
+<!-- HIASAN LUAR - HANYA PELANGI, MATAHARI, BUAH, BUNGA, KUPU-KUPU. BUDI/BIMO/SARI/BALON SUDAH DIHAPUS -->
 <div class="hiasanLuar kiri">
   <div class="item"><span class="emoji">🌈</span><span class="teks">Taman Bermain</span></div>
-  <div class="item"><span class="emoji">🧒</span><span class="teks">Budi</span></div>
-  <div class="item"><span class="emoji">🐻</span><span class="teks">Bimo Beruang</span></div>
-  <div class="item"><span class="balonLuar">🎈🎈</span><span class="teks">Balon 1</span></div>
   <div class="item"><span class="emoji">🌸🌼</span><span class="teks">Bunga Ceria</span></div>
+  <div class="item"><span class="emoji">🍎🍌</span><span class="teks">Buah Segar</span></div>
 </div>
 <div class="hiasanLuar kanan">
   <div class="item"><span class="emoji">☀️</span><span class="teks">Matahari</span></div>
-  <div class="item"><span class="emoji">👧</span><span class="teks">Sari</span></div>
-  <div class="item"><span class="balonLuar">🎈🎈</span><span class="teks">Balon 2</span></div>
-  <div class="item"><span class="emoji">🍎🍌</span><span class="teks">Buah Segar</span></div>
+  <div class="item"><span class="emoji">🍓🥭</span><span class="teks">Buah Segar</span></div>
   <div class="item"><span class="emoji">🦋</span><span class="teks">Kupu-Kupu</span></div>
 </div>
 
@@ -221,10 +204,8 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 <span id="lolosGame">🍎🍎🍎🍎🍎</span>
 <button id="btnMusikGame" onclick="toggleMusik()">🎵 ON</button>
 </div>
+<!-- ARENA BERSIH - BUDI/BIMO/SARI + 4 BALON SUDAH DIHAPUS, KADA MENGHALANGI LAGI -->
 <div id="arena">
-<div class="balonAtas b1">🎈</div><div class="balonAtas b2">🎈</div>
-<div class="karakterTaman kiri"><span class="anak">🧒</span><span class="nama">Budi</span><span class="beruang">🐻</span><span class="nama">Bimo</span></div>
-<div class="karakterTaman kanan"><span class="balon">🎈🎈</span><span class="anak">👧</span><span class="nama">Sari</span><span class="nama" style="background:#BBDEFB">Balon Ceria</span></div>
 <div id="meriam"><div id="laras"></div><div id="roda"></div></div>
 <div id="tanah">🌿 🧺 🌿 🍎 🍌 🍇 🌿 🧺 🌿</div>
 </div>
@@ -259,7 +240,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 <div id="wrapDua">
 <div class="panelPemain p1">
 <div class="barPemain"><div class="namaPemain">🔵 PEMAIN 1</div><div class="skorPemain" id="skor1">Skor: 0</div><div class="lolosPemain" id="lolos1">🍎🍎🍎🍎🍎</div></div>
-<div class="arenaDua" id="arena1"><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">🧒</span><span class="nama">Budi</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="beruang" style="font-size:24px">🐻</span><span class="nama">Bimo</span></div><div class="meriamDua" id="meriam1"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="arenaDua" id="arena1"><div class="meriamDua" id="meriam1"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
 <div class="panelBawahDua"><div class="tampilanDua" id="jawab1">......</div><div class="keypadDua">
 <button onclick="tekanAngka2(0,'1')">1</button><button onclick="tekanAngka2(0,'2')">2</button><button onclick="tekanAngka2(0,'3')">3</button>
 <button onclick="tekanAngka2(0,'4')">4</button><button onclick="tekanAngka2(0,'5')">5</button><button onclick="tekanAngka2(0,'6')">6</button>
@@ -270,7 +251,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 </div>
 <div class="panelPemain p2">
 <div class="barPemain"><div class="namaPemain">🔴 PEMAIN 2</div><div class="skorPemain" id="skor2">Skor: 0</div><div class="lolosPemain" id="lolos2">🍎🍎🍎🍎🍎</div></div>
-<div class="arenaDua" id="arena2"><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">👧</span><span class="nama">Sari</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="balon" style="font-size:20px">🎈🎈</span><span class="nama">Balon</span></div><div class="meriamDua" id="meriam2"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="arenaDua" id="arena2"><div class="meriamDua" id="meriam2"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
 <div class="panelBawahDua"><div class="tampilanDua" id="jawab2">......</div><div class="keypadDua">
 <button onclick="tekanAngka2(1,'1')">1</button><button onclick="tekanAngka2(1,'2')">2</button><button onclick="tekanAngka2(1,'3')">3</button>
 <button onclick="tekanAngka2(1,'4')">4</button><button onclick="tekanAngka2(1,'5')">5</button><button onclick="tekanAngka2(1,'6')">6</button>
