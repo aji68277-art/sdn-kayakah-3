@@ -6,7 +6,20 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483,#e94560,#ff6b6b);background-size:400% 400%;animation:pel 10s ease infinite;margin:0;padding:4px}
 @keyframes pel{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-#menuScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;height:100%;position:relative;overflow:auto}
+/* ===== BARU: HIASAN DI LUAR POP-UP - SAMPING BIRU JADI ADA ISI ===== */
+.hiasanLuar{position:fixed;top:0;bottom:0;width:calc((100vw - 540px)/2);z-index:1;pointer-events:none;display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:20px 6px}
+.hiasanLuar.kiri{left:0}
+.hiasanLuar.kanan{right:0}
+.hiasanLuar .item{text-align:center;animation:lompatAnak 2.2s ease-in-out infinite;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.3))}
+.hiasanLuar .item:nth-child(2){animation-delay:.5s}
+.hiasanLuar .item:nth-child(3){animation-delay:1s}
+.hiasanLuar .emoji{font-size:64px;line-height:1;display:block}
+.hiasanLuar .teks{font-size:12px;font-weight:900;background:white;color:#333;border:2px solid #333;border-radius:12px;padding:3px 8px;display:inline-block;margin-top:4px;box-shadow:0 3px 0 #333}
+.hiasanLuar .balonLuar{font-size:44px;animation:balonNaik 2.5s ease-in-out infinite}
+@keyframes lompatAnak{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes balonNaik{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+@media(max-width:900px){.hiasanLuar{display:none}}
+#menuScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;height:100%;position:relative;overflow:auto;z-index:2}
 #menuScreen::before{content:'☀️ 🌈 ☁️ 🦋';position:absolute;top:4px;left:0;right:0;font-size:24px;letter-spacing:14px}
 #menuScreen::after{content:'🎮 🕹️ 🎲 🍎 🍌 🍇';position:absolute;bottom:4px;left:0;right:0;font-size:22px;letter-spacing:10px}
 #menuBox{background:linear-gradient(180deg,#2b2d42,#1a1a2e);border:4px solid #00f5d4;border-radius:24px;padding:10px;max-width:680px;width:100%;box-shadow:0 0 0 4px #ff006e,0 0 0 8px #ffbe0b,0 0 30px rgba(0,245,212,.8);position:relative;z-index:2}
@@ -28,7 +41,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #btnMulaiMenu{background:linear-gradient(180deg,#ffbe0b,#fb5607);color:white;border:3px solid white;padding:9px 30px;border-radius:22px;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 5px 0 #7a2e00,inset 0 -3px 0 rgba(0,0,0,.25);margin-top:10px;width:100%;text-shadow:2px 2px 0 rgba(0,0,0,.4)}
 #btnMulaiMenu:active{transform:translateY(3px);box-shadow:0 1px 0 #7a2e00}
 #ketPilihan{background:#fff;color:#8338ec;padding:5px;border-radius:10px;font-weight:900;font-size:11px;margin-top:6px;border:3px dashed #ff006e}
-#gameScreen{display:none;flex-direction:column;padding:3px;max-width:520px;margin:0 auto;height:100vh;height:100dvh;gap:4px;overflow:hidden}
+#gameScreen{display:none;flex-direction:column;padding:3px;max-width:520px;margin:0 auto;height:100vh;height:100dvh;gap:4px;overflow:hidden;position:relative;z-index:2}
 #barGame{display:flex;gap:4px;align-items:center;flex-shrink:0;height:30px}
 #barGame button,#barGame span{border:2px solid white;border-radius:12px;padding:4px 8px;font-weight:900;font-size:11px;box-shadow:0 2px 0 rgba(0,0,0,.4)}
 #skorGame{background:linear-gradient(180deg,#8338ec,#3a0ca3);color:white;flex:1}
@@ -59,23 +72,17 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #tampilanJawab{font-size:18px;font-weight:900;color:#00f5d4;background:#000;padding:3px;border:2px solid #ffbe0b;border-radius:10px;min-height:26px;letter-spacing:5px;text-shadow:0 0 8px #00f5d4}
 #tampilanJawab.salah{animation:goyangSalah .4s;background:#ff006e;color:white;text-shadow:none}
 @keyframes goyangSalah{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-
-/* ===== BARU: TAMAN BERMAIN - ANAK KIRI KANAN + BERUANG + BALON + PELANGI ===== */
 .karakterTaman{position:absolute;bottom:18px;z-index:4;pointer-events:none;text-align:center;line-height:1}
 .karakterTaman.kiri{left:2px}
 .karakterTaman.kanan{right:2px}
 .karakterTaman .anak{font-size:38px;display:block;animation:lompatAnak 1.6s ease-in-out infinite;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2))}
 .karakterTaman.kanan .anak{animation-delay:.5s}
-@keyframes lompatAnak{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .karakterTaman .beruang{font-size:30px;display:block;margin-top:1px}
 .karakterTaman .balon{font-size:26px;display:block;animation:balonNaik 2.2s ease-in-out infinite}
-@keyframes balonNaik{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
 .karakterTaman .nama{font-size:8px;font-weight:900;background:white;color:#333;border:1.5px solid #333;border-radius:8px;padding:1px 4px;display:inline-block;margin-top:1px}
-.pelangiTaman{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:28px;z-index:1;opacity:.9;pointer-events:none;letter-spacing:2px}
-.balonAtas{position:absolute;top:30px;font-size:18px;z-index:1;pointer-events:none;animation:balonNaik 2.5s ease-in-out infinite}
+/* PELANGI TENGAH DIHILANGKAN - TINGGAL YANG MEPET ATAS SAJA */
+.balonAtas{position:absolute;top:22px;font-size:16px;z-index:1;pointer-events:none;animation:balonNaik 2.5s ease-in-out infinite}
 .balonAtas.b1{left:28%} .balonAtas.b2{right:28%;animation-delay:.7s}
-
-/* ===== BARU: KEYPAD KOTAK TIMBUL SEPERTI KEYBOARD HP ===== */
 #keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px}
 #keypad button{font-size:20px;font-weight:900;padding:0;border:3px solid #333;border-radius:12px;color:#333;cursor:pointer;font-family:'Comic Sans MS',Arial,sans-serif;text-shadow:0 1px 0 white;box-shadow:0 5px 0 #333,0 6px 8px rgba(0,0,0,.35);width:100%;height:42px;line-height:1;background:linear-gradient(180deg,#ffffff 0%,#e0e0e0 100%);transition:all .07s}
 #keypad button:active{transform:translateY(4px);box-shadow:0 1px 0 #333,0 2px 3px rgba(0,0,0,.3)}
@@ -91,7 +98,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #keypad button.hapus{background:linear-gradient(180deg,#FF8A65,#FF5722)!important;color:white!important;text-shadow:1px 1px 0 rgba(0,0,0,.3);font-size:14px}
 #keypad button:nth-child(11){background:linear-gradient(180deg,#D7CCC8,#BCAAA4);color:#3E2723}
 #keypad button:nth-child(12){background:linear-gradient(180deg,#CFD8DC,#90A4AE);color:#263238}
-
 #wrapBawah{display:flex;gap:6px;justify-content:center;align-items:center;flex-shrink:0;height:36px}
 #btnTembak{background:linear-gradient(180deg,#ff006e,#c9184a);color:white;border:2px solid white;border-radius:50px;padding:6px 18px;font-weight:900;font-size:15px;cursor:pointer;min-width:150px;box-shadow:0 3px 0 #7a0a2a;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
 #btnTembak:active{transform:translateY(2px);box-shadow:0 1px 0 #7a0a2a}
@@ -100,7 +106,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #btnUlang.menyala{animation:kedip 0.8s infinite}
 @keyframes kedip{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 #pesanGame{font-size:10px;font-weight:900;color:#fff;min-height:12px;margin:1px;flex-shrink:0;background:rgba(0,0,0,.5);border-radius:8px;padding:2px;border:2px solid #00f5d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#gameScreen2{display:none;flex-direction:column;padding:4px;height:100vh;height:100dvh;gap:4px;overflow:hidden;max-width:1400px;margin:0 auto}
+#gameScreen2{display:none;flex-direction:column;padding:4px;height:100vh;height:100dvh;gap:4px;overflow:hidden;max-width:1400px;margin:0 auto;position:relative;z-index:2}
 #barDua{display:flex;gap:6px;align-items:center;flex-shrink:0;height:32px;overflow:hidden}
 #barDua button{border:2px solid white;border-radius:12px;padding:5px 12px;font-weight:900;font-size:12px;box-shadow:0 2px 0 rgba(0,0,0,.4);cursor:pointer;color:white;flex-shrink:0;white-space:nowrap}
 #btnKembali2{background:linear-gradient(180deg,#ff006e,#c9184a)}
@@ -128,8 +134,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 .panelBawahDua{background:linear-gradient(180deg,#2b2d42,#1a1a2e);border:2px solid #00f5d4;border-radius:12px;padding:3px;flex-shrink:0}
 .tampilanDua{font-size:18px;font-weight:900;color:#00f5d4;background:#000;padding:2px;border:2px solid #ffbe0b;border-radius:8px;min-height:26px;letter-spacing:6px;text-shadow:0 0 8px #00f5d4}
 .tampilanDua.salah{animation:goyangSalah .4s;background:#ff006e;color:white;text-shadow:none}
-
-/* ===== BARU: KEYPAD 2 ORANG JUGA KOTAK TIMBUL ===== */
 .keypadDua{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px}
 .keypadDua button{font-size:18px;font-weight:900;padding:0;border:3px solid #333;border-radius:10px;color:#333;cursor:pointer;font-family:'Comic Sans MS',Arial,sans-serif;text-shadow:0 1px 0 white;box-shadow:0 4px 0 #333,0 5px 6px rgba(0,0,0,.3);width:100%;height:38px;line-height:1;touch-action:manipulation;background:linear-gradient(180deg,#fff,#e0e0e0)}
 .keypadDua button:active{transform:translateY(3px);box-shadow:0 1px 0 #333}
@@ -149,6 +153,22 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 .btnTembakDua{flex:1;background:linear-gradient(180deg,#ff006e,#c9184a);color:white;border:2px solid white;border-radius:50px;padding:6px;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 3px 0 #7a0a2a;text-shadow:1px 1px 0 rgba(0,0,0,.3);touch-action:manipulation}
 .btnTembakDua:active{transform:translateY(2px);box-shadow:0 1px 0 #7a0a2a}
 </style></head><body>
+
+<!-- HIASAN LUAR - DI LUAR POP-UP, SAMPING BIRU -->
+<div class="hiasanLuar kiri">
+  <div class="item"><span class="emoji">🌈</span><span class="teks">Taman Bermain</span></div>
+  <div class="item"><span class="emoji">🧒</span><span class="teks">Budi</span></div>
+  <div class="item"><span class="emoji">🐻</span><span class="teks">Bimo Beruang</span></div>
+  <div class="item"><span class="balonLuar">🎈🎈</span><span class="teks">Balon 1</span></div>
+  <div class="item"><span class="emoji">🌸🌼</span><span class="teks">Bunga Ceria</span></div>
+</div>
+<div class="hiasanLuar kanan">
+  <div class="item"><span class="emoji">☀️</span><span class="teks">Matahari</span></div>
+  <div class="item"><span class="emoji">👧</span><span class="teks">Sari</span></div>
+  <div class="item"><span class="balonLuar">🎈🎈</span><span class="teks">Balon 2</span></div>
+  <div class="item"><span class="emoji">🍎🍌</span><span class="teks">Buah Segar</span></div>
+  <div class="item"><span class="emoji">🦋</span><span class="teks">Kupu-Kupu</span></div>
+</div>
 
 <div id="menuScreen">
 <div id="menuBox">
@@ -194,7 +214,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 </div>
 </div>
 
-<!-- MODE 1 ORANG -->
 <div id="gameScreen">
 <div id="barGame">
 <button id="btnKembali" onclick="keMenu()">⬅️ MENU</button>
@@ -203,11 +222,8 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 <button id="btnMusikGame" onclick="toggleMusik()">🎵 ON</button>
 </div>
 <div id="arena">
-<div class="pelangiTaman">🌈</div>
 <div class="balonAtas b1">🎈</div><div class="balonAtas b2">🎈</div>
-<!-- KIRI: ANAK + BERUANG -->
 <div class="karakterTaman kiri"><span class="anak">🧒</span><span class="nama">Budi</span><span class="beruang">🐻</span><span class="nama">Bimo</span></div>
-<!-- KANAN: ANAK + BALON -->
 <div class="karakterTaman kanan"><span class="balon">🎈🎈</span><span class="anak">👧</span><span class="nama">Sari</span><span class="nama" style="background:#BBDEFB">Balon Ceria</span></div>
 <div id="meriam"><div id="laras"></div><div id="roda"></div></div>
 <div id="tanah">🌿 🧺 🌿 🍎 🍌 🍇 🌿 🧺 🌿</div>
@@ -233,7 +249,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 <div id="pesanGame">🎮 Ketik jawaban dulu, lalu pencet TEMBAK! 🍎</div>
 </div>
 
-<!-- MODE 2 ORANG - FINAL KADA SCROLL -->
 <div id="gameScreen2">
 <div id="barDua">
 <button id="btnKembali2" onclick="keMenu()">⬅️ MENU</button>
@@ -244,7 +259,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 <div id="wrapDua">
 <div class="panelPemain p1">
 <div class="barPemain"><div class="namaPemain">🔵 PEMAIN 1</div><div class="skorPemain" id="skor1">Skor: 0</div><div class="lolosPemain" id="lolos1">🍎🍎🍎🍎🍎</div></div>
-<div class="arenaDua" id="arena1"><div class="pelangiTaman" style="font-size:20px">🌈</div><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">🧒</span><span class="nama">Budi</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="beruang" style="font-size:24px">🐻</span><span class="nama">Bimo</span></div><div class="meriamDua" id="meriam1"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="arenaDua" id="arena1"><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">🧒</span><span class="nama">Budi</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="beruang" style="font-size:24px">🐻</span><span class="nama">Bimo</span></div><div class="meriamDua" id="meriam1"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
 <div class="panelBawahDua"><div class="tampilanDua" id="jawab1">......</div><div class="keypadDua">
 <button onclick="tekanAngka2(0,'1')">1</button><button onclick="tekanAngka2(0,'2')">2</button><button onclick="tekanAngka2(0,'3')">3</button>
 <button onclick="tekanAngka2(0,'4')">4</button><button onclick="tekanAngka2(0,'5')">5</button><button onclick="tekanAngka2(0,'6')">6</button>
@@ -255,7 +270,7 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 </div>
 <div class="panelPemain p2">
 <div class="barPemain"><div class="namaPemain">🔴 PEMAIN 2</div><div class="skorPemain" id="skor2">Skor: 0</div><div class="lolosPemain" id="lolos2">🍎🍎🍎🍎🍎</div></div>
-<div class="arenaDua" id="arena2"><div class="pelangiTaman" style="font-size:20px">🌈</div><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">👧</span><span class="nama">Sari</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="balon" style="font-size:20px">🎈🎈</span><span class="nama">Balon</span></div><div class="meriamDua" id="meriam2"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
+<div class="arenaDua" id="arena2"><div class="karakterTaman kiri" style="bottom:16px"><span class="anak" style="font-size:30px">👧</span><span class="nama">Sari</span></div><div class="karakterTaman kanan" style="bottom:16px"><span class="balon" style="font-size:20px">🎈🎈</span><span class="nama">Balon</span></div><div class="meriamDua" id="meriam2"><div class="larasDua"></div><div class="rodaDua"></div></div><div class="tanahDua">🌿 🧺 🍎 🍌 🌿</div></div>
 <div class="panelBawahDua"><div class="tampilanDua" id="jawab2">......</div><div class="keypadDua">
 <button onclick="tekanAngka2(1,'1')">1</button><button onclick="tekanAngka2(1,'2')">2</button><button onclick="tekanAngka2(1,'3')">3</button>
 <button onclick="tekanAngka2(1,'4')">4</button><button onclick="tekanAngka2(1,'5')">5</button><button onclick="tekanAngka2(1,'6')">6</button>
