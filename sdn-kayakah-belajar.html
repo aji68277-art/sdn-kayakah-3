@@ -169,5 +169,14 @@ function speakKayakah(){try{window.speechSynthesis.cancel();let u=new SpeechSynt
 function celebrateKayakah(){const emojis=["⭐","🎉","🌈","❤️","🎈","✨"];for(let i=0;i<30;i++){let s=document.createElement("div");s.className="confetti";s.innerText=emojis[Math.floor(Math.random()*emojis.length)];s.style.left=Math.random()*100+"vw";s.style.animationDelay=(Math.random()*0.5)+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),2500)}}
 updateJumlah(); renderSiswa(); renderGuru(); renderKelas(); renderMapel(); updateBar(); updateFormAkses(); updatePanelKepsek(); muatMateriDariFirebase(); muatSiswaGuruDariFirebase();
 </script>
+  <script>
+// SAMBUNGKAN TOMBOL LATIHAN SOAL KE FILE SOAL
+document.addEventListener('click', function(e){
+  let t = e.target.closest('button, a');
+  if(t && t.textContent.includes('Latihan Soal')){
+    window.location.href = 'latihan-soal.html';
+  }
+});
+</script>
 </body>
 </html>
