@@ -82,7 +82,6 @@ body{font-family:'Comic Sans MS',Arial,sans-serif;text-align:center;color:#fff;b
 #btnUlang.menyala{animation:kedip 0.8s infinite}
 @keyframes kedip{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 #pesanGame{font-size:10px;font-weight:900;color:#fff;min-height:12px;margin:1px;flex-shrink:0;background:rgba(0,0,0,.5);border-radius:8px;padding:2px;border:2px solid #00f5d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* ===== MODE 2 ORANG - FINAL, KADA SCROLL ===== */
 #gameScreen2{display:none;flex-direction:column;padding:4px;height:100vh;height:100dvh;gap:4px;overflow:hidden;max-width:1400px;margin:0 auto}
 #barDua{display:flex;gap:6px;align-items:center;flex-shrink:0;height:32px;overflow:hidden}
 #barDua button{border:2px solid white;border-radius:12px;padding:5px 12px;font-weight:900;font-size:12px;box-shadow:0 2px 0 rgba(0,0,0,.4);cursor:pointer;color:white;flex-shrink:0;white-space:nowrap}
@@ -247,7 +246,8 @@ let kategori='mudah', operasi='campur', skala='campur', mode='satu', skor=0, nya
 let daftarBuah=['🍎','🍌','🍇','🍊','🍓','🥭','🍉','🍍','🥥','🍒','🍑','🥝'];
 let namaLevel={1:'Pemula',2:'Jago',3:'Master',4:'Legenda',5:'Raja Buah 👑'};
 let batasLevel={1:30,2:70,3:120,4:180,5:9999};
-let dataKategori={mudah:{nyawa:5,kec:0.35},sedang:{nyawa:5,kec:0.6},sulit:{nyawa:5,kec:0.95}};
+// DIPELANKAN - SESUAI PERMINTAAN: ADA WAKTU JAWAB DULU
+let dataKategori={mudah:{nyawa:5,kec:0.18},sedang:{nyawa:5,kec:0.28},sulit:{nyawa:5,kec:0.40}};
 let namaSkala={kecil:'🔢 Satuan Kecil - Soal kecil, hasil bisa puluhan! Hasil bulat, kada ada koma!',puluhan:'🔟 Puluhan - Soal puluhan! Hasil bulat, kada ada koma!',campur:'🎲 Campur Kecil + Puluhan! Hasil selalu bulat, kada ada koma!'};
 function updateKet(){document.getElementById('ketPilihan').innerText=namaSkala[skala];}
 function pilihKategori(k,el){bunyiKlik();kategori=k;document.querySelectorAll('#katPilih button').forEach(b=>b.classList.remove('aktif'));el.classList.add('aktif');updateKet();}
@@ -268,8 +268,9 @@ document.getElementById('gameScreen').style.display='none';document.getElementBy
 }
 function ulangGame(){bunyiKlik();document.getElementById('btnUlang').classList.remove('menyala');mulaiGame();}
 let ctxMusik=null, musikOn=true, timerMusik=null, nadaKe=0;
-let lagu=[523,659,784,659,880,784,659,523,523,659,784,880,1046,880,784,659];
-function mulaiMusik(){if(!musikOn) return;try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();clearInterval(timerMusik);timerMusik=setInterval(()=>{if(!musikOn) return;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='triangle';o.frequency.value=lagu[nadaKe%lagu.length];g.gain.value=0.06;o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.22);nadaKe++;},260);}catch(e){}}
+// MUSIK POP ROCK - RIFF SEMANGAT, NGE-BEAT
+let lagu=[392,392,523,392,440,523,659,523,440,392,440,523,392,330,392,440,392,392,523,587,659,587,523,440,392,440,523,659,784,659,523,440];
+function mulaiMusik(){if(!musikOn) return;try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();clearInterval(timerMusik);timerMusik=setInterval(()=>{if(!musikOn) return;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='square';o.frequency.value=lagu[nadaKe%lagu.length];g.gain.value=0.04;o.connect(g);g.connect(ctxMusik.destination);o.start();o.stop(ctxMusik.currentTime+0.16);nadaKe++;},170);}catch(e){}}
 function toggleMusik(){musikOn=!musikOn;document.getElementById('btnMusikGame').innerText=musikOn?'🎵 ON':'🔇 OFF';document.getElementById('btnMusik2').innerText=musikOn?'🎵 ON':'🔇 OFF';if(musikOn) mulaiMusik(); else clearInterval(timerMusik);}
 function bunyiBum(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();let t=ctxMusik.currentTime;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sine';o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(30,t+0.45);g.gain.setValueAtTime(0.5,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.5);o.connect(g);g.connect(ctxMusik.destination);o.start(t);o.stop(t+0.5);let len=ctxMusik.sampleRate*0.3;let buf=ctxMusik.createBuffer(1,len,ctxMusik.sampleRate);let d=buf.getChannelData(0);for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*(1-i/len);let src=ctxMusik.createBufferSource();src.buffer=buf;let g2=ctxMusik.createGain();g2.gain.value=0.3;src.connect(g2);g2.connect(ctxMusik.destination);src.start();}catch(e){}}
 function bunyiSalah(){try{if(!ctxMusik) ctxMusik=new (window.AudioContext||window.webkitAudioContext)();if(ctxMusik.state==='suspended') ctxMusik.resume();let t=ctxMusik.currentTime;let o=ctxMusik.createOscillator();let g=ctxMusik.createGain();o.type='sawtooth';o.frequency.setValueAtTime(140,t);o.frequency.setValueAtTime(140,t+0.5);g.gain.setValueAtTime(0.18,t);g.gain.setValueAtTime(0.18,t+0.5);g.gain.exponentialRampToValueAtTime(0.001,t+0.55);o.connect(g);g.connect(ctxMusik.destination);o.start(t);o.stop(t+0.55);}catch(e){}}
@@ -318,11 +319,10 @@ let modeSkala=skala; if(modeSkala==='campur') modeSkala=Math.random()<0.5?'kecil
 if(modeSkala==='kecil') return buatSoalKecil(op);
 return buatSoalPuluhan(op);
 }
-function spawnBuah(){if(!main) return;let arena=document.getElementById('arena');let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.15;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};arena.appendChild(d);buahList.push(data);}
-function restartSpawn(){clearInterval(timerSpawn);timerSpawn=setInterval(spawnBuah,1900);}
+function spawnBuah(){if(!main) return;if(buahList.length>=2) return;let arena=document.getElementById('arena');let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.05;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};arena.appendChild(d);buahList.push(data);}
+function restartSpawn(){clearInterval(timerSpawn);timerSpawn=setInterval(spawnBuah,3000);}
 function mulaiGame(){mulaiMusik();skor=0;nyawa=5;benarCount=0;lolos=0;level=1;main=true;jawabanKetik='';buahList.forEach(b=>b.el.remove());buahList=[];document.getElementById('pesanGame').innerText='Ketik jawaban, lalu pencet Tembak!';updateJawab();updateInfo();clearInterval(timerSpawn);clearInterval(timerJatuh);restartSpawn();timerJatuh=setInterval(()=>{if(!main) return;buahList.forEach((b,idx)=>{b.y+=b.kecepatan;b.el.style.top=b.y+'px';let batasBawah=document.getElementById('arena').clientHeight-85;if(b.y>batasBawah){b.el.remove();buahList.splice(idx,1);buahLolos(b);}});},20);}
 function gameOver(){main=false;clearInterval(timerSpawn);clearInterval(timerJatuh);buahList.forEach(b=>b.el.remove());buahList=[];document.getElementById('pesanGame').innerText='🏁 GAME OVER! Skor '+skor+' | Lv '+level;document.getElementById('btnUlang').classList.add('menyala');updateInfo();}
-/* ===== LOGIKA 2 ORANG - PESAN PENDEK BIAR KADA SCROLL ===== */
 let mainDua=false, timerSpawnDua=null, timerJatuhDua=null;
 let pemain=[
 {nama:'PEMAIN 1',skor:0,lolos:0,jawaban:'',buah:[],arena:null,meriam:null,skorEl:null,lolosEl:null,jawabEl:null},
@@ -343,7 +343,8 @@ function efekDua(p,x,y,teks){let e=document.createElement('div');e.className='ef
 function spawnBuahDua(){
 if(!mainDua) return;
 pemain.forEach(p=>{
-let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=p.arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.15;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};p.arena.appendChild(d);p.buah.push(data);
+if(p.buah.length>=2) return;
+let teks=buatBuahBaru();let d=document.createElement('div');d.className='buah';d.innerHTML='<span class="icon">'+daftarBuah[Math.floor(Math.random()*daftarBuah.length)]+'</span><span class="soal">'+teks+'</span>';let w=p.arena.clientWidth-70;let x=Math.floor(Math.random()*w);d.style.left=x+'px';d.style.top='-10px';let kec=dataKategori[kategori].kec+Math.random()*0.05;let data={el:d,y:-10,x:x,kecepatan:kec,teks:teks};p.arena.appendChild(d);p.buah.push(data);
 });
 }
 function tembak2(idx){
@@ -380,7 +381,7 @@ initPemain();mulaiMusik();mainDua=true;
 pemain.forEach(p=>{p.skor=0;p.lolos=0;p.jawaban='';p.buah.forEach(b=>b.el.remove());p.buah=[];updateInfoDua(p);});
 document.getElementById('pesanDua').innerText='🏆 Bertanding! Siapa habis 5 🍎, kalah!';
 clearInterval(timerSpawnDua);clearInterval(timerJatuhDua);
-timerSpawnDua=setInterval(spawnBuahDua,1900);
+timerSpawnDua=setInterval(spawnBuahDua,3000);
 timerJatuhDua=setInterval(()=>{
 if(!mainDua) return;
 pemain.forEach(p=>{
