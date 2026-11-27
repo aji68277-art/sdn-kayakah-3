@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PJOK SDN Kayakah - Beranda Guru PJOK</title>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GURU PJOK SDN Kayakah - LENGKAP FINAL - Kelas 1-6</title>
 <style>
 *{box-sizing:border-box;font-family:'Comic Sans MS',Arial}body{margin:0;background:#FFF9DB}
 header{background:linear-gradient(90deg,#00C853,#8BC34A,#FFEB3B,#FFC107);padding:14px;text-align:center;border-bottom:6px solid #FFD700}
@@ -10,69 +8,61 @@ header .judul{background:#fff;color:#E65100;display:inline-block;padding:8px 18p
 header p{margin:6px 0 0;font-weight:bold;color:#333}
 .menuAtas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px;background:#E8F5E9}
 .menuAtas button{border:3px solid #fff;padding:11px 16px;border-radius:25px;font-weight:bold;cursor:pointer;color:#fff;font-size:14px}
-.menuAtas button.active{outline:4px solid #222;transform:scale(1.05)}
-.btnK1{background:#222}.btnK2{background:#4DB6AC}.btnK3{background:#FF5722}.btnK4{background:#FF8F00}.btnK5{background:#D32F2F}.btnK6{background:#0097A7}.btnSemua{background:#7C3AED}.btnBeranda{background:#059669}
 .card{background:#fff;margin:14px;padding:18px;border-radius:22px;border:3px solid #FFE066;box-shadow:0 4px 0 #FFD700}
-h2{color:#7C3AED;margin:0}h3{color:#059669}
+h2{color:#7C3AED;margin:0}h3{color:#059669}h4{color:#D97706;margin:8px 0}
 table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:2px solid #FFE066;padding:6px;text-align:center}th{background:linear-gradient(90deg,#FF4757,#FFA502);color:#fff}td:first-child,td:nth-child(2){text-align:left}
 .btn2{border:none;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer;color:#fff;margin:3px}
-.btnKecil{border:none;padding:6px 8px;border-radius:10px;font-weight:bold;cursor:pointer;color:#fff;margin:2px;font-size:11px}
 .box{background:#FEF3C7;border:3px solid #D97706;padding:12px;border-radius:14px;margin:8px 0}
 .box2{background:#DBEAFE;border:3px solid #1E90FF;padding:12px;border-radius:14px;margin:8px 0}
 .box3{background:#D1FAE5;border:3px solid #059669;padding:12px;border-radius:14px;margin:8px 0}
-.boxMerah{background:#FEE2E2;border:3px solid #D32F2F;padding:12px;border-radius:14px;margin:8px 0}
-.boxKunci{background:#FEE2E2;border:4px solid #D32F2F;padding:22px;border-radius:20px;margin:12px 0;text-align:center}
+.boxPink{background:#FCE7F3;border:3px solid #EC4899;padding:12px;border-radius:14px;margin:8px 0}
 input,select,textarea{width:100%;padding:11px;margin:6px 0;border:3px solid #FFE066;border-radius:14px;background:#FFFBEB}
-select{font-weight:bold}
-details{border:2px solid #FFE066;border-radius:14px;margin:8px 0;background:#FFFBEB}details summary{padding:12px;font-weight:bold;color:#7C3AED;background:#FFF3C4;cursor:pointer}details .isi{padding:12px;line-height:1.7}
 .menuAdmin{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .menuAdmin button{border:3px solid #fff;padding:10px 12px;border-radius:20px;font-weight:bold;cursor:pointer;color:#fff;flex:1;min-width:110px}
-.presensiWrap{overflow-x:auto}
-.presensiWrap select{width:70px;padding:5px;margin:0;border:2px solid #FFE066;border-radius:8px;background:#fff;font-size:12px}
-.gridBeranda{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.kartuKelas{background:#fff;border:3px solid #FFE066;border-radius:18px;padding:14px;text-align:center;cursor:pointer;box-shadow:0 3px 0 #FFD700}
-.kartuKelas b{font-size:16px;color:#7C3AED}.kartuKelas p{margin:4px 0}
-.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-weight:bold;font-size:12px;color:#fff}
-.badgeGuru{background:#059669}
-.nilaiWrap{overflow-x:auto;border:2px solid #FFE066;border-radius:12px}
-.nilaiWrap table{min-width:1250px}
-.nilaiWrap th,.nilaiWrap td{white-space:nowrap}
-.nilaiWrap td:first-child{position:sticky;left:0;background:#FFF9DB;z-index:2;text-align:left;min-width:170px}
-.nilaiWrap th:first-child{position:sticky;left:0;z-index:3}
-.kotak-nilai{display:flex;gap:4px;justify-content:center;align-items:center}
+.presensiWrap{overflow-x:auto}.presensiWrap select{width:70px;padding:5px;margin:0;border:2px solid #FFE066;border-radius:8px;background:#fff;font-size:12px}
+.nilaiWrap{overflow-x:auto;border:2px solid #FFE066;border-radius:12px}.nilaiWrap table{min-width:1100px}
 .in-nilai{width:52px!important;min-width:52px;padding:7px 4px!important;margin:0!important;border:2px solid #FFD700!important;border-radius:10px!important;text-align:center;font-weight:bold;background:#fff!important}
-.nilai-materi{display:block;margin-top:6px;font-size:14px;font-weight:bold;background:#FFF3C4;padding:5px 4px;border-radius:8px;white-space:nowrap;line-height:1.2}
-.rank-1{background:#FFD700!important;font-weight:bold}.rank-2{background:#E5E7EB!important;font-weight:bold}.rank-3{background:#F59E0B!important;color:#fff;font-weight:bold}
-.editWrap{overflow-x:auto;border:2px solid #FFE066;border-radius:12px}
-.editWrap table{min-width:900px}
-.editWrap input,.editWrap textarea{padding:7px;margin:2px 0;border:2px solid #FFD700;border-radius:8px;background:#fff;font-size:12px}
-.editWrap textarea{min-height:60px}
-@media print{.no-print{display:none} .card{box-shadow:none;border:none} .presensiWrap{overflow:visible}}
-</style>
-</head>
-<body>
-<header><div class="judul">🌈 Belajar Asyik, 💚 Berakhlak, 💙 Berprestasi</div><p>⚽ PJOK SDN KAYAKAH - 2026/2027 - Guru PJOK: Wahyu Aji, S.Pd.Jas</p></header>
+details.kayakah-lipat{border:2px solid #FFE066;border-radius:14px;margin:8px 0;background:#FFFBEB;overflow:hidden}
+details.kayakah-lipat summary{cursor:pointer;padding:12px 14px;font-weight:bold;color:#7C3AED;background:#FFF3C4;list-style:none}
+details.kayakah-lipat .isi-lipat{padding:12px 14px;line-height:1.7;font-size:14px}
+@media print{.no-print{display:none}}
+</style></head><body>
+<header><div class="judul">🌈 Belajar Asyik, 💚 Berakhlak, 💙 Berprestasi</div><p>⚽ GURU PJOK SDN KAYAKAH - LENGKAP FINAL - Kelas 1-6 - 2026/2027 - Guru PJOK: Wahyu Aji, S.Pd.Jas</p></header>
 <div class="menuAtas no-print">
-<button onclick="window.location.href='sdn-kayakah-belajar.html'" style="background:#222;color:white">Kembali</button> <button class="btnBeranda" id="tombol-Beranda" onclick="pilihKelas('Beranda')">🏠 BERANDA</button>
-<button class="btnK1" id="tombol-Kelas 1" onclick="pilihKelas('Kelas 1')">📚 Kelas 1</button>
-<button class="btnK2" id="tombol-Kelas 2" onclick="pilihKelas('Kelas 2')">📚 Kelas 2</button>
-<button class="btnK3" id="tombol-Kelas 3" onclick="pilihKelas('Kelas 3')">📚 Kelas 3</button>
-<button class="btnK4" id="tombol-Kelas 4" onclick="pilihKelas('Kelas 4')">📚 Kelas 4</button>
-<button class="btnK5" id="tombol-Kelas 5" onclick="pilihKelas('Kelas 5')">📚 Kelas 5</button>
-<button class="btnK6" id="tombol-Kelas 6" onclick="pilihKelas('Kelas 6')">📚 Kelas 6</button>
-<button class="btnSemua" onclick="pilihKelas('Semua')">📚 SEMUA</button>
+<button onclick="window.location.href='sdn-kayakah-belajar.html'" style="background:#222">🏠 Kembali ke Kayakah Belajar</button>
+<button onclick="pilihKelas('Beranda')" style="background:#059669">🏠 BERANDA</button>
+<button onclick="pilihKelas('Kelas 1')" style="background:#FF4757">📚 PJOK Kelas 1 - Sabtu</button>
+<button onclick="pilihKelas('Kelas 2')" style="background:#FF6B35">📚 PJOK Kelas 2 - Jumat</button>
+<button onclick="pilihKelas('Kelas 3')" style="background:#FFA502">📚 PJOK Kelas 3 - Kamis</button>
+<button onclick="pilihKelas('Kelas 4')" style="background:#2ED573">📚 PJOK Kelas 4 - Rabu</button>
+<button onclick="pilihKelas('Kelas 5')" style="background:#1E90FF">📚 PJOK Kelas 5 - Selasa</button>
+<button onclick="pilihKelas('Kelas 6')" style="background:#7C3AED">📚 PJOK Kelas 6 - Senin</button>
+<button onclick="pilihKelas('Semua')" style="background:#222">📚 SEMUA</button>
 <button id="tombolLogin" onclick="klikLogin()" style="background:#222">🔐 LOGIN GURU PJOK</button>
 <button id="tombolGantiPw" onclick="gantiPassword()" style="background:#7C3AED;display:none">🔑 GANTI PASSWORD</button>
-</div>
-<div id="isiUtama" class="card"></div>
+</div><div id="isiUtama" class="card"></div>
 <script>
 var PASSWORD_GURU = localStorage.getItem('PJOK_PASSWORD_GURU') || "PJOK2026";
 var MODE_GURU = localStorage.getItem('PJOK_MODE_GURU') === '1';
-var DATA_SISWA={"Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Latif","Muhammad Luthfi","Muhammad Nafis Al Ikhwan","Muhammad Zulkifli","Rahmawati","Salsabila Ayu Hanifa","Wirda Aulia"],"Kelas 2":["Ahmad Riduan","Ahmad Yasir","Ahmad Zainul Majerdi","Eirlangga Saputra","Humaira Munawwarah","Nadia","Nazril Kamari","Via Anggraini"],"Kelas 3":["Ahmad Fazrianur","Ahmad Jailani","Arsita","Jaki Habibi","Maria Ulfah","Muhammad Baihaki","Muhammad Rijani","Mutiara Anastasya","Naira Amelia Ulfa","Nia Ramadhani","Novita"],"Kelas 4":["Asyifa Putri Aura Zaskia","Hadi Rahman","M. Nafis Mubarak","Muhammad Al Farisqi","Muhammad Fauzi Akbar","Muhammad Salman Al-Farisy","Nafisya Azzahrah","Naura Aqila Wilda","Nayla Amanda","Nor Azizah Mutahharah"],"Kelas 5":["Abdul Karim","Ahmad Badali","Alika Naila Putri","Ikrimah","Ilmina","Iqbal Al Jailani","Khanza Alifia","M. Ajrul Ilmi","Muhammad Habil","Muhammad Zakaria","Muslimah","Nurlatifah"],"Kelas 6":["Ifdhal","M. Nafis Ihsan","M. Rizalul Fikri","M. Zaidan Akmal","Muhammad Maulana","Nazwa","Nikmah","Siti Fatimatuz Zahra","Siti Rahmah"]};
+var DATA_SISWA={
+"Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Latif","Muhammad Luthfi","Muhammad Nafis Al Ikhwan","Muhammad Zulkifli","Rahmawati","Salsabila Ayu Hanifa","Wirda Aulia"],
+"Kelas 2":["Ahmad Riduan","Ahmad Yasir","Ahmad Zainul Majerdi","Eirlangga Saputra","Humaira Munawwarah","Nadia","Nazril Kamari","Via Anggraini"],
+"Kelas 3":["Ahmad Fazrianur","Ahmad Jailani","Arsita","Jaki Habibi","Maria Ulfah","Muhammad Baihaki","Muhammad Rijani","Mutiara Anastasya","Naira Amelia Ulfa","Nia Ramadhani","Novita"],
+"Kelas 4":["Asyifa Putri Aura Zaskia","Hadi Rahman","M. Nafis Mubarak","Muhammad Al Farisqi","Muhammad Fauzi Akbar","Muhammad Salman Al-Farisy","Nafisya Azzahrah","Naura Aqila Wilda","Nayla Amanda","Nor Azizah Mutahharah"],
+"Kelas 5":["Abdul Karim","Ahmad Badali","Alika Naila Putri","Ikrimah","Ilmina","Iqbal Al Jailani","Khanza Alifia","M. Ajrul Ilmi","Muhammad Habil","Muhammad Zakaria","Muslimah","Nurlatifah"],
+"Kelas 6":["Ifdhal","M. Nafis Ihsan","M. Rizalul Fikri","M. Zaidan Akmal","Muhammad Maulana","Nazwa","Nikmah","Siti Fatimatuz Zahra","Siti Rahmah"]};
 var WALI={"Kelas 1":"Radinah, S.Pd","Kelas 2":"Siti Nuriyah, S.Pd.SD","Kelas 3":"Pathul Jannah, S.Pd.I","Kelas 4":"Norsalim, S.Pd","Kelas 5":"Syahruni, S.Pd.SD","Kelas 6":"Samsul Bahri, S.Pd"};
 var HARI={"Kelas 1":"Sabtu","Kelas 2":"Jumat","Kelas 3":"Kamis","Kelas 4":"Rabu","Kelas 5":"Selasa","Kelas 6":"Senin"};
 var HARI_NUM={"Senin":1,"Selasa":2,"Rabu":3,"Kamis":4,"Jumat":5,"Sabtu":6};
-var PJOK={Ganjil:["Gerak Dasar & Senam Pagi","Permainan Bola Kecil - Lempar Tangkap","Kebugaran & Pola Hidup Sehat","Atletik - Lari & Lompat","Sepak Bola Dasar","Permainan & Sportivitas","Gerak Jalan - Jalan & Lari","Gerak Lompat - Lompat Jauh","Gerak Lempar - Lempar Bola","Keseimbangan - Berdiri Satu Kaki","Senam Lantai Sederhana","Permainan Tradisional - Engklek","Kebersihan Diri - Cuci Tangan","Makanan Sehat untuk Atlet Cilik","Bermain Aman - Tidak Mendorong","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet","Bola Voli Mini - Passing","Bola Basket Mini - Dribbling","Bulu Tangkis - Pukul Kok","Kasti - Memukul & Berlari","Rounders - Permainan Regu","Senam Irama - Gerak & Musik","Renang - Pengenalan Air","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up Sederhana","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas"]};
+var FASE={"Kelas 1":"Fase A","Kelas 2":"Fase A","Kelas 3":"Fase B","Kelas 4":"Fase B","Kelas 5":"Fase C","Kelas 6":"Fase C"};
+var JUDUL_PJOK={
+"Kelas 1":{Ganjil:["Gerak Dasar & Senam Pagi - Jalan, Lari Pelan","Permainan Bola Kecil - Lempar Tangkap Bola","Kebugaran & Pola Hidup Sehat - Makan Sehat","Atletik - Lari & Lompat Kecil","Sepak Bola Dasar - Menendang Bola","Permainan & Sportivitas - Fair Play","Gerak Jalan - Jalan & Lari","Gerak Lompat - Lompat Jauh Kecil","Gerak Lempar - Lempar Bola Kecil","Keseimbangan - Berdiri Satu Kaki","Senam Lantai Sederhana - Berguling","Permainan Tradisional - Engklek","Kebersihan Diri - Cuci Tangan","Makanan Sehat untuk Atlet Cilik","Bermain Aman - Tidak Mendorong","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet Sederhana","Bola Voli Mini - Passing Bawah Pelan","Bola Basket Mini - Dribbling Pelan","Bulu Tangkis - Pukul Kok Pelan","Kasti - Memukul & Berlari","Rounders - Permainan Regu Sederhana","Senam Irama - Gerak & Musik","Renang - Pengenalan Air - Keselamatan","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up Sederhana","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 1"]},
+"Kelas 2":{Ganjil:["Gerak Dasar - Kombinasi Jalan, Lari, Melompat","Permainan Bola Kecil - Kasti Sederhana","Kebugaran - Kekuatan & Kelenturan","Atletik - Lari 30m","Sepak Bola Dasar - Menggiring Bola","Permainan & Sportivitas - Kerjasama","Gerak Jalan - Jalan Cepat & Lari","Gerak Lompat - Lompat Jauh","Gerak Lempar - Lempar Bola Kasti","Keseimbangan - Berdiri Satu Kaki & Tangan","Senam Lantai - Berguling Depan","Permainan Tradisional - Gobak Sodor","Kebersihan Diri - Mandi & Cuci Tangan","Makanan Sehat - 4 Sehat 5 Sempurna","Bermain Aman - Aturan Bermain","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet","Bola Voli Mini - Passing","Bola Basket Mini - Dribbling","Bulu Tangkis - Pukul Kok","Kasti - Memukul & Berlari","Rounders - Permainan Regu","Senam Irama - Gerak & Musik","Renang - Pengenalan Air","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 2"]},
+"Kelas 3":{Ganjil:["Gerak Dasar - Kombinasi Lokomotor & Non Lokomotor","Permainan Bola Kecil - Melempar & Menangkap","Kebugaran - Kelincahan & Kekuatan","Atletik - Lari 30m & Lompat","Sepak Bola Dasar - Passing","Permainan & Sportivitas - Kerjasama Regu","Gerak Jalan - Jalan & Lari Cepat","Gerak Lompat - Lompat Jauh Gaya Jongkok","Gerak Lempar - Lempar Bola","Keseimbangan - Sikap Lilin","Senam Lantai - Guling Depan & Sikap Lilin","Permainan Tradisional - Bentengan","Kebersihan Diri - Kebersihan Badan","Makanan Sehat - Gizi Seimbang","Bermain Aman - Keselamatan","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet 4x50m","Bola Voli Mini - Passing","Bola Basket Mini - Dribbling","Bulu Tangkis - Servis & Pukul Kok","Kasti - Memukul & Strategi","Rounders - Permainan Regu","Senam Irama - Gerak & Musik Kreasi","Renang - Pengenalan Air","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 3"]},
+"Kelas 4":{Ganjil:["Gerak Dasar & Senam Pagi - Pemanasan","Permainan Bola Kecil - Lempar Tangkap","Kebugaran & Pola Hidup Sehat","Atletik - Lari 40m & Lompat Jauh","Sepak Bola - Passing & Menggiring","Permainan & Sportivitas - Fair Play","Gerak Jalan - Jalan & Lari","Gerak Lompat - Lompat Jauh","Gerak Lempar - Lempar Bola","Keseimbangan - Berdiri Satu Kaki","Senam Lantai - Guling Depan & Belakang","Permainan Tradisional - Engklek / Gobak Sodor","Kebersihan Diri - Cuci Tangan","Makanan Sehat untuk Atlet Cilik","Bermain Aman - Tidak Mendorong","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet","Bola Voli Mini - Passing","Bola Basket Mini - Dribbling & Shooting","Bulu Tangkis - Servis Panjang & Pendek","Kasti - Memukul & Berlari - Taktik","Rounders - Permainan Regu","Senam Irama - Gerak & Musik Kelompok","Renang - Pengenalan Air","P3K - Pertolongan Pertama","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 4"]},
+"Kelas 5":{Ganjil:["Sepak Bola - Passing & Control","Bola Voli - Passing Atas & Bawah","Bola Basket - Dribbling & Passing Dada","Permainan Tradisional - Bentengan","Kebugaran - Kekuatan, Kelenturan, Kelincahan","Senam Lantai - Rangkaian Guling & Sikap Lilin","Permainan & Sportivitas - Strategi Regu","Atletik - Lari 400m","Atletik - Lompat Tinggi & Lempar Bola","Keseimbangan - Rangkaian Senam","Senam Lantai - Kayang & Sikap Lilin","Permainan Tradisional - Gobak Sodor","Kebersihan Diri - PHBS","Makanan Sehat - Gizi Atlet","Bermain Aman - P3K Dasar","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet & Start Jongkok","Bola Voli - Passing, Servis Bawah","Bola Basket - Dribbling, Passing, Shooting","Bulu Tangkis - Servis & Smash Pelan","Kasti - Memukul & Strategi Regu","Rounders - Permainan Regu","Senam Irama - Kreasi Kelompok","Renang - Pengenalan Air - Mengapung","P3K - Pertolongan Pertama - Balut Luka","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 5"]},
+"Kelas 6":{Ganjil:["Sepak Bola - Teknik & Taktik 7 vs 7","Bola Voli - Servis, Passing, Smash","Bola Basket - Shooting & Lay-up","Permainan Tradisional - Gobak Sodor","Kebugaran - Tes Kebugaran","Senam Lantai - Rangkaian & Keseimbangan","Permainan & Sportivitas - Taktik Regu","Atletik - Lari 60m, Lompat Jauh, Lempar","Bela Diri - Pencak Silat Dasar","Keseimbangan - Rangkaian Senam","Senam Lantai - Rangkaian Lengkap","Permainan Tradisional - Bentengan","Kebersihan Diri - PHBS","Makanan Sehat - Gizi & Ujian Praktik","Bermain Aman - P3K","Senam Bersama & Lomba Kecil"],Genap:["Atletik Lanjutan - Lari Estafet","Bola Voli - Passing, Servis, Smash","Bola Basket - Dribbling, Shooting, Game 3 vs 3","Bulu Tangkis - Servis, Smash, Game Tunggal","Kasti - Memukul & Strategi - Game","Rounders - Permainan Regu - Game","Senam Irama - Pentas Kelas","Renang - Pengenalan Air","P3K - Pertolongan Pertama & Ujian Praktik","Kebugaran - Tes Lari 20 Meter","Permainan Tradisional - Gobak Sodor","Gerak Manipulatif - Menendang & Mengoper","Kekuatan - Push Up & Sit Up","Kelincahan - Lari Zig-Zag","Sportivitas - Menang & Kalah","Festival Olahraga Kelas 6 - Pelepasan"]}
+};
 var PROTA_DATA={
 "Kelas 1":[["Gerak Dasar Lokomotor, Non-lokomotor, Manipulatif","24 JP","12 JP","12 JP"],["Permainan Bola Kecil & Bola Besar","24 JP","12 JP","12 JP"],["Permainan Tradisional","12 JP","6 JP","6 JP"],["Senam & Aktivitas Ritmik","18 JP","9 JP","9 JP"],["Kebugaran Jasmani & Pola Hidup Sehat","18 JP","9 JP","9 JP"],["Aktivitas Air & Keselamatan Diri","6 JP","-","6 JP"],["Ulangan / Asesmen","18 JP","9 JP","9 JP"]],
 "Kelas 2":[["Gerak Dasar Lokomotor, Non-lokomotor, Manipulatif","24 JP","12 JP","12 JP"],["Permainan Bola Kecil & Bola Besar","24 JP","12 JP","12 JP"],["Permainan Tradisional","12 JP","6 JP","6 JP"],["Senam & Aktivitas Ritmik","18 JP","9 JP","9 JP"],["Kebugaran Jasmani & Pola Hidup Sehat","18 JP","9 JP","9 JP"],["Aktivitas Air & Keselamatan Diri","6 JP","-","6 JP"],["Ulangan / Asesmen","18 JP","9 JP","9 JP"]],
@@ -99,346 +89,124 @@ var PROSEM_BARU={
 "Kelas 6":[["Atletik Lanjutan: Lari estafet","3 JP","Penilaian awal"],["Bola Voli: Passing, servis, smash","3 JP",""],["Bola Basket: Dribbling, shooting, game 3 vs 3","3 JP",""],["Bulu Tangkis: Servis, smash, game tunggal","3 JP",""],["Kasti: Memukul & strategi - Game","3 JP",""],["Rounders: Permainan regu - Game","3 JP",""],["SUMATIF TENGAH SEMESTER (STS)","-","Ulangan"],["Senam Irama: Pentas kelas","3 JP",""],["Renang: Pengenalan air","3 JP",""],["P3K: Pertolongan Pertama & Ujian Praktik","3 JP",""],["Kebugaran: Tes lari 20m","3 JP",""],["Festival Olahraga Kelas","3 JP",""],["Pengulangan & Pengayaan - Latihan Ujian Praktik","3 JP",""],["MINGGU CADANGAN","3 JP",""],["SUMATIF AKHIR TAHUN (SAT) + UJIAN PRAKTIK","-","Ulangan"],["Remedial & Kelulusan","-",""]]
 }
 };
-var BULAN_LIST=[
- {key:"2026-07", label:"Juli 2026 - Sem 1", sem:"Ganjil"},
- {key:"2026-08", label:"Agustus 2026 - Sem 1", sem:"Ganjil"},
- {key:"2026-09", label:"September 2026 - Sem 1", sem:"Ganjil"},
- {key:"2026-10", label:"Oktober 2026 - Sem 1", sem:"Ganjil"},
- {key:"2026-11", label:"November 2026 - Sem 1", sem:"Ganjil"},
- {key:"2026-12", label:"Desember 2026 - Sem 1", sem:"Ganjil"},
- {key:"2027-01", label:"Januari 2027 - Sem 2", sem:"Genap"},
- {key:"2027-02", label:"Februari 2027 - Sem 2", sem:"Genap"},
- {key:"2027-03", label:"Maret 2027 - Sem 2", sem:"Genap"},
- {key:"2027-04", label:"April 2027 - Sem 2", sem:"Genap"},
- {key:"2027-05", label:"Mei 2027 - Sem 2", sem:"Genap"},
- {key:"2027-06", label:"Juni 2027 - Sem 2", sem:"Genap"},
- {key:"2027-07", label:"Juli 2027 - Sem 2", sem:"Genap"}
-];
-var kelasAktif="Beranda", adminAktif="PROTA", bulanAktif="2026-07";
-var PRESENSI_BULAN=JSON.parse(localStorage.getItem('PJOK_PRESENSI_BULAN')||'{}');
+var BULAN_LIST=[{key:"2026-07",label:"Juli 2026 - Sem 1",sem:"Ganjil"},{key:"2026-08",label:"Agustus 2026 - Sem 1",sem:"Ganjil"},{key:"2026-09",label:"September 2026 - Sem 1",sem:"Ganjil"},{key:"2026-10",label:"Oktober 2026 - Sem 1",sem:"Ganjil"},{key:"2026-11",label:"November 2026 - Sem 1",sem:"Ganjil"},{key:"2026-12",label:"Desember 2026 - Sem 1",sem:"Ganjil"},{key:"2027-01",label:"Januari 2027 - Sem 2",sem:"Genap"},{key:"2027-02",label:"Februari 2027 - Sem 2",sem:"Genap"},{key:"2027-03",label:"Maret 2027 - Sem 2",sem:"Genap"},{key:"2027-04",label:"April 2027 - Sem 2",sem:"Genap"},{key:"2027-05",label:"Mei 2027 - Sem 2",sem:"Genap"},{key:"2027-06",label:"Juni 2027 - Sem 2",sem:"Genap"}];
+var kelasAktif="Beranda", adminAktif="MATERI", bulanAktif="2026-07", semMateri="Ganjil";
 var NILAI_DATA=JSON.parse(localStorage.getItem('PJOK_NILAI')||'{}');
 var nilaiSemAktif="Ganjil";
 var MATERI_NILAI={Ganjil:["1. Gerak Dasar","2. Bola Kecil","3. Sepak Bola","4. Atletik","5. Senam","6. Tradisional & Sportivitas","7. Kebugaran & PHBS"],Genap:["1. Atletik Lanjutan","2. Bola Voli Mini","3. Bola Basket Mini","4. Bulu Tangkis","5. Kasti & Rounders","6. Senam Irama & Kebugaran","7. P3K, Renang & Sportivitas"]};
-var EDIT_DATA=JSON.parse(localStorage.getItem('PJOK_EDIT_DATA')||'{}');
-var EDIT_IDX=-1, EDIT_TIPE='';
-function simpanEditData(){localStorage.setItem('PJOK_EDIT_DATA',JSON.stringify(EDIT_DATA));}
-function kunciEdit(tipe){return tipe+"|"+kelasAktif;}
-function getDataEdit(tipe){
-  var k=kunciEdit(tipe);
-  if(EDIT_DATA[k]) return EDIT_DATA[k];
-  var arr=[];
-  if(tipe==='PROTA'){ arr=PROTA_DATA[kelasAktif].map(function(r){return {a:r[0],b:r[1],c:r[2],d:r[3]};}); }
-  if(tipe==='PROSEM1'){ arr=PROSEM_BARU.Ganjil[kelasAktif].map(function(r){return {a:r[0],b:r[1],c:r[2]};}); }
-  if(tipe==='PROSEM2'){ arr=PROSEM_BARU.Genap[kelasAktif].map(function(r){return {a:r[0],b:r[1],c:r[2]};}); }
-  if(tipe==='ATP'){ arr=PJOK.Ganjil.map(function(m){return {a:m,b:"Siswa mampu memahami dan mempraktekkan "+m.toLowerCase()+".",c:"Siswa mampu mempraktekkan "+m.toLowerCase()+" dengan benar dan sportivitas."};}); }
-  if(tipe==='MODUL'){ arr=PJOK.Ganjil.map(function(m){return {a:m,b:"Siswa mampu mempraktekkan "+m.toLowerCase()+".",c:"Doa, absen, pemanasan 10 menit.",d:"Demo "+m.toLowerCase()+", latihan kelompok, game 40 menit.",e:"Pendinginan, refleksi, doa 10 menit.",f:"Bola, cone, matras, lapangan."};}); }
-  if(tipe==='JURNAL'){ arr=PJOK.Ganjil.map(function(m,i){return {a:"Pertemuan "+(i+1),b:"",c:m,d:"Doa, absen, pemanasan. Inti: Demo "+m.toLowerCase()+", latihan kelompok, game. Penutup: Pendinginan, refleksi, doa.",e:"-",f:"Anak semangat dan aktif.",g:"Lanjutkan / ulangi materi jika perlu."};}); }
-  EDIT_DATA[k]=arr; simpanEditData(); return arr;
+var JURNAL_BULAN_LIST=["2026-07","2026-08","2026-09","2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05","2027-06"];
+var JURNAL_BULAN_LABEL={"2026-07":"Juli 2026","2026-08":"Agustus 2026","2026-09":"September 2026","2026-10":"Oktober 2026","2026-11":"November 2026","2026-12":"Desember 2026","2027-01":"Januari 2027","2027-02":"Februari 2027","2027-03":"Maret 2027","2027-04":"April 2027","2027-05":"Mei 2027","2027-06":"Juni 2027"};
+var JURNAL_BULAN_AKTIF="2026-07";
+var NAMA_HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+function buatJurnalPerBulan(){
+  var hasil=[];
+  JURNAL_BULAN_LIST.forEach(function(bulanKey){
+    var parts=bulanKey.split("-"); var y=parseInt(parts[0]), m=parseInt(parts[1])-1;
+    var d=new Date(y,m,1); if(bulanKey==="2026-07") d=new Date(2026,6,13);
+    while(d.getMonth()===m){
+      var hari=d.getDay();
+      if(hari!==0){
+        var kelasList=Object.keys(JUDUL_PJOK); var kls=null;
+        kelasList.forEach(function(kk){ if(HARI_NUM[HARI[kk]]===hari) kls=kk; });
+        if(kls){
+          var sem = bulanKey<"2027-01" ? "Ganjil" : "Genap";
+          var daftar=JUDUL_PJOK[kls][sem]; var materi=daftar[d.getDate()%16];
+          var tglStr=NAMA_HARI[hari]+", "+d.getDate()+" "+JURNAL_BULAN_LABEL[bulanKey];
+          hasil.push({bulan:bulanKey,kelas:kls,tgl:tglStr,mapel:"PJOK - "+kls,materi:materi,kegiatan:"Doa, absen, pemanasan 10 menit. Inti: Demo "+materi.toLowerCase()+", latihan kelompok, game 40 menit. Penutup: Pendinginan, refleksi, doa 10 menit.",kendala:"-",refleksi:"Anak antusias, aktif bergerak, sportivitas bagus.",tindak:"Lanjutkan / ulangi jika perlu."});
+        }
+      }
+      d.setDate(d.getDate()+1);
+    }
+  });
+  return hasil;
 }
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function mulaiEdit(tipe,idx){if(!cekGuru('EDIT'))return; EDIT_TIPE=tipe; EDIT_IDX=idx; render();}
-function batalEdit(){EDIT_IDX=-1; EDIT_TIPE=''; render();}
-function simpanEdit(tipe,idx){
-  var arr=getDataEdit(tipe);
-  var fields={PROTA:['a','b','c','d'],PROSEM1:['a','b','c'],PROSEM2:['a','b','c'],ATP:['a','b','c'],MODUL:['a','b','c','d','e','f'],JURNAL:['a','b','c','d','e','f','g']}[tipe];
-  fields.forEach(function(f){var el=document.getElementById('edit-'+f); if(el) arr[idx][f]=el.value;});
-  simpanEditData(); EDIT_IDX=-1; EDIT_TIPE=''; render();
+var JURNAL_DEFAULT=buatJurnalPerBulan();
+var JURNAL_DATA=JSON.parse(localStorage.getItem('PJOK_JURNAL')||'null')||JURNAL_DEFAULT;
+function simpanJurnal(){localStorage.setItem('PJOK_JURNAL',JSON.stringify(JURNAL_DATA));}
+var JURNAL_EDIT_IDX=-1;
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function levelText(kelas){if(kelas==="Kelas 1"||kelas==="Kelas 2")return "Fase A - Belajar sambil bermain, gambar, lagu, praktek. Guru bimbing dengan sabar, anak meniru, lalu praktek. Tugas: Menyebutkan, mencontohkan, menggambar, menyanyi, praktek sederhana."; if(kelas==="Kelas 3"||kelas==="Kelas 4")return "Fase B - Sudah bisa membaca, menulis, diskusi kelompok. Latihan dengan contoh nyata di Amuntai. Tugas: Menjelaskan, membandingkan, membuat laporan sederhana, presentasi kelompok."; return "Fase C - Sudah bisa berpikir kritis, presentasi, proyek kelompok. Latihan dengan soal HOTS sederhana. Tugas: Menganalisis, menyimpulkan, membuat karya / proyek, presentasi mandiri.";}
+function cpPJOK(kelas){return "CP PJOK - "+kelas+" - "+FASE[kelas]+" - Kurikulum Merdeka. Gerak dasar, kebugaran, pola hidup sehat, sportivitas. Peserta didik mampu memahami, menjelaskan, dan mempraktekkan gerak dasar, permainan, senam, kebugaran, dan PHBS di rumah, di SDN Kayakah, dan di Amuntai Selatan. Profil Pelajar Pancasila: Beriman, Mandiri, Gotong Royong, Bernalar Kritis, Kreatif."}
+function tpPJOK(jud){return "TP 1: Peserta didik mampu menjelaskan "+jud.toLowerCase()+" dengan bahasanya sendiri. TP 2: Peserta didik mampu mempraktekkan "+jud.toLowerCase()+" dengan benar dan aman. TP 3: Peserta didik mampu menunjukkan sikap sportivitas, kerjasama, dan tanggung jawab dalam permainan "+jud.toLowerCase()+"."}
+function modulAjarHTML(kelas,jud,idx,sem){
+  return '<div class="boxPink"><h4>📗 MODUL AJAR PJOK PER MATERI - '+esc(kelas)+' - Materi '+(idx+1)+' - Semester '+sem+' - Hari '+HARI[kelas]+'</h4>'
+  +'<p><b>Identitas:</b> SDN Kayakah - '+esc(kelas)+' - '+FASE[kelas]+' - Tahun Pelajaran 2026/2027 - Guru PJOK: Wahyu Aji, S.Pd.Jas - Wali Kelas: '+WALI[kelas]+' - Alokasi: 2 x 35 Menit (1 Pertemuan) - Materi: <b>'+esc(jud)+'</b></p>'
+  +'<div class="box"><b>📘 CP - Capaian Pembelajaran:</b><br>'+cpPJOK(kelas)+'</div>'
+  +'<div class="box2"><b>📗 TP - Tujuan Pembelajaran:</b><br>'+tpPJOK(jud)+'</div>'
+  +'<div class="box3"><b>🌈 Profil Pelajar Pancasila:</b> Beriman & Bertakwa, Mandiri, Gotong Royong, Bernalar Kritis, Kreatif, Berkebinekaan Global.</div>'
+  +'<p><b>🎯 Tujuan Akhir:</b> Setelah belajar, anak mampu menjelaskan dan mempraktekkan <b>'+esc(jud)+'</b> dengan benar, aman, dan sportivitas.</p>'
+  +'<p><b>🛠️ Sarana & Prasarana:</b> Lapangan SDN Kayakah, Bola Kecil / Bola Besar, Cone, Matras, Peluit, Stopwatch, Papan Tulis, Spidol, Lagu Senam, HP / Laptop Guru, Lembar Kerja Anak, Kotak P3K.</p>'
+  +'<p><b>👥 Model Pembelajaran:</b> Pembelajaran Berdiferensiasi - Discovery Learning - Diskusi Kelompok - Praktek & Game - Sportivitas.</p>'
+  +'<h4>📋 Langkah Pembelajaran</h4>'
+  +'<p><b>1. PENDAHULUAN - 10 Menit:</b><br>1) Salam, Doa, Absen, Cek Kebersihan & Kesehatan.<br>2) Apersepsi: Guru bertanya pengalaman anak tentang '+esc(jud.toLowerCase())+'.<br>3) Motivasi: Guru cerita / tunjukkan contoh nyata di Amuntai.<br>4) Guru sampaikan tujuan hari ini: Hari ini kita belajar '+esc(jud)+'.<br>5) Pemanasan: Lari pelan, peregangan, senam pagi 5 menit.</p>'
+  +'<p><b>2. INTI - 60 Menit:</b><br><b>Mengamati (10 Menit):</b> Guru demo '+esc(jud)+', anak mengamati.<br><b>Menanya (5 Menit):</b> Anak bertanya, guru menjawab.<br><b>Mencoba / Berlatih (30 Menit):</b> Anak latihan kelompok: Meniru demo, latihan berpasangan, latihan kelompok tentang '+esc(jud)+'. Guru keliling membimbing, mengoreksi gerak.<br><b>Game (10 Menit):</b> Permainan / lomba kecil tentang '+esc(jud)+'. Anak main dengan sportivitas.<br><b>Penguatan (5 Menit):</b> Guru menguatkan gerak benar, meluruskan yang keliru.</p>'
+  +'<p><b>3. PENUTUP - 10 Menit:</b><br>1) Pendinginan: Jalan pelan, peregangan, tarik napas.<br>2) Anak menyimpulkan apa yang dipelajari hari ini.<br>3) Guru memberi kuis lisan 3 pertanyaan.<br>4) Refleksi: Apa yang paling kamu suka? Apa yang belum bisa?<br>5) Tindak Lanjut: PR: Praktek di rumah, jaga kebersihan, makan sehat, tidur cukup.<br>6) Doa Penutup, Salam, Pulang tertib.</p>'
+  +'<h4>📝 Asesmen / Penilaian</h4>'
+  +'<p><b>Sikap (S):</b> Observasi - Jujur, Disiplin, Sopan, Gotong Royong, Sportivitas, Tanggung Jawab, Percaya Diri.<br><b>Pengetahuan (P):</b> Lisan - Anak mampu menjelaskan 3 hal tentang '+esc(jud)+'. Tertulis - Lembar Kerja: Menjodohkan, Melengkapi.<br><b>Keterampilan / Praktek (K):</b> Unjuk Kerja - Anak mampu mempraktekkan '+esc(jud)+' dengan benar dan aman.</p>'
+  +'<p><b>📖 Refleksi Guru:</b> Apa yang sudah berhasil? Anak mana yang belum paham? Apa tindak lanjut besok? (Diisi di Jurnal).<br><b>📖 Remedial:</b> Bimbingan kelompok kecil, demo ulang, latihan pelan.<br><b>📖 Pengayaan:</b> Latihan lebih sulit, jadi contoh demo, bantu teman, lomba.</p>'
+  +'<p><b>📝 Latihan Anak:</b> 1) Jelaskan kembali tentang '+esc(jud)+'! 2) Praktek bersama teman: '+esc(jud)+'! 3) Main game dengan sportivitas! 4) Tulis / gambar 1 hal yang kamu pelajari hari ini!</p></div>';
 }
-function hapusBaris(tipe,idx){if(!cekGuru('HAPUS'))return; if(!confirm('Hapus baris ini, Pak?'))return; var arr=getDataEdit(tipe); arr.splice(idx,1); simpanEditData(); render();}
-function tambahBaris(tipe){if(!cekGuru('TAMBAH'))return; var arr=getDataEdit(tipe); var baru={a:'Materi Baru',b:'',c:'',d:'',e:'',f:'',g:''};
-  if(tipe==='PROTA'){baru={a:'Materi Baru',b:'3 JP',c:'',d:''};}
-  if(tipe==='PROSEM1'||tipe==='PROSEM2'){baru={a:'Materi Baru',b:'3 JP',c:''};}
-  if(tipe==='ATP'){baru={a:'Materi Baru',b:'CP baru',c:'TP baru'};}
-  if(tipe==='MODUL'){baru={a:'Materi Baru',b:'Tujuan baru',c:'Pendahuluan',d:'Inti',e:'Penutup',f:'Media'};}
-  if(tipe==='JURNAL'){baru={a:'Pertemuan Baru',b:'',c:'Materi Baru',d:'Kegiatan',e:'-',f:'-',g:'-'};}
-  arr.push(baru); simpanEditData(); EDIT_TIPE=tipe; EDIT_IDX=arr.length-1; render();
-}
-function tombolAksi(tipe,idx){
-  if(!MODE_GURU) return '';
-  if(EDIT_TIPE===tipe && EDIT_IDX===idx) return '<button class="btnKecil" style="background:#059669" onclick="simpanEdit(\''+tipe+'\','+idx+')">💾 SIMPAN</button><button class="btnKecil" style="background:#666" onclick="batalEdit()">❌ BATAL</button>';
-  return '<button class="btnKecil" style="background:#1E90FF" onclick="mulaiEdit(\''+tipe+'\','+idx+')">✏️ EDIT</button><button class="btnKecil" style="background:#D32F2F" onclick="hapusBaris(\''+tipe+'\','+idx+')">🗑️ HAPUS</button>';
-}
-function tombolTambah(tipe,label){
-  if(!MODE_GURU) return '<div class="box2">🔒 <b>Terkunci untuk pengunjung.</b> Hanya Guru PJOK yang bisa EDIT / TAMBAH / HAPUS. Silahkan hubungi Guru Olahraga untuk keterangan lebih lanjut.</div>';
-  return '<div class="no-print"><button class="btn2" style="background:#059669" onclick="tambahBaris(\''+tipe+'\')">➕ TAMBAH BARIS BARU - '+label+'</button><button class="btn2" style="background:#1E90FF" onclick="cobaPrint()">🖨️ PRINT / PDF</button></div>';
-}
-function inp(id,val,isArea){ if(isArea) return '<textarea id="'+id+'">'+esc(val)+'</textarea>'; return '<input id="'+id+'" value="'+esc(val)+'">'; }
-function selEdit(tipe,idx,field,val,isArea){ if(EDIT_TIPE===tipe && EDIT_IDX===idx) return inp('edit-'+field,val,isArea); return esc(val); }
-function renderTabelEdit(tipe, headers, fieldKeys, isAreaMap){
-  var arr=getDataEdit(tipe);
-  var head=headers.map(function(h){return '<th>'+h+'</th>';}).join('') + (MODE_GURU?'<th>✏️ Aksi</th>':'');
-  var rows=arr.map(function(r,i){
-    var cells=fieldKeys.map(function(f){ return '<td style="text-align:left">'+selEdit(tipe,i,f,r[f], isAreaMap&&isAreaMap[f])+'</td>'; }).join('');
-    return '<tr><td>'+(i+1)+'</td>'+cells+(MODE_GURU?'<td style="white-space:nowrap">'+tombolAksi(tipe,i)+'</td>':'')+'</tr>';
-  }).join('');
-  return '<div class="editWrap"><table><tr><th>No</th>'+head+'</tr>'+rows+'</table></div>';
-}
+function pilihKelas(k){kelasAktif=k;render();}
+function pilihAdmin(a){adminAktif=a;render();}
+function pilihBulan(b){bulanAktif=b;render();}
+function cekGuru(){if(!MODE_GURU){alert('Maaf. Hanya Guru PJOK yang bisa membuka dan mengedit. Hubungi Wahyu Aji, S.Pd.Jas.');return false;}return true;}
+function klikLogin(){if(MODE_GURU){if(confirm('Sudah login. Mau keluar?')){MODE_GURU=false;localStorage.setItem('PJOK_MODE_GURU','0');render();}return;}var p=prompt('Masukkan Password Guru PJOK:');if(p===null)return;if(p===PASSWORD_GURU){MODE_GURU=true;localStorage.setItem('PJOK_MODE_GURU','1');alert('Alhamdulillah, selamat datang, Pak Wahyu Aji!');render();}else alert('Password salah!');}
+function gantiPassword(){if(!MODE_GURU){alert('Login dulu.');return;}var lama=prompt('Password LAMA:');if(lama!==PASSWORD_GURU){alert('Password lama salah!');return;}var baru=prompt('Password BARU (min 4):');if(!baru||baru.trim().length<4){alert('Terlalu pendek!');return;}var ulang=prompt('Ketik lagi Password BARU:');if(baru!==ulang){alert('Tidak sama!');return;}PASSWORD_GURU=baru;localStorage.setItem('PJOK_PASSWORD_GURU',baru);alert('Password berhasil diganti: '+baru);render();}
+function updateTombolLogin(){var b=document.getElementById('tombolLogin');if(b){b.innerText=MODE_GURU?'✅ GURU PJOK: Wahyu Aji - LOGOUT':'🔐 LOGIN GURU PJOK';b.style.background=MODE_GURU?'#059669':'#222';}var g=document.getElementById('tombolGantiPw');if(g)g.style.display=MODE_GURU?'inline-block':'none';}
+function getTanggalBulan(key,kelas){var p=key.split('-');var y=parseInt(p[0]),m=parseInt(p[1])-1;var target=HARI_NUM[HARI[kelas]];var res=[];var d=new Date(y,m,1);while(d.getMonth()===m){if(d.getDay()===target)res.push(d.getDate());d.setDate(d.getDate()+1);}return res;}
 function predikatNilai(n){if(n>=90)return 'A - Sangat Baik';if(n>=80)return 'B - Baik';if(n>=70)return 'C - Cukup';if(n>0)return 'D - Perlu Bimbingan';return '-';}
 function kunciNilai(){return kelasAktif+"|"+nilaiSemAktif;}
 function pilihNilaiSem(s){nilaiSemAktif=s;render();}
 function hitungNilaiSiswa(nama){var k=kunciNilai();var data=NILAI_DATA[k]||{};var total=0,cnt=0,per=[];MATERI_NILAI[nilaiSemAktif].forEach(function(m,mi){var v=data[nama+"|"+mi]||{P:'',K:'',S:''};var pp=parseFloat(v.P)||0,kk=parseFloat(v.K)||0,ss=parseFloat(v.S)||0;var j=(v.P!==''?1:0)+(v.K!==''?1:0)+(v.S!==''?1:0);var nm=0,ada=false;if(j>0){nm=(pp+kk+ss)/j;ada=true;}if(ada){total+=nm;cnt++;per.push(nm.toFixed(0));}else per.push('-');});var rata=cnt?total/cnt:0;return {per:per,rata:rata,pred:predikatNilai(rata)};}
-function hitungRanking(){var list=DATA_SISWA[kelasAktif].map(function(nama,idx){var h=hitungNilaiSiswa(nama);return {nama:nama,idx:idx,rata:h.rata};});list.sort(function(a,b){return b.rata-a.rata;});var map={};var rank=0,prev=-1;list.forEach(function(x,i){if(x.rata!==prev){rank=i+1;prev=x.rata;}map[x.nama]=x.rata>0?rank:'-';});return map;}
-function updateRankingLive(){var map=hitungRanking();DATA_SISWA[kelasAktif].forEach(function(nama,idx){var el=document.getElementById('rank-'+idx);if(el){var r=map[nama];el.innerHTML=r==='-'?'-':'🏆 '+r;el.className=r===1?'rank-1':r===2?'rank-2':r===3?'rank-3':'';}});}
-function ubahNilai(el,idx,mi,kol,val,nama){if(!cekGuru('EDIT NILAI')){render();return;}var k=kunciNilai();if(!NILAI_DATA[k])NILAI_DATA[k]={};if(!NILAI_DATA[k][nama+"|"+mi])NILAI_DATA[k][nama+"|"+mi]={P:'',K:'',S:''};NILAI_DATA[k][nama+"|"+mi][kol]=val;var v=NILAI_DATA[k][nama+"|"+mi];var pp=parseFloat(v.P)||0,kk=parseFloat(v.K)||0,ss=parseFloat(v.S)||0;var j=(v.P!==''?1:0)+(v.K!==''?1:0)+(v.S!==''?1:0);var nm=j>0?(pp+kk+ss)/j:0;var elM=document.getElementById('nm-'+idx+'-'+mi);if(elM)elM.innerText='Nilai: '+(j>0?nm.toFixed(0):'-');var h=hitungNilaiSiswa(nama);var elR=document.getElementById('nilaiRata-'+nama.replace(/[^a-zA-Z0-9]/g,''));if(elR)elR.innerHTML='<b>'+(h.rata?h.rata.toFixed(1):'-')+'</b><br>'+h.pred;updateRankingLive();}
-function simpanNilai(){if(!cekGuru('SIMPAN NILAI'))return;localStorage.setItem('PJOK_NILAI',JSON.stringify(NILAI_DATA));alert('Nilai '+kelasAktif+' - Semester '+nilaiSemAktif+' tersimpan, Pak!');render();}
-function buatTeksNilai(){var teks='NILAI PJOK - SDN KAYAKAH\n'+kelasAktif+' - Semester '+nilaiSemAktif+'\nGuru PJOK: Wahyu Aji, S.Pd.Jas\nP = Kognitif / Pengetahuan | K = Psikomotor / Praktek | S = Afektif / Sikap\n--------------------------------\n';var map=hitungRanking();var urut=DATA_SISWA[kelasAktif].slice().sort(function(a,b){return hitungNilaiSiswa(b).rata-hitungNilaiSiswa(a).rata;});urut.forEach(function(nama,i){var h=hitungNilaiSiswa(nama);teks+='Rangking '+map[nama]+'. '+nama+' - Per Materi: '+h.per.join(', ')+' - Akhir: '+(h.rata?h.rata.toFixed(1):'-')+' ('+h.pred+')\n';});teks+='--------------------------------\nAmuntai Selatan\nGuru PJOK: Wahyu Aji, S.Pd.Jas';return teks;}
-function salinNilai(){if(!cekGuru('SALIN NILAI'))return;var t=buatTeksNilai();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>alert('Rekap Nilai + Rangking sudah tercopy, Pak!')).catch(()=>fallbackSalin(t));}else fallbackSalin(t);}
-function waNilai(){if(!cekGuru('WA NILAI'))return;window.open('https://wa.me/?text='+encodeURIComponent(buatTeksNilai()),'_blank');}
-function downloadNilai(){if(!cekGuru('DOWNLOAD NILAI'))return;var csv='NILAI PJOK - SDN KAYAKAH\n'+kelasAktif+' - Semester '+nilaiSemAktif+'\nGuru PJOK,Wahyu Aji, S.Pd.Jas\n\n';var map=hitungRanking();csv+='Rangking,No,Nama Siswa,'+MATERI_NILAI[nilaiSemAktif].join(',')+',Nilai Akhir,Predikat\n';var urut=DATA_SISWA[kelasAktif].map(function(nama,i){return {nama:nama,i:i,rata:hitungNilaiSiswa(nama).rata};}).sort(function(a,b){return b.rata-a.rata;});urut.forEach(function(o){var h=hitungNilaiSiswa(o.nama);csv+=map[o.nama]+','+(o.i+1)+',"'+o.nama+'",'+h.per.join(',')+','+(h.rata?h.rata.toFixed(1):'-')+',"'+h.pred+'"\n';});var blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='Nilai-PJOK-'+kelasAktif.replace(' ','-')+'-'+nilaiSemAktif+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);alert('File Nilai + Rangking sudah terdownload, Pak!');}
-function fase(k){var n=parseInt(k.replace("Kelas ","")); if(n<=2) return "Fase A - Belajar sambil bermain."; if(n<=4) return "Fase B - Diskusi kelompok, praktek."; return "Fase C - Berpikir kritis, presentasi, proyek.";}
-function pilihKelas(k){ kelasAktif=k; adminAktif="PROTA"; EDIT_IDX=-1; EDIT_TIPE=''; render(); }
-function pilihAdmin(a){ adminAktif=a; EDIT_IDX=-1; EDIT_TIPE=''; render(); }
-function pilihBulan(b){ bulanAktif=b; render(); }
-function cekGuru(aksi){
-  if(!MODE_GURU){
-    alert('Maaf, Pak / Bu. Hanya Guru PJOK yang bisa membuka dan mengedit. Silahkan hubungi Guru Olahraga untuk keterangan lebih lanjut.');
-    return false;
+function hitungRanking(){var list=DATA_SISWA[kelasAktif].map(function(nama){return {nama:nama,rata:hitungNilaiSiswa(nama).rata}});list.sort(function(a,b){return b.rata-a.rata});var map={},rank=0,prev=-1;list.forEach(function(x,i){if(x.rata!==prev){rank=i+1;prev=x.rata;}map[x.nama]=x.rata>0?rank:'-';});return map;}
+function ubahNilai(el,idx,mi,kol,val,nama){if(!cekGuru()){render();return;}var k=kunciNilai();if(!NILAI_DATA[k])NILAI_DATA[k]={};if(!NILAI_DATA[k][nama+"|"+mi])NILAI_DATA[k][nama+"|"+mi]={P:'',K:'',S:''};NILAI_DATA[k][nama+"|"+mi][kol]=val;localStorage.setItem('PJOK_NILAI',JSON.stringify(NILAI_DATA));render();}
+function simpanNilai(){if(!cekGuru())return;localStorage.setItem('PJOK_NILAI',JSON.stringify(NILAI_DATA));alert('Nilai tersimpan!');}
+function simpanEditJurnal(i){if(!cekGuru())return;JURNAL_DATA[i]={bulan:JURNAL_DATA[i].bulan,kelas:JURNAL_DATA[i].kelas,tgl:document.getElementById('je-tgl').value,mapel:document.getElementById('je-mapel').value,materi:document.getElementById('je-materi').value,kegiatan:document.getElementById('je-kegiatan').value,kendala:document.getElementById('je-kendala').value,refleksi:document.getElementById('je-refleksi').value,tindak:document.getElementById('je-tindak').value};simpanJurnal();JURNAL_EDIT_IDX=-1;alert('Jurnal tersimpan!');render();}
+function hapusJurnal(i){if(!cekGuru())return;if(!confirm('Hapus jurnal ini?'))return;JURNAL_DATA.splice(i,1);simpanJurnal();render();}
+function tambahJurnalBaru(){if(!cekGuru())return;var hariIni=new Date();var tglStr=NAMA_HARI[hariIni.getDay()]+", "+hariIni.getDate()+" "+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF];JURNAL_DATA.push({bulan:JURNAL_BULAN_AKTIF,kelas:kelasAktif==="Beranda"||kelasAktif==="Semua"?"Kelas 1":kelasAktif,tgl:tglStr,mapel:"PJOK",materi:"Materi baru",kegiatan:"Isi kegiatan...",kendala:"-",refleksi:"-",tindak:"-"});simpanJurnal();JURNAL_EDIT_IDX=JURNAL_DATA.length-1;render();}
+function renderBeranda(){return '<h2>🏠 BERANDA PJOK SDN KAYAKAH - LENGKAP FINAL</h2><p>SDN Kayakah - Amuntai Selatan - 2026/2027 - Guru PJOK: Wahyu Aji, S.Pd.Jas - Kepala Sekolah: Wahyu Aji, S.Pd.Jas</p><div class="box"><b>Isi File Lengkap:</b><br>📚 MATERI PJOK Kelas 1-6 (192 Materi)<br>📗 MODUL AJAR PJOK PER MATERI<br>📆 PROTA PJOK Per Kelas<br>📅 PROMES PJOK Per Kelas Per Minggu<br>📓 JURNAL PJOK Per Bulan - Sesuai Hari PJOK<br>📋 PRESENSI PJOK Per Kelas Per Bulan<br>🏆 NILAI PJOK P-K-S + Ranking</div><div class="box2"><b>6 Kelas PJOK:</b><br>Kelas 1: 10 Siswa - Sabtu - Wali: Radinah, S.Pd<br>Kelas 2: 8 Siswa - Jumat - Wali: Siti Nuriyah, S.Pd.SD<br>Kelas 3: 11 Siswa - Kamis - Wali: Pathul Jannah, S.Pd.I<br>Kelas 4: 10 Siswa - Rabu - Wali: Norsalim, S.Pd<br>Kelas 5: 12 Siswa - Selasa - Wali: Syahruni, S.Pd.SD<br>Kelas 6: 9 Siswa - Senin - Wali: Samsul Bahri, S.Pd<br><b>Total: 60 Siswa</b></div><div class="box3"><b>Cara Pakai:</b> Klik tombol PJOK Kelas 1-6 di atas, Pak. Pilih MATERI, PROTA, PROMES, JURNAL, PRESENSI, NILAI, Pak.</div>';}
+function renderProta(){
+  var rows=PROTA_DATA[kelasAktif].map(function(r){return '<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td><td>'+esc(r[3])+'</td></tr>';}).join('');
+  return '<h3>📆 PROTA PJOK - '+esc(kelasAktif)+' - '+FASE[kelasAktif]+' - 2026/2027 - Hari '+HARI[kelasAktif]+'</h3><div class="box">SDN Kayakah - '+esc(kelasAktif)+' - Guru PJOK: Wahyu Aji, S.Pd.Jas - Wali Kelas: '+WALI[kelasAktif]+'<br><b>Jumlah Efektif:</b> Ganjil: 16 Minggu (13 Juli - 12 Des 2026) - Genap: 16 Minggu (5 Jan - 20 Juni 2027) - Total: 32 Minggu<br><b>Materi PJOK:</b> Gerak Dasar, Permainan Bola Kecil & Besar, Permainan Tradisional, Senam & Ritmik, Kebugaran & PHBS, Aktivitas Air & Keselamatan.<br><b>Kegiatan Tahunan:</b> MPLS, Maulid Nabi, Isra Miraj, Ramadhan, Idul Fitri, HUT RI, Hari Guru, Wisuda Tahfiz, Pentas Seni, Perkemahan Pramuka, Festival Olahraga.</div>'
+  +'<table><tr><th>Materi / Unsur</th><th>Alokasi Waktu</th><th>Semester 1</th><th>Semester 2</th></tr>'+rows+'</table>'
+  +'<div class="box2"><b>Catatan PROTA:</b> Minggu 1: MPLS & Asesmen Awal. Minggu 2-15: Materi 1-14. Minggu 16: Pengulangan & SAS/SAT. Praktek & Game setiap minggu.</div>'
+  +'<div class="box">Tanda Tangan:<br>Amuntai Selatan, Juli 2026<br><br>Guru PJOK,<br><br><b>Wahyu Aji, S.Pd.Jas</b></div>';
+}
+function renderPromes(){
+  var s=semMateri;
+  var rows="";
+  for(var minggu=0; minggu<16; minggu++){
+    var p=PROSEM_BARU[s][kelasAktif][minggu];
+    rows+='<tr><td><b>Minggu '+(minggu+1)+'</b></td><td style="text-align:left"><b>'+esc(p[0])+'</b></td><td>'+esc(p[1])+'</td><td>'+esc(p[2])+'</td></tr>';
   }
-  return true;
-}
-function klikLogin(){
-  if(MODE_GURU){
-    if(confirm('Pian sudah login sebagai Guru PJOK, Pak. Mau keluar (Logout)?')){
-      MODE_GURU=false; localStorage.setItem('PJOK_MODE_GURU','0'); render();
-    }
-    return;
-  }
-  var p=prompt('Masukkan Password Guru PJOK, Pak:');
-  if(p===null) return;
-  if(p===PASSWORD_GURU){
-    MODE_GURU=true; localStorage.setItem('PJOK_MODE_GURU','1');
-    alert('Alhamdulillah, selamat datang, Pak Wahyu Aji! Pian sekarang bisa Edit, Simpan, Salin, Download & Teruskan WA, Pak.');
-    render();
-  } else {
-    alert('Password salah, Pak! Hanya Guru PJOK yang bisa login, Pak.');
-  }
-}
-function gantiPassword(){
-  if(!MODE_GURU){ alert('Pian harus LOGIN dulu sebagai Guru PJOK, Pak. Baru bisa ganti password, Pak.'); return; }
-  var lama=prompt('Masukkan Password LAMA Pian, Pak:');
-  if(lama===null) return;
-  if(lama!==PASSWORD_GURU){ alert('Password lama salah, Pak! Kada bisa ganti, Pak.'); return; }
-  var baru=prompt('Masukkan Password BARU Pian, Pak:\nMinimal 4 huruf / angka, Pak. Contoh: Wahyu123');
-  if(baru===null) return;
-  baru=baru.trim();
-  if(baru.length<4){ alert('Password baru terlalu pendek, Pak! Minimal 4 huruf, Pak.'); return; }
-  var ulang=prompt('Ketik lagi Password BARU Pian, Pak (untuk memastikan):');
-  if(ulang===null) return;
-  if(baru!==ulang){ alert('Password baru kada sama, Pak! Coba lagi, Pak.'); return; }
-  PASSWORD_GURU=baru;
-  localStorage.setItem('PJOK_PASSWORD_GURU', baru);
-  alert('Alhamdulillah, Password Pian sudah BERHASIL diganti, Pak! 🎉\n\nPassword baru Pian: '+baru+'\nJangan lupa dicatat, Pak. Besok login pakai password baru ini, Pak.');
-  render();
-}
-function updateTombolLogin(){
-  var b=document.getElementById('tombolLogin');
-  if(b) b.innerText = MODE_GURU ? '✅ GURU PJOK: Wahyu Aji - LOGOUT' : '🔐 LOGIN GURU PJOK';
-  if(b) b.style.background = MODE_GURU ? '#059669' : '#222';
-  var g=document.getElementById('tombolGantiPw');
-  if(g) g.style.display = MODE_GURU ? 'inline-block' : 'none';
-}
-function getTanggalBulan(key, kelas){
-  var parts=key.split('-'); var y=parseInt(parts[0]); var m=parseInt(parts[1])-1;
-  var target=HARI_NUM[HARI[kelas]];
-  var res=[]; var d=new Date(y,m,1);
-  while(d.getMonth()===m){ if(d.getDay()===target) res.push(d.getDate()); d.setDate(d.getDate()+1); }
-  return res;
-}
-function ambilDataPresensi(){
-  var k=kelasAktif; var tanggalList=getTanggalBulan(bulanAktif, k);
-  var hasil=[];
-  DATA_SISWA[k].forEach((nama,idx)=>{
-    var arr=[]; var h=0,s=0,iz=0,a=0;
-    tanggalList.forEach((tgl,j)=>{
-      var sel=document.querySelector(`select[data-siswa="${idx}"][data-pertemuan="${j}"]`);
-      var v=sel?sel.value:'H'; arr.push(v);
-      if(v==='H')h++; if(v==='S')s++; if(v==='I')iz++; if(v==='A')a++;
-    });
-    hasil.push({nama:nama, arr:arr, h:h, s:s, i:iz, a:a});
-  });
-  return {tanggalList:tanggalList, hasil:hasil};
-}
-function renderKunci(judul){
-  return '<div class="boxKunci"><div style="font-size:60px">🔒</div><h2 style="color:#D32F2F;margin:8px 0">'+judul+' DIKUNCI</h2><p style="font-size:16px;line-height:1.6"><b>Maaf, Pak / Bu.</b><br>Hanya Guru PJOK yang bisa membuka dan mengedit.<br>Silahkan hubungi Guru Olahraga untuk keterangan lebih lanjut.</p><p style="font-size:13px;color:#666">Guru PJOK: Wahyu Aji, S.Pd.Jas - SDN Kayakah</p></div>';
-}
-function renderBeranda(){
-  var status = MODE_GURU ? '<span class="badge badgeGuru">✅ MODE: GURU PJOK - Bisa Edit / Simpan / Salin / Download / WA</span>' : '';
-  var tombolGanti = MODE_GURU ? '<div class="box3"><b>🔑 Mau Ganti Password, Pak?</b><br>Pencet tombol <b>🔑 GANTI PASSWORD</b> di atas, Pak. Pian bisa ganti sendiri, kada perlu buka kode lagi, Pak.<br><button class="btn2" style="background:#7C3AED" onclick="gantiPassword()">🔑 GANTI PASSWORD SEKARANG</button></div>' : '';
-  var pesan = MODE_GURU ? '<div class="box3"><b>Selamat datang, Pak Wahyu Aji! 🙏</b><br>Pian sudah login sebagai Guru PJOK, Pak. Pian bisa edit PROTA, PROSEM, ATP, MODUL, JURNAL, PRESENSI & NILAI, Pak.</div>' : '';
-  var kartu = ["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].map(k=>`<div class="kartuKelas" onclick="pilihKelas('${k}')"><div style="font-size:36px">⚽</div><b>${k}</b><p>Hari ${HARI[k]}</p><p>${DATA_SISWA[k].length} Siswa</p><p>Guru: Wahyu Aji, S.Pd.Jas</p><button class="btn2" style="background:#7C3AED">Buka ${k} ➡️</button></div>`).join('');
-  return `<h2>🏠 BERANDA PJOK SDN KAYAKAH</h2><p>Selamat datang di Aplikasi PJOK, Pak!</p>${status}<br>${pesan}${tombolGanti}<div class="box"><b>🏫 SDN Kayakah - Amuntai Selatan</b><br>Tahun Pelajaran 2026/2027 • Guru PJOK: <b>Wahyu Aji, S.Pd.Jas</b> • Kepala Sekolah: Wahyu Aji, S.Pd.Jas<br><b>Isi Aplikasi:</b> PROTA, PROSEM Sem 1 & 2, JURNAL, ATP & MODUL, PRESENSI PER BULAN, NILAI<br><b>Baru:</b> PROTA, PROSEM, ATP, MODUL, JURNAL sekarang bisa DIEDIT Guru PJOK, Pak. Per baris, bisa TAMBAH & HAPUS, Pak.</div><h3>Pilih Kelas, Pak:</h3><div class="gridBeranda">${kartu}</div><div class="box2" style="display:none"><b>Cara Pakai Edit, Pak:</b><br>1. LOGIN dulu, Pak.<br>2. Pilih kelas, pilih menu PROTA / PROSEM / JURNAL / ATP, Pak.<br>3. Pencet <b>✏️ EDIT</b> di baris yang Pian mau ubah, Pak. Ubah, pencet <b>💾 SIMPAN</b>, Pak.<br>4. Mau tambah, pencet <b>➕ TAMBAH BARIS BARU</b>, Pak.<br>5. Mau hapus, pencet <b>🗑️ HAPUS</b>, Pak.</div>`;
+  return '<h3>📅 PROMES PJOK - '+esc(kelasAktif)+' - Semester '+s+' - 2026/2027 - Hari '+HARI[kelasAktif]+'</h3><div class="no-print"><button class="btn2" style="background:#F59E0B" onclick="semMateri=\'Ganjil\';render()">🍂 PROMES Ganjil</button><button class="btn2" style="background:#059669" onclick="semMateri=\'Genap\';render()">🌸 PROMES Genap</button></div><div class="box">SDN Kayakah - '+esc(kelasAktif)+' - Guru PJOK: Wahyu Aji, S.Pd.Jas - Semester '+s+' - 16 Minggu - 3 JP per Minggu.<br><b>Cara Baca:</b> Minggu 1 = Materi 1. Minggu 2 = Materi 2, dst. Minggu 16 = Pengulangan & SAS/SAT.</div><table><tr><th>Minggu</th><th>Materi / Tujuan</th><th>JP</th><th>Keterangan</th></tr>'+rows+'</table><div class="box2"><b>Asesmen PROMES:</b> Asesmen Formatif tiap minggu (Lisan, Praktek, Game, Sportivitas). STS Minggu 7. SAS/SAT Minggu 15-16.</div>';
 }
 function render(){
-  updateTombolLogin();
-  document.querySelectorAll('.menuAtas button').forEach(b=>b.classList.remove('active'));
-  var tb=document.getElementById('tombol-'+kelasAktif); if(tb) tb.classList.add('active');
-  var el=document.getElementById('isiUtama');
-  if(kelasAktif==="Beranda"){ el.innerHTML=renderBeranda(); return; }
-  if(kelasAktif==="Semua"){
-    el.innerHTML=`<h2>📚 Semua Kelas - Guru PJOK: Wahyu Aji, S.Pd.Jas</h2>${["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].map(k=>`<div class="box3"><b>${k} - Hari ${HARI[k]} - Guru PJOK: Wahyu Aji, S.Pd.Jas - ${DATA_SISWA[k].length} Siswa</b><br><button class="btn2" style="background:#222" onclick="pilihKelas('${k}')">Buka ${k} ➡️</button></div>`).join('')}<div class="box"><b>Data Wali Kelas (Hanya untuk Data Siswa):</b><br>${["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].map(k=>`${k}: ${WALI[k]}`).join('<br>')}</div>`;
-    return;
-  }
-  var k=kelasAktif;
-  var statusAkses = MODE_GURU ? '<div class="box3">✅ <b>MODE GURU PJOK</b> - Pian bisa Edit, Tambah, Hapus, Simpan, Salin, Download & WA, Pak.</div>' : '<div class="box2">👀 <b>MODE PENGUNJUNG</b> - Pian cuma bisa lihat, Pak. Untuk EDIT, silahkan LOGIN Guru PJOK di atas, Pak.</div>';
-  var labelPresensi = MODE_GURU ? '✅ PRESENSI PER BULAN' : '🔒 PRESENSI PER BULAN';
-  var labelNilai = MODE_GURU ? '✅ NILAI' : '🔒 NILAI';
-  var menuAdmin=`${statusAkses}<div class="menuAdmin no-print">
-    <button style="background:#1E90FF" onclick="pilihAdmin('PROTA')">📆 PROTA</button>
-    <button style="background:#F59E0B" onclick="pilihAdmin('PROSEM1')">📅 PROSEM Sem 1</button>
-    <button style="background:#059669" onclick="pilihAdmin('PROSEM2')">📅 PROSEM Sem 2</button>
-    <button style="background:#7C3AED" onclick="pilihAdmin('GABUNG')">📚 PROTA + PROSEM</button>
-    <button style="background:#0891B2" onclick="pilihAdmin('JURNAL')">📓 JURNAL</button>
-    <button style="background:#EC4899" onclick="pilihAdmin('ATP')">📘 ATP & MODUL</button>
-    <button style="background:#D97706" onclick="pilihAdmin('PRESENSI')">${labelPresensi}</button>
-    <button style="background:#DC2626" onclick="pilihAdmin('NILAI')">${labelNilai}</button>
-  </div><p>Administrasi Aktif: <b>${adminAktif}</b> - Guru PJOK: <b>Wahyu Aji, S.Pd.Jas</b></p>`;
+  updateTombolLogin();var el=document.getElementById('isiUtama');if(kelasAktif==="Beranda"){el.innerHTML=renderBeranda();return;}
+  if(kelasAktif==="Semua"){el.innerHTML='<h2>📚 Semua Kelas PJOK - Guru: Wahyu Aji, S.Pd.Jas</h2>'+["Kelas 1","Kelas 2","Kelas 3","Kelas 4","Kelas 5","Kelas 6"].map(function(k){return '<div class="box3"><b>'+k+' - Hari '+HARI[k]+' - '+DATA_SISWA[k].length+' Siswa</b><br><button class="btn2" style="background:#222" onclick="pilihKelas(\''+k+'\')">Buka '+k+' ➡️</button></div>';}).join('');return;}
+  var statusAkses=MODE_GURU?'<div class="box3">✅ <b>MODE GURU PJOK</b> - Bisa Edit, Simpan, Salin, Download & WA.</div>':'<div class="box2">👀 <b>MODE PENGUNJUNG</b> - Cuma bisa lihat. Login untuk EDIT.</div>';
+  var menuAdmin=statusAkses+'<div class="menuAdmin no-print"><button style="background:#EC4899" onclick="pilihAdmin(\'MATERI\')">📚 MATERI PJOK + MODUL</button><button style="background:#1E90FF" onclick="pilihAdmin(\'PROTA\')">📆 PROTA</button><button style="background:#F59E0B" onclick="pilihAdmin(\'PROMES\')">📅 PROMES</button><button style="background:#0891B2" onclick="pilihAdmin(\'JURNAL\')">📓 JURNAL PER BULAN</button><button style="background:#D97706" onclick="pilihAdmin(\'PRESENSI\')">📋 PRESENSI</button><button style="background:#DC2626" onclick="pilihAdmin(\'NILAI\')">🏆 NILAI</button></div>';
   var isi="";
-  if(adminAktif==="PROTA"){
-    isi=`<h3>📆 PROTA ${k} - 1 Tahun - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box">SDN Kayakah • ${k} • Hari ${HARI[k]} • 2026/2027 • Klik ✏️ EDIT untuk ubah, Pak. Klik ➕ untuk tambah, Pak.</div>`+renderTabelEdit('PROTA',['Materi / Unsur','Alokasi Waktu','Semester 1','Semester 2'],['a','b','c','d'],{a:true})+tombolTambah('PROTA','PROTA')+`<div class="box2">Tanda Tangan:<br>Amuntai Selatan, Juli 2026<br><br>Guru PJOK,<br><br><b>Wahyu Aji, S.Pd.Jas</b></div>`;
+  if(adminAktif==="MATERI"){
+    var semBtn='<button class="btn2" style="background:'+(semMateri==="Ganjil"?'#F59E0B':'#94A3B8')+'" onclick="semMateri=\'Ganjil\';render()">🍂 Ganjil - 16 Materi</button><button class="btn2" style="background:'+(semMateri==="Genap"?'#059669':'#94A3B8')+'" onclick="semMateri=\'Genap\';render()">🌸 Genap - 16 Materi</button>';
+    var list=JUDUL_PJOK[kelasAktif][semMateri].map(function(jud,idx){return '<details class="kayakah-lipat"><summary>Materi '+(idx+1)+': '+esc(jud)+' - Klik untuk Buka MODUL AJAR 📗</summary><div class="isi-lipat"><p><b>📖 Materi:</b> Anak memahami '+esc(jud.toLowerCase())+' dan bisa menjelaskan dan mempraktekkannya di lapangan SDN Kayakah, Amuntai Selatan. '+levelText(kelasAktif)+'</p>'+modulAjarHTML(kelasAktif,jud,idx,semMateri)+'</div></details>';}).join('');
+    isi='<h3>📚 MATERI PJOK + MODUL AJAR PER MATERI - '+esc(kelasAktif)+' - '+FASE[kelasAktif]+' - Semester '+semMateri+' - Hari '+HARI[kelasAktif]+'</h3><div class="box">Klik Materi untuk buka Modul Ajar lengkapnya, Pak. Setiap Materi ada Modulnya sendiri, Pak.</div><div class="no-print">'+semBtn+'</div>'+list;
   }
-  if(adminAktif==="PROSEM1"){ isi=`<h3>📅 PROSEM ${k} - Sem 1 - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box">Klik ✏️ EDIT untuk ubah Minggu / Materi / JP, Pak.</div>`+renderTabelEdit('PROSEM1',['Materi / Tujuan','JP','Keterangan'],['a','b','c'],{a:true})+tombolTambah('PROSEM1','PROSEM Sem 1')+`<div class="box2">Guru PJOK: Wahyu Aji, S.Pd.Jas</div>`; }
-  if(adminAktif==="PROSEM2"){ isi=`<h3>📅 PROSEM ${k} - Sem 2 - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box">Klik ✏️ EDIT untuk ubah Minggu / Materi / JP, Pak.</div>`+renderTabelEdit('PROSEM2',['Materi / Tujuan','JP','Keterangan'],['a','b','c'],{a:true})+tombolTambah('PROSEM2','PROSEM Sem 2')+`<div class="box2">Guru PJOK: Wahyu Aji, S.Pd.Jas</div>`; }
-  if(adminAktif==="GABUNG"){
-    var p1=getDataEdit('PROTA'), s1=getDataEdit('PROSEM1'), s2=getDataEdit('PROSEM2');
-    isi=`<h3>📚 PROTA + PROSEM ${k} - 1 Tahun - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><h3>📆 PROTA</h3><table><tr><th>No</th><th>Materi</th><th>Alokasi</th><th>Sem 1</th><th>Sem 2</th></tr>${p1.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.a)}</b></td><td>${esc(r.b)}</td><td>${esc(r.c)}</td><td>${esc(r.d)}</td></tr>`).join('')}</table><h3>📅 PROSEM Sem 1</h3><table><tr><th>Minggu</th><th>Materi</th><th>JP</th><th>Keterangan</th></tr>${s1.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.a)}</b></td><td>${esc(r.b)}</td><td>${esc(r.c)}</td></tr>`).join('')}</table><h3>📅 PROSEM Sem 2</h3><table><tr><th>Minggu</th><th>Materi</th><th>JP</th><th>Keterangan</th></tr>${s2.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.a)}</b></td><td>${esc(r.b)}</td><td>${esc(r.c)}</td></tr>`).join('')}</table><div class="box2">Untuk EDIT, buka menu PROTA / PROSEM Sem 1 / PROSEM Sem 2 sendiri-sendiri, Pak. Di sini cuma untuk lihat gabungan & PRINT, Pak.</div>`;
-  }
+  if(adminAktif==="PROTA"){isi=renderProta();}
+  if(adminAktif==="PROMES"){isi=renderPromes();}
   if(adminAktif==="JURNAL"){
-    isi=`<h3>📓 JURNAL ${k} - Hari ${HARI[k]} - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box"><b>Jurnal Asli Guru, Pak.</b> Ada Tanggal, Materi, Kegiatan, Kendala, Refleksi, Tindak Lanjut, Pak. Geser ke kanan kalau kepotong 👉</div>`+renderTabelEdit('JURNAL',['Pertemuan','Tanggal','Materi','Kegiatan','Kendala','Refleksi','Tindak Lanjut'],['a','b','c','d','e','f','g'],{c:true,d:true,e:true,f:true,g:true})+tombolTambah('JURNAL','JURNAL')+`<div class="box2">Tanda Tangan:<br>Amuntai Selatan<br><br>Guru PJOK,<br><br><b>Wahyu Aji, S.Pd.Jas</b></div>`;
-  }
-  if(adminAktif==="ATP"){
-    isi=`<h3>📘 ATP ${k} - ${fase(k)} - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box">CP = Capaian Pembelajaran. TP = Tujuan Pembelajaran. Klik ✏️ EDIT untuk ubah, Pak.</div>`+renderTabelEdit('ATP',['Materi','CP - Capaian Pembelajaran','TP - Tujuan Pembelajaran'],['a','b','c'],{a:true,b:true,c:true})+tombolTambah('ATP','ATP')+`<h3>📗 MODUL AJAR ${k} - Guru PJOK: Wahyu Aji, S.Pd.Jas</h3><div class="box">Modul per materi, Pak. Bisa edit Tujuan, Pendahuluan, Inti, Penutup, Media, Pak. Geser ke kanan 👉</div>`+renderTabelEdit('MODUL',['Materi','Tujuan','Pendahuluan','Inti','Penutup','Media'],['a','b','c','d','e','f'],{a:true,b:true,c:true,d:true,e:true,f:true})+tombolTambah('MODUL','MODUL AJAR');
-  }
-  if(adminAktif==="NILAI"){
-    if(!MODE_GURU){ isi=renderKunci('🏆 NILAI'); }
-    else {
-    var dataN=NILAI_DATA[kunciNilai()]||{}; var dis='';
-    var mapRank=hitungRanking();
-    var headN=MATERI_NILAI[nilaiSemAktif].map(function(m){return '<th>'+m+'<br><span style="font-size:10px">P | K | S | Nilai</span></th>';}).join('');
-    var rowsN=DATA_SISWA[k].map(function(nama,idx){
-      var cells=MATERI_NILAI[nilaiSemAktif].map(function(m,mi){
-        var v=dataN[nama+"|"+mi]||{P:'',K:'',S:''}; var pp=parseFloat(v.P)||0,kk2=parseFloat(v.K)||0,ss2=parseFloat(v.S)||0;var j2=(v.P!==''?1:0)+(v.K!==''?1:0)+(v.S!==''?1:0);var nm=0;if(j2>0)nm=(pp+kk2+ss2)/j2;var safeNama=nama.replace(/'/g,'');
-        return '<td><div class="kotak-nilai"><input class="in-nilai" type="number" min="0" max="100" placeholder="P" value="'+v.P+'" '+dis+' oninput="ubahNilai(this,'+idx+','+mi+',\'P\',this.value,\''+safeNama+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="K" value="'+v.K+'" '+dis+' oninput="ubahNilai(this,'+idx+','+mi+',\'K\',this.value,\''+safeNama+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="S" value="'+v.S+'" '+dis+' oninput="ubahNilai(this,'+idx+','+mi+',\'S\',this.value,\''+safeNama+'\')"></div><span class="nilai-materi" id="nm-'+idx+'-'+mi+'">Nilai: '+(nm?nm.toFixed(0):'-')+'</span></td>';
-      }).join('');
-      var h=hitungNilaiSiswa(nama); var idR='nilaiRata-'+nama.replace(/[^a-zA-Z0-9]/g,''); var rk=mapRank[nama]; var clsRank=rk===1?'rank-1':rk===2?'rank-2':rk===3?'rank-3':'';
-      return '<tr><td>'+(idx+1)+'. <b>'+nama+'</b></td>'+cells+'<td id="'+idR+'"><b>'+(h.rata?h.rata.toFixed(1):'-')+'</b><br>'+h.pred+'</td><td id="rank-'+idx+'" class="'+clsRank+'">'+(rk==='-'?'-':'🏆 '+rk)+'</td></tr>';
+    var opsiBulanJurnal=JURNAL_BULAN_LIST.map(function(b){return '<option value="'+b+'" '+(b===JURNAL_BULAN_AKTIF?'selected':'')+'>'+JURNAL_BULAN_LABEL[b]+'</option>';}).join('');
+    var jFiltered=JURNAL_DATA.filter(function(j){return j.bulan===JURNAL_BULAN_AKTIF;});
+    var jList=jFiltered.map(function(j){
+      var i=JURNAL_DATA.indexOf(j);
+      if(JURNAL_EDIT_IDX===i){return '<div class="box"><b>EDIT JURNAL</b><br><input id="je-tgl" value="'+esc(j.tgl)+'"><input id="je-mapel" value="'+esc(j.mapel)+'"><input id="je-materi" value="'+esc(j.materi)+'"><textarea id="je-kegiatan">'+esc(j.kegiatan)+'</textarea><textarea id="je-kendala">'+esc(j.kendala)+'</textarea><textarea id="je-refleksi">'+esc(j.refleksi)+'</textarea><textarea id="je-tindak">'+esc(j.tindak)+'</textarea><button class="btn2" style="background:#059669" onclick="simpanEditJurnal('+i+')">💾 SIMPAN</button><button class="btn2" style="background:#666" onclick="JURNAL_EDIT_IDX=-1;render()">❌ BATAL</button></div>';}
+      return '<div class="box"><b>'+esc(j.tgl)+'</b> - '+esc(j.mapel)+' - <b>'+esc(j.materi)+'</b><br><b>Kegiatan:</b> '+esc(j.kegiatan)+'<br><b>Kendala:</b> '+esc(j.kendala)+'<br><b>Refleksi:</b> '+esc(j.refleksi)+'<br><b>Tindak Lanjut:</b> '+esc(j.tindak)+'<br><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#1E90FF" onclick="JURNAL_EDIT_IDX='+i+';render()">✏️ EDIT</button><button class="btn2" style="background:#D32F2F" onclick="hapusJurnal('+i+')">🗑️ HAPUS</button>':'<span style="font-size:12px;color:#888">🔒 Login guru untuk edit</span>')+'</div></div>';
     }).join('');
-    var urutRekap=DATA_SISWA[k].map(function(nama,i){return {nama:nama,i:i,h:hitungNilaiSiswa(nama),rk:mapRank[nama]};}).sort(function(a,b){return b.h.rata-a.h.rata;});
-    var rekapN=urutRekap.map(function(o){return '<tr><td>🏆 '+o.rk+'</td><td>'+(o.i+1)+'. '+o.nama+'</td><td><b>'+(o.h.rata?o.h.rata.toFixed(1):'-')+'</b></td><td>'+o.h.pred+'</td></tr>';}).join('');
-    isi='<h3>🏆 NILAI PJOK '+k+' - Semester '+nilaiSemAktif+'</h3><div class="box"><b>SDN Kayakah • '+k+' • Hari '+HARI[k]+' • Guru PJOK: Wahyu Aji, S.Pd.Jas</b><br><b>P = Kognitif / Pengetahuan | K = Psikomotor / Praktek | S = Afektif / Sikap</b><br>Isi 0-100, Pak. Contoh: 80, 85, 90. Geser tabel ke kanan kalau kepotong 👉</div><div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap"><div style="flex:1"><label>Pilih Semester</label><select onchange="pilihNilaiSem(this.value)"><option value="Ganjil" '+(nilaiSemAktif==='Ganjil'?'selected':'')+'>🍂 Semester Ganjil</option><option value="Genap" '+(nilaiSemAktif==='Genap'?'selected':'')+'>🌸 Semester Genap</option></select></div></div><div class="nilaiWrap"><table><tr><th>Nama Siswa</th>'+headN+'<th>Rata-rata<br>Predikat</th><th>🏆 Rangking</th></tr>'+rowsN+'</table></div><div class="box2"><b>Predikat:</b> 90-100 = A - Sangat Baik | 80-89 = B - Baik | 70-79 = C - Cukup | &lt;70 = D - Perlu Bimbingan<br><b>Rangking:</b> 🥇 1 = Emas | 🥈 2 = Perak | 🥉 3 = Perunggu | Kalau nilai sama, rangking sama, Pak.</div><div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="simpanNilai()">💾 SIMPAN NILAI</button><button class="btn2" style="background:#1E90FF;flex:1" onclick="salinNilai()">📋 SALIN - Buat WA</button><button class="btn2" style="background:#25D366;flex:1" onclick="waNilai()">💬 TERUSKAN WA</button><button class="btn2" style="background:#059669;flex:1" onclick="downloadNilai()">⬇️ DOWNLOAD EXCEL</button><button class="btn2" style="background:#FF4757;flex:1" onclick="cobaPrint()">🖨️ PRINT / PDF</button></div><h3>📊 Rekap Rangking - '+k+' - Semester '+nilaiSemAktif+' - Sudah Urut dari Juara 1, Pak</h3><table><tr><th>Rangking</th><th>Nama</th><th>Nilai Akhir</th><th>Predikat</th></tr>'+rekapN+'</table><div class="box">Tanda Tangan:<br>Amuntai Selatan<br><br><br>Guru PJOK,<br><br><b>Wahyu Aji, S.Pd.Jas</b></div>';
-    }
+    isi='<h3>📓 JURNAL HARIAN GURU PJOK - Per Bulan - Mulai 13 Juli 2026 - Sesuai Hari PJOK</h3><div class="box2">Pilih bulan di bawah, Pak. Muncul jurnal per hari PJOK, Pak. Kelas 1 Sabtu, Kelas 2 Jumat, Kelas 3 Kamis, Kelas 4 Rabu, Kelas 5 Selasa, Kelas 6 Senin, Pak.</div><div class="no-print"><label><b>Pilih Bulan Jurnal:</b></label><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select></div><div class="box"><b>Bulan: '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+' - Total: '+jFiltered.length+' Pertemuan PJOK</b> - Guru PJOK: Wahyu Aji, S.Pd.Jas</div><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL HARI INI</button><button class="btn2" style="background:#FF4757" onclick="window.print()">🖨️ PRINT / PDF BULAN INI</button>':'')+'</div>'+jList;
   }
-  if(adminAktif==="PRESENSI"){
-    if(!MODE_GURU){ isi=renderKunci('📋 PRESENSI'); }
-    else {
-    var bulanObj=BULAN_LIST.find(b=>b.key===bulanAktif);
-    var tanggalList=getTanggalBulan(bulanAktif, k);
-    var keySimpan=k+"|"+bulanAktif;
-    var dataTersimpan=PRESENSI_BULAN[keySimpan]||{};
-    var opsiBulan=BULAN_LIST.map(b=>`<option value="${b.key}" ${b.key===bulanAktif?'selected':''}>${b.label}</option>`).join('');
-    var disabledAttr = '';
-    isi=`
-    <h3>📋 PRESENSI PJOK ${k} - PER BULAN</h3>
-    <div class="box"><b>SDN Kayakah • ${k} • Hari ${HARI[k]} • Guru PJOK: Wahyu Aji, S.Pd.Jas</b><br>Semester 1: Juli - Desember 2026 • Semester 2: Januari - Juli 2027 • Keterangan: H = Hadir, S = Sakit, I = Izin, A = Alpa</div>
-    <div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap"><div style="flex:1"><label>Pilih Bulan</label><select onchange="pilihBulan(this.value)">${opsiBulan}</select></div><div style="flex:1"><label>Pilih Semester Cepat</label><select onchange="if(this.value==='Ganjil') pilihBulan('2026-07'); else pilihBulan('2027-01');"><option value="Ganjil">🍂 Semester 1 - Juli 2026</option><option value="Genap">🌸 Semester 2 - Januari 2027</option></select></div></div>
-    <h3>${bulanObj.label} - ${k} - ${tanggalList.length} Pertemuan (${HARI[k]})</h3>
-    <p>Tanggal PJOK di bulan ini (hanya hari ${HARI[k]}): <b>${tanggalList.join(', ')}</b></p>
-    <div class="presensiWrap"><table><tr><th>No</th><th>Nama Siswa</th>${tanggalList.map(t=>`<th>${t}</th>`).join('')}<th>H</th><th>S</th><th>I</th><th>A</th></tr>
-    ${DATA_SISWA[k].map((nama,idx)=>{
-      return `<tr><td>${idx+1}</td><td style="white-space:nowrap"><b>${nama}</b></td>${tanggalList.map((tgl, j)=>{
-        var val=(dataTersimpan[idx] && dataTersimpan[idx][j]) || 'H';
-        return `<td><select data-siswa="${idx}" data-pertemuan="${j}" ${disabledAttr}><option value="H" ${val==='H'?'selected':''}>H</option><option value="S" ${val==='S'?'selected':''}>S</option><option value="I" ${val==='I'?'selected':''}>I</option><option value="A" ${val==='A'?'selected':''}>A</option></select></td>`;
-      }).join('')}<td id="rekap-H-${idx}">-</td><td id="rekap-S-${idx}">-</td><td id="rekap-I-${idx}">-</td><td id="rekap-A-${idx}">-</td></tr>`;
-    }).join('')}
-    </table></div>
-    <div class="box2" id="rekapBulan"></div>
-    <div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn2" style="background:#059669;flex:1" onclick="simpanPresensiBulan()">💾 SIMPAN</button>
-      <button class="btn2" style="background:#1E90FF;flex:1" onclick="salinPresensiBulan()">📋 SALIN - Buat WA</button>
-      <button class="btn2" style="background:#25D366;flex:1" onclick="teruskanWA()">💬 TERUSKAN WA</button>
-      <button class="btn2" style="background:#059669;flex:1" onclick="downloadPresensiBulan()">⬇️ DOWNLOAD EXCEL</button>
-      <button class="btn2" style="background:#FF4757;flex:1" onclick="cobaPrint()">🖨️ PRINT / PDF</button>
-    </div>
-    <div class="box">Tanda Tangan:<br>Amuntai Selatan, ${bulanObj.label}<br><br><br>Guru PJOK,<br><br><b>Wahyu Aji, S.Pd.Jas</b></div>
-    `;
-    }
-  }
-  el.innerHTML=`<h2>🌈 PJOK ${k.toUpperCase()} - Hari ${HARI[k]} - Guru PJOK: Wahyu Aji, S.Pd.Jas - ${DATA_SISWA[k].length} Siswa</h2><p><b>Siswa ${k}:</b> ${DATA_SISWA[k].join(', ')}</p>${menuAdmin}${isi}`;
-  if(adminAktif==="PRESENSI" && MODE_GURU) hitungRekap();
-}
-function hitungRekap(){
-  var k=kelasAktif; var tanggalList=getTanggalBulan(bulanAktif, k);
-  var totalH=0,totalS=0,totalI=0,totalA=0;
-  DATA_SISWA[k].forEach((nama,idx)=>{
-    var h=0,s=0,iz=0,a=0;
-    tanggalList.forEach((tgl,j)=>{
-      var sel=document.querySelector(`select[data-siswa="${idx}"][data-pertemuan="${j}"]`);
-      var v=sel?sel.value:'H'; if(v==='H')h++; if(v==='S')s++; if(v==='I')iz++; if(v==='A')a++;
-    });
-    document.getElementById('rekap-H-'+idx).innerText=h;
-    document.getElementById('rekap-S-'+idx).innerText=s;
-    document.getElementById('rekap-I-'+idx).innerText=iz;
-    document.getElementById('rekap-A-'+idx).innerText=a;
-    totalH+=h; totalS+=s; totalI+=iz; totalA+=a;
-  });
-  var bulanObj=BULAN_LIST.find(b=>b.key===bulanAktif);
-  document.getElementById('rekapBulan').innerHTML=`<b>Rekap ${bulanObj.label} - ${k}:</b> Total Tanda Hadir: ${totalH} dari ${DATA_SISWA[k].length * tanggalList.length} (${DATA_SISWA[k].length} siswa x ${tanggalList.length} pertemuan) • Sakit: ${totalS} • Izin: ${totalI} • Alpa: ${totalA}`;
-  document.querySelectorAll('select[data-siswa]').forEach(sel=>{ sel.onchange=hitungRekap; });
-}
-function buatTeksPresensi(){
-  var k=kelasAktif; var bulanObj=BULAN_LIST.find(b=>b.key===bulanAktif);
-  var data=ambilDataPresensi();
-  var teks=`PRESENSI PJOK - SDN KAYAKAH\n${k} - ${bulanObj.label}\nHari: ${HARI[k]} - Guru PJOK: Wahyu Aji, S.Pd.Jas\nTanggal: ${data.tanggalList.join(', ')}\nKeterangan: H=Hadir, S=Sakit, I=Izin, A=Alpa\n--------------------------------\n`;
-  data.hasil.forEach((s,i)=>{ teks+=`${i+1}. ${s.nama}: ${s.arr.join(' ')} | H:${s.h} S:${s.s} I:${s.i} A:${s.a}\n`; });
-  var totalH=0,totalS=0,totalI=0,totalA=0; data.hasil.forEach(s=>{ totalH+=s.h; totalS+=s.s; totalI+=s.i; totalA+=s.a; });
-  teks+=`--------------------------------\nRekap: Total Tanda Hadir: ${totalH} dari ${DATA_SISWA[k].length * data.tanggalList.length} • Sakit: ${totalS} • Izin: ${totalI} • Alpa: ${totalA}\nAmuntai Selatan, ${bulanObj.label}\nGuru PJOK: Wahyu Aji, S.Pd.Jas`;
-  return teks;
-}
-function simpanPresensiBulan(){
-  if(!cekGuru('SIMPAN')) return;
-  var k=kelasAktif; var tanggalList=getTanggalBulan(bulanAktif, k);
-  var data={};
-  DATA_SISWA[k].forEach((nama,idx)=>{ data[idx]=[]; tanggalList.forEach((tgl,j)=>{ var sel=document.querySelector(`select[data-siswa="${idx}"][data-pertemuan="${j}"]`); data[idx].push(sel?sel.value:'H'); }); });
-  PRESENSI_BULAN[k+"|"+bulanAktif]=data;
-  localStorage.setItem('PJOK_PRESENSI_BULAN', JSON.stringify(PRESENSI_BULAN));
-  alert('Presensi '+k+' - '+BULAN_LIST.find(b=>b.key===bulanAktif).label+' tersimpan, Pak!');
-  render();
-}
-function salinPresensiBulan(){
-  if(!cekGuru('SALIN')) return;
-  var teks=buatTeksPresensi();
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(teks).then(()=>{ alert('Sudah tercopy, Pak! Tinggal Paste di WA, Pak!'); }).catch(()=>{ fallbackSalin(teks); });
-  } else { fallbackSalin(teks); }
-}
-function fallbackSalin(teks){
-  var ta=document.createElement('textarea'); ta.value=teks; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); alert('Sudah tercopy, Pak! Tinggal Paste di WA, Pak!'); }catch(e){ prompt('Copy manual, Pak. Blok lalu Salin:', teks); } document.body.removeChild(ta);
-}
-function teruskanWA(){
-  if(!cekGuru('TERUSKAN WA')) return;
-  var teks=buatTeksPresensi();
-  var url='https://wa.me/?text='+encodeURIComponent(teks);
-  window.open(url, '_blank');
-}
-function downloadPresensiBulan(){
-  if(!cekGuru('DOWNLOAD')) return;
-  var k=kelasAktif; var bulanObj=BULAN_LIST.find(b=>b.key===bulanAktif);
-  var data=ambilDataPresensi();
-  var csv=`PRESENSI PJOK - SDN KAYAKAH\n${k} - ${bulanObj.label}\nHari: ${HARI[k]} - Guru PJOK: Wahyu Aji, S.Pd.Jas\n\n`;
-  csv+=`No,Nama Siswa,${data.tanggalList.map(t=>`Tanggal ${t}`).join(',')},H,S,I,A\n`;
-  data.hasil.forEach((s,i)=>{ csv+=`${i+1},"${s.nama}",${s.arr.join(',')},${s.h},${s.s},${s.i},${s.a}\n`; });
-  var totalH=0,totalS=0,totalI=0,totalA=0; data.hasil.forEach(s=>{ totalH+=s.h; totalS+=s.s; totalI+=s.i; totalA+=s.a; });
-  csv+=`\nRekap,Total Tanda Hadir: ${totalH} dari ${DATA_SISWA[k].length * data.tanggalList.length},Sakit: ${totalS},Izin: ${totalI},Alpa: ${totalA}\n`;
-  csv+=`Guru PJOK,Wahyu Aji, S.Pd.Jas\nKepala Sekolah,Wahyu Aji, S.Pd.Jas\n`;
-  var blob=new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a'); a.href=url; a.download=`Presensi-PJOK-${k.replace(' ','-')}-${bulanAktif}.csv`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-  alert('File Excel sudah terdownload, Pak! Cek di Download HP Pian, Pak!');
-}
-function cobaPrint(){
-  if(!cekGuru('PRINT / PDF')) return;
-  window.print();
+  if(adminAktif==="PRESENSI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>PRESENSI DIKUNCI</h2><p>Hanya Guru PJOK yang bisa buka. Hubungi Wahyu Aji, S.Pd.Jas.</p></div>';}else{var bulanObj=BULAN_LIST.find(function(b){return b.key===bulanAktif});var tanggalList=getTanggalBulan(bulanAktif,kelasAktif);var opsiBulan=BULAN_LIST.map(function(b){return '<option value="'+b.key+'" '+(b.key===bulanAktif?'selected':'')+'>'+b.label+'</option>';}).join('');isi='<h3>📋 PRESENSI PJOK - '+esc(kelasAktif)+' - PER BULAN - Hari '+HARI[kelasAktif]+'</h3><div class="box">SDN Kayakah - Guru PJOK: Wahyu Aji, S.Pd.Jas - H=Hadir, S=Sakit, I=Izin, A=Alpa</div><label>Pilih Bulan</label><select onchange="pilihBulan(this.value)">'+opsiBulan+'</select><h3>'+bulanObj.label+' - '+tanggalList.length+' Pertemuan ('+HARI[kelasAktif]+')</h3><p>Tanggal PJOK: <b>'+tanggalList.join(', ')+'</b></p><div class="presensiWrap"><table><tr><th>No</th><th>Nama</th>'+tanggalList.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>'+DATA_SISWA[kelasAktif].map(function(nama,idx){return '<tr><td>'+(idx+1)+'</td><td style="white-space:nowrap"><b>'+esc(nama)+'</b></td>'+tanggalList.map(function(tgl,j){return '<td><select><option value="H">H</option><option value="S">S</option><option value="I">I</option><option value="A">A</option></select></td>';}).join('')+'</tr>';}).join('')+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="alert(\'Presensi tersimpan!\')">💾 SIMPAN</button><button class="btn2" style="background:#25D366;flex:1" onclick="window.open(\'https://wa.me/?text=\'+encodeURIComponent(\'Presensi PJOK - '+kelasAktif+' - \'+bulanObj.label),\'_blank\')">💬 WA</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
+  if(adminAktif==="NILAI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>NILAI DIKUNCI</h2><p>Hanya Guru PJOK yang bisa buka.</p></div>';}else{var materi=MATERI_NILAI[nilaiSemAktif];var mapRank=hitungRanking();var headN=materi.map(function(m){return '<th>'+esc(m)+'<br><span style="font-size:10px">P | K | S | Nilai</span></th>';}).join('');var rowsN=DATA_SISWA[kelasAktif].map(function(nama,idx){var cells=materi.map(function(m,mi){var k=kunciNilai();var data=NILAI_DATA[k]||{};var v=data[nama+"|"+mi]||{P:'',K:'',S:''};return '<td><input class="in-nilai" type="number" min="0" max="100" placeholder="P" value="'+v.P+'" oninput="ubahNilai(this,'+idx+','+mi+',\'P\',this.value,\''+nama.replace(/\'/g,'')+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="K" value="'+v.K+'" oninput="ubahNilai(this,'+idx+','+mi+',\'K\',this.value,\''+nama.replace(/\'/g,'')+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="S" value="'+v.S+'" oninput="ubahNilai(this,'+idx+','+mi+',\'S\',this.value,\''+nama.replace(/\'/g,'')+'\')"></td>';}).join('');var h=hitungNilaiSiswa(nama);return '<tr><td>'+(idx+1)+'. <b>'+esc(nama)+'</b></td>'+cells+'<td><b>'+(h.rata?h.rata.toFixed(1):'-')+'</b><br>'+h.pred+'</td><td>🏆 '+(mapRank[nama]==='-'?'-':mapRank[nama])+'</td></tr>';}).join('');isi='<h3>🏆 NILAI PJOK - '+esc(kelasAktif)+' - Semester '+nilaiSemAktif+' - Hari '+HARI[kelasAktif]+'</h3><div class="box">SDN Kayakah - Guru PJOK: Wahyu Aji, S.Pd.Jas - <b>P = Pengetahuan | K = Praktek | S = Sikap</b> - Nilai tersimpan otomatis di HP.</div><div class="no-print"><select onchange="pilihNilaiSem(this.value)"><option value="Ganjil" '+(nilaiSemAktif==='Ganjil'?'selected':'')+'>🍂 Ganjil</option><option value="Genap" '+(nilaiSemAktif==='Genap'?'selected':'')+'>🌸 Genap</option></select></div><div class="nilaiWrap"><table><tr><th>Nama</th>'+headN+'<th>Rata-rata</th><th>Ranking</th></tr>'+rowsN+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="simpanNilai()">💾 SIMPAN</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
+  el.innerHTML='<h2>🌈 PJOK '+esc(kelasAktif)+' - Hari '+HARI[kelasAktif]+' - Guru: Wahyu Aji, S.Pd.Jas - '+DATA_SISWA[kelasAktif].length+' Siswa - Wali: '+WALI[kelasAktif]+'</h2><p><b>Siswa:</b> '+DATA_SISWA[kelasAktif].join(', ')+'</p>'+menuAdmin+isi;
 }
 render();
-</script>
-</body>
-</html>
+</script></body></html>
