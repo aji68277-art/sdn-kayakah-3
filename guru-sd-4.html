@@ -65,19 +65,39 @@ var JURNAL_BULAN_LIST=["2026-07","2026-08","2026-09","2026-10","2026-11","2026-1
 var JURNAL_BULAN_LABEL={"2026-07":"Juli 2026","2026-08":"Agustus 2026","2026-09":"September 2026","2026-10":"Oktober 2026","2026-11":"November 2026","2026-12":"Desember 2026","2027-01":"Januari 2027","2027-02":"Februari 2027","2027-03":"Maret 2027","2027-04":"April 2027","2027-05":"Mei 2027","2027-06":"Juni 2027"};
 var JURNAL_BULAN_AKTIF="2026-07";
 var NAMA_HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+// === JADWAL GURU KELAS 4 - SESUAI FOTO JADWAL - MULAI 13 JULI 2026 - PAI, TAHSIN, PJOK, SHOLAT PISAH ===
+var JADWAL_GURU_KELAS={
+  1:[{mapel:"Pendidikan Pancasila",jam:"Jam 1-3"}],
+  2:[{mapel:"IPAS",jam:"Jam 1-3"},{mapel:"Seni Budaya",jam:"Jam 4-6"}],
+  3:[{mapel:"Bahasa Indonesia",jam:"Jam 1-3"}],
+  4:[{mapel:"IPAS",jam:"Jam 1-2"},{mapel:"Bahasa Inggris",jam:"Jam 3-4"}],
+  5:[{mapel:"Pendidikan Pancasila",jam:"Jam 1-2"},{mapel:"Bahasa Indonesia",jam:"Jam 3-4"}],
+  6:[{mapel:"Matematika",jam:"Jam 1-2"},{mapel:"Seni Budaya",jam:"Jam 3-5"}]
+};
 function buatJurnalPerBulan(){
-  var hasil=[]; var daftarMateri=[];
-  DAFTAR_MAPEL.forEach(function(mp){ JUDUL[mp].Ganjil.forEach(function(j){daftarMateri.push({mapel:mp,materi:j});}); JUDUL[mp].Genap.forEach(function(j){daftarMateri.push({mapel:mp,materi:j});}); });
-  var idx=0;
+  var hasil=[];
+  var pointer={};
+  function ambilMateri(mapel, sem){
+    if(pointer[mapel]==null) pointer[mapel]=0;
+    var list=JUDUL[mapel][sem];
+    var materi=list[pointer[mapel] % list.length];
+    pointer[mapel]++;
+    return materi;
+  }
   JURNAL_BULAN_LIST.forEach(function(bulanKey){
     var parts=bulanKey.split("-"); var y=parseInt(parts[0]), m=parseInt(parts[1])-1;
+    var sem = (m>=6) ? "Ganjil" : "Genap";
+    if(bulanKey==="2027-01"){ pointer={}; }
     var d=new Date(y,m,1); if(bulanKey==="2026-07") d=new Date(2026,6,13);
     while(d.getMonth()===m){
       var hari=d.getDay();
-      if(hari!==0){
-        var item=daftarMateri[idx % daftarMateri.length]; idx++;
-        var tglStr=NAMA_HARI[hari]+", "+d.getDate()+" "+JURNAL_BULAN_LABEL[bulanKey];
-        hasil.push({bulan:bulanKey,tgl:tglStr,mapel:item.mapel,materi:item.materi,kegiatan:"Doa, absen, apersepsi 10 menit. Inti: Mengamati, tanya jawab, diskusi kelompok, latihan, presentasi "+item.materi.toLowerCase()+" 60 menit. Penutup: Refleksi, doa 10 menit.",kendala:"-",refleksi:"Anak antusias, aktif diskusi dan presentasi.",tindak:"Lanjutkan / ulangi jika perlu."});
+      var jadwalHari=JADWAL_GURU_KELAS[hari];
+      if(jadwalHari){
+        jadwalHari.forEach(function(slot){
+          var materi=ambilMateri(slot.mapel, sem);
+          var tglStr=NAMA_HARI[hari]+", "+d.getDate()+" "+JURNAL_BULAN_LABEL[bulanKey]+" - "+slot.jam;
+          hasil.push({bulan:bulanKey,tgl:tglStr,mapel:slot.mapel,materi:materi,kegiatan:"Doa, absen, apersepsi 10 menit. Inti: Mengamati, tanya jawab, diskusi kelompok, latihan, presentasi "+materi.toLowerCase()+" 60 menit. Penutup: Refleksi, doa 10 menit.",kendala:"-",refleksi:"Anak antusias, aktif diskusi dan presentasi.",tindak:"Lanjutkan / ulangi jika perlu."});
+        });
       }
       d.setDate(d.getDate()+1);
     }
@@ -85,7 +105,7 @@ function buatJurnalPerBulan(){
   return hasil;
 }
 var JURNAL_DEFAULT=buatJurnalPerBulan();
-var JURNAL_DATA=JSON.parse(localStorage.getItem('KELAS4_JURNAL')||'null')||JURNAL_DEFAULT;
+var JURNAL_DATA=JURNAL_DEFAULT;
 function simpanJurnal(){localStorage.setItem('KELAS4_JURNAL',JSON.stringify(JURNAL_DATA));}
 var JURNAL_EDIT_IDX=-1;
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -129,7 +149,7 @@ function simpanNilai(){if(!cekGuru())return;localStorage.setItem('KELAS4_NILAI',
 function simpanEditJurnal(i){if(!cekGuru())return;JURNAL_DATA[i]={bulan:JURNAL_DATA[i].bulan,tgl:document.getElementById('je-tgl').value,mapel:document.getElementById('je-mapel').value,materi:document.getElementById('je-materi').value,kegiatan:document.getElementById('je-kegiatan').value,kendala:document.getElementById('je-kendala').value,refleksi:document.getElementById('je-refleksi').value,tindak:document.getElementById('je-tindak').value};simpanJurnal();JURNAL_EDIT_IDX=-1;alert('Jurnal tersimpan!');render();}
 function hapusJurnal(i){if(!cekGuru())return;if(!confirm('Hapus jurnal ini?'))return;JURNAL_DATA.splice(i,1);simpanJurnal();render();}
 function tambahJurnalBaru(){if(!cekGuru())return;var hariIni=new Date();var tglStr=NAMA_HARI[hariIni.getDay()]+", "+hariIni.getDate()+" "+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF];JURNAL_DATA.push({bulan:JURNAL_BULAN_AKTIF,tgl:tglStr,mapel:"Mapel baru",materi:"Materi baru",kegiatan:"Isi kegiatan...",kendala:"-",refleksi:"-",tindak:"-"});simpanJurnal();JURNAL_EDIT_IDX=JURNAL_DATA.length-1;render();}
-function renderBeranda(){return '<h2>🏠 BERANDA GURU KELAS 4 - LENGKAP FINAL</h2><p>SDN Kayakah - Amuntai Selatan - 2026/2027 - Wali Kelas 4: Norsalim, S.Pd. - Kepala Sekolah: Wahyu Aji, S.Pd.Jas</p><div class="box"><b>Isi File Lengkap:</b><br>📚 MATERI 14 Mapel (448 Materi)<br>📗 MODUL AJAR PER MATERI - Lengkap Per Materi<br>📆 PROTA 1 Tahun<br>📅 PROMES / PROSEM Ganjil & Genap Per Minggu<br>📓 JURNAL Per Bulan - Mulai 13 Juli 2026 - Senin-Sabtu<br>📋 PRESENSI Per Bulan<br>🏆 NILAI 1 Tahun + Ranking</div><div class="box2"><b>14 Mapel:</b><br>'+DAFTAR_MAPEL.map(function(m,i){return (i+1)+". "+m}).join("<br>")+'</div><div class="box3"><b>10 Siswa:</b><br>'+DATA_SISWA["Kelas 4"].map(function(n,i){return (i+1)+". "+n}).join("<br>")+'</div><button class="btn2" style="background:#FF8F00" onclick="pilihKelas(\'Kelas 4\')">📚 Buka Kelas 4 LENGKAP ➡️</button>';}
+function renderBeranda(){return '<h2>🏠 BERANDA GURU KELAS 4 - LENGKAP FINAL</h2><p>SDN Kayakah - Amuntai Selatan - 2026/2027 - Wali Kelas 4: Norsalim, S.Pd. - Kepala Sekolah: Wahyu Aji, S.Pd.Jas</p><div class="box"><b>Isi File Lengkap:</b><br>📚 MATERI 14 Mapel (448 Materi)<br>📗 MODUL AJAR PER MATERI - Lengkap Per Materi<br>📆 PROTA 1 Tahun<br>📅 PROMES / PROSEM Ganjil & Genap Per Minggu<br>📓 JURNAL Per Bulan - Mulai 13 Juli 2026 - Senin-Sabtu (Guru Kelas, PAI & PJOK Pisah)<br>📋 PRESENSI Per Bulan<br>🏆 NILAI 1 Tahun + Ranking</div><div class="box2"><b>14 Mapel:</b><br>'+DAFTAR_MAPEL.map(function(m,i){return (i+1)+". "+m}).join("<br>")+'</div><div class="box3"><b>10 Siswa:</b><br>'+DATA_SISWA["Kelas 4"].map(function(n,i){return (i+1)+". "+n}).join("<br>")+'</div><button class="btn2" style="background:#FF8F00" onclick="pilihKelas(\'Kelas 4\')">📚 Buka Kelas 4 LENGKAP ➡️</button>';}
 function renderProta(){
   var rows=DAFTAR_MAPEL.map(function(m){
     return '<tr><td><b>'+esc(m)+'</b></td><td>32 JP<br>16 Materi</td><td>32 JP<br>16 Materi</td><td>64 JP<br>32 Materi</td><td>STS: Minggu 8<br>SAS/SAT: Minggu 16</td></tr>';
@@ -171,7 +191,7 @@ function render(){
       if(JURNAL_EDIT_IDX===i){return '<div class="box"><b>EDIT JURNAL</b><br><input id="je-tgl" value="'+esc(j.tgl)+'"><input id="je-mapel" value="'+esc(j.mapel)+'"><input id="je-materi" value="'+esc(j.materi)+'"><textarea id="je-kegiatan">'+esc(j.kegiatan)+'</textarea><textarea id="je-kendala">'+esc(j.kendala)+'</textarea><textarea id="je-refleksi">'+esc(j.refleksi)+'</textarea><textarea id="je-tindak">'+esc(j.tindak)+'</textarea><button class="btn2" style="background:#059669" onclick="simpanEditJurnal('+i+')">💾 SIMPAN</button><button class="btn2" style="background:#666" onclick="JURNAL_EDIT_IDX=-1;render()">❌ BATAL</button></div>';}
       return '<div class="box"><b>'+esc(j.tgl)+'</b> - '+esc(j.mapel)+' - <b>'+esc(j.materi)+'</b><br><b>Kegiatan:</b> '+esc(j.kegiatan)+'<br><b>Kendala:</b> '+esc(j.kendala)+'<br><b>Refleksi:</b> '+esc(j.refleksi)+'<br><b>Tindak Lanjut:</b> '+esc(j.tindak)+'<br><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#1E90FF" onclick="JURNAL_EDIT_IDX='+i+';render()">✏️ EDIT</button><button class="btn2" style="background:#D32F2F" onclick="hapusJurnal('+i+')">🗑️ HAPUS</button>':'<span style="font-size:12px;color:#888">🔒 Login guru untuk edit</span>')+'</div></div>';
     }).join('');
-    isi='<h3>📓 JURNAL HARIAN GURU - Kelas 4 - Per Bulan - Mulai 13 Juli 2026 - Senin-Sabtu</h3><div class="box2">Pilih bulan di bawah, Pak. Muncul jurnal per hari, Pak. Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Pak. Minggu libur, Pak.</div><div class="no-print"><label><b>Pilih Bulan Jurnal:</b></label><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select></div><div class="box"><b>Bulan: '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+' - Total: '+jFiltered.length+' Hari</b> - Wali Kelas: Norsalim, S.Pd.</div><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL HARI INI</button><button class="btn2" style="background:#FF4757" onclick="window.print()">🖨️ PRINT / PDF BULAN INI</button>':'')+'</div>'+jList;
+    isi='<h3>📓 JURNAL HARIAN GURU KELAS - Kelas 4 - Per Bulan - Mulai 13 Juli 2026 - Senin-Sabtu (PAI & PJOK Pisah)</h3><div class="box2">Pilih bulan di bawah, Pak. Jurnal sudah ikut Jadwal Pelajaran Guru Kelas, Pak. Senin Pancasila, Selasa IPAS + Seni Budaya, Rabu B. Indonesia, Kamis IPAS + B. Inggris, Jumat Pancasila + B. Indonesia, Sabtu Matematika + Seni Budaya. Tahsin / PAI / PJOK / Sholat tidak masuk, Pak. Minggu libur, Pak.</div><div class="no-print"><label><b>Pilih Bulan Jurnal:</b></label><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select></div><div class="box"><b>Bulan: '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+' - Total: '+jFiltered.length+' Jurnal</b> - Wali Kelas: Norsalim, S.Pd.</div><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL HARI INI</button><button class="btn2" style="background:#FF4757" onclick="window.print()">🖨️ PRINT / PDF BULAN INI</button>':'')+'</div>'+jList;
   }
   if(adminAktif==="PRESENSI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>PRESENSI DIKUNCI</h2><p>Hanya Guru Kelas 4 yang bisa buka. Hubungi Norsalim, S.Pd.</p></div>';}else{var bulanObj=BULAN_LIST.find(function(b){return b.key===bulanAktif});var tanggalList=getTanggalBulan(bulanAktif);var opsiBulan=BULAN_LIST.map(function(b){return '<option value="'+b.key+'" '+(b.key===bulanAktif?'selected':'')+'>'+b.label+'</option>';}).join('');isi='<h3>📋 PRESENSI KELAS 4 - PER BULAN</h3><div class="box">SDN Kayakah - Wali: Norsalim, S.Pd. - H=Hadir, S=Sakit, I=Izin, A=Alpa</div><label>Pilih Bulan</label><select onchange="pilihBulan(this.value)">'+opsiBulan+'</select><h3>'+bulanObj.label+' - '+tanggalList.length+' Hari</h3><div class="presensiWrap"><table><tr><th>No</th><th>Nama</th>'+tanggalList.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>'+DATA_SISWA["Kelas 4"].map(function(nama,idx){return '<tr><td>'+(idx+1)+'</td><td style="white-space:nowrap"><b>'+esc(nama)+'</b></td>'+tanggalList.map(function(tgl,j){return '<td><select><option value="H">H</option><option value="S">S</option><option value="I">I</option><option value="A">A</option></select></td>';}).join('')+'</tr>';}).join('')+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="alert(\'Presensi tersimpan!\')">💾 SIMPAN</button><button class="btn2" style="background:#25D366;flex:1" onclick="window.open(\'https://wa.me/?text=\'+encodeURIComponent(\'Presensi Kelas 4 - \'+bulanObj.label),\'_blank\')">💬 WA</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
   if(adminAktif==="NILAI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>NILAI DIKUNCI</h2><p>Hanya Guru Kelas 4 yang bisa buka.</p></div>';}else{var materi=MATERI_NILAI[nilaiSemAktif][nilaiMapelAktif];var mapRank=hitungRanking();var headN='<th>UH 1<br><small>'+esc(materi[0])+'</small></th><th>UH 2<br><small>'+esc(materi[1])+'</small></th><th>UH 3<br><small>'+esc(materi[2])+'</small></th><th>UH 4<br><small>'+esc(materi[3])+'</small></th><th>UH 5<br><small>'+esc(materi[4])+'</small></th><th>UH 6<br><small>'+esc(materi[5])+'</small></th><th>STS</th><th>'+(nilaiSemAktif==='Ganjil'?'SAS':'SAT')+'</th>';var rowsN=DATA_SISWA["Kelas 4"].map(function(nama,idx){var hv=getNilaiMapel(nama,nilaiMapelAktif);var v=hv.v;var cells=['uh1','uh2','uh3','uh4','uh5','uh6','sts','sas'].map(function(col){return '<td><input class="in-nilai" type="number" min="0" max="100" value="'+v[col]+'" oninput="ubahNilai(this,'+idx+',\''+nilaiMapelAktif.replace(/\'/g,'')+'\',\''+col+'\',this.value,\''+nama.replace(/\'/g,'')+'\')"></td>';}).join('');var h=hitungNilaiSiswa(nama);return '<tr><td>'+(idx+1)+'. <b>'+esc(nama)+'</b></td>'+cells+'<td><b>'+(hv.rata?hv.rata.toFixed(0):'-')+'</b></td><td><b>'+(h.rata?h.rata.toFixed(1):'-')+'</b><br>'+h.pred+'</td><td>🏆 '+(mapRank[nama]==='-'?'-':mapRank[nama])+'</td></tr>';}).join('');var tabMapel=DAFTAR_MAPEL.map(function(m){return '<button class="btn2" style="background:'+(m===nilaiMapelAktif?'#7C3AED':'#94A3B8')+'" onclick="pilihNilaiMapel(\''+m.replace(/\'/g,'')+'\')">'+esc(m)+'</button>';}).join('');isi='<h3>🏆 NILAI KELAS 4 - Semester '+nilaiSemAktif+' - Mapel: '+esc(nilaiMapelAktif)+'</h3><div class="box">SDN Kayakah - Wali: Norsalim, S.Pd. - UH 1-6, STS, SAS/SAT - Nilai tersimpan otomatis di HP.</div><div class="no-print"><select onchange="pilihNilaiSem(this.value)"><option value="Ganjil" '+(nilaiSemAktif==='Ganjil'?'selected':'')+'>🍂 Ganjil</option><option value="Genap" '+(nilaiSemAktif==='Genap'?'selected':'')+'>🌸 Genap</option></select><div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0">'+tabMapel+'</div></div><div class="nilaiWrap"><table><tr><th>Nama</th>'+headN+'<th>Nilai Mapel</th><th>Rata-rata</th><th>Ranking</th></tr>'+rowsN+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="simpanNilai()">💾 SIMPAN</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
