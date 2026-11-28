@@ -42,10 +42,17 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 var daftarGlobal = {};
 async function ambilPIN(){
-  var doc = await db.collection("guru_kayakah").doc("daftar").get();
-  return doc.data().daftarPIN;
-}
-async function simpanPIN(d){
+  try{
+    var doc = await db.collection("guru_kayakah").doc("daftar").get();
+    if(doc.exists && doc.data().daftarPIN){ return doc.data().daftarPIN; }
+    var d = {"Wahyu Aji, S.Pd.Jas":"197601","Hj. Arbayah, S.Pd":"123456"};
+    try{ await db.collection("guru_kayakah").doc("daftar").set({daftarPIN:d},{merge:true}); }catch(e){}
+    return d;
+  }catch(e){
+    document.getElementById('pesan').innerText = "Firebase gagal: " + e.message;
+    return {"Wahyu Aji, S.Pd.Jas":"197601","Hj. Arbayah, S.Pd":"123456"};
+  }
+}async function simpanPIN(d){
   await db.collection("guru_kayakah").doc("daftar").set({daftarPIN:d},{merge:true});
 }
 async function loginKepsek(){
