@@ -39,10 +39,10 @@ details.kayakah-lipat .isi-lipat{padding:12px 14px;line-height:1.7;font-size:14p
 <button onclick="pilihKelas('Kelas 6')" style="background:#7C3AED">📚 PJOK Kelas 6 - Senin</button>
 <button onclick="pilihKelas('Semua')" style="background:#222">📚 SEMUA</button>
 <button id="tombolLogin" onclick="klikLogin()" style="background:#222">🔐 LOGIN GURU PJOK</button>
-<button id="tombolGantiPw" onclick="gantiPassword()" style="background:#7C3AED;display:none">🔑 GANTI PASSWORD</button>
+<button id="tombolGantiPin" onclick="gantiPin()" style="background:#7C3AED;display:none">🔑 GANTI PIN</button>
 </div><div id="isiUtama" class="card"></div>
 <script>
-var PASSWORD_GURU = localStorage.getItem('PJOK_PASSWORD_GURU') || "PJOK2026";
+var PIN_GURU = localStorage.getItem('PJOK_PIN_GURU') || "210007";
 var MODE_GURU = localStorage.getItem('PJOK_MODE_GURU') === '1';
 var DATA_SISWA={
 "Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Latif","Muhammad Luthfi","Muhammad Nafis Al Ikhwan","Muhammad Zulkifli","Rahmawati","Salsabila Ayu Hanifa","Wirda Aulia"],
@@ -150,9 +150,9 @@ function pilihKelas(k){kelasAktif=k;render();}
 function pilihAdmin(a){adminAktif=a;render();}
 function pilihBulan(b){bulanAktif=b;render();}
 function cekGuru(){if(!MODE_GURU){alert('Maaf. Hanya Guru PJOK yang bisa membuka dan mengedit. Hubungi Wahyu Aji, S.Pd.Jas.');return false;}return true;}
-function klikLogin(){if(MODE_GURU){if(confirm('Sudah login. Mau keluar?')){MODE_GURU=false;localStorage.setItem('PJOK_MODE_GURU','0');render();}return;}var p=prompt('Masukkan Password Guru PJOK:');if(p===null)return;if(p===PASSWORD_GURU){MODE_GURU=true;localStorage.setItem('PJOK_MODE_GURU','1');alert('Alhamdulillah, selamat datang, Pak Wahyu Aji!');render();}else alert('Password salah!');}
-function gantiPassword(){if(!MODE_GURU){alert('Login dulu.');return;}var lama=prompt('Password LAMA:');if(lama!==PASSWORD_GURU){alert('Password lama salah!');return;}var baru=prompt('Password BARU (min 4):');if(!baru||baru.trim().length<4){alert('Terlalu pendek!');return;}var ulang=prompt('Ketik lagi Password BARU:');if(baru!==ulang){alert('Tidak sama!');return;}PASSWORD_GURU=baru;localStorage.setItem('PJOK_PASSWORD_GURU',baru);alert('Password berhasil diganti: '+baru);render();}
-function updateTombolLogin(){var b=document.getElementById('tombolLogin');if(b){b.innerText=MODE_GURU?'✅ GURU PJOK: Wahyu Aji - LOGOUT':'🔐 LOGIN GURU PJOK';b.style.background=MODE_GURU?'#059669':'#222';}var g=document.getElementById('tombolGantiPw');if(g)g.style.display=MODE_GURU?'inline-block':'none';}
+function klikLogin(){if(MODE_GURU){if(confirm('Sudah login. Mau keluar?')){MODE_GURU=false;localStorage.setItem('PJOK_MODE_GURU','0');render();}return;}var p=prompt('Masukkan PIN Guru PJOK:');if(p===null)return;if(p===PIN_GURU){MODE_GURU=true;localStorage.setItem('PJOK_MODE_GURU','1');alert('Alhamdulillah, selamat datang, Pak Wahyu Aji!');render();}else alert('PIN salah!');}
+function gantiPin(){if(!MODE_GURU){alert('Login dulu.');return;}var lama=prompt('PIN LAMA:');if(lama!==PIN_GURU){alert('PIN lama salah!');return;}var baru=prompt('PIN BARU (min 4):');if(!baru||baru.trim().length<4){alert('Terlalu pendek!');return;}var ulang=prompt('Ketik lagi PIN BARU:');if(baru!==ulang){alert('Tidak sama!');return;}PIN_GURU=baru;localStorage.setItem('PJOK_PIN_GURU',baru);alert('PIN berhasil diganti: '+baru);render();}
+function updateTombolLogin(){var b=document.getElementById('tombolLogin');if(b){b.innerText=MODE_GURU?'✅ GURU PJOK: Wahyu Aji - LOGOUT':'🔐 LOGIN GURU PJOK';b.style.background=MODE_GURU?'#059669':'#222';}var g=document.getElementById('tombolGantiPin');if(g)g.style.display=MODE_GURU?'inline-block':'none';}
 function getTanggalBulan(key,kelas){var p=key.split('-');var y=parseInt(p[0]),m=parseInt(p[1])-1;var target=HARI_NUM[HARI[kelas]];var res=[];var d=new Date(y,m,1);while(d.getMonth()===m){if(d.getDay()===target)res.push(d.getDate());d.setDate(d.getDate()+1);}return res;}
 function predikatNilai(n){if(n>=90)return 'A - Sangat Baik';if(n>=80)return 'B - Baik';if(n>=70)return 'C - Cukup';if(n>0)return 'D - Perlu Bimbingan';return '-';}
 function kunciNilai(){return kelasAktif+"|"+nilaiSemAktif;}
