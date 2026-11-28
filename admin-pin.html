@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN PIN - Kepala Sekolah SDN Kayakah 3</title>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<style>body{font-family:Arial;margin:0;background:#FFF9DB;padding:14px}h2{color:#7C3AED}.card{background:#fff;padding:16px;border-radius:16px;border:3px solid #FFD700;margin:12px 0}table{width:100%;border-collapse:collapse}th,td{border:2px solid #FFE066;padding:8px;text-align:left}th{background:#FF4757;color:#fff}input{width:100%;padding:10px;margin:6px 0;border:3px solid #FFE066;border-radius:12px}button{border:none;padding:11px 14px;border-radius:20px;font-weight:bold;color:#fff;cursor:pointer;margin:3px}</style></head><body>
+<h2>🔐 ADMIN PIN - Kepala Sekolah</h2>
+<p>SDN Kayakah 3 - Wahyu Aji, S.Pd.Jas</p>
+<div id="loginBox" class="card">
+  <h3>Masuk Kepala Sekolah</h3>
+  <p>Masukkan PIN Kepala Sekolah (197601):</p>
+  <input type="password" id="pinKepsek" placeholder="PIN Kepala Sekolah">
+  <button style="background:#059669" onclick="loginKepsek()">MASUK</button>
+  <p id="pesan"></p>
+</div>
+<div id="adminBox" class="card" style="display:none">
+  <h3>📋 Daftar PIN Guru - Dari Firebase guru_kayakah / daftar</h3>
+  <p>Cuma Bapak yang bisa buka halaman ini, Pak.</p>
+  <table>
+    <tr><th>Guru</th><th>PIN Saat Ini</th><th>PIN Baru</th><th>Aksi</th></tr>
+    <tbody id="tabelPIN"></tbody>
+  </table>
+  <hr>
+  <h3>🔑 Ganti PIN Bapak Sendiri</h3>
+  <p>PIN Bapak saat ini: <b id="pinSaya"></b></p>
+  <input type="password" id="pinBaruSaya" placeholder="PIN Baru Bapak">
+  <button style="background:#7C3AED" onclick="gantiPINSaya()">Simpan PIN Saya</button>
+  <br><br>
+  <button style="background:#222" onclick="keluar()">KELUAR</button>
+  <button style="background:#059669" onclick="window.location.href='index.html'">🏠 Ke Beranda</button>
+</div>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyARTLGupKOPl1IYtborh8tMhWtY2Hhf0FU",
+  authDomain: "sdn-kayakah-2.firebaseapp.com",
+  projectId: "sdn-kayakah-2",
+  storageBucket: "sdn-kayakah-2.firebasestorage.app",
+  messagingSenderId: "285223036478",
+  appId: "1:285223036478:web:5929f766f2c5f2960bd36f"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+var daftarGlobal = {};
+async function ambilPIN(){
+  var doc = await db.collection("guru_kayakah").doc("daftar").get();
+  return doc.data().daftarPIN;
+}
+async function simpanPIN(d){
+  await db.collection("guru_kayakah").doc("daftar").set({daftarPIN:d},{merge:true});
+}
+async function loginKepsek(){
+  var p = document.getElementById('pinKepsek').value;
+  var daftar = await ambilPIN();
+  daftarGlobal = daftar;
+  var namaKepsek = "";
+  for(var n in daftar){ if(String(daftar[n])===String(p)) namaKepsek=n; }
+  if(namaKepsek==="Wahyu Aji, S.Pd.Jas"){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('adminBox').style.display='block';
+    tampilkanPIN();
+  } else {
+    document.getElementById('pesan').innerText = "PIN salah! Cuma Kepala Sekolah (Wahyu Aji) yang bisa buka.";
+  }
+}
+function tampilkanPIN(){
+  var html = "";
+  var pinSaya = "";
+  for(var nama in daftarGlobal){
+    if(nama==="Wahyu Aji, S.Pd.Jas"){ pinSaya = daftarGlobal[nama]; continue; }
+    var idAman = nama.replace(/[^a-zA-Z0-9]/g,'_');
+    html += '<tr><td><b>'+nama+'</b></td><td><b>'+daftarGlobal[nama]+'</b></td><td><input type="text" id="baru_'+idAman+'" placeholder="PIN baru"></td><td><button style="background:#DC2626" onclick="gantiPINguru(\''+nama.replace(/'/g,"\\'")+'\',\''+idAman+'\')">GANTI</button></td></tr>';
+  }
+  document.getElementById('tabelPIN').innerHTML = html;
+  document.getElementById('pinSaya').innerText = pinSaya;
+}
+async function gantiPINguru(nama, idAman){
+  var baru = document.getElementById('baru_'+idAman).value;
+  if(!baru || baru.trim().length < 4){ alert("PIN baru minimal 4 angka, Pak."); return; }
+  daftarGlobal[nama]=baru;
+  await simpanPIN(daftarGlobal);
+  alert("PIN "+nama+" berhasil diganti jadi: "+baru+". Guru langsung pakai PIN baru ini, Pak.");
+  tampilkanPIN();
+}
+async function gantiPINSaya(){
+  var baru = document.getElementById('pinBaruSaya').value;
+  if(!baru || baru.trim().length < 4){ alert("PIN baru minimal 4 angka, Pak."); return; }
+  daftarGlobal["Wahyu Aji, S.Pd.Jas"]=baru;
+  await simpanPIN(daftarGlobal);
+  alert("PIN Bapak berhasil diganti jadi: "+baru+". Ingat PIN baru ini, Pak.");
+  tampilkanPIN();
+}
+function keluar(){
+  document.getElementById('adminBox').style.display='none';
+  document.getElementById('loginBox').style.display='block';
+}
+</script></body></html>
