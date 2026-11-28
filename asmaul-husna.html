@@ -75,11 +75,15 @@ input{width:100%;padding:10px;border-radius:12px;border:2px solid #ddd;font-size
 .barBawah{background:linear-gradient(90deg,#6BCB77,#00CEC9,#4D96FF,#B983FF);color:#fff;border-radius:14px;padding:10px 8px;font-weight:800;font-size:13px;line-height:1.5;box-shadow:0 4px 0 rgba(0,0,0,.2)}
 .awanMini{font-size:28px;animation:awanJalan 14s linear infinite;position:absolute}
 @keyframes awanJalan{from{left:-5%}to{left:105%}}
+/* === TAMBAHAN MUSIK - TOMBOL ON/OFF === */
+#btnMusik{max-width:1000px;margin:8px auto;display:block;width:calc(100% - 16px);padding:12px;background:#FFEAA7;border:3px solid #fff;border-radius:16px;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25);color:#2D3436}
+#btnMusik.on{background:#00FF88}
 @media(max-width:900px){.menuGrid{grid-template-columns:repeat(3,1fr)}.ularLayout{flex-direction:column;align-items:center}.papanUlarWrap{width:100%;max-width:520px}.duelWrap{flex-direction:column}}
 </style>
 </head>
 <body>
   <div style="text-align:center;padding:10px;background:#fff;"><a href="index.html" style="display:inline-block;background:#2196F3;color:white;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:bold;">🏠 Kembali ke Beranda</a></div>
+<button id="btnMusik" onclick="toggleMusik()">🎵 Musik Ceria Lembut: OFF - Klik untuk ON</button>
 <!-- ===== DEPAN MERIAH MODEL FOTO - SELALU DI ATAS, KLIK LANGSUNG MAIN ===== -->
 <div class="topPelangi">
   <div class="judulPelangi">🌈 ✨ DUNIA ASMAUL HUSNA PELANGI ✨ 🌈</div>
@@ -99,11 +103,37 @@ input{width:100%;padding:10px;border-radius:12px;border:2px solid #ddd;font-size
     <div class="menuBtn" style="background:linear-gradient(180deg,#6BCB77,#00B894)" onclick="home()">🕌<br>Sholeh</div>
   </div>
 </div>
-
 <div class="card" id="app"></div>
 <div style="max-width:1000px;margin:auto;background:#fff;border-radius:16px;padding:8px;position:relative;z-index:2"><div class="dekor">🌈 🕌 ⭐ 🎈 🌸 🦋 📖 🌈</div><p style="margin:2px;font-size:12px;color:#666">Belajar Asmaul Husna Jadi Menyenangkan • SDN Kayakah Hebat! • 🕌 🌈 ⭐</p></div>
 <div id="popup"><div class="popupBox"><div style="font-size:40px">🎉 🕌 🎉</div><div class="bintangBesar" id="emojiPopup">⭐🎉⭐</div><h2 id="judulPopup">MASYA ALLAH!</h2><p id="isiPopup">Kamu Hebat!</p><div style="font-size:28px" id="tepukPopup">👏👏👏👏👏</div><div id="soalPopup"></div><button class="btnPopup" id="tombolPopup" onclick="tutupPopup()">LANJUT MAIN ➡</button></div></div>
 <script>
+// === MUSIK CERIA LEMBUT UNTUK GAME ASMAUL HUSNA - TIDAK MERUBAH GAME LAMA ===
+let musikOn=false, musikCtx=null, musikTimer=null, musikIdx=0;
+// Lagu ceria lembut, nada mayor, pelan, cocok untuk anak hafalan - diulang terus
+let musikNada=[523.25,659.25,783.99,659.25,587.33,659.25,783.99,1046.50,783.99,659.25,587.33,523.25,0,523.25,587.33,659.25,783.99,659.25,587.33,523.25,392.00,523.25,659.25,523.25];
+function mainNadaMusik(freq){
+  if(!musikCtx) return;
+  let o=musikCtx.createOscillator(), g=musikCtx.createGain();
+  o.type='sine'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0.0001, musikCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.07, musikCtx.currentTime+0.1);
+  g.gain.exponentialRampToValueAtTime(0.0001, musikCtx.currentTime+1.1);
+  o.connect(g); g.connect(musikCtx.destination);
+  o.start(); o.stop(musikCtx.currentTime+1.2);
+}
+function toggleMusik(){
+  let btn=document.getElementById('btnMusik');
+  if(!musikOn){
+    musikCtx=new (window.AudioContext||window.webkitAudioContext)();
+    musikOn=true; musikIdx=0;
+    btn.innerText='🎵 Musik Ceria Lembut: ON - Klik untuk OFF'; btn.classList.add('on');
+    musikTimer=setInterval(()=>{ let f=musikNada[musikIdx%musikNada.length]; if(f>0) mainNadaMusik(f); musikIdx++; },800);
+  } else {
+    musikOn=false; clearInterval(musikTimer); if(musikCtx) musikCtx.close(); musikCtx=null;
+    btn.innerText='🎵 Musik Ceria Lembut: OFF - Klik untuk ON'; btn.classList.remove('on');
+  }
+}
+// === AKHIR MUSIK ===
 const D=[["الرَّحْمَنُ","Ar-Rahman","Maha Pengasih"],["الرَّحِيمُ","Ar-Rahim","Maha Penyayang"],["الْمَلِكُ","Al-Malik","Maha Merajai"],["الْقُدُّوسُ","Al-Quddus","Maha Suci"],["السَّلَامُ","As-Salam","Maha Pemberi Keselamatan"],["الْمُؤْمِنُ","Al-Mu'min","Maha Pemberi Keamanan"],["الْمُهَيْمِنُ","Al-Muhaimin","Maha Pemelihara"],["الْعَزِيزُ","Al-Aziz","Maha Perkasa"],["الْجَبَّارُ","Al-Jabbar","Maha Memaksa"],["الْمُتَكَبِّرُ","Al-Mutakabbir","Maha Megah"],["الْخَالِقُ","Al-Khaliq","Maha Pencipta"],["الْبَارِئُ","Al-Bari'","Maha Mengadakan"],["الْمُصَوِّرُ","Al-Mushawwir","Maha Membentuk"],["الْغَفَّارُ","Al-Ghaffar","Maha Pengampun"],["الْقَهَّارُ","Al-Qahhar","Maha Memaksa"],["الْوَهَّابُ","Al-Wahhab","Maha Pemberi"],["الرَّزَّاقُ","Ar-Razzaq","Maha Pemberi Rezeki"],["الْفَتَّاحُ","Al-Fattah","Maha Pembuka"],["الْعَلِيمُ","Al-Alim","Maha Mengetahui"],["الْقَابِضُ","Al-Qabidh","Maha Menyempitkan"],["الْبَاسِطُ","Al-Basith","Maha Melapangkan"],["الْخَافِضُ","Al-Khafidh","Maha Merendahkan"],["الرَّافِعُ","Ar-Rafi'","Maha Meninggikan"],["الْمُعِزُّ","Al-Mu'izz","Maha Memuliakan"],["الْمُذِلُّ","Al-Mudzill","Maha Menghinakan"],["السَّمِيعُ","As-Sami'","Maha Mendengar"],["الْبَصِيرُ","Al-Bashir","Maha Melihat"],["الْحَكَمُ","Al-Hakam","Maha Menetapkan"],["الْعَدْلُ","Al-Adl","Maha Adil"],["اللَّطِيفُ","Al-Lathif","Maha Lembut"],["الْخَبِيرُ","Al-Khabir","Maha Mengenal"],["الْحَلِيمُ","Al-Halim","Maha Penyantun"],["الْعَظِيمُ","Al-Azhim","Maha Agung"],["الْغَفُورُ","Al-Ghafur","Maha Pengampun"],["الشَّكُورُ","Asy-Syakur","Maha Pembalas Budi"],["الْعَلِيُّ","Al-Aliyy","Maha Tinggi"],["الْكَبِيرُ","Al-Kabir","Maha Besar"],["الْحَفِيظُ","Al-Hafizh","Maha Memelihara"],["الْمُقِيتُ","Al-Muqit","Maha Pemberi Kecukupan"],["الْحَسِيبُ","Al-Hasib","Maha Membuat Perhitungan"],["الْجَلِيلُ","Al-Jalil","Maha Luhur"],["الْكَرِيمُ","Al-Karim","Maha Mulia"],["الرَّقِيبُ","Ar-Raqib","Maha Mengawasi"],["الْمُجِيبُ","Al-Mujib","Maha Mengabulkan"],["الْوَاسِعُ","Al-Wasi'","Maha Luas"],["الْحَكِيمُ","Al-Hakim","Maha Bijaksana"],["الْوَدُودُ","Al-Wadud","Maha Mengasihi"],["الْمَجِيدُ","Al-Majid","Maha Mulia"],["الْبَاعِثُ","Al-Ba'its","Maha Membangkitkan"],["الشَّهِيدُ","Asy-Syahid","Maha Menyaksikan"],["الْحَقُّ","Al-Haqq","Maha Benar"],["الْوَكِيلُ","Al-Wakil","Maha Memelihara"],["الْقَوِيُّ","Al-Qawiyy","Maha Kuat"],["الْمَتِينُ","Al-Matin","Maha Kokoh"],["الْوَلِيُّ","Al-Waliyy","Maha Melindungi"],["الْحَمِيدُ","Al-Hamid","Maha Terpuji"],["الْمُحْصِي","Al-Muhshi","Maha Menghitung"],["الْمُبْدِئُ","Al-Mubdi'","Maha Memulai"],["الْمُعِيدُ","Al-Mu'id","Maha Mengembalikan"],["الْمُحْيِي","Al-Muhyi","Maha Menghidupkan"],["الْمُمِيتُ","Al-Mumit","Maha Mematikan"],["الْحَيُّ","Al-Hayy","Maha Hidup"],["الْقَيُّومُ","Al-Qayyum","Maha Mandiri"],["الْوَاجِدُ","Al-Wajid","Maha Menemukan"],["الْمَاجِدُ","Al-Majid","Maha Mulia"],["الْوَاحِدُ","Al-Wahid","Maha Esa"],["الْأَحَدُ","Al-Ahad","Maha Esa"],["الصَّمَدُ","As-Shamad","Maha Dibutuhkan"],["الْقَادِرُ","Al-Qadir","Maha Kuasa"],["الْمُقْتَدِرُ","Al-Muqtadir","Maha Berkuasa"],["الْمُقَدِّمُ","Al-Muqaddim","Maha Mendahulukan"],["الْمُؤَخِّرُ","Al-Mu'akhkhir","Maha Mengakhirkan"],["الْأَوَّلُ","Al-Awwal","Maha Awal"],["الْآخِرُ","Al-Akhir","Maha Akhir"],["الظَّاهِرُ","Az-Zhahir","Maha Nyata"],["الْبَاطِنُ","Al-Bathin","Maha Ghaib"],["الْوَالِي","Al-Wali","Maha Memerintah"],["الْمُتَعَالِي","Al-Muta'ali","Maha Tinggi"],["الْبَرُّ","Al-Barr","Maha Penderma"],["التَّوَّابُ","At-Tawwab","Maha Penerima Tobat"],["الْمُنْتَقِمُ","Al-Muntaqim","Maha Pemberi Balasan"],["الْعَفُوُّ","Al-Afuww","Maha Pemaaf"],["الرَّؤُوفُ","Ar-Ra'uf","Maha Belas Kasih"],["مَالِكُ الْمُلْكِ","Malikul Mulk","Maha Penguasa Kerajaan"],["ذُو الْجَلَالِ وَالْإِكْرَامِ","Dzul Jalali wal Ikram","Maha Memiliki Kebesaran"],["الْمُقْسِطُ","Al-Muqsith","Maha Adil"],["الْجَامِعُ","Al-Jami'","Maha Mengumpulkan"],["الْغَنِيُّ","Al-Ghaniyy","Maha Kaya"],["الْمُغْنِي","Al-Mughni","Maha Pemberi Kekayaan"],["الْمَانِعُ","Al-Mani'","Maha Mencegah"],["الضَّارُّ","Ad-Dharr","Maha Pemberi Bahaya"],["النَّافِعُ","An-Nafi'","Maha Pemberi Manfaat"],["النُّورُ","An-Nur","Maha Pemberi Cahaya"],["الْهَادِي","Al-Hadi","Maha Pemberi Petunjuk"],["الْبَدِيعُ","Al-Badi'","Maha Pencipta Baru"],["الْبَاقِي","Al-Baqi","Maha Kekal"],["الْوَارِثُ","Al-Warits","Maha Pewaris"],["الرَّشِيدُ","Ar-Rasyid","Maha Pandai"],["الصَّبُورُ","As-Shabur","Maha Sabar"]];
 let idx=0, star=0, benar=0, salah=0, soalKe=1, first=null, lock=false, matched=0, cards=[];
 let duelSkor1=0, duelSkor2=0, duelRonde=1, duelJawaban='', duelSelesai=false, duelSoalData=null, duelSalahTim=[];
