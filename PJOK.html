@@ -98,22 +98,32 @@ var JURNAL_BULAN_LIST=["2026-07","2026-08","2026-09","2026-10","2026-11","2026-1
 var JURNAL_BULAN_LABEL={"2026-07":"Juli 2026","2026-08":"Agustus 2026","2026-09":"September 2026","2026-10":"Oktober 2026","2026-11":"November 2026","2026-12":"Desember 2026","2027-01":"Januari 2027","2027-02":"Februari 2027","2027-03":"Maret 2027","2027-04":"April 2027","2027-05":"Mei 2027","2027-06":"Juni 2027"};
 var JURNAL_BULAN_AKTIF="2026-07";
 var NAMA_HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+// === JURNAL PJOK - SESUAI FOTO - MULAI 13 JULI 2026 - MATERI URUT PER KELAS - KELAS 5 SELASA ===
 function buatJurnalPerBulan(){
   var hasil=[];
+  var pointer={};
+  function ambilMateri(kls, sem){
+    if(pointer[kls]==null) pointer[kls]=0;
+    var list=JUDUL_PJOK[kls][sem];
+    var materi=list[pointer[kls] % list.length];
+    pointer[kls]++;
+    return materi;
+  }
   JURNAL_BULAN_LIST.forEach(function(bulanKey){
     var parts=bulanKey.split("-"); var y=parseInt(parts[0]), m=parseInt(parts[1])-1;
+    var sem = bulanKey<"2027-01" ? "Ganjil" : "Genap";
+    if(bulanKey==="2027-01"){ pointer={}; }
     var d=new Date(y,m,1); if(bulanKey==="2026-07") d=new Date(2026,6,13);
     while(d.getMonth()===m){
       var hari=d.getDay();
       if(hari!==0){
-        var kelasList=Object.keys(JUDUL_PJOK); var kls=null;
-        kelasList.forEach(function(kk){ if(HARI_NUM[HARI[kk]]===hari) kls=kk; });
-        if(kls){
-          var sem = bulanKey<"2027-01" ? "Ganjil" : "Genap";
-          var daftar=JUDUL_PJOK[kls][sem]; var materi=daftar[d.getDate()%16];
-          var tglStr=NAMA_HARI[hari]+", "+d.getDate()+" "+JURNAL_BULAN_LABEL[bulanKey];
-          hasil.push({bulan:bulanKey,kelas:kls,tgl:tglStr,mapel:"PJOK - "+kls,materi:materi,kegiatan:"Doa, absen, pemanasan 10 menit. Inti: Demo "+materi.toLowerCase()+", latihan kelompok, game 40 menit. Penutup: Pendinginan, refleksi, doa 10 menit.",kendala:"-",refleksi:"Anak antusias, aktif bergerak, sportivitas bagus.",tindak:"Lanjutkan / ulangi jika perlu."});
-        }
+        Object.keys(JUDUL_PJOK).forEach(function(kls){
+          if(HARI_NUM[HARI[kls]]===hari){
+            var materi=ambilMateri(kls, sem);
+            var tglStr=NAMA_HARI[hari]+", "+d.getDate()+" "+JURNAL_BULAN_LABEL[bulanKey];
+            hasil.push({bulan:bulanKey,kelas:kls,tgl:tglStr,mapel:"PJOK - "+kls,materi:materi,kegiatan:"Doa, absen, pemanasan 10 menit. Inti: Demo "+materi.toLowerCase()+", latihan kelompok, game 40 menit. Penutup: Pendinginan, refleksi, doa 10 menit.",kendala:"-",refleksi:"Anak antusias, aktif bergerak, sportivitas bagus.",tindak:"Lanjutkan / ulangi jika perlu."});
+          }
+        });
       }
       d.setDate(d.getDate()+1);
     }
@@ -121,7 +131,7 @@ function buatJurnalPerBulan(){
   return hasil;
 }
 var JURNAL_DEFAULT=buatJurnalPerBulan();
-var JURNAL_DATA=JSON.parse(localStorage.getItem('PJOK_JURNAL')||'null')||JURNAL_DEFAULT;
+var JURNAL_DATA=JURNAL_DEFAULT;
 function simpanJurnal(){localStorage.setItem('PJOK_JURNAL',JSON.stringify(JURNAL_DATA));}
 var JURNAL_EDIT_IDX=-1;
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -202,7 +212,7 @@ function render(){
       if(JURNAL_EDIT_IDX===i){return '<div class="box"><b>EDIT JURNAL</b><br><input id="je-tgl" value="'+esc(j.tgl)+'"><input id="je-mapel" value="'+esc(j.mapel)+'"><input id="je-materi" value="'+esc(j.materi)+'"><textarea id="je-kegiatan">'+esc(j.kegiatan)+'</textarea><textarea id="je-kendala">'+esc(j.kendala)+'</textarea><textarea id="je-refleksi">'+esc(j.refleksi)+'</textarea><textarea id="je-tindak">'+esc(j.tindak)+'</textarea><button class="btn2" style="background:#059669" onclick="simpanEditJurnal('+i+')">💾 SIMPAN</button><button class="btn2" style="background:#666" onclick="JURNAL_EDIT_IDX=-1;render()">❌ BATAL</button></div>';}
       return '<div class="box"><b>'+esc(j.tgl)+'</b> - '+esc(j.mapel)+' - <b>'+esc(j.materi)+'</b><br><b>Kegiatan:</b> '+esc(j.kegiatan)+'<br><b>Kendala:</b> '+esc(j.kendala)+'<br><b>Refleksi:</b> '+esc(j.refleksi)+'<br><b>Tindak Lanjut:</b> '+esc(j.tindak)+'<br><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#1E90FF" onclick="JURNAL_EDIT_IDX='+i+';render()">✏️ EDIT</button><button class="btn2" style="background:#D32F2F" onclick="hapusJurnal('+i+')">🗑️ HAPUS</button>':'<span style="font-size:12px;color:#888">🔒 Login guru untuk edit</span>')+'</div></div>';
     }).join('');
-    isi='<h3>📓 JURNAL HARIAN GURU PJOK - Per Bulan - Mulai 13 Juli 2026 - Sesuai Hari PJOK</h3><div class="box2">Pilih bulan di bawah, Pak. Muncul jurnal per hari PJOK, Pak. Kelas 1 Sabtu, Kelas 2 Jumat, Kelas 3 Kamis, Kelas 4 Rabu, Kelas 5 Selasa, Kelas 6 Senin, Pak.</div><div class="no-print"><label><b>Pilih Bulan Jurnal:</b></label><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select></div><div class="box"><b>Bulan: '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+' - Total: '+jFiltered.length+' Pertemuan PJOK</b> - Guru PJOK: Wahyu Aji, S.Pd.Jas</div><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL HARI INI</button><button class="btn2" style="background:#FF4757" onclick="window.print()">🖨️ PRINT / PDF BULAN INI</button>':'')+'</div>'+jList;
+    isi='<h3>📓 JURNAL HARIAN GURU PJOK - Per Bulan - Mulai 13 Juli 2026 - Sesuai Hari PJOK</h3><div class="box2">Pilih bulan di bawah, Pak. Muncul jurnal per hari PJOK, Pak. Kelas 6 Senin, Kelas 5 Selasa, Kelas 4 Rabu, Kelas 3 Kamis, Kelas 2 Jumat, Kelas 1 Sabtu, Pak.</div><div class="no-print"><label><b>Pilih Bulan Jurnal:</b></label><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select></div><div class="box"><b>Bulan: '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+' - Total: '+jFiltered.length+' Pertemuan PJOK</b> - Guru PJOK: Wahyu Aji, S.Pd.Jas</div><div class="no-print">'+(MODE_GURU?'<button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL HARI INI</button><button class="btn2" style="background:#FF4757" onclick="window.print()">🖨️ PRINT / PDF BULAN INI</button>':'')+'</div>'+jList;
   }
   if(adminAktif==="PRESENSI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>PRESENSI DIKUNCI</h2><p>Hanya Guru PJOK yang bisa buka. Hubungi Wahyu Aji, S.Pd.Jas.</p></div>';}else{var bulanObj=BULAN_LIST.find(function(b){return b.key===bulanAktif});var tanggalList=getTanggalBulan(bulanAktif,kelasAktif);var opsiBulan=BULAN_LIST.map(function(b){return '<option value="'+b.key+'" '+(b.key===bulanAktif?'selected':'')+'>'+b.label+'</option>';}).join('');isi='<h3>📋 PRESENSI PJOK - '+esc(kelasAktif)+' - PER BULAN - Hari '+HARI[kelasAktif]+'</h3><div class="box">SDN Kayakah - Guru PJOK: Wahyu Aji, S.Pd.Jas - H=Hadir, S=Sakit, I=Izin, A=Alpa</div><label>Pilih Bulan</label><select onchange="pilihBulan(this.value)">'+opsiBulan+'</select><h3>'+bulanObj.label+' - '+tanggalList.length+' Pertemuan ('+HARI[kelasAktif]+')</h3><p>Tanggal PJOK: <b>'+tanggalList.join(', ')+'</b></p><div class="presensiWrap"><table><tr><th>No</th><th>Nama</th>'+tanggalList.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>'+DATA_SISWA[kelasAktif].map(function(nama,idx){return '<tr><td>'+(idx+1)+'</td><td style="white-space:nowrap"><b>'+esc(nama)+'</b></td>'+tanggalList.map(function(tgl,j){return '<td><select><option value="H">H</option><option value="S">S</option><option value="I">I</option><option value="A">A</option></select></td>';}).join('')+'</tr>';}).join('')+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="alert(\'Presensi tersimpan!\')">💾 SIMPAN</button><button class="btn2" style="background:#25D366;flex:1" onclick="window.open(\'https://wa.me/?text=\'+encodeURIComponent(\'Presensi PJOK - '+kelasAktif+' - \'+bulanObj.label),\'_blank\')">💬 WA</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
   if(adminAktif==="NILAI"){if(!MODE_GURU){isi='<div style="text-align:center;padding:20px"><div style="font-size:60px">🔒</div><h2>NILAI DIKUNCI</h2><p>Hanya Guru PJOK yang bisa buka.</p></div>';}else{var materi=MATERI_NILAI[nilaiSemAktif];var mapRank=hitungRanking();var headN=materi.map(function(m){return '<th>'+esc(m)+'<br><span style="font-size:10px">P | K | S | Nilai</span></th>';}).join('');var rowsN=DATA_SISWA[kelasAktif].map(function(nama,idx){var cells=materi.map(function(m,mi){var k=kunciNilai();var data=NILAI_DATA[k]||{};var v=data[nama+"|"+mi]||{P:'',K:'',S:''};return '<td><input class="in-nilai" type="number" min="0" max="100" placeholder="P" value="'+v.P+'" oninput="ubahNilai(this,'+idx+','+mi+',\'P\',this.value,\''+nama.replace(/\'/g,'')+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="K" value="'+v.K+'" oninput="ubahNilai(this,'+idx+','+mi+',\'K\',this.value,\''+nama.replace(/\'/g,'')+'\')"><input class="in-nilai" type="number" min="0" max="100" placeholder="S" value="'+v.S+'" oninput="ubahNilai(this,'+idx+','+mi+',\'S\',this.value,\''+nama.replace(/\'/g,'')+'\')"></td>';}).join('');var h=hitungNilaiSiswa(nama);return '<tr><td>'+(idx+1)+'. <b>'+esc(nama)+'</b></td>'+cells+'<td><b>'+(h.rata?h.rata.toFixed(1):'-')+'</b><br>'+h.pred+'</td><td>🏆 '+(mapRank[nama]==='-'?'-':mapRank[nama])+'</td></tr>';}).join('');isi='<h3>🏆 NILAI PJOK - '+esc(kelasAktif)+' - Semester '+nilaiSemAktif+' - Hari '+HARI[kelasAktif]+'</h3><div class="box">SDN Kayakah - Guru PJOK: Wahyu Aji, S.Pd.Jas - <b>P = Pengetahuan | K = Praktek | S = Sikap</b> - Nilai tersimpan otomatis di HP.</div><div class="no-print"><select onchange="pilihNilaiSem(this.value)"><option value="Ganjil" '+(nilaiSemAktif==='Ganjil'?'selected':'')+'>🍂 Ganjil</option><option value="Genap" '+(nilaiSemAktif==='Genap'?'selected':'')+'>🌸 Genap</option></select></div><div class="nilaiWrap"><table><tr><th>Nama</th>'+headN+'<th>Rata-rata</th><th>Ranking</th></tr>'+rowsN+'</table></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" style="background:#059669;flex:1" onclick="simpanNilai()">💾 SIMPAN</button><button class="btn2" style="background:#FF4757;flex:1" onclick="window.print()">🖨️ PRINT</button></div>';}}
