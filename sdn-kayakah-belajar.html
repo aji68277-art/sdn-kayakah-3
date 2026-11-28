@@ -18,15 +18,19 @@ header p{margin:10px 0 0;font-weight:bold}
 .menu button:nth-child(2){background:#FF6B35}
 .menu button:nth-child(3){background:#FFA502}
 .menu button:nth-child(4){background:#2ED573}
-.menu button:nth-child(5){background:#222}
-.menu button:nth-child(6){background:#1E90FF}
+.menu button:nth-child(5){background:#1E90FF}
+.menu button:nth-child(6){background:#7C3AED}
 .menu button:nth-child(7){background:#FF6348}
 .menu button:nth-child(8){background:#00CEC9}
-.menu button:nth-child(9){background:#FF6348}
+.menu button:nth-child(9){background:#E84393}
 .menu button:nth-child(10){background:#F59E0B}
 .menu button:nth-child(11){background:#DC2626}
 .menu button:nth-child(12){background:#0891B2}
-.menu button:nth-child(13){background:#7C3AED}
+.menu button:nth-child(13){background:#16A34A}
+.menu button:nth-child(14){background:#059669}
+.menu button:nth-child(15){background:#0E7490}
+.menu button:nth-child(16){background:#111 !important;color:#FFD700 !important;border:3px solid #FFD700 !important}
+.menu button:nth-child(17){background:#EA580C}
 .menu button.active{background:#222!important}
 .card{background:white;margin:14px;padding:18px;border-radius:22px;box-shadow:0 4px 0 #FFD700;border:3px solid #FFE066}
 .card h2{color:#7C3AED;margin-top:0}
@@ -87,7 +91,6 @@ footer{text-align:center;padding:20px;color:#7C3AED;font-size:13px;font-weight:b
 <script>
 var DATA={"Kelas 1":["Aida Salsabila","Fatimah Azzahra","Mahrini","Muhammad Latif","Muhammad Luthfi","Muhammad Nafis Al Ikhwan","Muhammad Zulkifli","Rahmawati","Salsabila Ayu Hanifa","Wirda Aulia"],"Kelas 2":["Ahmad Riduan","Ahmad Yasir","Ahmad Zainul Majerdi","Eirlangga Saputra","Humaira Munawwarah","Nadia","Nazril Kamari","Via Anggraini"],"Kelas 3":["Ahmad Fazrianur","Ahmad Jailani","Arsita","Jaki Habibi","Maria Ulfah","Muhammad Baihaki","Muhammad Rijani","Mutiara Anastasya","Naira Amelia Ulfa","Nia Ramadhani","Novita"],"Kelas 4":["Asyifa Putri Aura Zaskia","Hadi Rahman","M. Nafis Mubarak","Muhammad Al Farisqi","Muhammad Fauzi Akbar","Muhammad Salman Al-Farisy","Nafisya Azzahrah","Naura Aqila Wilda","Nayla Amanda","Nor Azizah Mutahharah"],"Kelas 5":["Abdul Karim","Ahmad Badali","Alika Naila Putri","Ikrimah","Ilmina","Iqbal Al Jailani","Khanza Alifia","M. Ajrul Ilmi","Muhammad Habil","Muhammad Zakaria","Muslimah","Nurlatifah"],"Kelas 6":["Ifdhal","M. Nafis Ihsan","M. Rizalul Fikri","M. Zaidan Akmal","Muhammad Maulana","Nazwa","Nikmah","Siti Fatimatuz Zahra","Siti Rahmah"]};
 var GURU_DATA=[{nama:"Wahyu Aji, S.Pd.Jas",jabatan:"Kepala Sekolah + PJOK + Pembina Pramuka",kelas:"Kepala Sekolah",mapel:"PJOK & Pramuka"},{nama:"Radinah, S.Pd",jabatan:"Guru Kelas 1",kelas:"Kelas 1",mapel:"Semua Mapel Kelas 1"},{nama:"Siti Nuriyah, S.Pd.SD",jabatan:"Guru Kelas 2",kelas:"Kelas 2",mapel:"Semua Mapel Kelas 2"},{nama:"Pathul Jannah, S.Pd.I",jabatan:"Guru PAI + Wali Kelas 3",kelas:"Kelas 3",mapel:"PAI"},{nama:"Norsalim, S.Pd",jabatan:"Guru Kelas 4",kelas:"Kelas 4",mapel:"Semua Mapel Kelas 4"},{nama:"Syahruni, S.Pd.SD",jabatan:"Guru Kelas 5",kelas:"Kelas 5",mapel:"Semua Mapel Kelas 5"},{nama:"Samsul Bahri, S.Pd",jabatan:"Guru Kelas 6",kelas:"Kelas 6",mapel:"Semua Mapel Kelas 6"},{nama:"Syahida Norpah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"Jannah, S.Pd",jabatan:"Pembimbing Tahsin dan Tahfiz",kelas:"Tahsin & Tahfiz",mapel:"Tahsin & Tahfiz"},{nama:"M. Husain",jabatan:"Operator Sekolah + Pembina Pramuka",kelas:"Operator + Pramuka",mapel:"Operator + Pramuka"}];
-// --- PERBAIKAN PIN: SIMPAN DI localStorage BIAR TIDAK BALIK LAGI ---
 var PIN_AWAL={kepsek:"197601",admin:"112233",guru:{"Radinah, S.Pd":"210001","Siti Nuriyah, S.Pd.SD":"210002","Pathul Jannah, S.Pd.I":"210003","Norsalim, S.Pd":"210004","Syahruni, S.Pd.SD":"210005","Samsul Bahri, S.Pd":"210006","Syahida Norpah, S.Pd":"210007","Jannah, S.Pd":"210008","M. Husain":"210009"}};
 var PIN_DATA=JSON.parse(localStorage.getItem('PIN_SDN_KAYAKAH')||'null')||JSON.parse(JSON.stringify(PIN_AWAL));
 function simpanPIN(){localStorage.setItem('PIN_SDN_KAYAKAH',JSON.stringify(PIN_DATA));}
