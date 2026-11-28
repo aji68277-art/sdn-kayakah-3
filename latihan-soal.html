@@ -44,9 +44,13 @@ body{font-family:Arial,sans-serif;padding:4px 8px;display:flex;flex-direction:co
 #nilaiBox{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99;background:#ffeaa7;border:4px solid #ff0080;border-radius:18px;padding:16px 20px;text-align:center;box-shadow:0 0 30px rgba(0,0,0,.6);width:90%;max-width:420px}
 #nilaiBox h2{font-size:28px}#nilaiBox p{font-size:15px;font-weight:bold;white-space:pre-line;line-height:1.4}
 #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98}
+/* === TAMBAHAN MUSIK - TIDAK MERUBAH YANG LAMA === */
+#btnMusik{width:100%;max-width:860px;margin-top:6px;padding:10px;background:#ffeaa7;border:2.5px solid #111;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px}
+#btnMusik.on{background:#00ff88}
 @media(max-width:700px){.wrap{flex-direction:column}.samping{width:100%}#panelGrid{grid-template-columns:repeat(10,1fr)}.gridKelas{grid-template-columns:1fr 1fr}}
 </style></head><body>
 <div class="top"><h1>🌟 SDN KAYAKAH 🌟</h1><p>Kurikulum Merdeka + Banjar Peribahasa & Pantun - Kelas 1 sampai 6 - Agama Islam</p></div>
+<button id="btnMusik" onclick="toggleMusik()">🎵 Musik Lembut: OFF - Klik untuk ON</button>
 <div style="width:100%;max-width:860px;margin-top:6px"><button onclick="if(document.referrer){history.back()}else{window.location.href='sdn-kayakah-belajar.html'}" style="width:100%;padding:10px;background:#ffffff;border:2.5px solid #111;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px">⬅️ Kembali ke Kayakah Belajar</button></div>
 <div class="gambar">🍎 📚 ✏️ 🎈 🍭 ⭐ 🦁 🐘 🌈</div>
 <div id="layarKelas" class="kotak">
@@ -108,6 +112,33 @@ body{font-family:Arial,sans-serif;padding:4px 8px;display:flex;flex-direction:co
 <div id="nilaiBox"><h2 id="nilaiAngka"></h2><p id="nilaiDetail"></p><button onclick="tutupNilai()" style="padding:9px 24px;border-radius:10px;font-weight:900;margin-top:8px;background:#00ff88;border:2px solid #111;cursor:pointer">Tutup ✖️</button></div>
 <div style="width:100%;max-width:860px;text-align:center;margin:10px 0 6px;font-size:12px;font-weight:700;color:#ffffff;opacity:0.9">Wahyu Aji, S.Pd.Jas</div>
 <script>
+// === TAMBAHAN MUSIK LEMBUT - TIDAK MERUBAH KODE LAMA ===
+let musikOn=false, musikCtx=null, musikTimer=null, musikIdx=0;
+let musikNada=[523.25,587.33,659.25,783.99,659.25,587.33,523.25,0,392.00,523.25,659.25,783.99,0,659.25,587.33,523.25];
+function mainNada(freq){
+  if(!musikCtx) return;
+  let o=musikCtx.createOscillator(), g=musikCtx.createGain();
+  o.type='sine'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0.0001, musikCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.08, musikCtx.currentTime+0.1);
+  g.gain.exponentialRampToValueAtTime(0.0001, musikCtx.currentTime+1.2);
+  o.connect(g); g.connect(musikCtx.destination);
+  o.start(); o.stop(musikCtx.currentTime+1.3);
+}
+function toggleMusik(){
+  let btn=document.getElementById('btnMusik');
+  if(!musikOn){
+    musikCtx=new (window.AudioContext||window.webkitAudioContext)();
+    musikOn=true; musikIdx=0;
+    btn.innerText='🎵 Musik Lembut: ON - Klik untuk OFF'; btn.classList.add('on');
+    musikTimer=setInterval(()=>{ let f=musikNada[musikIdx%musikNada.length]; if(f>0) mainNada(f); musikIdx++; },900);
+  } else {
+    musikOn=false; clearInterval(musikTimer); if(musikCtx) musikCtx.close(); musikCtx=null;
+    btn.innerText='🎵 Musik Lembut: OFF - Klik untuk ON'; btn.classList.remove('on');
+  }
+}
+// === AKHIR TAMBAHAN MUSIK ===
+
 function buatAngka(soal,benar,pendek){
   benar=Math.round(benar);
   let s1=benar+1,s2=benar-1; if(s2<0)s2=benar+2;
@@ -131,8 +162,6 @@ function pick(arr){return arr[rnd(arr.length)];}
 function dariPasangan(list,pendek){ let p=pick(list); return buatTeks(p[0],p[1],p[2],p[3],pendek); }
 let NAMA=['Budi','Siti','Ahmad','Aisyah','Andi','Rina','Fajar','Nadia','Rizky','Putri','Dewi','Bayu'];
 function nm(){return pick(NAMA);}
-
-// ===== DATA PERIBAHASA & PANTUN BANJAR - LEBIH BANYAK =====
 let PERIBAHASA=[
 ["Biar lambat asal selamat","Tidak apa-apa lambat, yang penting selamat","Harus cepat-cepat walau bahaya","Tidak boleh pergi"],
 ["Hemat pangkal kaya","Kalau hemat, lama-lama jadi kaya","Kalau boros jadi kaya","Kalau malas jadi kaya"],
@@ -187,12 +216,9 @@ let PANTUN=[
 ["Burung pipit hinggap di dahan,\nDahannya halus banar,\nKalau ikam handak sukses,\nRajin balajar wan berdoa.",
  "Rajin belajar dan berdoa agar sukses","Malas belajar agar sukses","Tidak perlu berdoa"],
 ];
-
 function genSoal(k,mapel,smt,i){
   let jenis=i%5;
   let pendek=(jenis<2);
-
-  // ===== BAHASA BANJAR - PERIBAHASA + PANTUN LEBIH BANYAK =====
   if(mapel==='Bahasa Banjar'){
     let modeBanjar = i%3;
     if(pendek){
@@ -294,8 +320,6 @@ function genSoal(k,mapel,smt,i){
       ["Urang Banjar terkenal ramah. Kalau ada tamu datang, urang Banjar manyambut lawan baik. Tamu diberi makan dan minum. Urang Banjar juga suka gotong royong.\nBagaimana sikap orang Banjar kepada tamu?","Ramah, menyambut tamu dengan baik, memberi makan dan minum, dan suka gotong royong","Tidak ramah, tidak mau menyambut tamu","Marah, tidak mau memberi makan"],
     ]);
   }
-
-  // ===== MATEMATIKA =====
   if(mapel==='Matematika'){
     if(pendek){
       if(k===1){ if(smt===1){let a=1+rnd(10),b=1+rnd(10);return buatAngka(a+" + "+b+" = ...",a+b,true);} let a=20+rnd(70),b=5+rnd(15);return buatAngka(a+" + "+b+" = ...",a+b,true); }
