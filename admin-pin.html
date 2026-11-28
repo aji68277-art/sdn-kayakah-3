@@ -21,6 +21,11 @@
     <tbody id="tabelPIN"></tbody>
   </table>
   <hr>
+  <h3>➕ Tambah Guru Baru</h3>
+  <input type="text" id="namaBaru" placeholder="Nama Guru Baru, contoh: Siti Aminah, S.Pd">
+  <input type="text" id="pinBaru" placeholder="PIN Guru Baru, contoh: 123456">
+  <button style="background:#059669" onclick="tambahGuru()">TAMBAH GURU</button>
+  <hr>
   <h3>🔑 Ganti PIN Bapak Sendiri</h3>
   <p>PIN Bapak saat ini: <b id="pinSaya"></b></p>
   <input type="password" id="pinBaruSaya" placeholder="PIN Baru Bapak">
@@ -75,7 +80,7 @@ function tampilkanPIN(){
   for(var nama in daftarGlobal){
     if(nama==="Wahyu Aji, S.Pd.Jas"){ pinSaya = daftarGlobal[nama]; continue; }
     var idAman = nama.replace(/[^a-zA-Z0-9]/g,'_');
-    html += '<tr><td><b>'+nama+'</b></td><td><b>'+daftarGlobal[nama]+'</b></td><td><input type="text" id="baru_'+idAman+'" placeholder="PIN baru"></td><td><button style="background:#DC2626" onclick="gantiPINguru(\''+nama.replace(/'/g,"\\'")+'\',\''+idAman+'\')">GANTI</button></td></tr>';
+    html += '<tr><td><b>'+nama+'</b></td><td><b>'+daftarGlobal[nama]+'</b></td><td><input type="text" id="baru_'+idAman+'" placeholder="PIN baru"></td><td><button style="background:#DC2626" onclick="gantiPINguru(\''+nama.replace(/'/g,"\\'")+'\',\''+idAman+'\')">GANTI</button> <button style="background:#111" onclick="hapusGuru(\''+nama.replace(/'/g,"\\'")+'\')">HAPUS</button></td></tr>';
   }
   document.getElementById('tabelPIN').innerHTML = html;
   document.getElementById('pinSaya').innerText = pinSaya;
@@ -86,6 +91,25 @@ async function gantiPINguru(nama, idAman){
   daftarGlobal[nama]=baru;
   await simpanPIN(daftarGlobal);
   alert("PIN "+nama+" berhasil diganti jadi: "+baru+". Guru langsung pakai PIN baru ini, Pak.");
+  tampilkanPIN();
+}
+async function hapusGuru(nama){
+  if(!confirm("Hapus guru "+nama+" ?")){ return; }
+  delete daftarGlobal[nama];
+  await simpanPIN(daftarGlobal);
+  alert("Guru "+nama+" sudah dihapus, Pak.");
+  tampilkanPIN();
+}
+async function tambahGuru(){
+  var nama = document.getElementById('namaBaru').value.trim();
+  var pin = document.getElementById('pinBaru').value.trim();
+  if(!nama || !pin){ alert("Isi nama dan PIN dulu, Pak."); return; }
+  if(pin.length < 4){ alert("PIN minimal 4 angka, Pak."); return; }
+  daftarGlobal[nama]=pin;
+  await simpanPIN(daftarGlobal);
+  document.getElementById('namaBaru').value="";
+  document.getElementById('pinBaru').value="";
+  alert("Guru "+nama+" berhasil ditambah, Pak.");
   tampilkanPIN();
 }
 async function gantiPINSaya(){
