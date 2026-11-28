@@ -24,16 +24,15 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:2px solid #FFE
 .kayakah-lipat{border:2px solid #FFE066;border-radius:14px;margin:8px 0;padding:10px;background:#FFFBEB}
 .in-nilai{width:70px;text-align:center}
 .presensiWrap,.nilaiWrap{overflow:auto}
-#menuKelas{display:none}
-#isiUtama{display:none}
-#tombolLoginAwal{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px;background:#FFF3C4}
+#barLogin{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px;background:#FFF3C4}
 </style>
 </head>
 <body>
 <header><h1>🕌 Tahsin Tahfiz - SDN Kayakah</h1><p>Amuntai Selatan - Pembimbing: Syahida Norpah, S.Pd & Jannah, S.Pd</p></header>
-<div id="tombolLoginAwal">
-<button class="btn2" style="background:#111;font-size:17px;padding:14px 24px;border-radius:25px" onclick="klikLogin()">🔐 LOGIN GURU TAHSIN</button>
+<div id="barLogin">
+<button class="btn2" id="btnLoginTahsin" style="background:#111;font-size:16px;padding:12px 22px;border-radius:25px" onclick="klikLogin()">🔐 LOGIN GURU TAHSIN</button>
 <button class="btn2" style="background:#888" onclick="window.location.href='index.html'">🏠 Kembali ke Beranda</button>
+<span id="statusLogin" style="font-weight:bold;align-self:center"></span>
 </div>
 <div class="menu" id="menuKelas">
 <button onclick="pilihKelas('Beranda')" style="background:#222">🏠 Beranda Tahsin</button>
@@ -43,7 +42,6 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:2px solid #FFE
 <button onclick="pilihKelas('Kelas 4')">Kelas 4</button>
 <button onclick="pilihKelas('Kelas 5')">Kelas 5</button>
 <button onclick="pilihKelas('Kelas 6')">Kelas 6</button>
-<button onclick="klikKeluar()" style="background:#FF4757">🚪 KELUAR</button>
 </div>
 <div id="isiUtama" class="card"></div>
 <script>
@@ -76,19 +74,18 @@ function simpanJurnal(){localStorage.setItem('TAHSIN_JURNAL',JSON.stringify(JURN
 var JURNAL_EDIT_IDX=-1;
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function modulAjarHTML(kelas,jenis,jud,idx,sem){return '<div class="boxPink"><h4>📗 MODUL AJAR '+(jenis==="Tahsin"?"TAHSIN":"TAHFIZ")+' - '+esc(kelas)+' - Materi '+(idx+1)+'</h4><p><b>Materi:</b> '+esc(jud)+'</p><div class="box">CP Tahsin Tahfiz - '+esc(kelas)+'</div><div class="box2">TP: Mampu membaca / menghafal '+esc(jud.toLowerCase())+' dengan tartil.</div><p><b>Langkah:</b> PENDAHULUAN 10 Menit - INTI 60 Menit - PENUTUP 10 Menit.</p></div>';}
-function pilihKelas(k){if(!MODE_GURU){alert('Login PIN dulu!');return;}kelasAktif=k;render();}
+function pilihKelas(k){kelasAktif=k;render();}
 function pilihAdmin(a){adminAktif=a;render();}
 function pilihBulan(b){bulanAktif=b;render();}
 function cekGuru(){if(!MODE_GURU){alert('Login PIN dulu!');return false;}return true;}
-function aturTampilan(){
-  var menu=document.getElementById('menuKelas');
-  var isi=document.getElementById('isiUtama');
-  var awal=document.getElementById('tombolLoginAwal');
-  if(MODE_GURU){menu.style.display='flex';isi.style.display='block';awal.style.display='none';}
-  else{menu.style.display='none';isi.style.display='none';awal.style.display='flex';}
+function updateStatusLogin(){
+  var st=document.getElementById('statusLogin');
+  var btn=document.getElementById('btnLoginTahsin');
+  if(MODE_GURU){ if(st) st.innerHTML='✅ Login: '+esc(NAMA_LOGIN_TAHSIN)+' - Klik tombol untuk keluar'; if(btn) btn.innerHTML='🚪 KELUAR'; }
+  else { if(st) st.innerHTML='👀 Pengunjung bisa lihat - Guru klik LOGIN untuk ngedit'; if(btn) btn.innerHTML='🔐 LOGIN GURU TAHSIN'; }
 }
 function klikLogin(){
-  if(MODE_GURU){if(confirm('Sudah login sebagai '+NAMA_LOGIN_TAHSIN+'. Mau keluar?')){klikKeluar();}return;}
+  if(MODE_GURU){ if(confirm('Sudah login sebagai '+NAMA_LOGIN_TAHSIN+'. Mau keluar?')){klikKeluar();} return; }
   var p=prompt('Masukkan PIN Putih Tahsin (6 angka):');
   if(p===null) return;
   p=p.trim();
@@ -97,7 +94,7 @@ function klikLogin(){
     MODE_GURU=true; NAMA_LOGIN_TAHSIN=nama;
     localStorage.setItem('TAHSIN_MODE_GURU','1'); localStorage.setItem('TAHSIN_NAMA_LOGIN',nama);
     alert('Alhamdulillah, selamat datang, '+nama+'!');
-    kelasAktif="Beranda"; render();
+    render();
   } else { alert('PIN Putih salah!'); }
 }
 function klikKeluar(){MODE_GURU=false;NAMA_LOGIN_TAHSIN='';localStorage.setItem('TAHSIN_MODE_GURU','0');localStorage.setItem('TAHSIN_NAMA_LOGIN','');render();alert('Sudah keluar.');}
@@ -111,20 +108,19 @@ function simpanNilai(){if(!cekGuru())return;localStorage.setItem('TAHSIN_NILAI',
 function simpanEditJurnal(i){if(!cekGuru())return;JURNAL_DATA[i]={bulan:JURNAL_DATA[i].bulan,kelas:JURNAL_DATA[i].kelas,tgl:document.getElementById('je-tgl').value,mapel:document.getElementById('je-mapel').value,materi:document.getElementById('je-materi').value,kegiatan:document.getElementById('je-kegiatan').value,kendala:document.getElementById('je-kendala').value,refleksi:document.getElementById('je-refleksi').value,tindak:document.getElementById('je-tindak').value};simpanJurnal();JURNAL_EDIT_IDX=-1;alert('Jurnal tersimpan!');render();}
 function hapusJurnal(i){if(!cekGuru())return;if(!confirm('Hapus jurnal ini?'))return;JURNAL_DATA.splice(i,1);simpanJurnal();render();}
 function tambahJurnalBaru(){if(!cekGuru())return;var hariIni=new Date();var tglStr=NAMA_HARI[hariIni.getDay()]+", "+hariIni.getDate()+" "+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF];JURNAL_DATA.push({bulan:JURNAL_BULAN_AKTIF,kelas:kelasAktif==="Beranda"?"Kelas 1":kelasAktif,tgl:tglStr,mapel:"Tahsin Tahfiz",materi:"Materi baru",kegiatan:"Isi kegiatan...",kendala:"-",refleksi:"-",tindak:"-"});simpanJurnal();JURNAL_EDIT_IDX=JURNAL_DATA.length-1;render();}
-function renderBeranda(){return '<h2>🏠 BERANDA TAHSIN TAHFIZ - Kelas 1-6</h2><p>SDN Kayakah - Pembimbing: Syahida Norpah, S.Pd & Jannah, S.Pd - Login: '+esc(NAMA_LOGIN_TAHSIN)+'</p><div class="box">📚 MATERI - 📗 MODUL - 📆 PROTA - 📅 PROMES - 📓 JURNAL - 📋 PRESENSI - 🏆 NILAI</div><div class="box2">Kelas 1: 10 - Kelas 2: 8 - Kelas 3: 11 - Kelas 4: 10 - Kelas 5: 12 - Kelas 6: 9 - Total: 60 Siswa</div>';}
+function renderBeranda(){return '<h2>🏠 BERANDA TAHSIN TAHFIZ - Kelas 1-6</h2><p>SDN Kayakah - Pembimbing: Syahida Norpah, S.Pd & Jannah, S.Pd - '+(MODE_GURU?'Login: '+esc(NAMA_LOGIN_TAHSIN):'Pengunjung bisa lihat, guru klik LOGIN untuk ngedit')+'</p><div class="box">📚 MATERI - 📗 MODUL - 📆 PROTA - 📅 PROMES - 📓 JURNAL - 📋 PRESENSI - 🏆 NILAI</div><div class="box2">Kelas 1: 10 - Kelas 2: 8 - Kelas 3: 11 - Kelas 4: 10 - Kelas 5: 12 - Kelas 6: 9 - Total: 60 Siswa</div>';}
 function renderProta(){return '<h3>📆 PROTA - '+esc(kelasAktif)+'</h3><div class="box">Ganjil: 16 Minggu - Genap: 16 Minggu</div><table><tr><th>Jenis</th><th>Semester</th><th>Materi</th></tr><tr><td>Tahsin</td><td>Ganjil</td><td>16</td></tr><tr><td>Tahsin</td><td>Genap</td><td>16</td></tr><tr><td>Tahfiz</td><td>Ganjil</td><td>16</td></tr><tr><td>Tahfiz</td><td>Genap</td><td>16</td></tr></table>';}
 function renderPromes(){var s=semMateri;var tanggalPromes=s==="Ganjil"?["13-18 Juli 2026","20-25 Juli 2026","27 Juli-1 Agt 2026","3-8 Agt 2026","10-15 Agt 2026","17-22 Agt 2026","24-29 Agt 2026","31 Agt-5 Sep 2026","7-12 Sep 2026","14-19 Sep 2026","21-26 Sep 2026","28 Sep-3 Okt 2026","5-10 Okt 2026","12-17 Okt 2026","19-24 Okt 2026","26 Okt-12 Des 2026"]:["5-10 Jan 2027","12-17 Jan 2027","19-24 Jan 2027","26-31 Jan 2027","2-7 Feb 2027","9-14 Feb 2027","16-21 Feb 2027","23-28 Feb 2027","2-7 Mar 2027","9-14 Mar 2027","16-21 Mar 2027","23-28 Mar 2027","30 Mar-4 Apr 2027","6-11 Apr 2027","13-18 Apr 2027","20 Apr-20 Juni 2027"];var rows="";for(var minggu=0;minggu<16;minggu++){rows+='<tr><td><b>Minggu '+(minggu+1)+'</b></td><td>'+tanggalPromes[minggu]+'</td><td style="text-align:left"><b>Tahsin:</b> '+esc(JUDUL_TT[kelasAktif].Tahsin[s][minggu])+'<br><b>Tahfiz:</b> '+esc(JUDUL_TT[kelasAktif].Tahfiz[s][minggu])+'</td></tr>';}return '<h3>📅 PROMES - '+esc(kelasAktif)+' - Semester '+s+'</h3><div><button class="btn2" style="background:#F59E0B" onclick="semMateri=\'Ganjil\';render()">🍂 Ganjil</button><button class="btn2" style="background:#059669" onclick="semMateri=\'Genap\';render()">🌸 Genap</button></div><table><tr><th>Minggu</th><th>Tanggal</th><th>Materi</th></tr>'+rows+'</table>';}
 function render(){
-  aturTampilan();
-  if(!MODE_GURU) return;
+  updateStatusLogin();
   var el=document.getElementById('isiUtama');if(kelasAktif==="Beranda"){el.innerHTML=renderBeranda();return;}
-  var menuAdmin='<div class="box3">✅ Login: '+esc(NAMA_LOGIN_TAHSIN)+'</div><div><button class="btn2" style="background:#EC4899" onclick="pilihAdmin(\'MATERI\')">📚 MATERI + MODUL</button><button class="btn2" style="background:#1E90FF" onclick="pilihAdmin(\'PROTA\')">📆 PROTA</button><button class="btn2" style="background:#F59E0B" onclick="pilihAdmin(\'PROMES\')">📅 PROMES</button><button class="btn2" style="background:#0891B2" onclick="pilihAdmin(\'JURNAL\')">📓 JURNAL</button><button class="btn2" style="background:#D97706" onclick="pilihAdmin(\'PRESENSI\')">📋 PRESENSI</button><button class="btn2" style="background:#DC2626" onclick="pilihAdmin(\'NILAI\')">🏆 NILAI</button></div>';
+  var menuAdmin='<div class="box3">'+(MODE_GURU?'✅ Login: '+esc(NAMA_LOGIN_TAHSIN):'👀 Pengunjung bisa lihat - Klik LOGIN GURU TAHSIN untuk ngedit')+'</div><div><button class="btn2" style="background:#EC4899" onclick="pilihAdmin(\'MATERI\')">📚 MATERI + MODUL</button><button class="btn2" style="background:#1E90FF" onclick="pilihAdmin(\'PROTA\')">📆 PROTA</button><button class="btn2" style="background:#F59E0B" onclick="pilihAdmin(\'PROMES\')">📅 PROMES</button><button class="btn2" style="background:#0891B2" onclick="pilihAdmin(\'JURNAL\')">📓 JURNAL</button><button class="btn2" style="background:#D97706" onclick="pilihAdmin(\'PRESENSI\')">📋 PRESENSI</button><button class="btn2" style="background:#DC2626" onclick="pilihAdmin(\'NILAI\')">🏆 NILAI</button></div>';
   var isi="";
   if(adminAktif==="MATERI"){var jenisBtn='<button class="btn2" style="background:'+(jenisAktif==="Tahsin"?'#059669':'#94A3B8')+'" onclick="jenisAktif=\'Tahsin\';render()">🕌 TAHSIN</button><button class="btn2" style="background:'+(jenisAktif==="Tahfiz"?'#D97706':'#94A3B8')+'" onclick="jenisAktif=\'Tahfiz\';render()">📖 TAHFIZ</button>';var semBtn='<button class="btn2" style="background:'+(semMateri==="Ganjil"?'#F59E0B':'#94A3B8')+'" onclick="semMateri=\'Ganjil\';render()">🍂 Ganjil</button><button class="btn2" style="background:'+(semMateri==="Genap"?'#059669':'#94A3B8')+'" onclick="semMateri=\'Genap\';render()">🌸 Genap</button>';var list=JUDUL_TT[kelasAktif][jenisAktif][semMateri].map(function(jud,idx){return '<details class="kayakah-lipat"><summary>Materi '+(idx+1)+': '+esc(jud)+'</summary><div>'+modulAjarHTML(kelasAktif,jenisAktif,jud,idx,semMateri)+'</div></details>';}).join('');isi='<h3>📚 MATERI '+jenisAktif+' - '+esc(kelasAktif)+' - Semester '+semMateri+'</h3><div>'+jenisBtn+'<br>'+semBtn+'</div>'+list;}
   if(adminAktif==="PROTA"){isi=renderProta();}
   if(adminAktif==="PROMES"){isi=renderPromes();}
   if(adminAktif==="JURNAL"){var opsiBulanJurnal=JURNAL_BULAN_LIST.map(function(b){return '<option value="'+b+'" '+(b===JURNAL_BULAN_AKTIF?'selected':'')+'>'+JURNAL_BULAN_LABEL[b]+'</option>';}).join('');var jFiltered=JURNAL_DATA.filter(function(j){return j.bulan===JURNAL_BULAN_AKTIF;});var jList=jFiltered.map(function(j){var i=JURNAL_DATA.indexOf(j);if(JURNAL_EDIT_IDX===i){return '<div class="box"><b>EDIT JURNAL</b><br><input id="je-tgl" value="'+esc(j.tgl)+'"><input id="je-mapel" value="'+esc(j.mapel)+'"><input id="je-materi" value="'+esc(j.materi)+'"><textarea id="je-kegiatan">'+esc(j.kegiatan)+'</textarea><textarea id="je-kendala">'+esc(j.kendala)+'</textarea><textarea id="je-refleksi">'+esc(j.refleksi)+'</textarea><textarea id="je-tindak">'+esc(j.tindak)+'</textarea><button class="btn2" style="background:#059669" onclick="simpanEditJurnal('+i+')">💾 SIMPAN</button></div>';}return '<div class="box"><b>'+esc(j.tgl)+'</b> - '+esc(j.materi)+'<br>'+esc(j.kegiatan)+'<br><button class="btn2" style="background:#1E90FF" onclick="JURNAL_EDIT_IDX='+i+';render()">✏️ EDIT</button><button class="btn2" style="background:#D32F2F" onclick="hapusJurnal('+i+')">🗑️ HAPUS</button></div>';}).join('');isi='<h3>📓 JURNAL - '+JURNAL_BULAN_LABEL[JURNAL_BULAN_AKTIF]+'</h3><select onchange="JURNAL_BULAN_AKTIF=this.value;render()">'+opsiBulanJurnal+'</select><button class="btn2" style="background:#059669" onclick="tambahJurnalBaru()">➕ TAMBAH JURNAL</button>'+jList;}
-  if(adminAktif==="PRESENSI"){var bulanObj=BULAN_LIST.find(function(b){return b.key===bulanAktif});var tanggalList=getTanggalBulan(bulanAktif);var opsiBulan=BULAN_LIST.map(function(b){return '<option value="'+b.key+'" '+(b.key===bulanAktif?'selected':'')+'>'+b.label+'</option>';}).join('');isi='<h3>📋 PRESENSI - '+esc(kelasAktif)+'</h3><select onchange="pilihBulan(this.value)">'+opsiBulan+'</select><div class="presensiWrap"><table><tr><th>No</th><th>Nama</th>'+tanggalList.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>'+DATA_SISWA[kelasAktif].map(function(nama,idx){return '<tr><td>'+(idx+1)+'</td><td><b>'+esc(nama)+'</b></td>'+tanggalList.map(function(){return '<td><select><option>H</option><option>S</option><option>I</option><option>A</option></select></td>';}).join('')+'</tr>';}).join('')+'</table></div><button class="btn2" style="background:#059669" onclick="alert(\'Presensi tersimpan!\')">💾 SIMPAN</button>';}
+  if(adminAktif==="PRESENSI"){var tanggalList=getTanggalBulan(bulanAktif);var opsiBulan=BULAN_LIST.map(function(b){return '<option value="'+b.key+'" '+(b.key===bulanAktif?'selected':'')+'>'+b.label+'</option>';}).join('');isi='<h3>📋 PRESENSI - '+esc(kelasAktif)+'</h3><select onchange="pilihBulan(this.value)">'+opsiBulan+'</select><div class="presensiWrap"><table><tr><th>No</th><th>Nama</th>'+tanggalList.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>'+DATA_SISWA[kelasAktif].map(function(nama,idx){return '<tr><td>'+(idx+1)+'</td><td><b>'+esc(nama)+'</b></td>'+tanggalList.map(function(){return '<td><select><option>H</option><option>S</option><option>I</option><option>A</option></select></td>';}).join('')+'</tr>';}).join('')+'</table></div><button class="btn2" style="background:#059669" onclick="alert(\'Presensi tersimpan!\')">💾 SIMPAN</button>';}
   if(adminAktif==="NILAI"){var materi=JUDUL_TT[kelasAktif][nilaiJenisAktif][nilaiSemAktif].slice(0,6);var mapRank=hitungRanking();var headN=materi.map(function(m,i){return '<th>Materi '+(i+1)+'<br><small>'+esc(m)+'</small></th>';}).join('');var rowsN=DATA_SISWA[kelasAktif].map(function(nama,idx){var hv=getNilaiTT(nama);var v=hv.v;var cells=['a','b','c','d','e','f'].map(function(col){return '<td><input class="in-nilai" type="number" min="0" max="100" value="'+v[col]+'" oninput="ubahNilai(this,'+idx+',\''+col+'\',this.value,\''+nama.replace(/\'/g,'')+'\')"></td>';}).join('');return '<tr><td>'+(idx+1)+'. <b>'+esc(nama)+'</b></td>'+cells+'<td><b>'+(hv.rata?hv.rata.toFixed(0):'-')+'</b></td><td>🏆 '+(mapRank[nama]==='-'?'-':mapRank[nama])+'</td></tr>';}).join('');isi='<h3>🏆 NILAI '+nilaiJenisAktif+' - '+esc(kelasAktif)+'</h3><button class="btn2" style="background:#059669" onclick="nilaiJenisAktif=\'Tahsin\';render()">🕌 TAHSIN</button><button class="btn2" style="background:#D97706" onclick="nilaiJenisAktif=\'Tahfiz\';render()">📖 TAHFIZ</button><select onchange="pilihNilaiSem(this.value)"><option value="Ganjil">Ganjil</option><option value="Genap">Genap</option></select><div class="nilaiWrap"><table><tr><th>Nama</th>'+headN+'<th>Nilai</th><th>Rank</th></tr>'+rowsN+'</table></div><button class="btn2" style="background:#059669" onclick="simpanNilai()">💾 SIMPAN</button>';}
   el.innerHTML='<h2>🌈 TAHSIN TAHFIZ '+esc(kelasAktif)+' - '+DATA_SISWA[kelasAktif].length+' Siswa - Wali: '+WALI[kelasAktif]+'</h2><p><b>Siswa:</b> '+DATA_SISWA[kelasAktif].join(', ')+'</p>'+menuAdmin+isi;
 }
